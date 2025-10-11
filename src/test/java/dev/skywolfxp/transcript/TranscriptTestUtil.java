@@ -138,7 +138,11 @@ final class TranscriptTestUtil {
         Container container = Container.of(
                 TextDisplay.of("## Bigger container text"),
                 TextDisplay.of("### Big container text"),
-                TextDisplay.of("Basic container text")
+                TextDisplay.of("Basic container text"),
+                ActionRow.of(
+                        Button.of(ButtonStyle.SUCCESS, "-", "Success", Emoji.fromUnicode("💪")),
+                        Button.of(ButtonStyle.SECONDARY, "-", "Button", Emoji.fromUnicode("💠"))
+                )
         );
         return List.of((MessageTopLevelComponentUnion) container);
     }
