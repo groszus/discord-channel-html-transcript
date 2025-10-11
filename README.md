@@ -60,30 +60,36 @@ font that is the property of Discord Inc.**\
 
 ```xml
 
-<dependencies>
-  <dependency>
-    <groupId>dev.skywolfxp</groupId>
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+
+<dependency>
+    <groupId>com.github.groszus</groupId>
     <artifactId>discord-channel-html-transcript</artifactId>
     <version>${version}</version>
-  </dependency>
-</dependencies>
+</dependency>
+
 ```
 
 ### Gradle
 
 ```kts
 repositories {
-  mavenCentral()
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
-  implementation("dev.skywolfxp:discord-channel-html-transcript:${version}")
-}
+    implementation 'com.github.groszus:discord-channel-html-transcript:${version}'
+} 
 ```
 
 ## Development
 
-1. Run [TranscriptGeneratorTest#createTranscript()](src/test/java/dev/skywolfxp/transcript/TranscriptGeneratorTest.java), A
+1. Run [TranscriptMockTest#render()](src/test/java/dev/skywolfxp/transcript/TranscriptMockTest.java), A
    `discord-channel-html-transcript` folder will be created under:
 
     - **Windows:** `%USERPROFILE%\AppData\Local\Temp`
