@@ -1,7 +1,7 @@
 package dev.skywolfxp.transcript;
 
+import net.dv8tion.jda.api.components.MessageTopLevelComponentUnion;
 import net.dv8tion.jda.api.entities.*;
-import net.dv8tion.jda.api.interactions.components.ActionRow;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -41,8 +41,8 @@ final class MessageMockBuilder {
     return this;
   }
   
-  public MessageMockBuilder withActionRows(List<ActionRow> actionRows) {
-    when(message.getActionRows()).thenReturn(actionRows);
+  public MessageMockBuilder withActionRows(List<MessageTopLevelComponentUnion> actionRows) {
+    when(message.getComponents()).thenReturn(actionRows);
     return this;
   }
   

@@ -1,15 +1,15 @@
+@import net.dv8tion.jda.api.components.buttons.Button
+@import net.dv8tion.jda.api.components.selections.SelectMenu
 @import net.dv8tion.jda.api.entities.Message
 @import net.dv8tion.jda.api.entities.emoji.Emoji
-@import net.dv8tion.jda.api.interactions.components.buttons.Button
-@import net.dv8tion.jda.api.interactions.components.selections.SelectMenu
 
 @param Message message
 
-@if(!message.getActionRows().isEmpty())
+@if(!message.getComponents().isEmpty())
   <div class="action-rows user-select-none">
-    @for(var actionRow : message.getActionRows())
+    @for(var actionRow : message.getComponents())
       <div class="action-row">
-        @for(var component : actionRow.getComponents())
+        @for(var component : actionRow.asActionRow().getComponents())
           <!-- ActionRow Button -->
           @if(component instanceof Button button)
             <a

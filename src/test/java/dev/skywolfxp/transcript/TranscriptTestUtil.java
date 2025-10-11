@@ -1,15 +1,16 @@
 package dev.skywolfxp.transcript;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.components.MessageTopLevelComponentUnion;
+import net.dv8tion.jda.api.components.actionrow.ActionRow;
+import net.dv8tion.jda.api.components.buttons.Button;
+import net.dv8tion.jda.api.components.buttons.ButtonStyle;
+import net.dv8tion.jda.api.components.selections.StringSelectMenu;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
-import net.dv8tion.jda.api.interactions.components.ActionRow;
-import net.dv8tion.jda.api.interactions.components.buttons.Button;
-import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
-import net.dv8tion.jda.api.interactions.components.selections.StringSelectMenu;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -102,20 +103,24 @@ final class TranscriptTestUtil {
       .setColor(51200)
       .build();
   }
-  
+
   @NotNull
-  public static List<ActionRow> createActionRows() {
+  public static List<MessageTopLevelComponentUnion> createActionRows() {
     List<Button> buttonsEnabled = new ArrayList<>();
     buttonsEnabled.add(Button.of(ButtonStyle.PRIMARY, "-", "Primary", Emoji.fromUnicode("💠")));
     buttonsEnabled.add(Button.of(ButtonStyle.SECONDARY, "-", "Secondary", Emoji.fromUnicode("💠")));
     buttonsEnabled.add(Button.of(ButtonStyle.SUCCESS, "-", "Success", Emoji.fromUnicode("💠")));
     buttonsEnabled.add(Button.of(ButtonStyle.DANGER, "-", "Danger", Emoji.fromUnicode("💠")));
     buttonsEnabled.add(Button.of(ButtonStyle.LINK, "https://github.com/skywolfxp", "Link", Emoji.fromUnicode("🔗")));
-    
+
     List<Button> buttonsDisabled = buttonsEnabled.stream().map(Button::asDisabled).toList();
-    
+
     StringSelectMenu selectMenu = StringSelectMenu.create("-").addOption("Label", "Value").build();
-    
-    return List.of(ActionRow.of(buttonsEnabled), ActionRow.of(buttonsDisabled), ActionRow.of(selectMenu));
+
+    return List.of(
+            (MessageTopLevelComponentUnion) ActionRow.of(buttonsEnabled),
+            (MessageTopLevelComponentUnion) ActionRow.of(buttonsDisabled),
+            (MessageTopLevelComponentUnion) ActionRow.of(selectMenu)
+    );
   }
 }
