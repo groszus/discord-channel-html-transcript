@@ -146,6 +146,9 @@
           @endif
         </div>
 
+        <!-- Containers -->
+        @template.html.message.container(message = message)
+
         <!-- Embeds -->
         @template.html.message.embed(message = message)
 
@@ -159,8 +162,5 @@
     !{previousMessage = message;}
   @endfor
 </ol>
-
-<!-- Footer -->
-@template.html.channel.footer()
 </body>
 </html>

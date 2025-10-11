@@ -802,4 +802,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .container {
+      border: 1px solid #2f2f2f;
+      background-color: var(--background-base-lower);
+      border-radius: 8px;
+      padding: 15px;
+      margin: 8px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-width: max-content;
+  }
 </style>
