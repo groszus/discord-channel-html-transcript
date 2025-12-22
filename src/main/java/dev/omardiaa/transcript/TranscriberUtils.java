@@ -37,6 +37,9 @@ public final class TranscriberUtils {
   private final static Pattern ROLE = Pattern.compile("&lt;@&amp;(\\d+)&gt;");
   private final static Pattern CHANNEL = Pattern.compile("&lt;#(\\d+)&gt;");
 
+  private final static Pattern CUSTOM_EMOJI = Pattern.compile("&lt;:(.+?):(\\d+)&gt;");
+  private final static Pattern ANIMATED_EMOJI = Pattern.compile("&lt;a:(.+?):(\\d+)&gt;");
+
   private final static long KB = 1024;
   private final static long MB = KB * KB;
   private final static long GB = MB * KB;
@@ -44,6 +47,18 @@ public final class TranscriberUtils {
   @NonNull
   public static String parseMarkup(@NonNull Guild guild, @NonNull String message) {
     String current = escapeMessage(message).replaceAll("(?<!```)\\n", "<br>\n");
+
+    current = replace(current, ANIMATED_EMOJI, matcher -> {
+      String name = matcher.group(1);
+      String id = matcher.group(2);
+      return "<img src=\"https://cdn.discordapp.com/emojis/%s.gif\" alt=\"%s\" class=\"emoji\">".formatted(id, name);
+    });
+
+    current = replace(current, CUSTOM_EMOJI, matcher -> {
+      String name = matcher.group(1);
+      String id = matcher.group(2);
+      return "<img src=\"https://cdn.discordapp.com/emojis/%s.png\" alt=\"%s\" class=\"emoji\">".formatted(id, name);
+    });
 
     List<String> codeMasks = new ArrayList<>();
 

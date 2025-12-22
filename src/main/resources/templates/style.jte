@@ -1088,4 +1088,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .emoji {
+      width: 1.375rem;
+      height: 1.375rem;
+      vertical-align: bottom;
+      object-fit: contain;
+      margin: 0 0.05rem;
+  }
 </style>
