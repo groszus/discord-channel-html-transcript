@@ -1,5 +1,6 @@
 ### Development ###
 .tool-versions
+examples/test*
 target/
 jte-classes
 !.mvn/wrapper/maven-wrapper.jar
@@ -10,5 +11,5 @@ jte-classes
 *.iws
 *.iml
 *.ipr
-/.idea/*
-!/.idea/runConfigurations/
+.idea/*
+!.idea/runConfigurations/

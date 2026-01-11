@@ -1,4 +1,4 @@
-<h1 align="center">discord-channel-html-transcript</h1>
+<h1 align="center">discord-html-transcript-api</h1>
 
 <p align="center"><strong>Discord Java library for generating HTML archives of channels, preserving the native Discord styles</strong></p>
 
@@ -11,8 +11,7 @@
 
 This is the **most**
 up-to-date Discord transcript generator, ensuring your archive is consistent with Discord's updated styles!\
-Uses [**Java Discord API**](https://github.com/discord-jda/JDA)
-& [**Java Template Engine**](https://github.com/casid/jte/).
+Uses [**Java Template Engine**](https://github.com/casid/jte/) for HTML generation.
 
 
 <details>
@@ -57,7 +56,7 @@ Uses [**Java Discord API**](https://github.com/discord-jda/JDA)
     </ul>
 </ul>
 
-## [Preview]()
+## [Preview](https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-channel-html-transcript/blob/60ab0f8c62798f1678917518fe211e2e629bc8ef/examples/transcript.example.html)
 
 <details>
     <summary><strong>Click To View</strong></summary>

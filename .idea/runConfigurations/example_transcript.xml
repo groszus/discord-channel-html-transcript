@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="example-transcript" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" environment="&lt;No Environment&gt;" path="$PROJECT_DIR$/examples/example-transcript.http" executionIdentifier="#1" runType="Run single request">
+    <method v="2" />
+  </configuration>
+</component>
