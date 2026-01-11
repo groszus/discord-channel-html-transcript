@@ -5,23 +5,19 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>dev.omardiaa</groupId>
-  <artifactId>discord-channel-html-transcript</artifactId>
-  <version>4.0.0</version>
+  <artifactId>discord-html-transcript-api</artifactId>
+  <version>1.0.0</version>
 
-  <name>
-    discord-channel-html-transcript
-  </name>
+  <name>discord-html-transcript-api</name>
   <description>
     Discord Java library for generating shareable HTML archives of channels, preserving the native Discord styles.
   </description>
-  <url>
-    https://github.com/omardiaadev/discord-channel-html-transcript
-  </url>
+  <url>https://github.com/omardiaadev/discord-html-transcript-api</url>
 
   <licenses>
     <license>
       <name>CC BY-SA 4.0</name>
-      <url>https://github.com/omardiaadev/discord-channel-html-transcript/blob/main/LICENSE</url>
+      <url>https://github.com/omardiaadev/discord-html-transcript-api/blob/main/LICENSE</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
@@ -35,15 +31,9 @@
   </developers>
 
   <scm>
-    <url>
-      https://github.com/omardiaadev/discord-channel-html-transcript
-    </url>
-    <connection>
-      scm:git:git://github.com/omardiaadev/discord-channel-html-transcript.git
-    </connection>
-    <developerConnection>
-      scm:git:ssh://git@github.com:omardiaadev/discord-channel-html-transcript.git
-    </developerConnection>
+    <url>https://github.com/omardiaadev/discord-html-transcript-api</url>
+    <connection>scm:git:git://github.com/omardiaadev/discord-html-transcript-api.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:omardiaadev/discord-html-transcript-api.git</developerConnection>
   </scm>
 
   <properties>
@@ -51,13 +41,26 @@
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jte.version>3.2.1</jte.version>
+    <mainClass>dev.omardiaa.transcript.Main</mainClass>
   </properties>
 
   <dependencies>
     <dependency>
+      <groupId>gg.jte</groupId>
+      <artifactId>jte</artifactId>
+      <version>${jte.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.javalin</groupId>
+      <artifactId>javalin</artifactId>
+      <version>6.7.0</version>
+    </dependency>
+
+    <dependency>
       <groupId>net.dv8tion</groupId>
       <artifactId>JDA</artifactId>
-      <version>6.2.0</version>
+      <version>6.2.1</version>
       <exclusions>
         <exclusion>
           <groupId>club.minnced</groupId>
@@ -72,16 +75,21 @@
     </dependency>
 
     <dependency>
-      <groupId>gg.jte</groupId>
-      <artifactId>jte</artifactId>
-      <version>${jte.version}</version>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.20.1</version>
     </dependency>
 
     <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.5.22</version>
-      <scope>compile</scope>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>2.20.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>2.0.17</version>
     </dependency>
 
     <dependency>
@@ -114,60 +122,6 @@
         <configuration>
           <source>${maven.compiler.source}</source>
           <target>${maven.compiler.target}</target>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.12.0</version>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>3.4.0</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar-no-fork</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <version>3.2.8</version>
-        <executions>
-          <execution>
-            <id>sign-artifacts</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>sign</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.sonatype.central</groupId>
-        <artifactId>central-publishing-maven-plugin</artifactId>
-        <version>0.9.0</version>
-        <extensions>true</extensions>
-        <configuration>
-          <publishingServerId>central</publishingServerId>
-          <autoPublish>true</autoPublish>
         </configuration>
       </plugin>
 
@@ -224,4 +178,59 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>prod</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.graalvm.buildtools</groupId>
+            <artifactId>native-maven-plugin</artifactId>
+            <version>0.11.3</version>
+            <extensions>true</extensions>
+            <executions>
+              <execution>
+                <id>build-native</id>
+                <goals>
+                  <goal>compile-no-fork</goal>
+                </goals>
+                <phase>package</phase>
+              </execution>
+            </executions>
+            <configuration>
+              <mainClass>${mainClass}</mainClass>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>dev</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.graalvm.buildtools</groupId>
+            <artifactId>native-maven-plugin</artifactId>
+            <version>0.11.3</version>
+            <extensions>true</extensions>
+            <executions>
+              <execution>
+                <id>build-native</id>
+                <goals>
+                  <goal>compile-no-fork</goal>
+                </goals>
+                <phase>package</phase>
+              </execution>
+            </executions>
+            <configuration>
+              <mainClass>${mainClass}</mainClass>
+              <quickBuild>true</quickBuild>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

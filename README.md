@@ -9,7 +9,8 @@
 
 ## About
 
-This is the **most** up-to-date Transcript generator, ensuring your file is consistent with Discord's styles!\
+This is the **most**
+up-to-date Discord transcript generator, ensuring your archive is consistent with Discord's updated styles!\
 Uses [**Java Discord API**](https://github.com/discord-jda/JDA)
 & [**Java Template Engine**](https://github.com/casid/jte/).
 
@@ -56,7 +57,7 @@ Uses [**Java Discord API**](https://github.com/discord-jda/JDA)
     </ul>
 </ul>
 
-## Preview
+## [Preview]()
 
 <details>
     <summary><strong>Click To View</strong></summary>

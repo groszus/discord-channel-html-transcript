@@ -1,9 +1,9 @@
 package dev.omardiaa.transcript;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
-import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -46,19 +45,16 @@ class TranscriberTest {
   }
 
   @Test
-  void transcribe() {
-    GuildMessageChannel channel = TranscriberMockUtil.mockChannel(TranscriberTestUtil.createMessages());
+  void transcribe() throws JsonProcessingException {
     File file = tempDir.resolve("transcript.html").toFile();
 
-    transcriber.transcribe(channel, testStyle).thenAccept(
+    transcriber.transcribe(TranscriberTestUtil.createPayload(), testStyle).thenAccept(
       transcript -> assertDoesNotThrow(() -> transcript.toFile(file)));
   }
 
   @Test
-  void transcribeThrowsIfEmpty() {
-    GuildMessageChannel channel = TranscriberMockUtil.mockChannel(Collections.emptyList());
-
-    CompletableFuture<Transcript> future = transcriber.transcribe(channel, testStyle);
+  void transcribeThrowsIfEmpty() throws JsonProcessingException {
+    CompletableFuture<Transcript> future = transcriber.transcribe(TranscriberTestUtil.createPayload(), testStyle);
 
     ExecutionException ex = assertThrows(ExecutionException.class, future::get);
     assertInstanceOf(IllegalArgumentException.class, ex.getCause());

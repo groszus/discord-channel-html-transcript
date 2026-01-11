@@ -1,18 +1,20 @@
-@import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel
+@import dev.omardiaa.transcript.util.TranscriberUtil
+@import dev.omardiaa.transcript.schema.payload.Channel
+@import dev.omardiaa.transcript.schema.payload.Guild
 
-@param GuildMessageChannel channel
+@param Guild guild
+@param Channel channel
 
 <div class="header user-select-none">
   <div class="header__guild__container">
     <div class="header__guild">
       <img
-        src="${channel.getGuild().getIconUrl()}"
-        alt="${channel.getGuild().getName()}"
-        height="20"
-        width="20"
+        src="${guild.getIconUrl() == null ? TranscriberUtil.generateGuildIconInitials(guild.getName()) : guild.getIconUrl()}"
+        alt="${guild.getName()}"
+        class="header__guild__icon"
       />
 
-      <span class="header__guild__name">${channel.getGuild().getName()}</span>
+      <span class="header__guild__name">${guild.getName()}</span>
     </div>
   </div>
 

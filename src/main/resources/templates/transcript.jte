@@ -1,17 +1,15 @@
-@import java.util.List
-@import dev.omardiaa.transcript.TranscriberConstants
-@import net.dv8tion.jda.api.entities.Message
-@import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
+@import dev.omardiaa.transcript.schema.payload.Message
+@import dev.omardiaa.transcript.schema.Payload
+@import dev.omardiaa.transcript.util.TimeUtil
 
-@param GuildMessageChannel channel
-@param List<Message> messages
+@param Payload payload
 @param String testStyle
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>#${channel.getName()} | ${channel.getGuild().getName()}</title>
+  <title>#${payload.getChannel().getName()} | ${payload.getGuild().getName()}</title>
 
   <link
     rel="icon"
@@ -29,14 +27,14 @@
 </head>
 
 <body>
-@template.discord.ui.header(channel = channel)
+@template.discord.ui.header(guild = payload.getGuild(), channel = payload.getChannel())
 
 <ol class="messages">
-  !{Message previousMessage = messages.getFirst();}
+  !{Message previousMessage = payload.getMessages().getFirst();}
 
-  @for(Message message : messages)
-    !{boolean showDivider = previousMessage.equals(message) || (previousMessage.getTimeCreated().getDayOfYear() != message.getTimeCreated().getDayOfYear());}
-    !{boolean showAuthor = showDivider || !previousMessage.getAuthor().equals(message.getAuthor()) || (message.getReferencedMessage() != null) || (message.getInteraction() != null);}
+  @for(Message message : payload.getMessages())
+    !{boolean showDivider = previousMessage.equals(message) || (previousMessage.getTimestamp().getDayOfYear() != message.getTimestamp().getDayOfYear());}
+    !{boolean showAuthor = showDivider || !previousMessage.getAuthor().equals(message.getAuthor()) || (message.getReferencedMessage() != null) || (message.getInteractionMetadata() != null);}
 
     @if(showDivider)
       @template.discord.ui.divider(message = message)
@@ -46,17 +44,17 @@
       data-show-author="${showAuthor}"
       class="message__container"
     >
-      @template.discord.ui.reference(referencedMessage = message.getReferencedMessage(), interaction = message.getInteraction())
+      @template.discord.ui.reference(message = message)
 
       <div class="author__avatar__container user-select-none">
         @if(showAuthor)
           <img
-            src="${message.getAuthor().getEffectiveAvatarUrl()}"
-            alt="Author Avatar"
+            src="${message.getAuthor().getAvatarUrl()}"
+            alt="Avatar"
             class="author__avatar"
           />
         @else
-          <time class="message__timestamp">${message.getTimeCreated().format(TranscriberConstants.TIME_SHORT)}</time>
+          <time class="message__timestamp">${TimeUtil.formatTimeShort(message.getTimestamp())}</time>
         @endif
       </div>
 
@@ -65,10 +63,10 @@
           <h3 class="author">
             <a
               href="https://discord.com/users/${message.getAuthor().getId()}"
-              title="@${message.getAuthor().getName()}"
+              title="@${message.getAuthor().getUsername()}"
               class="author__name"
             >
-              ${message.getAuthor().getEffectiveName()}
+              ${message.getAuthor().getGlobalName()}
             </a>
 
             @if(message.getAuthor().isBot())
@@ -78,14 +76,14 @@
             @endif
 
             <div class="author__timestamp">
-              @template.discord.ui.timestamp(offsetDateTime = message.getTimeCreated())
+              @template.discord.ui.timestamp(timestamp = message.getTimestamp())
 
-              <time>${message.getTimeCreated().format(TranscriberConstants.DATE_SHORT)}</time>
+              <time>${TimeUtil.formatDateShort(message.getTimestamp())}</time>
             </div>
           </h3>
         @endif
 
-        @template.discord.message(message = message)
+        @template.discord.message(guild = payload.getGuild(), message = message)
       </div>
     </li>
 

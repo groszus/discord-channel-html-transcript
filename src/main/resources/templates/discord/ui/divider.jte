@@ -1,10 +1,10 @@
-@import dev.omardiaa.transcript.TranscriberConstants
-@import net.dv8tion.jda.api.entities.Message
+@import dev.omardiaa.transcript.util.TimeUtil
+@import dev.omardiaa.transcript.schema.payload.Message
 
 @param Message message
 
 <div class="divider user-select-none">
   <time class="divider__content">
-    ${message.getTimeCreated().format(TranscriberConstants.DATE_LONG)}
+    ${TimeUtil.formatDateLong(message.getTimestamp())}
   </time>
 </div>

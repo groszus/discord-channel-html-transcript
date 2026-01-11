@@ -1,6 +1,18 @@
 # Changelog
 
-## 4.0.0
+## [v5.0.0] (Unreleased)
+
+### Added
+
+- Add `@everyone` and `@here` markdown parsing.
+- Add `File` component.
+- Add "Custom Emoji" markdown.
+
+### Changed
+
+- Update Header and Subtext markdown parsing.
+
+## [v4.0.0]
 
 ### Changed
 
@@ -14,7 +26,7 @@
 
 - Fix handling of the generated tanscript output.
 
-## 3.0.0
+## [v3.0.0]
 
 ### Changed
 
@@ -24,21 +36,21 @@
 
 - Fix NPE when loading JTE precompiled classes ([#1](https://github.com/omardiaadev/discord-channel-html-transcript/issues/1))
 
-## 2.0.0
+## [v2.0.0]
 
 ### Changed
 
 - **Migrate the maven GroupID from `io.github.skywolfxp` to `dev.skywolfxp`.**
 - Update footer styling.
 
-## 1.1.1
+## [v1.1.1]
 
 ### Changed
 
 - Replace Google's "DM sans" font with Discord's "gg sans" font.
 - Update footer styling.
 
-## 1.1.0
+## [v1.1.0]
 
 ### Changed
 

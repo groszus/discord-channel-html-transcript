@@ -1,23 +1,20 @@
-@import java.util.List
-@import net.dv8tion.jda.api.entities.MessageReaction
-@import net.dv8tion.jda.api.entities.emoji.CustomEmoji
-@import net.dv8tion.jda.api.entities.emoji.UnicodeEmoji
+@import dev.omardiaa.transcript.schema.payload.Message
+@import dev.omardiaa.transcript.schema.payload.util.Emoji
 
-@param List<MessageReaction> reactions
+@param Message message
 
-@if(!reactions.isEmpty())
+@if((message.getReactions() != null) && !message.getReactions().isEmpty())
   <div class="reactions user-select-none">
-    @for(MessageReaction reaction : reactions)
+    @for(Message.Reaction reaction : message.getReactions())
       <div class="reaction">
-        @if(reaction.getEmoji() instanceof CustomEmoji customEmoji)
+        @if(reaction.getEmoji() instanceof Emoji.Custom customEmoji)
           <img
             src="${customEmoji.getImageUrl()}"
-            alt="Custom Emoji"
-            title="${customEmoji.getName()}"
+            alt="${customEmoji.getName()}"
             class="reaction__emoji"
           />
-        @elseif(reaction.getEmoji() instanceof UnicodeEmoji unicodeEmoji)
-          <span class="reaction__emoji">&#x${unicodeEmoji.getAsCodepoints().replace("U+", "")};</span>
+        @elseif(reaction.getEmoji() instanceof Emoji.Unicode unicodeEmoji)
+          <span class="reaction__emoji">$unsafe{unicodeEmoji.getAsUTF8()}</span>
         @endif
 
         <span class="reaction__count">${reaction.getCount()}</span>

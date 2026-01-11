@@ -1,23 +1,27 @@
 package dev.omardiaa.transcript;
 
+import dev.omardiaa.transcript.schema.Payload;
 import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.output.Utf8ByteOutput;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Transcribes a {@link GuildMessageChannel} into a {@link Transcript} as HTML.
  * <p>
  * Uses <a href="https://github.com/casid/jte/">Java Template Engine</a> for HTML generation.
  */
+@NullMarked
 public class Transcriber {
+  private final ExecutorService executor = Executors.newCachedThreadPool();
   private final TemplateEngine templateEngine;
 
   /**
@@ -41,22 +45,21 @@ public class Transcriber {
   }
 
   /**
-   * @param channel
-   *   The {@link GuildMessageChannel} to transcribe.
+   * @param payload
+   *   The {@link Payload} to transcribe.
    *
    * @return A {@link CompletableFuture} of the transcribed {@link Transcript}.
    * <p>
    * The future completes exceptionally with {@link IllegalArgumentException}
    * if the specified {@code channel} contains no messages.
    */
-  @NonNull
-  public CompletableFuture<Transcript> transcribe(@NonNull GuildMessageChannel channel) {
-    return transcribe(channel, null);
+  public CompletableFuture<Transcript> transcribe(Payload payload) {
+    return transcribe(payload, null);
   }
 
   /**
-   * @param channel
-   *   The {@link GuildMessageChannel} to transcribe.
+   * @param payload
+   *   The {@link Payload} to transcribe.
    * @param testStyle
    *   The path to the test {@code style.css}, only specified during testing.
    *
@@ -65,23 +68,22 @@ public class Transcriber {
    * The future completes exceptionally with {@link IllegalArgumentException}
    * if the specified {@code channel} contains no messages.
    */
-  @NonNull
-  CompletableFuture<Transcript> transcribe(@NonNull GuildMessageChannel channel, @Nullable String testStyle) {
-    return channel.getIterableHistory().takeWhileAsync(Objects::nonNull).thenCompose(messages -> {
-      if (messages.isEmpty()) {
-        return CompletableFuture.failedFuture(
-          new IllegalArgumentException("'#%s' contains no messages.".formatted(channel.getName())));
-      }
+  CompletableFuture<Transcript> transcribe(Payload payload, @Nullable String testStyle) {
+    if (payload.getMessages().isEmpty()) {
+      return CompletableFuture.failedFuture(
+        new IllegalArgumentException("'#%s' contains no messages.".formatted(payload.getChannel().getName())));
+    }
 
-      Map<String, Object> params = new HashMap<>();
-      params.put("channel", channel);
-      params.put("messages", messages.reversed());
-      params.put("testStyle", testStyle);
+    return CompletableFuture.supplyAsync(
+      () -> {
+        Map<String, Object> params = new HashMap<>();
+        params.put("payload", payload);
+        params.put("testStyle", testStyle);
 
-      Utf8ByteOutput output = new Utf8ByteOutput();
-      templateEngine.render("transcript.jte", params, output);
+        Utf8ByteOutput output = new Utf8ByteOutput();
+        templateEngine.render("transcript.jte", params, output);
 
-      return CompletableFuture.completedFuture(new Transcript(output, channel.getName()));
-    });
+        return new Transcript(output);
+      });
   }
 }

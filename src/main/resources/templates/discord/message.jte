@@ -1,25 +1,32 @@
-@import dev.omardiaa.transcript.TranscriberUtils
-@import net.dv8tion.jda.api.entities.Message
+@import dev.omardiaa.transcript.util.TranscriberUtil
+@import dev.omardiaa.transcript.schema.payload.Guild
+@import dev.omardiaa.transcript.schema.payload.Message
+@import dev.omardiaa.transcript.schema.payload.message.Embed
 
+@param Guild guild
 @param Message message
 
 <div
   id="${message.getId()}"
   class="message markup"
 >
-  $unsafe{TranscriberUtils.parseMarkup(message.getGuild(), message.getContentRaw())}
+  $unsafe{TranscriberUtil.parseMarkup(guild, message, message.getContent())}
 
-  @template.discord.message.attachments(message = message)
+  @template.discord.message.attachments(attachments = message.getAttachments())
 
-  @template.discord.message.components(message = message)
+  @for(Embed embed : message.getEmbeds())
+    @template.discord.message.embed(guild = guild, message = message, embed = embed)
+  @endfor
 
-  @template.discord.message.reactions(reactions = message.getReactions())
+  @template.discord.message.components(guild = guild, message = message)
 
-  @if(message.getTimeEdited() != null)
+  @template.discord.message.reactions(message = message)
+
+  @if(message.getEditedTimestamp() != null)
     <div class="message__edited user-select-none">
       <span>(edited)</span>
 
-      @template.discord.ui.timestamp(offsetDateTime = message.getTimeEdited())
+      @template.discord.ui.timestamp(timestamp = message.getEditedTimestamp())
     </div>
   @endif
 </div>
