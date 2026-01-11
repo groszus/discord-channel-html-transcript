@@ -1,4 +1,4 @@
-@import dev.omardiaa.transcript.util.TranscriberUtil
+@import dev.omardiaa.transcript.util.MarkdownUtil
 @import dev.omardiaa.transcript.schema.payload.Guild
 @import dev.omardiaa.transcript.schema.payload.Message
 @import dev.omardiaa.transcript.schema.payload.message.Embed
@@ -10,7 +10,7 @@
   id="${message.getId()}"
   class="message markup"
 >
-  $unsafe{TranscriberUtil.parseMarkup(guild, message, message.getContent())}
+  $unsafe{MarkdownUtil.parseMarkup(guild, message, message.getContent())}
 
   @template.discord.message.attachments(attachments = message.getAttachments())
 

@@ -1,5 +1,5 @@
+@import dev.omardiaa.transcript.util.Helper
 @import dev.omardiaa.transcript.schema.payload.message.component.File
-@import dev.omardiaa.transcript.util.TranscriberUtil
 
 @param File file
 
@@ -28,6 +28,6 @@
       ${file.getName()}
     </a>
 
-    <span class="file__size">${TranscriberUtil.formatBytes(file.getSize())}</span>
+    <span class="file__size">${Helper.formatBytes(file.getSize())}</span>
   </div>
 </div>

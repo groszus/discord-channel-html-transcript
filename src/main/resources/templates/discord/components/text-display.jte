@@ -1,4 +1,4 @@
-@import dev.omardiaa.transcript.util.TranscriberUtil
+@import dev.omardiaa.transcript.util.MarkdownUtil
 @import dev.omardiaa.transcript.schema.payload.Guild
 @import dev.omardiaa.transcript.schema.payload.Message
 @import dev.omardiaa.transcript.schema.payload.message.component.TextDisplay
@@ -9,6 +9,6 @@
 
 <div class="text-display">
   <div class="message markup">
-    $unsafe{TranscriberUtil.parseMarkup(guild, message, textDisplay.getContent())}
+    $unsafe{MarkdownUtil.parseMarkup(guild, message, textDisplay.getContent())}
   </div>
 </div>

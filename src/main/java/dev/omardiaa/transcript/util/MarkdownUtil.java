@@ -9,21 +9,15 @@ import gg.jte.html.escape.Escape;
 import gg.jte.output.StringOutput;
 import org.jspecify.annotations.NullMarked;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @NullMarked
-public final class TranscriberUtil {
-  private TranscriberUtil() {}
+public final class MarkdownUtil {
+  private MarkdownUtil() {}
 
   private static final String SVG_CHANNEL_ICON =
     """
@@ -61,12 +55,10 @@ public final class TranscriberUtil {
 
   private final static Pattern CUSTOM_EMOJI = Pattern.compile("&lt;a?:(\\w+):(\\d+)&gt;");
 
-  private final static long KB = 1024;
-  private final static long MB = KB * KB;
-  private final static long GB = MB * KB;
-
   public static String parseMarkup(Guild guild, Message message, String content) {
-    String current = escapeMessage(content).replaceAll("(?<!```)\\n", "<br>\n");
+    StringOutput stringOutput = new StringOutput();
+    Escape.htmlContent(content, stringOutput);
+    String current = stringOutput.toString().replaceAll("(?<!```)\\n", "<br>\n");
 
     List<String> codeMasks = new ArrayList<>();
 
@@ -162,81 +154,5 @@ public final class TranscriberUtil {
 
     matcher.appendTail(sb);
     return sb.toString();
-  }
-
-  /**
-   * @param bytes
-   *   Number of bytes to parse.
-   *
-   * @return {@link String} Parsed String as {@code 1024 byte/KB/MB/GB}.
-   */
-  public static String formatBytes(int bytes) {
-    if (bytes < KB) {
-      return "%s bytes".formatted(bytes);
-    } else if (bytes < MB) {
-      return "%.2f KB".formatted((double) bytes / KB);
-    } else if (bytes < GB) {
-      return "%.2f MB".formatted((double) bytes / MB);
-    } else {
-      return "%.2f GB".formatted((double) bytes / GB);
-    }
-  }
-
-  public static String generateGuildIconInitials(String guildName) {
-    int width = 50;
-    int height = 50;
-
-    BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-    Graphics2D g2d = image.createGraphics();
-
-    g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-    g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-
-    Color bgColor = new Color(151, 151, 159, 20);
-
-    g2d.setColor(bgColor);
-    g2d.fillRect(0, 0, width, height);
-
-    g2d.setFont(new Font("Arial", Font.BOLD, 20));
-    g2d.setColor(Color.WHITE);
-
-    String initials = getInitials(guildName);
-    FontMetrics fm = g2d.getFontMetrics();
-
-    int x = (width - fm.stringWidth(initials)) / 2;
-    int y = ((height - fm.getHeight()) / 2) + fm.getAscent();
-
-    g2d.drawString(initials, x, y);
-
-    g2d.dispose();
-
-    try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-      ImageIO.write(image, "png", baos);
-      return "data:image/png;base64," + Base64.getEncoder().encodeToString(baos.toByteArray());
-    } catch (IOException ex) {
-      return "";
-    }
-  }
-
-  private static String getInitials(String name) {
-    String[] parts = name.trim().split("\\s+");
-    StringBuilder initials = new StringBuilder();
-
-    for (String part : parts) {
-      if (initials.length() == 3) {
-        break;
-      }
-
-      initials.append(part.charAt(0));
-    }
-
-    return initials.toString().toUpperCase();
-  }
-
-  private static String escapeMessage(String message) {
-    StringOutput stringOutput = new StringOutput();
-    Escape.htmlContent(message, stringOutput);
-
-    return stringOutput.toString();
   }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.omardiaa.transcript.schema.payload.util.Role;
+import dev.omardiaa.transcript.util.IconUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -58,12 +59,13 @@ public class Guild {
   /**
    * Helper Method
    *
-   * @return {@link String} - Icon URL
+   * @return {@link String} - Formatted Guild Icon URL, or base64 image of {@link Guild#getName()} initials if
+   * {@link Guild#getIcon()} returns null.
    */
   @JsonIgnore
-  public @Nullable String getIconUrl() {
+  public String getIconUrl() {
     return getIcon() == null
-      ? null
+      ? IconUtil.drawGuildIcon(getName())
       : GUILD_ICON.formatted(getId(), getIcon());
   }
 

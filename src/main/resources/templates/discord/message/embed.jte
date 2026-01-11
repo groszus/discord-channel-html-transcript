@@ -1,5 +1,5 @@
 @import dev.omardiaa.transcript.util.TimeUtil
-@import dev.omardiaa.transcript.util.TranscriberUtil
+@import dev.omardiaa.transcript.util.MarkdownUtil
 @import dev.omardiaa.transcript.schema.payload.Guild
 @import dev.omardiaa.transcript.schema.payload.Message
 @import dev.omardiaa.transcript.schema.payload.message.Embed
@@ -54,7 +54,7 @@
 
   @if(embed.getDescription() != null)
     <div class="embed__description embed__margin">
-      <span>$unsafe{TranscriberUtil.parseMarkup(guild, message, embed.getDescription())}</span>
+      <span>$unsafe{MarkdownUtil.parseMarkup(guild, message, embed.getDescription())}</span>
     </div>
   @endif
 

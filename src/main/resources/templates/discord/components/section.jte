@@ -1,3 +1,4 @@
+@import dev.omardiaa.transcript.util.MarkdownUtil
 @import dev.omardiaa.transcript.schema.payload.Guild
 @import dev.omardiaa.transcript.schema.payload.Message
 @import dev.omardiaa.transcript.schema.payload.message.component.Section
@@ -5,7 +6,6 @@
 @import dev.omardiaa.transcript.schema.payload.message.component.TextDisplay
 @import dev.omardiaa.transcript.schema.payload.message.component.Button
 @import dev.omardiaa.transcript.schema.payload.message.component.Thumbnail
-@import dev.omardiaa.transcript.util.TranscriberUtil
 
 @param Guild guild
 @param Section section
@@ -16,7 +16,7 @@
     @for(SectionChildComponent component : section.getComponents())
       @if(component instanceof TextDisplay textDisplay)
         <div class="message markup">
-          $unsafe{TranscriberUtil.parseMarkup(guild, message, textDisplay.getContent())}
+          $unsafe{MarkdownUtil.parseMarkup(guild, message, textDisplay.getContent())}
         </div>
       @endif
     @endfor

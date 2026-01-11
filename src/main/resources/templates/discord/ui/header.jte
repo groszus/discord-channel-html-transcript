@@ -1,4 +1,3 @@
-@import dev.omardiaa.transcript.util.TranscriberUtil
 @import dev.omardiaa.transcript.schema.payload.Channel
 @import dev.omardiaa.transcript.schema.payload.Guild
 
@@ -9,7 +8,7 @@
   <div class="header__guild__container">
     <div class="header__guild">
       <img
-        src="${guild.getIconUrl() == null ? TranscriberUtil.generateGuildIconInitials(guild.getName()) : guild.getIconUrl()}"
+        src="${guild.getIconUrl()}"
         alt="${guild.getName()}"
         class="header__guild__icon"
       />
