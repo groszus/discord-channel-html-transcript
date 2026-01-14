@@ -67,6 +67,22 @@ public class User {
   }
 
   /**
+   * @return {@link String} - {@code APP} or {@code SYSTEM}
+   */
+  @JsonIgnore
+  public @Nullable String getTag() {
+    if (isBot()) {
+      return "APP";
+    }
+
+    if (isSystem()) {
+      return "SYSTEM";
+    }
+
+    return null;
+  }
+
+  /**
    * Helper Method
    * <p>
    * <a href="https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints">CDN Endpoints</a>

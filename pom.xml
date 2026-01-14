@@ -37,8 +37,7 @@
   </scm>
 
   <properties>
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
+    <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jte.version>3.2.1</jte.version>
     <mainClass>dev.omardiaa.transcript.Main</mainClass>
@@ -114,14 +113,25 @@
   </dependencies>
 
   <build>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>${project.build.directory}/jte-classes</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
+
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.14.1</version>
         <configuration>
-          <source>${maven.compiler.source}</source>
-          <target>${maven.compiler.target}</target>
+          <release>${maven.compiler.release}</release>
         </configuration>
       </plugin>
 
@@ -130,9 +140,8 @@
         <artifactId>jte-maven-plugin</artifactId>
         <version>${jte.version}</version>
         <configuration>
-          <sourceDirectory>${project.basedir}/src/main/resources/templates</sourceDirectory>
-          <targetDirectory>${project.build.directory}/classes</targetDirectory>
-          <trimControlStructures>true</trimControlStructures>
+          <sourceDirectory>${project.basedir}/src/main/resources/jte</sourceDirectory>
+          <targetDirectory>${project.build.directory}/jte-classes</targetDirectory>
           <binaryStaticContent>true</binaryStaticContent>
           <contentType>Html</contentType>
         </configuration>

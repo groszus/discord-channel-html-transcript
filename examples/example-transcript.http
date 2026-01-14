@@ -1,9 +1,9 @@
 # @no-cookie-jar
-POST http://localhost:8080/transcript
+POST http://localhost:7000/transcript
 Content-Type: application/json
 
 # input body
 < example-payload.json
 
 # output and override html file
->>! transcript.example.html
+>>! example-transcript.html

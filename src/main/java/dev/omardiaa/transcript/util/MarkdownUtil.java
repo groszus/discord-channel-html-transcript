@@ -34,14 +34,14 @@ public final class MarkdownUtil {
     </svg>
     """;
 
+  private final static Pattern CODE_BLOCK = Pattern.compile("```\\n(.*)\\n```", Pattern.DOTALL);
+  private final static Pattern CODE_INLINE = Pattern.compile("`(?!`)(.*)`");
+
   private final static Pattern BOLD = Pattern.compile("\\*\\*(?!\\*)(.+?)\\*\\*");
   private final static Pattern UNDERLINE = Pattern.compile("__(?!_)(.+?)__");
   private final static Pattern ITALIC = Pattern.compile("[*_](?![*_])(.+?)[_*]");
   private final static Pattern STRIKE_THROUGH = Pattern.compile("~~(.+?)~~");
-  private final static Pattern LINK = Pattern.compile("\\[(.*)]\\((\\S*)\\)");
-
-  private final static Pattern CODE_BLOCK = Pattern.compile("```\\n(.*)\\n```", Pattern.DOTALL);
-  private final static Pattern CODE_INLINE = Pattern.compile("`(?!`)(.*)`");
+  private final static Pattern LINK = Pattern.compile("\\[(.*?)]\\((\\S*?)\\)");
 
   private final static Pattern HEADER_1 = Pattern.compile("^#\\s+(.*)", Pattern.MULTILINE);
   private final static Pattern HEADER_2 = Pattern.compile("^#{2}\\s+(.*)", Pattern.MULTILINE);
@@ -56,20 +56,14 @@ public final class MarkdownUtil {
   private final static Pattern CUSTOM_EMOJI = Pattern.compile("&lt;a?:(\\w+):(\\d+)&gt;");
 
   public static String parseMarkup(Guild guild, Message message, String content) {
-    StringOutput stringOutput = new StringOutput();
-    Escape.htmlContent(content, stringOutput);
-    String current = stringOutput.toString().replaceAll("(?<!```)\\n", "<br>\n");
+    if (content.isEmpty()) {
+      return "";
+    }
 
     List<String> codeMasks = new ArrayList<>();
 
-    current = replace(current, BOLD, m -> "<strong>%s</strong>".formatted(m.group(1)));
-    current = replace(current, UNDERLINE, m -> "<u>%s</u>".formatted(m.group(1)));
-    current = replace(current, ITALIC, m -> "<em>%s</em>".formatted(m.group(1)));
-    current = replace(current, STRIKE_THROUGH, m -> "<s>%s</s>".formatted(m.group(1)));
-    current = replace(current, LINK, m -> "<a href=\"%s\" class=\"markup\">%s</a>".formatted(m.group(2), m.group(1)));
-
-    current = replace(
-      current, CODE_BLOCK, m -> {
+    String current = replace(
+      content, CODE_BLOCK, m -> {
         codeMasks.add("<code class=\"markup\" data-code-style=\"block\">%s</code>".formatted(m.group(1)));
         return "{CODE_" + (codeMasks.size() - 1) + "}";
       });
@@ -79,6 +73,14 @@ public final class MarkdownUtil {
         codeMasks.add("<code class=\"markup\" data-code-style=\"inline\">%s</code>".formatted(m.group(1)));
         return "{CODE_" + (codeMasks.size() - 1) + "}";
       });
+
+    current = escape(current).replaceAll("\n", "<br>\n");
+
+    current = replace(current, BOLD, m -> "<strong>%s</strong>".formatted(m.group(1)));
+    current = replace(current, UNDERLINE, m -> "<u>%s</u>".formatted(m.group(1)));
+    current = replace(current, ITALIC, m -> "<em>%s</em>".formatted(m.group(1)));
+    current = replace(current, STRIKE_THROUGH, m -> "<s>%s</s>".formatted(m.group(1)));
+    current = replace(current, LINK, m -> "<a href=\"%s\" class=\"markup\">%s</a>".formatted(m.group(2), m.group(1)));
 
     current = replace(current, HEADER_1, m -> "<h1 class=\"markup\">%s</h1>".formatted(m.group(1)));
     current = replace(current, HEADER_2, m -> "<h2 class=\"markup\">%s</h2>".formatted(m.group(1)));
@@ -154,5 +156,11 @@ public final class MarkdownUtil {
 
     matcher.appendTail(sb);
     return sb.toString();
+  }
+
+  private static String escape(String input) {
+    StringOutput output = new StringOutput();
+    Escape.htmlContent(input, output);
+    return output.toString();
   }
 }

@@ -1,7 +1,10 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Main" type="Application" factoryName="Application" activateToolWindowBeforeRun="false" nameIsGenerated="true">
+  <configuration default="false" name="prod" type="Application" factoryName="Application" activateToolWindowBeforeRun="false">
     <option name="MAIN_CLASS_NAME" value="dev.omardiaa.transcript.Main" />
     <module name="discord-html-transcript-api" />
+    <selectedOptions>
+      <option name="environmentVariables" visible="false" />
+    </selectedOptions>
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

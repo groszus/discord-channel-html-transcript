@@ -10,7 +10,7 @@
 ## About
 
 This is the **most**
-up-to-date Discord transcript generator, ensuring your archive is consistent with Discord's updated styles!\
+up-to-date Discord transcript generator, ensuring your archive is consistent with Discord's new styles!\
 Uses [**Java Template Engine**](https://github.com/casid/jte/) for HTML generation.
 
 
@@ -30,7 +30,7 @@ Uses [**Java Template Engine**](https://github.com/casid/jte/) for HTML generati
 ## Legal Compliance
 
 > [!NOTE]
-> This project utilizes the [gg sans](src/main/resources/font/ggsansvf-VF.woff) font that is the property of Discord Inc.
+> This project utilizes the [gg sans](src/main/resources/font/ggsansvf.woff) font that is the property of Discord Inc.
 
 ## Features
 
@@ -111,7 +111,7 @@ implementation("dev.omardiaa:discord-channel-html-transcript:4.0.0")
 
 2. Modify CSS in [style.css](src/test/resources/template/css/style.css) for live updates during development.
 
-3. Copy CSS in [style.css](src/test/resources/template/css/style.css) to [style.jte](src/main/resources/templates/style.jte) when done.
+3. Copy CSS in [style.css](src/test/resources/template/css/style.css) to [style.jte](src/main/resources/jte/style.jte) when done.
 
 ## Enjoying My Work? Give it A Star!
 
