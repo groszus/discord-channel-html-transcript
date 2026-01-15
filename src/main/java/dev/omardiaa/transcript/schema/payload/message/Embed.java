@@ -37,7 +37,7 @@ public class Embed {
     @JsonProperty("thumbnail") Embed.@Nullable Thumbnail thumbnail,
     @JsonProperty("author") Embed.@Nullable Author author,
     @JsonProperty("fields") @Nullable List<Field> fields) {
-    this.title = Check.notLonger(title, 256, "title");
+    this.title = title;
     this.type = type;
     this.description = description;
     this.url = url;
