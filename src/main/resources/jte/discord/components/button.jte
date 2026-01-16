@@ -26,7 +26,9 @@
     @endif
   @endif
 
-  <span>${button.getLabel()}</span>
+  @if(button.getLabel() != null)
+    <span>${button.getLabel()}</span>
+  @endif
 
   @if(button.getButtonStyle() == ButtonStyle.LINK)
     <svg

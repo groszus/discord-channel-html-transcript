@@ -4,17 +4,16 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.omardiaa.transcript.schema.payload.util.Emoji;
-import dev.omardiaa.transcript.util.Check;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Objects;
+
 @NullMarked
 public class Button implements ActionRowChildComponent, SectionAccessoryComponent {
-  private static final int LABEL_MAX_LENGTH = 80;
-
   private final int type;
   private final int style;
-  private final String label;
+  private final @Nullable String label;
   private final @Nullable Emoji emoji;
   private final @Nullable String url;
   private final boolean disabled;
@@ -33,17 +32,17 @@ public class Button implements ActionRowChildComponent, SectionAccessoryComponen
     @JsonProperty("disabled") boolean disabled) {
     if (style == ButtonStyle.LINK.getValue()) {
       if (url == null) {
-        throw new IllegalArgumentException("Link Button cannot have null url");
+        throw new IllegalArgumentException("Link Button cannot have null url.");
       }
     }
 
-    if ((label == null) && (emoji == null)) {
-      throw new IllegalArgumentException("label and emoji are null, one must be present");
+    if (Objects.isNull(label) && Objects.isNull(emoji)) {
+      throw new IllegalArgumentException("label and emoji are null, either one must be present.");
     }
 
     this.type = type;
     this.style = style;
-    this.label = Check.notNullElse(Check.notLonger(label, LABEL_MAX_LENGTH, "label"), "");
+    this.label = label;
     this.emoji = emoji;
     this.url = url;
     this.disabled = disabled;
@@ -58,7 +57,7 @@ public class Button implements ActionRowChildComponent, SectionAccessoryComponen
     return style;
   }
 
-  public String getLabel() {
+  public @Nullable String getLabel() {
     return label;
   }
 
@@ -81,7 +80,7 @@ public class Button implements ActionRowChildComponent, SectionAccessoryComponen
    */
   @JsonIgnore
   public ButtonStyle getButtonStyle() {
-    return ButtonStyle.fromValue(style);
+    return ButtonStyle.fromValue(getStyle());
   }
 
   @Override
