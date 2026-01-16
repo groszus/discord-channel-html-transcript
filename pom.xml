@@ -9,7 +9,7 @@
   <version>1.0.0</version>
 
   <name>discord-html-transcript-api</name>
-  <description>Discord HTML transcript generator that preserves your favorite Discord styles.</description>
+  <description>A Discord HTML transcript generator that preserves your favorite Discord styles</description>
   <url>https://github.com/omardiaadev/discord-html-transcript-api</url>
 
   <licenses>

@@ -1,17 +1,17 @@
 <h1 align="center">discord-html-transcript-api</h1>
 
-<p align="center"><strong>Discord HTML transcript generator that preserves your favorite Discord styles</strong></p>
+<p align="center"><strong>A Discord HTML transcript generator that preserves your favorite Discord styles</strong></p>
 
 <p align="center">
-    <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-channel-html-transcript"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-channel-html-transcript?label=Maven&color=0055D2&labelColor=0055D2"/></a>
-    <a href="https://github.com/omardiaadev/discord-channel-html-transcript/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-channel-html-transcript?label=License&color=0055D2&labelColor=0055D2"/></a>
+    <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript-api"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript-api?label=Maven&color=0055D2&labelColor=0055D2"/></a>
+    <a href="https://github.com/omardiaadev/discord-html-transcript-api/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript-api?label=License&color=0055D2&labelColor=0055D2"/></a>
 </p>
 
 ## About
 
 This is the most
 **up-to-date** Discord transcript generator, ensuring your archive is consistent with Discord's new styles!\
-You can get a preview for the HTML file [here](https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-channel-html-transcript/blob/60ab0f8c62798f1678917518fe211e2e629bc8ef/examples/transcript.example.html).
+You can get a preview for the HTML file [here](https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript-api/blob/60ab0f8c62798f1678917518fe211e2e629bc8ef/examples/transcript.example.html).
 
 **Uses:**
 
@@ -68,14 +68,14 @@ You can get a preview for the HTML file [here](https://htmlpreview.github.io/?ht
 
 <dependency>
   <groupId>dev.omardiaa</groupId>
-  <artifactId>discord-html-transcript-jda</artifactId>
+  <artifactId>discord-html-transcript-api</artifactId>
   <version>1.0.0</version>
 </dependency>
 ```
 
 ```kts
 
-implementation("dev.omardiaa:discord-html-transcript-jda:1.0.0")
+implementation("dev.omardiaa:discord-html-transcript-api:1.0.0")
 ```
 
 ## How To Use
