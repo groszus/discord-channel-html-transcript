@@ -64,34 +64,43 @@ You can get a preview for the HTML file [here](https://htmlpreview.github.io/?ht
 
 - **Java 21+**
 
-##### Usage
-
 ```xml
 
 <dependency>
   <groupId>dev.omardiaa</groupId>
-  <artifactId>discord-channel-html-transcript</artifactId>
-  <version>4.0.0</version>
+  <artifactId>discord-html-transcript-jda</artifactId>
+  <version>1.0.0</version>
 </dependency>
 ```
 
 ```kts
 
-implementation("dev.omardiaa:discord-channel-html-transcript:4.0.0")
+implementation("dev.omardiaa:discord-html-transcript-jda:1.0.0")
 ```
+
+## How To Use
+
+##### Library
+
+The following libraries carefully retrieve the required [Payload](src/main/java/dev/omardiaa/transcript/api/schema/Payload.java)
+with respect to your bot's instance to handle Discord's rate limiter.
+
+| Framework              | Library                                                                                     |
+|------------------------|---------------------------------------------------------------------------------------------|
+| Java Discord API (JDA) | [`discord-html-transcript-jda`](https://github.com/omardiaadev/discord-html-transcript-jda) |
+| Discord.js             | WIP                                                                                         |
+| Discord.py             | WIP                                                                                         |
+
+##### Self-Hosting
+
+- WIP
 
 ## Development
 
-1. Run [TranscriberTest#transcribe()](src/test/java/dev/omardiaa/transcript/TranscriberTest.java), an HTML file will appear in:
-    - **Windows:** `%TEMP%\discord-channel-html-transcript\transcript.html`
-    - **macOS:** `/tmp/discord-channel-html-transcript/transcript.html`
-    - **Linux:** `/tmp/discord-channel-html-transcript/transcript.html`
-
 - Pass
-  `testStylePath` to [Payload](src/main/java/dev/omardiaa/transcript/api/api/schema/Payload.java) for live CSS updates during development.
+  `testStylePath` to [Payload](src/main/java/dev/omardiaa/transcript/api/schema/Payload.java) for live CSS updates during development.
 
 ## Enjoying The Package? Give it A Star!
 
 <a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"/></a>
-<a href="https://reddit.com/user/omardiaadev"><img alt="Reddit" src="https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=FFF&logoSize=auto"/></a>
 <a href="https://discord.gg/fWtQjEJgWX"><img alt="Discord" src="https://img.shields.io/discord/1055244032105787472?style=for-the-badge&logo=discord&logoColor=FFF&logoSize=auto&label=%20&color=5865F2"/></a>
