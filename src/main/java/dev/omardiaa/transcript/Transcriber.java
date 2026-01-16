@@ -1,26 +1,19 @@
 package dev.omardiaa.transcript;
 
+import dev.omardiaa.transcript.config.TranscriberConfig;
 import dev.omardiaa.transcript.schema.Payload;
-import gg.jte.TemplateEngine;
 import gg.jte.output.Utf8ByteOutput;
-import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.concurrent.CompletableFuture;
 
 /**
- * Transcribes a {@link GuildMessageChannel} into a {@link Transcript} as HTML.
+ * Transcribes a {@link Payload} into a {@link Transcript}.
  * <p>
- * Uses <a href="https://github.com/casid/jte/">Java Template Engine</a> for HTML generation.
+ * Uses <a href="https://github.com/casid/jte/">Java Template Engine</a> to generate the HTML transcript.
  */
 @NullMarked
 public class Transcriber {
-  private final TemplateEngine templateEngine;
-
-  public Transcriber(TemplateEngine templateEngine) {
-    this.templateEngine = templateEngine;
-  }
-
   /**
    * @param payload
    *   The {@link Payload} to transcribe.
@@ -39,7 +32,7 @@ public class Transcriber {
     return CompletableFuture.supplyAsync(
       () -> {
         Utf8ByteOutput output = new Utf8ByteOutput();
-        templateEngine.render("index.jte", payload, output);
+        TranscriberConfig.getTemplateEngine().render("index.jte", payload, output);
 
         return new Transcript(output);
       });

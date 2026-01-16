@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="dev" type="MavenRunConfiguration" factoryName="Maven">
+  <configuration default="false" name="native-dev" type="MavenRunConfiguration" factoryName="Maven">
     <MavenSettings>
       <option name="myGeneralSettings" />
       <option name="myRunnerSettings">
@@ -33,7 +33,7 @@
           <option name="pomFileName" />
           <option name="profilesMap">
             <map>
-              <entry key="dev" value="true" />
+              <entry key="native-dev" value="true" />
             </map>
           </option>
           <option name="projectsCmdOptionValues">

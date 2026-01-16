@@ -10,6 +10,7 @@ import org.jspecify.annotations.Nullable;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+// TODO: implement different Embed types other than "rich"
 @NullMarked
 public class Embed {
   private final @Nullable String title;

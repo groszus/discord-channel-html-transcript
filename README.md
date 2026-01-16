@@ -90,7 +90,7 @@ implementation("dev.omardiaa:discord-channel-html-transcript:4.0.0")
 - Pass
   `testStylePath` to [Payload](src/main/java/dev/omardiaa/transcript/schema/Payload.java) for live CSS updates during development.
 
-## Enjoying My Work? Give it A Star!
+## Enjoying The Package? Give it A Star!
 
 <a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"/></a>
 <a href="https://reddit.com/user/omardiaadev"><img alt="Reddit" src="https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=FFF&logoSize=auto"/></a>

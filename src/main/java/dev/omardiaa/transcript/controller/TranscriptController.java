@@ -8,8 +8,8 @@ import org.jspecify.annotations.NonNull;
 public final class TranscriptController implements Handler {
   private final Transcriber transcriber;
 
-  public TranscriptController(Transcriber transcriber) {
-    this.transcriber = transcriber;
+  public TranscriptController() {
+    this.transcriber = new Transcriber();
   }
 
   @Override
@@ -19,8 +19,8 @@ public final class TranscriptController implements Handler {
     ctx.future(() -> transcriber
       .transcribe(payload)
       .thenAccept(transcript -> {
-        ctx.header(Header.CONTENT_TYPE, ContentType.HTML);
         ctx.status(HttpStatus.OK);
+        ctx.header(Header.CONTENT_TYPE, ContentType.HTML);
         ctx.result(transcript.getByteArray());
       }));
   }

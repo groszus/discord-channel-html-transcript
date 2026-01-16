@@ -39,7 +39,8 @@ class TranscriberTestUtil {
         "3c970034e345f0f833b0d010f10a3be7",
         new ArrayList<>()),
       new Channel("1371192695279849504", 0, "discord-channel-html-transcript"),
-      TranscriberTestUtil.createMessages());
+      TranscriberTestUtil.createMessages(),
+      null);
 
     String s = new ObjectMapper()
       .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)

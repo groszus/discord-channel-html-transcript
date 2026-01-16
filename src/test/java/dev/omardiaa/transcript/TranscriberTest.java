@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TranscriberTest {
   private final Path tempDir = Path.of(System.getProperty("java.io.tmpdir")).resolve("discord-html-transcript-api");
-  private final String testStyle = new File("src/test/resources/template/css/style.css").getAbsolutePath();
 
   private AutoCloseable mocks;
 
@@ -38,7 +36,7 @@ class TranscriberTest {
 
   @Test
   void transcribeThrowsIfEmpty() throws JsonProcessingException {
-    CompletableFuture<Transcript> future = Transcriber.transcribe(TranscriberTestUtil.createPayload(), testStyle);
+    CompletableFuture<Transcript> future = new Transcriber().transcribe(TranscriberTestUtil.createPayload());
 
     ExecutionException ex = assertThrows(ExecutionException.class, future::get);
     assertInstanceOf(IllegalArgumentException.class, ex.getCause());

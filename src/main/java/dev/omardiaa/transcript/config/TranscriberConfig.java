@@ -12,36 +12,35 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @NullMarked
-public final class Config {
-  private static final Logger LOGGER = LoggerFactory.getLogger(Config.class);
+public final class TranscriberConfig {
+  private static final Logger LOGGER = LoggerFactory.getLogger(TranscriberConfig.class);
 
   public static final String JAVALIN_HOST = getEnv("JAVALIN_HOST", "0.0.0.0");
   public static final int JAVALIN_PORT = getEnv("JAVALIN_PORT", 7000);
   public static final boolean JTE_DEV = getEnv("JTE_DEV", false);
 
-  private static final TemplateEngine ENGINE;
+  private static final TemplateEngine TEMPLATE_ENGINE;
   private static final ObjectMapper OBJECT_MAPPER;
 
   static {
     OBJECT_MAPPER = new ObjectMapper()
-      .addHandler(new JacksonProblemHandler())
       .registerModule(new JavaTimeModule())
       .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
       .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
 
     if (JTE_DEV) {
-      ENGINE = TemplateEngine.create(new ResourceCodeResolver("jte"), ContentType.Html);
+      TEMPLATE_ENGINE = TemplateEngine.create(new ResourceCodeResolver("jte"), ContentType.Html);
       LOGGER.info("JTE is running in development mode.");
     } else {
-      ENGINE = TemplateEngine.createPrecompiled(ContentType.Html);
+      TEMPLATE_ENGINE = TemplateEngine.createPrecompiled(ContentType.Html);
       LOGGER.info("JTE is running in production mode.");
     }
   }
 
-  private Config() {}
+  private TranscriberConfig() {}
 
-  public static TemplateEngine getEngine() {
-    return ENGINE;
+  public static TemplateEngine getTemplateEngine() {
+    return TEMPLATE_ENGINE;
   }
 
   public static ObjectMapper getObjectMapper() {
