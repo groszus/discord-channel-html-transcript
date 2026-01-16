@@ -88,7 +88,7 @@ implementation("dev.omardiaa:discord-channel-html-transcript:4.0.0")
     - **Linux:** `/tmp/discord-channel-html-transcript/transcript.html`
 
 - Pass
-  `testStylePath` to [Payload](src/main/java/dev/omardiaa/transcript/schema/Payload.java) for live CSS updates during development.
+  `testStylePath` to [Payload](src/main/java/dev/omardiaa/transcript/api/api/schema/Payload.java) for live CSS updates during development.
 
 ## Enjoying The Package? Give it A Star!
 

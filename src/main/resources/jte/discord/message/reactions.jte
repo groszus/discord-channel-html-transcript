@@ -1,5 +1,5 @@
-@import dev.omardiaa.transcript.schema.payload.Message
-@import dev.omardiaa.transcript.schema.payload.util.Emoji
+@import dev.omardiaa.transcript.api.schema.payload.Message
+@import dev.omardiaa.transcript.api.schema.payload.util.Emoji
 
 @param Message message
 

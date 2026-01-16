@@ -1,7 +1,4 @@
-@import dev.omardiaa.transcript.schema.payload.message.component.ActionRow
-@import dev.omardiaa.transcript.schema.payload.message.component.ActionRowChildComponent
-@import dev.omardiaa.transcript.schema.payload.message.component.Button
-@import dev.omardiaa.transcript.schema.payload.message.component.SelectMenu
+@import dev.omardiaa.transcript.api.schema.payload.message.component.*
 
 @param ActionRow actionRow
 

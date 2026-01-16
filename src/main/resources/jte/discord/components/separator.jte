@@ -1,4 +1,4 @@
-@import dev.omardiaa.transcript.schema.payload.message.component.Separator
+@import dev.omardiaa.transcript.api.schema.payload.message.component.Separator
 
 @param Separator separator
 

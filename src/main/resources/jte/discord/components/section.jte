@@ -1,11 +1,6 @@
-@import dev.omardiaa.transcript.util.MarkdownUtil
-@import dev.omardiaa.transcript.schema.payload.Guild
-@import dev.omardiaa.transcript.schema.payload.Message
-@import dev.omardiaa.transcript.schema.payload.message.component.Section
-@import dev.omardiaa.transcript.schema.payload.message.component.SectionChildComponent
-@import dev.omardiaa.transcript.schema.payload.message.component.TextDisplay
-@import dev.omardiaa.transcript.schema.payload.message.component.Button
-@import dev.omardiaa.transcript.schema.payload.message.component.Thumbnail
+@import dev.omardiaa.transcript.api.schema.payload.*
+@import dev.omardiaa.transcript.api.schema.payload.message.component.*
+@import dev.omardiaa.transcript.api.util.MarkdownUtil
 
 @param Guild guild
 @param Section section

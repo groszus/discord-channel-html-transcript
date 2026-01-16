@@ -1,4 +1,4 @@
-@import dev.omardiaa.transcript.schema.payload.message.Attachment
+@import dev.omardiaa.transcript.api.schema.payload.message.Attachment
 @import java.util.List
 
 @param List<Attachment> attachments

@@ -1,6 +1,6 @@
-@import dev.omardiaa.transcript.schema.payload.Message
-@import dev.omardiaa.transcript.schema.payload.User
-@import dev.omardiaa.transcript.schema.payload.message.InteractionType
+@import dev.omardiaa.transcript.api.schema.payload.User
+@import dev.omardiaa.transcript.api.schema.payload.Message
+@import dev.omardiaa.transcript.api.schema.payload.message.InteractionType
 
 @param Message message
 
@@ -19,7 +19,7 @@
 
     @if(author.isBot())
       <span class="author__tag">APP</span>
-    @elseif(author.isBot())
+    @elseif(author.isSystem())
       <span class="author__tag user-select-none">SYSTEM</span>
     @endif
 

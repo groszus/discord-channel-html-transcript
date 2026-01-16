@@ -1,6 +1,6 @@
-@import dev.omardiaa.transcript.schema.payload.message.component.Button
-@import dev.omardiaa.transcript.schema.payload.message.component.ButtonStyle
-@import dev.omardiaa.transcript.schema.payload.util.Emoji
+@import dev.omardiaa.transcript.api.schema.payload.message.component.Button
+@import dev.omardiaa.transcript.api.schema.payload.message.component.ButtonStyle
+@importdev.omardiaa.transcript.api.schema.payload.util.Emoji
 
 @param Button button
 

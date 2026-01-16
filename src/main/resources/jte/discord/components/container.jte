@@ -1,6 +1,5 @@
-@import dev.omardiaa.transcript.schema.payload.Guild
-@import dev.omardiaa.transcript.schema.payload.Message
-@import dev.omardiaa.transcript.schema.payload.message.component.*
+@import dev.omardiaa.transcript.api.schema.payload.*
+@import dev.omardiaa.transcript.api.schema.payload.message.component.*
 
 @param Guild guild
 @param Container container

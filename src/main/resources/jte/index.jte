@@ -1,6 +1,6 @@
-@import dev.omardiaa.transcript.schema.payload.Message
-@import dev.omardiaa.transcript.schema.Payload
-@import dev.omardiaa.transcript.util.TimeUtil
+@import dev.omardiaa.transcript.api.schema.payload.Message
+@import dev.omardiaa.transcript.api.schema.Payload
+@import dev.omardiaa.transcript.api.util.TimeUtil
 
 @param Payload payload
 

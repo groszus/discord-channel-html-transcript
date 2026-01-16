@@ -1,8 +1,8 @@
-@import dev.omardiaa.transcript.util.TimeUtil
-@import dev.omardiaa.transcript.util.MarkdownUtil
-@import dev.omardiaa.transcript.schema.payload.Guild
-@import dev.omardiaa.transcript.schema.payload.Message
-@import dev.omardiaa.transcript.schema.payload.message.Embed
+@import dev.omardiaa.transcript.api.schema.payload.Guild
+@import dev.omardiaa.transcript.api.schema.payload.Message
+@import dev.omardiaa.transcript.api.schema.payload.message.Embed
+@import dev.omardiaa.transcript.api.util.TimeUtil
+@import dev.omardiaa.transcript.api.util.MarkdownUtil
 
 @param Guild guild
 @param Embed embed
