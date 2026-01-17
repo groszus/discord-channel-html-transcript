@@ -62,7 +62,7 @@
           <h3 class="author">
             <a
               href="https://discord.com/users/${message.getAuthor().getId()}"
-              title="@${message.getAuthor().getUsername()}"
+              title="${message.getAuthor().getUsername()}"
               class="author__name"
             >
               ${message.getAuthor().getGlobalName()}

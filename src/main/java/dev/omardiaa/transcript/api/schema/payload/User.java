@@ -43,7 +43,7 @@ public class User {
   }
 
   public String getUsername() {
-    return username;
+    return username + (!getDiscriminator().equals("0") ? "#" + getDiscriminator() : "");
   }
 
   public String getDiscriminator() {
@@ -67,7 +67,7 @@ public class User {
   }
 
   /**
-   * @return {@link String} - {@code APP} or {@code SYSTEM}
+   * @return {@code "APP"} or {@code "SYSTEM"}.
    */
   @JsonIgnore
   public @Nullable String getTag() {
@@ -87,7 +87,7 @@ public class User {
    * <p>
    * <a href="https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints">CDN Endpoints</a>
    *
-   * @return {@link String} - Avatar URL
+   * @return Formatted Avatar URL
    */
   @JsonIgnore
   public String getAvatarUrl() {
@@ -101,7 +101,7 @@ public class User {
    * <p>
    * <a href="https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints">CDN Endpoints</a>
    *
-   * @return {@link String} - Default Avatar Index
+   * @return Default Avatar Index
    */
   @JsonIgnore
   private String getDefaultAvatar() {

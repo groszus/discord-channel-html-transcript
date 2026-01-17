@@ -13,7 +13,7 @@
 
     <img
       src="${author.getAvatarUrl()}"
-      alt="@${author.getUsername()}"
+      alt="${author.getUsername()}"
       class="reference__author__avatar"
     />
 
@@ -25,7 +25,7 @@
 
     <a
       href="https://discord.com/users/${author.getId()}"
-      title="@${author.getUsername()}"
+      title="${author.getUsername()}"
       class="reference__author__name"
     >
       ${author.getGlobalName()}
@@ -67,13 +67,13 @@
 
     <img
       src="${user.getAvatarUrl()}"
-      alt="@${user.getUsername()}"
+      alt="${user.getUsername()}"
       class="reference__author__avatar"
     />
 
     <a
       href="https://discord.com/users/${user.getId()}"
-      title="@${user.getUsername()}"
+      title="${user.getUsername()}"
       class="reference__author__name"
     >
       ${user.getGlobalName()}
