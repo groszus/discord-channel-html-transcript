@@ -11,7 +11,7 @@
     discord-html-transcript-api
   </a>
 
-  &nbsp;•&nbsp;
+  &nbsp;&nbsp;•&nbsp;&nbsp;
 
   <a
     href="https://creativecommons.org/licenses/by-sa/4.0/"
@@ -22,7 +22,7 @@
     CC BY-SA 4.0
   </a>
 
-  &nbsp;•&nbsp;
+  &nbsp;&nbsp;•&nbsp;&nbsp;
 
   <a
     href="https://github.com/omardiaadev/discord-html-transcript-api/#legal-compliance"
