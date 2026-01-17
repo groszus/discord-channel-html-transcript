@@ -19,6 +19,7 @@
       display: flex;
       flex-direction: column;
       background-color: var(--background-base-lower);
+      height: 100vh;
     }
 
     hr {
@@ -239,9 +240,9 @@
     font-weight: 500;
     line-height: 1.75rem;
     display: flex;
+    align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 28px;
+    height: 34px;
     color: var(--text-normal);
     border-top: 0.0625rem solid var(--border-subtle);
     background-color: var(--background-base-lowest);
@@ -249,11 +250,10 @@
 
   .header {
     position: sticky;
-    z-index: 100;
     top: 0;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    margin-bottom: auto;
     color: var(--text-normal);
   }
 
