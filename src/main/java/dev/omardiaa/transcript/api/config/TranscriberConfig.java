@@ -30,6 +30,7 @@ public final class TranscriberConfig {
 
     if (JTE_DEV) {
       TEMPLATE_ENGINE = TemplateEngine.create(new ResourceCodeResolver("jte"), ContentType.Html);
+      TEMPLATE_ENGINE.setBinaryStaticContent(true);
       LOGGER.info("JTE is running in development mode.");
     } else {
       TEMPLATE_ENGINE = TemplateEngine.createPrecompiled(ContentType.Html);
