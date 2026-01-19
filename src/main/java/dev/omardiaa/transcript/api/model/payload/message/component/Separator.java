@@ -1,0 +1,49 @@
+package dev.omardiaa.transcript.api.model.payload.message.component;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import dev.omardiaa.transcript.api.util.Check;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+/**
+ * Discord <a href="https://discord.com/developers/docs/components/reference#separator">Separator</a>.
+ */
+@NullMarked
+public class Separator implements ContainerChildComponent {
+  private final int type;
+  private final boolean divider;
+  private final SeparatorSpacing spacing;
+
+  @JsonCreator
+  public Separator(
+    @JsonProperty(value = "type", required = true) int type,
+    @JsonProperty(value = "divider") @Nullable Boolean divider,
+    @JsonProperty(value = "spacing") @Nullable Integer spacing) {
+    this.type = type;
+    this.divider = Check.defaultIfNull(divider, true);
+    this.spacing = SeparatorSpacing.fromValue(Check.defaultIfNull(spacing, 1));
+  }
+
+  @Override
+  public int getType() {
+    return type;
+  }
+
+  public boolean isDivider() {
+    return divider;
+  }
+
+  public SeparatorSpacing getSpacing() {
+    return spacing;
+  }
+
+  @Override
+  public String toString() {
+    return "Separator{" +
+           "type=" + type +
+           ", divider=" + divider +
+           ", spacing=" + spacing +
+           '}';
+  }
+}

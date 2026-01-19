@@ -3,7 +3,6 @@ package dev.omardiaa.transcript.api.util;
 import org.jspecify.annotations.NullMarked;
 
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -22,14 +21,6 @@ public final class TimeUtil {
     DateTimeFormatter.ofPattern("h:mm a", Locale.US);
 
   private TimeUtil() {}
-
-  public static OffsetDateTime toOffsetDateTime(String iso8601) {
-    try {
-      return OffsetDateTime.parse(iso8601).withOffsetSameInstant(ZoneOffset.UTC);
-    } catch (RuntimeException ex) {
-      throw new IllegalArgumentException("'" + iso8601 + "' is not a valid ISO8601 timestamp", ex);
-    }
-  }
 
   public static String formatDateFull(OffsetDateTime timestamp) {
     return timestamp.format(DATE_FULL);

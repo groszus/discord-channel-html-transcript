@@ -1,6 +1,6 @@
-@import dev.omardiaa.transcript.api.schema.payload.User
-@import dev.omardiaa.transcript.api.schema.payload.Message
-@import dev.omardiaa.transcript.api.schema.payload.message.InteractionType
+@import dev.omardiaa.transcript.api.model.payload.message.User
+@import dev.omardiaa.transcript.api.model.payload.Message
+@import dev.omardiaa.transcript.api.model.payload.message.InteractionType
 
 @param Message message
 
@@ -59,7 +59,7 @@
   </div>
 @endif
 
-@if((message.getInteractionMetadata() != null) && (message.getInteractionMetadata().getInteractionType() == InteractionType.APPLICATION_COMMAND))
+@if((message.getInteractionMetadata() != null) && (message.getInteractionMetadata().getType() == InteractionType.APPLICATION_COMMAND))
   <div class="reference__spine"></div>
 
   <div class="reference user-select-none">

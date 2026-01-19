@@ -550,11 +550,13 @@
 }
 
 .separator {
-  border-bottom: 0.0625rem solid oklch(0.679 0.012 286.086 / 0.2);
+  height: 1px;
+  border: none;
+  background-color: var(--button-secondary-background-hover);
 }
 
 .separator[aria-hidden="true"] {
-  border-bottom: 0;
+  background-color: #00000000;
 }
 
 .separator[data-separator-spacing="LARGE"] {

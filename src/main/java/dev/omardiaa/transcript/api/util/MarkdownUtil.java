@@ -1,10 +1,10 @@
 package dev.omardiaa.transcript.api.util;
 
-import dev.omardiaa.transcript.api.schema.payload.Guild;
-import dev.omardiaa.transcript.api.schema.payload.Message;
-import dev.omardiaa.transcript.api.schema.payload.User;
-import dev.omardiaa.transcript.api.schema.payload.util.Emoji;
-import dev.omardiaa.transcript.api.schema.payload.util.Role;
+import dev.omardiaa.transcript.api.model.payload.Guild;
+import dev.omardiaa.transcript.api.model.payload.Message;
+import dev.omardiaa.transcript.api.model.payload.message.User;
+import dev.omardiaa.transcript.api.model.payload.common.Emoji;
+import dev.omardiaa.transcript.api.model.payload.common.Role;
 import gg.jte.html.escape.Escape;
 import gg.jte.output.StringOutput;
 import org.jspecify.annotations.NullMarked;

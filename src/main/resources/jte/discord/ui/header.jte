@@ -1,5 +1,5 @@
-@import dev.omardiaa.transcript.api.schema.payload.Channel
-@import dev.omardiaa.transcript.api.schema.payload.Guild
+@import dev.omardiaa.transcript.api.model.payload.Channel
+@import dev.omardiaa.transcript.api.model.payload.Guild
 
 @param Guild guild
 @param Channel channel

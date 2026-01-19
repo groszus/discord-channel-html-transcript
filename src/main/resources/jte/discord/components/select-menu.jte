@@ -1,4 +1,4 @@
-@import dev.omardiaa.transcript.api.schema.payload.message.component.SelectMenu
+@import dev.omardiaa.transcript.api.model.payload.message.component.SelectMenu
 
 @param SelectMenu selectMenu
 

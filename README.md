@@ -53,8 +53,9 @@ You can get a preview for the HTML file [here](https://htmlpreview.github.io/?ht
 <ul>
     <li><strong>To-Do:</strong></li>
     <ul>
-        <li>Cleanup CSS</li>
+        <li>Add GIF and Article Embeds</li>
         <li>Add List Markdown</li>
+        <li>Refactor CSS</li>
     </ul>
 </ul>
 

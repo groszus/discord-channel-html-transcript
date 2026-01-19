@@ -1,6 +1,6 @@
-@import dev.omardiaa.transcript.api.schema.payload.message.component.Button
-@import dev.omardiaa.transcript.api.schema.payload.message.component.ButtonStyle
-@importdev.omardiaa.transcript.api.schema.payload.util.Emoji
+@import dev.omardiaa.transcript.api.model.payload.message.component.Button
+@import dev.omardiaa.transcript.api.model.payload.message.component.ButtonStyle
+@importdev.omardiaa.transcript.api.model.payload.common.Emoji
 
 @param Button button
 
@@ -9,7 +9,7 @@
   aria-disabled="${button.isDisabled()}"
   role="button"
   target="_blank"
-  data-button-style="${button.getButtonStyle().name()}"
+  data-button-style="${button.getStyle().name()}"
   class="button user-select-none"
 >
   @if(button.getEmoji() != null)
@@ -30,7 +30,7 @@
     <span>${button.getLabel()}</span>
   @endif
 
-  @if(button.getButtonStyle() == ButtonStyle.LINK)
+  @if(button.getStyle() == ButtonStyle.LINK)
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"

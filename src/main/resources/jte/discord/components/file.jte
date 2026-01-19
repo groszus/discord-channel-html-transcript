@@ -1,4 +1,4 @@
-@import dev.omardiaa.transcript.api.schema.payload.message.component.File
+@import dev.omardiaa.transcript.api.model.payload.message.component.File
 @import dev.omardiaa.transcript.api.util.Helper
 
 @param File file

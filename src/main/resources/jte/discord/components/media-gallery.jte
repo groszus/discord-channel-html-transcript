@@ -1,4 +1,5 @@
-@import dev.omardiaa.transcript.api.schema.payload.message.component.*
+@import dev.omardiaa.transcript.api.model.payload.message.component.MediaGallery
+@import dev.omardiaa.transcript.api.model.payload.message.component.MediaGalleryItem
 
 @param MediaGallery mediaGallery
 

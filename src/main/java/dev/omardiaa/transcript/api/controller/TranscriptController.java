@@ -1,27 +1,29 @@
 package dev.omardiaa.transcript.api.controller;
 
-import dev.omardiaa.transcript.api.Transcriber;
-import dev.omardiaa.transcript.api.schema.Payload;
-import io.javalin.http.*;
+import dev.omardiaa.transcript.api.model.Payload;
+import dev.omardiaa.transcript.api.service.Transcriber;
+import io.javalin.http.ContentType;
+import io.javalin.http.Context;
+import io.javalin.http.Header;
+import io.javalin.http.HttpStatus;
 import org.jspecify.annotations.NonNull;
 
-public final class TranscriptController implements Handler {
+public class TranscriptController {
   private final Transcriber transcriber;
 
   public TranscriptController() {
     this.transcriber = new Transcriber();
   }
 
-  @Override
-  public void handle(@NonNull Context ctx) {
+  public void create(@NonNull Context ctx) {
     Payload payload = ctx.bodyStreamAsClass(Payload.class);
 
     ctx.future(() -> transcriber
       .transcribe(payload)
-      .thenAccept(transcript -> {
+      .thenAccept(output -> {
         ctx.status(HttpStatus.OK);
         ctx.header(Header.CONTENT_TYPE, ContentType.HTML);
-        ctx.result(transcript.getByteArray());
+        ctx.result(output.toByteArray());
       }));
   }
 }
