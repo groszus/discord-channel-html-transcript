@@ -12,4 +12,4 @@ jte-classes
 *.iml
 *.ipr
 .idea/*
-!.idea/runConfigurations/
+!.idea/runConfigurations

@@ -1,4 +1,4 @@
-<h1 align="center">discord-html-transcript-api</h1>
+<h1 align="center">discord-html-transcript</h1>
 
 <p align="center"><strong>A Discord HTML transcript generator that preserves your favorite Discord styles</strong></p>
 
@@ -12,11 +12,6 @@
 This is the most
 **up-to-date** Discord transcript generator, ensuring your archive is consistent with Discord's new styles!\
 You can get a preview for the HTML file [here](https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript-api/blob/60ab0f8c62798f1678917518fe211e2e629bc8ef/examples/transcript.example.html).
-
-**Uses:**
-
-- [**Javalin**](https://github.com/javalin/javalin) to start a server that accepts a payload of Discord messages.
-- [**Java Template Engine**](https://github.com/casid/jte/) to generate the HTML transcript.
 
 <details>
     <summary>
@@ -34,14 +29,14 @@ You can get a preview for the HTML file [here](https://htmlpreview.github.io/?ht
 ## Legal Compliance
 
 > [!NOTE]
-> This project utilizes the [gg sans](src/main/resources/font/ggsansvf.woff) font that is the property of Discord Inc.
+> This project utilizes the [gg sans](core/src/main/resources/font/ggsansvf.woff) font that is the property of Discord Inc.
 
 ## Features
 
 <ul>
     <li>
         <strong>ComponentsV2</strong>
-        <img src="https://img.shields.io/badge/NEW-FF2E2E" alt="NEW" height="12"/>
+        <img alt="NEW" src="https://img.shields.io/badge/NEW-FF2E2E" height="12"/>
     </li>
     <li><strong>Markdown:</strong> Standard Markup, Mentions, Custom Emojis, and more...</li>
     <li><strong>Attachments</strong></li>
@@ -69,37 +64,81 @@ You can get a preview for the HTML file [here](https://htmlpreview.github.io/?ht
 
 <dependency>
   <groupId>dev.omardiaa</groupId>
-  <artifactId>discord-html-transcript-api</artifactId>
+  <artifactId>discord-html-transcript-core</artifactId>
   <version>1.0.0</version>
 </dependency>
 ```
 
 ```kts
 
-implementation("dev.omardiaa:discord-html-transcript-api:1.0.0")
+implementation("dev.omardiaa:discord-html-transcript-core:1.0.0")
 ```
 
 ## How To Use
 
-##### Library
+There are 3 ways you can use this library:
 
-The following libraries carefully retrieve the required [Payload](src/main/java/dev/omardiaa/transcript/api/schema/Payload.java)
+### Installation
+
+##### Requirements
+
+- **Java 21+**
+
+```xml
+
+<dependency>
+  <groupId>dev.omardiaa</groupId>
+  <artifactId>discord-html-transcript-core</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+```kts
+
+implementation("dev.omardiaa:discord-html-transcript-core:1.0.0")
+```
+
+### Library
+
+The following libraries carefully retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
 with respect to your bot's instance to handle Discord's rate limiter.
 
-| Framework              | Library                                                                                     |
-|------------------------|---------------------------------------------------------------------------------------------|
-| Java Discord API (JDA) | [`discord-html-transcript-jda`](https://github.com/omardiaadev/discord-html-transcript-jda) |
-| Discord.js             | WIP                                                                                         |
-| Discord.py             | WIP                                                                                         |
+<table>
+    <tr>
+        <th>Framework</th>
+        <th>Library</th>
+    </tr>
+    <tr>
+        <td>
+            <img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="16" />
+            <strong>Java Discord API</strong>
+        </td>
+        <td><a href="https://github.com/omardiaadev/discord-html-transcript-jda">discord-html-transcript-jda</a></td>
+    </tr>
+    <tr>
+        <td>
+            <img alt="Discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="16" />
+            <strong>Discord.js</strong>
+        </td>
+        <td>WIP</td>
+    </tr>
+    <tr>
+        <td>
+            <img alt="Discord.py" src="https://discordpy.readthedocs.io/en/stable/_static/discord_py_logo.ico" height="16" />
+            <strong>Discord.py</strong>
+        </td>
+        <td>WIP</td>
+    </tr>
+</table>
 
-##### Self-Hosting
+### Self-Hosting
 
 - WIP
 
 ## Development
 
 - Pass
-  `testStylePath` to [Payload](src/main/java/dev/omardiaa/transcript/api/schema/Payload.java) for live CSS updates during development.
+  `stylePath` to [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java) for live CSS updates during development.
 
 ## Enjoying The Package? Give it A Star!
 
