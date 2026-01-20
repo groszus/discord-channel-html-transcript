@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>dev.omardiaa</groupId>
+    <artifactId>discord-html-transcript</artifactId>
+    <version>1.0.0</version>
+  </parent>
+
+  <artifactId>discord-html-transcript-server</artifactId>
+
+  <name>${project.artifactId}</name>
+
+  <scm>
+    <connection>scm:git:git://github.com/omardiaadev/discord-html-transcript.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com:omardiaadev/discord-html-transcript.git</developerConnection>
+    <url>https://github.com/omardiaadev/discord-html-transcript</url>
+  </scm>
+
+  <properties>
+    <mainClass>dev.omardiaa.transcript.server.Main</mainClass>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>dev.omardiaa</groupId>
+      <artifactId>discord-html-transcript-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.javalin</groupId>
+      <artifactId>javalin</artifactId>
+      <version>6.7.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <id>native</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.graalvm.buildtools</groupId>
+            <artifactId>native-maven-plugin</artifactId>
+            <version>0.11.3</version>
+            <extensions>true</extensions>
+            <configuration>
+              <mainClass>${mainClass}</mainClass>
+            </configuration>
+            <executions>
+              <execution>
+                <id>build-native</id>
+                <goals>
+                  <goal>compile-no-fork</goal>
+                </goals>
+                <phase>package</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>native-dev</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.graalvm.buildtools</groupId>
+            <artifactId>native-maven-plugin</artifactId>
+            <version>0.11.3</version>
+            <extensions>true</extensions>
+            <configuration>
+              <mainClass>${mainClass}</mainClass>
+              <quickBuild>true</quickBuild>
+            </configuration>
+            <executions>
+              <execution>
+                <id>build-native</id>
+                <goals>
+                  <goal>compile-no-fork</goal>
+                </goals>
+                <phase>package</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
