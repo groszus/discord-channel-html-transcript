@@ -110,21 +110,21 @@ with respect to your bot's instance to handle Discord's rate limiter.
     </tr>
     <tr>
         <td>
-            <img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="16" />
+            <img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="12" />
             <strong>Java Discord API</strong>
         </td>
         <td><a href="https://github.com/omardiaadev/discord-html-transcript-jda">discord-html-transcript-jda</a></td>
     </tr>
     <tr>
         <td>
-            <img alt="Discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="16" />
+            <img alt="Discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="12" />
             <strong>Discord.js</strong>
         </td>
         <td>WIP</td>
     </tr>
     <tr>
         <td>
-            <img alt="Discord.py" src="https://discordpy.readthedocs.io/en/stable/_static/discord_py_logo.ico" height="16" />
+            <img alt="Discord.py" src="https://discordpy.readthedocs.io/en/stable/_static/discord_py_logo.ico" height="12" />
             <strong>Discord.py</strong>
         </td>
         <td>WIP</td>
