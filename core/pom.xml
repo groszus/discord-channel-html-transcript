@@ -6,12 +6,14 @@
   <parent>
     <groupId>dev.omardiaa</groupId>
     <artifactId>discord-html-transcript</artifactId>
-    <version>1.0.0</version>
+    <version>0.1.0</version>
   </parent>
 
   <artifactId>discord-html-transcript-core</artifactId>
 
-  <name>${project.artifactId}</name>
+  <name>discord-html-transcript-core</name>
+  <description>A Discord HTML transcript generator that preserves your favorite Discord styles</description>
+  <url>https://github.com/omardiaadev/discord-html-transcript</url>
 
   <scm>
     <connection>scm:git:git://github.com/omardiaadev/discord-html-transcript.git</connection>
@@ -51,18 +53,6 @@
   </dependencies>
 
   <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-      </resource>
-      <resource>
-        <directory>${project.build.directory}/jte-classes</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
-      </resource>
-    </resources>
-
     <plugins>
       <plugin>
         <groupId>gg.jte</groupId>
@@ -70,16 +60,40 @@
         <version>${jte.version}</version>
         <configuration>
           <sourceDirectory>${project.basedir}/src/main/resources/jte</sourceDirectory>
-          <targetDirectory>${project.build.directory}/jte-classes</targetDirectory>
           <binaryStaticContent>true</binaryStaticContent>
           <contentType>Html</contentType>
+          <targetDirectory/>
         </configuration>
         <executions>
           <execution>
             <goals>
-              <goal>precompile</goal>
+              <goal>generate</goal>
+            </goals>
+            <phase>generate-sources</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>copy-resources</goal>
             </goals>
             <phase>process-classes</phase>
+            <configuration>
+              <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.basedir}/target/generated-sources/jte</directory>
+                  <includes>
+                    <include>**/*.bin</include>
+                  </includes>
+                  <filtering>false</filtering>
+                </resource>
+              </resources>
+            </configuration>
           </execution>
         </executions>
       </plugin>
