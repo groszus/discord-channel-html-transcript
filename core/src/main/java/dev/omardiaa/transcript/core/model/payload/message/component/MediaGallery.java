@@ -2,6 +2,7 @@ package dev.omardiaa.transcript.core.model.payload.message.component;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import dev.omardiaa.transcript.core.model.payload.common.UnfurledMediaItem;
 import dev.omardiaa.transcript.core.util.Check;
 import org.jspecify.annotations.NullMarked;
 
@@ -13,12 +14,12 @@ import java.util.List;
 @NullMarked
 public class MediaGallery implements ContainerChildComponent {
   private final int type;
-  private final List<MediaGalleryItem> items;
+  private final List<Item> items;
 
   @JsonCreator
   public MediaGallery(
     @JsonProperty(value = "type", required = true) int type,
-    @JsonProperty(value = "items", required = true) List<MediaGalleryItem> items) {
+    @JsonProperty(value = "items", required = true) List<Item> items) {
     this.type = type;
     this.items = Check.lengthBetween(items, "items", 1, 10);
   }
@@ -28,7 +29,7 @@ public class MediaGallery implements ContainerChildComponent {
     return type;
   }
 
-  public List<MediaGalleryItem> getItems() {
+  public List<Item> getItems() {
     return items;
   }
 
@@ -38,5 +39,29 @@ public class MediaGallery implements ContainerChildComponent {
            "type=" + type +
            ", items=" + items +
            '}';
+  }
+
+  /**
+   * Discord <a href="https://discord.com/developers/docs/components/reference#media-gallery-media-gallery-item-structure">Media Gallery Item</a>.
+   */
+  @NullMarked
+  public static class Item {
+    private final UnfurledMediaItem media;
+
+    @JsonCreator
+    public Item(@JsonProperty(value = "media", required = true) UnfurledMediaItem media) {
+      this.media = media;
+    }
+
+    public UnfurledMediaItem getMedia() {
+      return media;
+    }
+
+    @Override
+    public String toString() {
+      return "Item{" +
+             "media=" + media +
+             '}';
+    }
   }
 }
