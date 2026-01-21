@@ -42,14 +42,14 @@ public final class TranscriberConfig {
   private TranscriberConfig() {}
 
   /**
-   * @return Configured {@link TemplateEngine}.
+   * @return Default {@link TemplateEngine}.
    */
   public static TemplateEngine getTemplateEngine() {
     return TEMPLATE_ENGINE;
   }
 
   /**
-   * @return Configured {@link ObjectMapper}.
+   * @return Default {@link ObjectMapper}.
    */
   public static ObjectMapper getObjectMapper() {
     return OBJECT_MAPPER;

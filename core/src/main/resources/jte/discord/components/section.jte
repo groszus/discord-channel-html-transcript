@@ -1,7 +1,6 @@
 @import dev.omardiaa.transcript.core.model.payload.Guild
 @import dev.omardiaa.transcript.core.model.payload.Message
 @import dev.omardiaa.transcript.core.model.payload.message.component.*
-@import dev.omardiaa.transcript.core.util.MarkdownUtil
 
 @param Guild guild
 @param Section section
@@ -11,9 +10,7 @@
   <div class="section__content">
     @for(SectionChildComponent component : section.getComponents())
       @if(component instanceof TextDisplay textDisplay)
-        <div class="message markup">
-          $unsafe{MarkdownUtil.parseMarkup(guild, message, textDisplay.getContent())}
-        </div>
+        @template.discord.message.content(guild = guild, message = message, content = textDisplay.getContent())
       @endif
     @endfor
   </div>

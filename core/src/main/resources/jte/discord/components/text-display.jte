@@ -8,7 +8,5 @@
 @param Message message
 
 <div class="text-display">
-  <div class="message markup">
-    $unsafe{MarkdownUtil.parseMarkup(guild, message, textDisplay.getContent())}
-  </div>
+  @template.discord.message.content(guild = guild, message = message, content = textDisplay.getContent())
 </div>

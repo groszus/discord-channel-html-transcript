@@ -18,7 +18,7 @@ public class Transcriber {
   private final TemplateEngine templateEngine;
 
   /**
-   * Constructs {@link Transcriber} with the configured {@link TemplateEngine}.
+   * Constructs {@link Transcriber} with the default {@link TemplateEngine}.
    *
    * @see TranscriberConfig#getTemplateEngine()
    */

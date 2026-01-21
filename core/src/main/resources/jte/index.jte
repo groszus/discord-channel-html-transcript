@@ -41,7 +41,7 @@
 
     <li
       data-show-author="${showAuthor}"
-      class="message__container"
+      class="message"
     >
       @template.discord.ui.reference(message = message)
 

@@ -1,24 +1,22 @@
 @import dev.omardiaa.transcript.core.model.payload.Guild
 @import dev.omardiaa.transcript.core.model.payload.Message
 @import dev.omardiaa.transcript.core.model.payload.message.Embed
-@import dev.omardiaa.transcript.core.util.MarkdownUtil
 
 @param Guild guild
 @param Message message
 
-<div
-  id="${message.getId()}"
-  class="message markup"
->
-  $unsafe{MarkdownUtil.parseMarkup(guild, message, message.getContent())}
+<div id="${message.getId()}">
+  @template.discord.message.content(guild = guild, message = message, content = message.getContent())
 
-  @template.discord.message.attachments(attachments = message.getAttachments())
+  <div class="message__accessories">
+    @template.discord.message.attachments(attachments = message.getAttachments())
 
-  @for(Embed embed : message.getEmbeds())
-    @template.discord.message.embed(guild = guild, message = message, embed = embed)
-  @endfor
+    @for(Embed embed : message.getEmbeds())
+      @template.discord.message.embed(guild = guild, message = message, embed = embed)
+    @endfor
 
-  @template.discord.message.components(guild = guild, message = message)
+    @template.discord.message.components(guild = guild, message = message)
+  </div>
 
   @template.discord.message.reactions(message = message)
 
