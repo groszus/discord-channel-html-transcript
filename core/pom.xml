@@ -92,6 +92,31 @@
 
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>sync-css</id>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <target>
+                <echo message="Syncing style.css to style.jte..."/>
+                <concat destfile="${project.basedir}/src/main/resources/jte/style.jte">
+                  <header>&lt;style&gt;${line.separator}</header>
+                  <fileset file="${project.basedir}/src/main/resources/style.css"/>
+                  <footer>&lt;/style&gt;</footer>
+                </concat>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.12.0</version>
         <executions>
