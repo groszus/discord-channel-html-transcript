@@ -8,7 +8,6 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Discord Select Menus:
- *
  * <ul>
  *   <li><a href="https://discord.com/developers/docs/components/reference#string-select">String Select</a></li>
  *   <li><a href="https://discord.com/developers/docs/components/reference#user-select">User Select</a></li>

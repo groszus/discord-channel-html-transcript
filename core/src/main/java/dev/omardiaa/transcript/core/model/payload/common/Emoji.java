@@ -5,6 +5,9 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.stream.Collectors;
 
+/**
+ * Discord <a href="https://discord.com/developers/docs/resources/emoji#emoji-resource">Emoji</a>.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, defaultImpl = Emoji.Unicode.class)
 @JsonSubTypes({
   @JsonSubTypes.Type(value = Emoji.Unicode.class),

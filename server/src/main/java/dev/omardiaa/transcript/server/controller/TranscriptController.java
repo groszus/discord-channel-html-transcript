@@ -6,8 +6,9 @@ import io.javalin.http.ContentType;
 import io.javalin.http.Context;
 import io.javalin.http.Header;
 import io.javalin.http.HttpStatus;
-import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class TranscriptController {
   private final Transcriber transcriber;
 
@@ -15,7 +16,7 @@ public class TranscriptController {
     this.transcriber = new Transcriber();
   }
 
-  public void create(@NonNull Context ctx) {
+  public void create(Context ctx) {
     Payload payload = ctx.bodyStreamAsClass(Payload.class);
 
     ctx.future(() -> transcriber

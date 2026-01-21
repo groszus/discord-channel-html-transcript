@@ -14,6 +14,9 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * Discord <a href="https://discord.com/developers/docs/resources/guild#guild-resource">Guild</a>.
+ */
 @NullMarked
 public class Guild {
   public static final String GUILD_ICON = "https://cdn.discordapp.com/icons/%s/%s.webp?animated=true";
@@ -25,9 +28,6 @@ public class Guild {
   @JsonIgnore
   private final Map<String, Role> rolesMap;
 
-  /**
-   * Discord <a href="https://discord.com/developers/docs/resources/guild#guild-resource">Guild</a>.
-   */
   @JsonCreator
   public Guild(
     @JsonProperty(value = "id", required = true) String id,

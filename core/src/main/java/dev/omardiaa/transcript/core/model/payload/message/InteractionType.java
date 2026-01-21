@@ -5,6 +5,9 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * Discord <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type">Interaction Type</a>.
+ */
 public enum InteractionType {
   UNKNOWN(-1),
   APPLICATION_COMMAND(2);

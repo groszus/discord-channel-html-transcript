@@ -19,6 +19,9 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * Discord <a href="https://discord.com/developers/docs/resources/message#messages-resource">Message</a>.
+ */
 @NullMarked
 public class Message {
   private final String id;
@@ -37,9 +40,6 @@ public class Message {
   @JsonIgnore
   private final Map<String, User> mentionsMap;
 
-  /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#messages-resource">Message</a>.
-   */
   @JsonCreator
   public Message(
     @JsonProperty(value = "id", required = true) String id,
@@ -153,14 +153,14 @@ public class Message {
            '}';
   }
 
+  /**
+   * Discord <a href="https://discord.com/developers/docs/resources/message#reaction-object">Reaction</a>.
+   */
   @NullMarked
   public static class Reaction {
     private final int count;
     private final Emoji emoji;
 
-    /**
-     * Discord <a href="https://discord.com/developers/docs/resources/message#reaction-object">Reaction</a>.
-     */
     public Reaction(
       @JsonProperty(value = "count", required = true) int count,
       @JsonProperty(value = "emoji", required = true) Emoji emoji) {
@@ -185,14 +185,14 @@ public class Message {
     }
   }
 
+  /**
+   * Discord <a href="https://discord.com/developers/docs/resources/message#message-interaction-metadata-object">Message Interaction Metadata</a>.
+   */
   @NullMarked
   public static class InteractionMetadata {
     private final InteractionType type;
     private final User user;
 
-    /**
-     * Discord <a href="https://discord.com/developers/docs/resources/message#message-interaction-metadata-object">Message Interaction Metadata</a>.
-     */
     @JsonCreator
     public InteractionMetadata(
       @JsonProperty(value = "type", required = true) int type,

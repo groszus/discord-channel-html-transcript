@@ -7,6 +7,9 @@ import dev.omardiaa.transcript.core.util.Check;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Discord <a href="https://discord.com/developers/docs/resources/user#users-resource">User</a>.
+ */
 @NullMarked
 public class User {
   public static final String DEFAULT_USER_AVATAR = "https://cdn.discordapp.com/embed/avatars/%s.png";
@@ -20,9 +23,6 @@ public class User {
   private final boolean bot;
   private final boolean system;
 
-  /**
-   * Discord <a href="https://discord.com/developers/docs/resources/user#users-resource">User</a>.
-   */
   @JsonCreator
   public User(
     @JsonProperty(value = "id", required = true) String id,

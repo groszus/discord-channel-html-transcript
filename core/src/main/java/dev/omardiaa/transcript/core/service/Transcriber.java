@@ -18,7 +18,7 @@ public class Transcriber {
   private final TemplateEngine templateEngine;
 
   /**
-   * Constructs {@link Transcriber} with the default {@link TemplateEngine}.
+   * Constructs {@link Transcriber} with the configured {@link TemplateEngine}.
    *
    * @see TranscriberConfig#getTemplateEngine()
    */
@@ -28,11 +28,9 @@ public class Transcriber {
 
   /**
    * Constructs {@link Transcriber} with a custom {@link TemplateEngine}.
-   * <br>
-   * This is for testing purposes.
    *
    * @param templateEngine
-   *   A custom {@link TemplateEngine}, use with caution.
+   *   The custom {@link TemplateEngine}.
    */
   Transcriber(TemplateEngine templateEngine) {
     this.templateEngine = templateEngine;

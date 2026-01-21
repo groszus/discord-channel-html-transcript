@@ -6,15 +6,15 @@ import dev.omardiaa.transcript.core.util.Check;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Discord <a href="https://discord.com/developers/docs/resources/channel#channels-resource">Channel</a>.
+ */
 @NullMarked
 public class Channel {
   private final String id;
   private final int type;
   private final String name;
 
-  /**
-   * Discord <a href="https://discord.com/developers/docs/resources/channel#channels-resource">Channel</a>.
-   */
   @JsonCreator
   public Channel(
     @JsonProperty(value = "id", required = true) String id,

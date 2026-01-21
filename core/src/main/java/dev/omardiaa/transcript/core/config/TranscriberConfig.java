@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import dev.omardiaa.transcript.core.service.Transcriber;
 import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
@@ -11,11 +12,14 @@ import org.jspecify.annotations.NullMarked;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Helper class that holds {@link Transcriber} configuration.
+ */
 @NullMarked
 public final class TranscriberConfig {
   private static final Logger LOGGER = LoggerFactory.getLogger(TranscriberConfig.class);
-
   private static final boolean JTE_DEV = EnvironmentConfig.get("JTE_DEV", false);
+
   private static final TemplateEngine TEMPLATE_ENGINE;
   private static final ObjectMapper OBJECT_MAPPER;
 
@@ -37,10 +41,16 @@ public final class TranscriberConfig {
 
   private TranscriberConfig() {}
 
+  /**
+   * @return Configured {@link TemplateEngine}.
+   */
   public static TemplateEngine getTemplateEngine() {
     return TEMPLATE_ENGINE;
   }
 
+  /**
+   * @return Configured {@link ObjectMapper}.
+   */
   public static ObjectMapper getObjectMapper() {
     return OBJECT_MAPPER;
   }

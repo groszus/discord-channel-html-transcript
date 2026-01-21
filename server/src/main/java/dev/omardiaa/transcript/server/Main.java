@@ -2,28 +2,25 @@ package dev.omardiaa.transcript.server;
 
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import dev.omardiaa.transcript.core.config.TranscriberConfig;
-import dev.omardiaa.transcript.server.config.JavalinConfig;
+import dev.omardiaa.transcript.server.config.ServerConfig;
 import dev.omardiaa.transcript.server.controller.TranscriptController;
+import dev.omardiaa.transcript.server.exception.GlobalExceptionHandler;
+import dev.omardiaa.transcript.server.exception.IncompatibleClientException;
+import dev.omardiaa.transcript.server.util.ServerUtil;
 import io.javalin.Javalin;
-import io.javalin.http.HttpStatus;
 import io.javalin.json.JavalinJackson;
 
 public class Main {
   public static void main(String[] args) {
+    JavalinJackson jsonMapper = new JavalinJackson(TranscriberConfig.getObjectMapper(), true);
     TranscriptController transcriptController = new TranscriptController();
 
-    Javalin.create(config -> config.jsonMapper(new JavalinJackson(TranscriberConfig.getObjectMapper(), true)))
-           .exception(
-             MismatchedInputException.class, (e, ctx) -> {
-               ctx.json(new ErrorRepsponse(HttpStatus.BAD_REQUEST, e.getMessage()));
-             })
+    Javalin.create(config -> config.jsonMapper(jsonMapper))
+           .before(ctx -> ServerUtil.checkClientVersion(ctx.header("Client-Version")))
            .post("/transcript", transcriptController::create)
-           .start(JavalinConfig.getJavalinHost(), JavalinConfig.getJavalinPort());
-  }
-
-  private record ErrorRepsponse(int status, String detail) {
-    public ErrorRepsponse(HttpStatus status, String detail) {
-      this(status.getCode(), detail);
-    }
+           .exception(MismatchedInputException.class, GlobalExceptionHandler::handleMismatchedInput)
+           .exception(IncompatibleClientException.class, GlobalExceptionHandler::handleIncompatibleClient)
+           .exception(Exception.class, GlobalExceptionHandler::handleException)
+           .start(ServerConfig.getHost(), ServerConfig.getPort());
   }
 }

@@ -8,6 +8,9 @@ import dev.omardiaa.transcript.core.model.payload.message.component.File;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Discord <a href="https://discord.com/developers/docs/resources/message#attachment-object">Attachment</a>.
+ */
 @NullMarked
 public class Attachment {
   private final String filename;
@@ -15,9 +18,6 @@ public class Attachment {
   private final int size;
   private final String url;
 
-  /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#attachment-object">Attachment</a>.
-   */
   @JsonCreator
   public Attachment(
     @JsonProperty(value = "filename", required = true) String filename,

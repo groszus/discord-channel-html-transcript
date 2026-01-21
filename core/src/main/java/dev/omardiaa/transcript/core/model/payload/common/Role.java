@@ -4,15 +4,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jspecify.annotations.NullMarked;
 
+/**
+ * Discord <a href="https://discord.com/developers/docs/topics/permissions#role-object">Role</a>.
+ */
 @NullMarked
 public class Role {
   private final String id;
   private final String name;
   private final Colors colors;
 
-  /**
-   * Discord <a href="https://discord.com/developers/docs/topics/permissions#role-object">Role</a>.
-   */
   @JsonCreator
   public Role(
     @JsonProperty(value = "id", required = true) String id,
@@ -44,13 +44,13 @@ public class Role {
            '}';
   }
 
+  /**
+   * Discord <a href="https://discord.com/developers/docs/topics/permissions#role-object-role-colors-object">Role Colors</a>.
+   */
   @NullMarked
   public static class Colors {
     private final int primaryColor;
 
-    /**
-     * Discord <a href="https://discord.com/developers/docs/topics/permissions#role-object-role-colors-object">Role Colors</a>.
-     */
     @JsonCreator
     public Colors(@JsonProperty(value = "primary_color", required = true) int primaryColor) {
       this.primaryColor = primaryColor;

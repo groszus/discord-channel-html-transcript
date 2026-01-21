@@ -14,6 +14,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 // TODO: implement different Embed types other than "rich"
+
+/**
+ * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object">Embed</a>.
+ */
 @NullMarked
 public class Embed {
   private final @Nullable String title;
@@ -28,9 +32,6 @@ public class Embed {
   private final Embed.@Nullable Author author;
   private final @Nullable List<Field> fields;
 
-  /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object">Embed</a>.
-   */
   @JsonCreator
   public Embed(
     @JsonProperty(value = "title") @Nullable String title,
@@ -133,14 +134,14 @@ public class Embed {
     }
   }
 
+  /**
+   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-footer-structure">Embed Footer</a>.
+   */
   @NullMarked
   public static class Footer {
     private final String text;
     private final @Nullable String iconUrl;
 
-    /**
-     * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-footer-structure">Embed Footer</a>.
-     */
     @JsonCreator
     public Footer(
       @JsonProperty(value = "text", required = true) String text,
@@ -166,13 +167,13 @@ public class Embed {
     }
   }
 
+  /**
+   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-image-structure">Embed Image</a>.
+   */
   @NullMarked
   public static class Image {
     private final String url;
 
-    /**
-     * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-image-structure">Embed Image</a>.
-     */
     @JsonCreator
     public Image(@JsonProperty(value = "url", required = true) String url) {
       this.url = url;
@@ -190,13 +191,13 @@ public class Embed {
     }
   }
 
+  /**
+   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-thumbnail-structure">Embed Thumbnail</a>.
+   */
   @NullMarked
   public static class Thumbnail {
     private final String url;
 
-    /**
-     * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-thumbnail-structure">Embed Thumbnail</a>.
-     */
     @JsonCreator
     public Thumbnail(@JsonProperty(value = "url", required = true) String url) {
       this.url = url;
@@ -214,15 +215,15 @@ public class Embed {
     }
   }
 
+  /**
+   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-author-structure">Embed Author</a>.
+   */
   @NullMarked
   public static class Author {
     private final String name;
     private final @Nullable String url;
     private final @Nullable String iconUrl;
 
-    /**
-     * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-author-structure">Embed Author</a>.
-     */
     @JsonCreator
     public Author(
       @JsonProperty(value = "name", required = true) String name,
@@ -255,15 +256,15 @@ public class Embed {
     }
   }
 
+  /**
+   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-field-structure">Embed Field</a>.
+   */
   @NullMarked
   public static class Field {
     private final String name;
     private final String value;
     private final boolean inline;
 
-    /**
-     * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-field-structure">Embed Field</a>.
-     */
     @JsonCreator
     public Field(
       @JsonProperty(value = "name", required = true) String name,
