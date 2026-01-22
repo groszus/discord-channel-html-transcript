@@ -213,12 +213,6 @@
   user-select: none;
 }
 
-.user-select-text {
-  -moz-user-select: text;
-  -webkit-user-select: text;
-  user-select: text;
-}
-
 /* ==========================================================================
    template/discord/ui
    ========================================================================== */
@@ -263,16 +257,12 @@
   color: var(--text-normal);
 }
 
-.header__guild__container {
-  display: flex;
-  justify-content: center;
-  height: 34px;
-  background-color: var(--background-base-lowest);
-}
-
 .header__guild {
   display: flex;
   align-items: center;
+  justify-content: center;
+  height: 34px;
+  background-color: var(--background-base-lowest);
   gap: 0.5rem;
 }
 
@@ -299,13 +289,29 @@
   padding: 0.5rem 0.75rem;
   border-bottom: 0.0625rem solid var(--border-subtle);
   background-color: var(--header-bar-background);
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .header__channel__title {
   font-weight: 500;
   overflow: hidden;
   color: var(--text-normal);
+}
+
+/* TODO: Implement better alternative for "max-width" */
+.header__channel__topic {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.125rem;
+  overflow: hidden;
+  max-width: 70%;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-muted);
+}
+
+.header__channel__topic > br {
+  display: none
 }
 
 .reference {
@@ -496,13 +502,12 @@
   gap: 0.75rem;
 }
 
+/* TODO: check discord styling*/
 .section__content {
+  font-size: 0.875rem;
   display: flex;
+  flex: 1;
   flex-direction: column;
-}
-
-.section__accessory {
-  align-self: flex-start;
 }
 
 .section__accessory:has(img) {
@@ -528,6 +533,7 @@
 
 .container > .file__container {
   margin-top: 0;
+  box-shadow: 0 1px 4px 0 oklch(0 0 0 / 0.14);
 }
 
 .file {
@@ -574,11 +580,10 @@
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  max-width: min(600px, 100%);
   padding: 1rem;
   border: 0.0625rem solid var(--border-subtle);
   border-radius: 0.5rem;
-  background: var(--background-surface-high);
+  background-color: var(--background-surface-high);
   gap: 0.5rem;
 }
 
@@ -604,7 +609,7 @@
   border: 0.0625rem solid var(--border-subtle);
   border-left: 0.25rem solid var(--border-normal);
   border-radius: 0.25rem;
-  background: var(--background-surface-high);
+  background-color: var(--background-surface-high);
   grid-template-columns: auto;
   grid-template-rows: auto;
 }
@@ -755,21 +760,21 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  padding-top: 0.25rem;
+  padding-top: 0.125rem;
 }
 
 .reaction {
   display: flex;
   align-items: center;
   min-height: 24px;
-  margin-right: 0.25rem;
-  padding: 0.125rem 0.375rem;
+  margin-bottom: 0.25rem;
+  padding: 0.25rem 0.375rem;
   cursor: pointer;
-  transition: none 0.1s ease;
-  transition-property: background-color, border-color;
+  transition: background-color, border-color, 0.1s ease;
   border: 0.0625rem solid transparent;
   border-radius: 0.5rem;
-  background: var(--background-mod-subtle);
+  background-color: var(--background-mod-subtle);
+  margin-inline-end: 0.25rem;
   gap: 0.375rem;
 }
 
@@ -782,7 +787,6 @@
   line-height: 1.25rem;
   width: 20px;
   height: 20px;
-  margin: 0.125rem 0;
 }
 
 .reaction__count {
@@ -939,9 +943,73 @@
   stroke-opacity: 1;
 }
 
+.images {
+  display: grid;
+  max-width: 550px;
+  gap: 0.25rem;
+}
+
+/* TODO: check if relevant */
+.components > .images,
+.container > .images {
+  /*padding: 0.125rem 0;*/
+}
+
+.images[data-count="1"] {
+  max-width: 350px;
+}
+
+.images:is([data-count="2"], [data-count="4"]) {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.images[data-count="3"] {
+  max-height: 350px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.images[data-count="3"] > :nth-child(1) {
+  grid-column: span 4;
+  grid-row: span 2;
+}
+
+.images[data-count="3"] > :nth-child(2),
+.images[data-count="3"] > :nth-child(3) {
+  grid-column: span 2;
+}
+
+.images[data-count="4"] {
+  max-height: 350px;
+}
+
+.images:is([data-count="5"], [data-count="8"]) {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.images:is([data-count="5"], [data-count="8"]) > :nth-child(-n+2) {
+  grid-column: span 3;
+}
+
+.images:is([data-count="5"], [data-count="8"]) > :nth-child(n+3) {
+  grid-column: span 2;
+}
+
+.images:is([data-count="6"], [data-count="9"]) {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.images:is([data-count="7"], [data-count="10"]) {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.images:is([data-count="7"], [data-count="10"]) > :nth-child(1) {
+  max-height: 280px;
+  grid-column: 1 / -1;
+}
+
 .image {
   display: flex;
-  flex: auto;
   flex-flow: row nowrap;
   width: 100%;
   height: 100%;
@@ -951,70 +1019,6 @@
 
 .image__wrapper {
   min-height: 0;
-}
-
-.image__container {
-  display: grid;
-  gap: 0.25rem;
-}
-
-.components > .image__container,
-.container > .image__container {
-  max-width: 550px;
-  padding: 0.125rem 0;
-}
-
-.image__container[data-count="1"] {
-  max-width: 350px;
-}
-
-.image__container:is([data-count="2"], [data-count="4"]) {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.image__container[data-count="3"] {
-  max-height: 350px;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-}
-
-.image__container[data-count="3"] > :nth-child(1) {
-  grid-column: span 4;
-  grid-row: span 2;
-}
-
-.image__container[data-count="3"] > :nth-child(2),
-.image__container[data-count="3"] > :nth-child(3) {
-  grid-column: span 2;
-}
-
-.image__container[data-count="4"] {
-  max-height: 350px;
-}
-
-.image__container:is([data-count="5"], [data-count="8"]) {
-  grid-template-columns: repeat(6, 1fr);
-}
-
-.image__container:is([data-count="5"], [data-count="8"]) > :nth-child(-n+2) {
-  grid-column: span 3;
-}
-
-.image__container:is([data-count="5"], [data-count="8"]) > :nth-child(n+3) {
-  grid-column: span 2;
-}
-
-.image__container:is([data-count="6"], [data-count="9"]) {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.image__container:is([data-count="7"], [data-count="10"]) {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.image__container:is([data-count="7"], [data-count="10"]) > :nth-child(1) {
-  max-height: 280px;
-  grid-column: 1 / -1;
 }
 
 .markup {
@@ -1066,20 +1070,27 @@ code.markup {
   line-height: 1.125rem;
   border: 0.0625rem solid var(--border-normal);
   border-radius: 0.25rem;
-  background: var(--background-code);
+  background-color: var(--background-code);
 }
 
-code.markup[data-code-style="block"] {
+code.markup[data-code-style="BLOCK"] {
   display: block;
   overflow-x: auto;
   max-width: 90%;
   margin-top: 0.375rem;
   padding: 0.5rem;
-  white-space: preserve;
+  white-space: pre;
 }
 
-code.markup[data-code-style="inline"] {
+code.markup[data-code-style="INLINE"] {
+  font-size: 85%;
   padding: 0 0.2rem;
+}
+
+time.markup {
+  padding: 0 0.125rem;
+  border-radius: 0.1875rem;
+  background-color: var(--background-mod-normal);
 }
 
 img.markup {
@@ -1099,13 +1110,13 @@ img.markup {
   vertical-align: middle;
   color: var(--mention-foreground);
   border-radius: 0.1875rem;
-  background: var(--mention-background);
+  background-color: var(--mention-background);
   gap: 0.25rem;
 }
 
 .mention:hover {
   color: white;
-  background: var(--brand-500);
+  background-color: var(--brand-500);
 }
 
 a.mention {

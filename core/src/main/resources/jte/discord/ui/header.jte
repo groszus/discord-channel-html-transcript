@@ -1,5 +1,6 @@
 @import dev.omardiaa.transcript.core.model.payload.Channel
 @import dev.omardiaa.transcript.core.model.payload.Guild
+@import dev.omardiaa.transcript.core.util.MarkdownUtil
 
 @param Guild guild
 @param Channel channel
@@ -17,7 +18,6 @@
 
   <div class="header__channel">
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       height="20"
       width="20"
@@ -30,5 +30,17 @@
     </svg>
 
     <span class="header__channel__title">${channel.getName()}</span>
+
+    @if(channel.getTopic() != null)
+      <svg
+        viewBox="0 0 4 4"
+        width="4"
+        height="4"
+      >
+        <circle cx="2" cy="2" r="2" fill="#9898A033"/>
+      </svg>
+
+      <span class="header__channel__topic markup">$unsafe{MarkdownUtil.parseMarkup(channel.getTopic())}</span>
+    @endif
   </div>
 </header>
