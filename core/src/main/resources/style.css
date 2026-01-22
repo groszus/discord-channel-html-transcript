@@ -259,10 +259,10 @@
 .header__guild {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   justify-content: center;
   height: 34px;
   background-color: var(--background-base-lowest);
+  gap: 0.5rem;
 }
 
 .header__guild__icon {
@@ -516,6 +516,7 @@
 
 .container > .file__container {
   margin-top: 0;
+  box-shadow: 0 1px 4px 0 oklch(0 0 0 / 0.14);
 }
 
 .file {
@@ -927,8 +928,8 @@
 
 .images {
   display: grid;
-  gap: 0.25rem;
   max-width: 550px;
+  gap: 0.25rem;
 }
 
 /* TODO: check if relevant */
