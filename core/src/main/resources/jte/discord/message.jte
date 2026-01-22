@@ -17,7 +17,7 @@
   @endif
 
   <div class="message__accessories">
-    @template.discord.message.attachments(attachments = message.getAttachments())
+    @template.discord.message.attachments(message = message)
 
     @for(Embed embed : message.getEmbeds())
       @template.discord.message.embed(guild = guild, message = message, embed = embed)

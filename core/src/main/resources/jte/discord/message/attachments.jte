@@ -1,19 +1,17 @@
+@import dev.omardiaa.transcript.core.model.payload.Message
 @import dev.omardiaa.transcript.core.model.payload.message.Attachment
-@import java.util.List
+@import dev.omardiaa.transcript.core.model.payload.message.component.File
 
-@param List<Attachment> attachments
-<%-- TODO: filter in Attachment.java instead --%>
-!{List<Attachment> images = attachments.stream().filter(Attachment::isImage).toList();}
-!{List<Attachment> files = attachments.stream().filter(a -> !a.isImage()).toList();}
+@param Message message
 
-@if(!images.isEmpty())
-  <div class="images" data-count="${images.size()}">
-    @for(Attachment image : images)
+@if(!message.getImages().isEmpty())
+  <div class="images" data-count="${message.getImages().size()}">
+    @for(Attachment image : message.getImages())
       @template.util.image(src = image.getUrl())
     @endfor
   </div>
 @endif
 
-@for(Attachment file : files)
-  @template.discord.components.file(file = file.toFile())
+@for(File file : message.getFiles())
+  @template.discord.components.file(file = file)
 @endfor

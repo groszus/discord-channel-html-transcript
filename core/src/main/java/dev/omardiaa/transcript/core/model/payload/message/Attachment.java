@@ -48,7 +48,7 @@ public class Attachment {
 
   /**
    * @return {@code true} if the attachment's
-   * <a href="https://en.wikipedia.org/wiki/Media_type">Media Type</a> is {@code image/*}
+   * <a href="https://en.wikipedia.org/wiki/Media_type">Media Type</a> is {@code image/*}.
    */
   @JsonIgnore
   public boolean isImage() {

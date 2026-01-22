@@ -9,6 +9,7 @@ import dev.omardiaa.transcript.core.model.payload.message.Embed;
 import dev.omardiaa.transcript.core.model.payload.message.InteractionType;
 import dev.omardiaa.transcript.core.model.payload.message.User;
 import dev.omardiaa.transcript.core.model.payload.message.component.Component;
+import dev.omardiaa.transcript.core.model.payload.message.component.File;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -39,6 +40,12 @@ public class Message {
 
   @JsonIgnore
   private final Map<String, User> mentionsMap;
+
+  @JsonIgnore
+  private final List<Attachment> images;
+
+  @JsonIgnore
+  private final List<File> files;
 
   @JsonCreator
   public Message(
@@ -71,6 +78,8 @@ public class Message {
     this.mentionsMap = mentions.isEmpty()
       ? Collections.emptyMap()
       : mentions.stream().collect(Collectors.toUnmodifiableMap(User::getId, Function.identity()));
+    this.images = attachments.stream().filter(Attachment::isImage).toList();
+    this.files = attachments.stream().filter(a -> !a.isImage()).map(Attachment::toFile).toList();
   }
 
   public String getId() {
@@ -134,23 +143,14 @@ public class Message {
     return mentionsMap;
   }
 
-  @Override
-  public String toString() {
-    return "Message{" +
-           "id='" + id + '\'' +
-           ", author=" + author +
-           ", content='" + content + '\'' +
-           ", timestamp=" + timestamp +
-           ", editedTimestamp=" + editedTimestamp +
-           ", attachments=" + attachments +
-           ", embeds=" + embeds +
-           ", reactions=" + reactions +
-           ", flags=" + flags +
-           ", referencedMessage=" + referencedMessage +
-           ", interactionMetadata=" + interactionMetadata +
-           ", components=" + components +
-           ", mentionsMap=" + mentionsMap +
-           '}';
+  @JsonIgnore
+  public List<Attachment> getImages() {
+    return images;
+  }
+
+  @JsonIgnore
+  public List<File> getFiles() {
+    return files;
   }
 
   /**
