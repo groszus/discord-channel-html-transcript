@@ -6,6 +6,6 @@
 @param Message message
 @param String content
 
-<div class="message__content markup user-select-text">
+<div class="message__content markup">
   $unsafe{MarkdownUtil.parseMarkup(guild, message, content)}
 </div>

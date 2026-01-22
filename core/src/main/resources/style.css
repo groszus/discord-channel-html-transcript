@@ -212,12 +212,6 @@
   user-select: none;
 }
 
-.user-select-text {
-  -moz-user-select: text;
-  -webkit-user-select: text;
-  user-select: text;
-}
-
 /* ==========================================================================
    template/discord/ui
    ========================================================================== */
@@ -495,13 +489,12 @@
   gap: 0.75rem;
 }
 
+/* TODO: check discord styling*/
 .section__content {
+  font-size: 0.875rem;
   display: flex;
+  flex: 1;
   flex-direction: column;
-}
-
-.section__accessory {
-  align-self: flex-start;
 }
 
 .section__accessory:has(img) {
@@ -573,11 +566,10 @@
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  max-width: min(600px, 100%);
   padding: 1rem;
   border: 0.0625rem solid var(--border-subtle);
   border-radius: 0.5rem;
-  background: var(--background-surface-high);
+  background-color: var(--background-surface-high);
   gap: 0.5rem;
 }
 
@@ -603,7 +595,7 @@
   border: 0.0625rem solid var(--border-subtle);
   border-left: 0.25rem solid var(--border-normal);
   border-radius: 0.25rem;
-  background: var(--background-surface-high);
+  background-color: var(--background-surface-high);
   grid-template-columns: auto;
   grid-template-rows: auto;
 }
@@ -939,7 +931,6 @@
 
 .image {
   display: flex;
-  flex: auto;
   flex-flow: row nowrap;
   width: 100%;
   height: 100%;
@@ -954,12 +945,13 @@
 .image__container {
   display: grid;
   gap: 0.25rem;
+  max-width: 550px;
 }
 
+/* TODO: check if relevant */
 .components > .image__container,
 .container > .image__container {
-  max-width: 550px;
-  padding: 0.125rem 0;
+  /*padding: 0.125rem 0;*/
 }
 
 .image__container[data-count="1"] {
@@ -1064,19 +1056,20 @@ code.markup {
   line-height: 1.125rem;
   border: 0.0625rem solid var(--border-normal);
   border-radius: 0.25rem;
-  background: var(--background-code);
+  background-color: var(--background-code);
 }
 
-code.markup[data-code-style="block"] {
+code.markup[data-code-style="BLOCK"] {
   display: block;
   overflow-x: auto;
   max-width: 90%;
   margin-top: 0.375rem;
   padding: 0.5rem;
-  white-space: preserve;
+  white-space: pre-wrap;
 }
 
-code.markup[data-code-style="inline"] {
+code.markup[data-code-style="INLINE"] {
+  font-size: 85%;
   padding: 0 0.2rem;
 }
 
@@ -1097,13 +1090,13 @@ img.markup {
   vertical-align: middle;
   color: var(--mention-foreground);
   border-radius: 0.1875rem;
-  background: var(--mention-background);
+  background-color: var(--mention-background);
   gap: 0.25rem;
 }
 
 .mention:hover {
   color: white;
-  background: var(--brand-500);
+  background-color: var(--brand-500);
 }
 
 a.mention {
