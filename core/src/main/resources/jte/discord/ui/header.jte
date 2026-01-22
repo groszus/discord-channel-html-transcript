@@ -4,20 +4,18 @@
 @param Guild guild
 @param Channel channel
 
-<div class="header user-select-none">
-  <div class="header__guild__container">
-    <div class="header__guild">
-      <img
-        src="${guild.getIconUrl()}"
-        alt="${guild.getName()}"
-        class="header__guild__icon"
-      />
+<header class="header user-select-none">
+  <div class="header__guild">
+    <img
+      src="${guild.getIconUrl()}"
+      alt="${guild.getName()}"
+      class="header__guild__icon"
+    />
 
-      <span class="header__guild__name">${guild.getName()}</span>
-    </div>
+    <span class="header__guild__name">${guild.getName()}</span>
   </div>
 
-  <section class="header__channel">
+  <div class="header__channel">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -31,6 +29,6 @@
       />
     </svg>
 
-    <h1 class="header__channel__title">${channel.getName()}</h1>
-  </section>
-</div>
+    <span class="header__channel__title">${channel.getName()}</span>
+  </div>
+</header>

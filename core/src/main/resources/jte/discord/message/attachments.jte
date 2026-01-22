@@ -2,14 +2,14 @@
 @import java.util.List
 
 @param List<Attachment> attachments
-
+<%-- TODO: filter in Attachment.java instead --%>
 !{List<Attachment> images = attachments.stream().filter(Attachment::isImage).toList();}
 !{List<Attachment> files = attachments.stream().filter(a -> !a.isImage()).toList();}
 
 @if(!images.isEmpty())
-  <div class="image__container" data-count="${images.size()}">
+  <div class="images" data-count="${images.size()}">
     @for(Attachment image : images)
-      @template.util.image(src = image.getUrl(), alt = image.getFilename())
+      @template.util.image(src = image.getUrl())
     @endfor
   </div>
 @endif

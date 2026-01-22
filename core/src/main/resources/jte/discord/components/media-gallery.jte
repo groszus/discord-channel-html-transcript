@@ -2,8 +2,8 @@
 
 @param MediaGallery mediaGallery
 
-<div class="image__container" data-count="${mediaGallery.getItems().size()}">
+<div class="images" data-count="${mediaGallery.getItems().size()}">
   @for(MediaGallery.Item item : mediaGallery.getItems())
-    @template.util.image(src = item.getMedia().getUrl(), alt = "Media Gallery Item")
+    @template.util.image(src = item.getMedia().getUrl())
   @endfor
 </div>
