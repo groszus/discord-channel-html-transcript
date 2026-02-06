@@ -13,7 +13,7 @@
 
 This is the most
 **up-to-date** Discord transcript generator, ensuring your archive is consistent with Discord's latest styles!\
-You can get a preview for the HTML file [here](https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript-api/blob/60ab0f8c62798f1678917518fe211e2e629bc8ef/examples/transcript.example.html).
+You can get a preview for the HTML file [here](https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/example-transcript.html).
 
 <details>
     <summary>
