@@ -135,7 +135,7 @@ public class Message {
    */
   @JsonIgnore
   public boolean isComponentsV2() {
-    return (getFlags() != null) && (getFlags() == 1 << 15);
+    return (this.flags != null) && ((this.flags & (1 << 15)) != 0);
   }
 
   @JsonIgnore

@@ -13,8 +13,6 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-// TODO: implement different Embed types other than "rich"
-
 /**
  * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object">Embed</a>.
  */
@@ -25,11 +23,12 @@ public class Embed {
   private final @Nullable String description;
   private final @Nullable String url;
   private final @Nullable OffsetDateTime timestamp;
-  private final @Nullable Integer color;
-  private final Embed.@Nullable Footer footer;
-  private final Embed.@Nullable Image image;
-  private final Embed.@Nullable Thumbnail thumbnail;
-  private final Embed.@Nullable Author author;
+  private final @Nullable String color;
+  private final @Nullable Footer footer;
+  private final @Nullable Image image;
+  private final @Nullable Thumbnail thumbnail;
+  private final @Nullable Video video;
+  private final @Nullable Author author;
   private final @Nullable List<Field> fields;
 
   @JsonCreator
@@ -40,20 +39,22 @@ public class Embed {
     @JsonProperty(value = "url") @Nullable String url,
     @JsonProperty(value = "timestamp") @Nullable OffsetDateTime timestamp,
     @JsonProperty(value = "color") @Nullable Integer color,
-    @JsonProperty(value = "footer") Embed.@Nullable Footer footer,
-    @JsonProperty(value = "image") Embed.@Nullable Image image,
-    @JsonProperty(value = "thumbnail") Embed.@Nullable Thumbnail thumbnail,
-    @JsonProperty(value = "author") Embed.@Nullable Author author,
+    @JsonProperty(value = "footer") @Nullable Footer footer,
+    @JsonProperty(value = "image") @Nullable Image image,
+    @JsonProperty(value = "thumbnail") @Nullable Thumbnail thumbnail,
+    @JsonProperty(value = "video") @Nullable Video video,
+    @JsonProperty(value = "author") @Nullable Author author,
     @JsonProperty(value = "fields") @Nullable List<Field> fields) {
     this.title = title;
-    this.type = type == null ? Type.RICH : Type.fromType(type);
+    this.type = Type.fromType(type);
     this.description = description;
     this.url = url;
     this.timestamp = timestamp;
-    this.color = color;
+    this.color = color == null ? null : String.format("#%06X", (0xFFFFFF & color));
     this.footer = footer;
     this.image = image;
     this.thumbnail = thumbnail;
+    this.video = video;
     this.author = author;
     this.fields = fields;
   }
@@ -78,23 +79,27 @@ public class Embed {
     return timestamp;
   }
 
-  public @Nullable Integer getColor() {
+  public @Nullable String getColor() {
     return color;
   }
 
-  public Embed.@Nullable Footer getFooter() {
+  public @Nullable Footer getFooter() {
     return footer;
   }
 
-  public Embed.@Nullable Image getImage() {
+  public @Nullable Image getImage() {
     return image;
   }
 
-  public Embed.@Nullable Thumbnail getThumbnail() {
+  public @Nullable Thumbnail getThumbnail() {
     return thumbnail;
   }
 
-  public Embed.@Nullable Author getAuthor() {
+  public @Nullable Video getVideo() {
+    return video;
+  }
+
+  public @Nullable Author getAuthor() {
     return author;
   }
 
@@ -106,14 +111,15 @@ public class Embed {
   public String toString() {
     return "Embed{" +
            "title='" + title + '\'' +
-           ", type='" + type + '\'' +
+           ", type=" + type +
            ", description='" + description + '\'' +
            ", url='" + url + '\'' +
            ", timestamp=" + timestamp +
-           ", color=" + color +
+           ", color='" + color + '\'' +
            ", footer=" + footer +
            ", image=" + image +
            ", thumbnail=" + thumbnail +
+           ", video=" + video +
            ", author=" + author +
            ", fields=" + fields +
            '}';
@@ -124,12 +130,12 @@ public class Embed {
    */
   @NullMarked
   public enum Type {
-    UNKNOWN(), RICH(), GIFV(), ARTICLE();
+    UNKNOWN, RICH, GIFV, ARTICLE;
 
     private static final Map<String, Type> TYPE_MAP = Arrays.stream(values()).collect(
       Collectors.toUnmodifiableMap(v -> v.name().toLowerCase(), Function.identity()));
 
-    public static Type fromType(String type) {
+    public static Type fromType(@Nullable String type) {
       return TYPE_MAP.getOrDefault(type, UNKNOWN);
     }
   }
@@ -210,6 +216,30 @@ public class Embed {
     @Override
     public String toString() {
       return "Thumbnail{" +
+             "url='" + url + '\'' +
+             '}';
+    }
+  }
+
+  /**
+   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-video-structure">Embed Video</a>.
+   */
+  @NullMarked
+  public static class Video {
+    private final @Nullable String url;
+
+    @JsonCreator
+    public Video(@JsonProperty(value = "url") @Nullable String url) {
+      this.url = url;
+    }
+
+    public @Nullable String getUrl() {
+      return url;
+    }
+
+    @Override
+    public String toString() {
+      return "Video{" +
              "url='" + url + '\'' +
              '}';
     }

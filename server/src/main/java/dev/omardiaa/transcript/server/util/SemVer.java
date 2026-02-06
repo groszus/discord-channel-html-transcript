@@ -76,8 +76,10 @@ public final class SemVer {
       return false;
     }
     SemVer semVer = (SemVer) o;
-    return major == semVer.major && minor == semVer.minor && patch == semVer.patch &&
-           Objects.equals(qualifier, semVer.qualifier);
+    return major == semVer.major
+           && minor == semVer.minor
+           && patch == semVer.patch
+           && Objects.equals(qualifier, semVer.qualifier);
   }
 
   @Override

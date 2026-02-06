@@ -2,23 +2,31 @@ package dev.omardiaa.transcript.core.util;
 
 import org.jspecify.annotations.NullMarked;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+/**
+ * Helper class for formatting timestamps.
+ */
 @NullMarked
 public final class TimeUtil {
   private static final DateTimeFormatter DATE_FULL =
-    DateTimeFormatter.ofPattern("eeee, MMMM M, u 'at' h:mm a '(UTC)'", Locale.US);
+    DateTimeFormatter.ofPattern("eeee, MMMM M, y 'at' h:mm a '(UTC)'", Locale.US);
 
   private static final DateTimeFormatter DATE_LONG =
-    DateTimeFormatter.ofPattern("MMMM d, u", Locale.US);
+    DateTimeFormatter.ofPattern("MMMM d, y", Locale.US);
 
   private static final DateTimeFormatter DATE_SHORT =
-    DateTimeFormatter.ofPattern("M/d/uu, h:mm a '(UTC)'", Locale.US);
+    DateTimeFormatter.ofPattern("M/d/yy, h:mm a '(UTC)'", Locale.US);
 
   private static final DateTimeFormatter TIME_SHORT =
     DateTimeFormatter.ofPattern("h:mm a", Locale.US);
+
+  private static final DateTimeFormatter TIMESTAMP =
+    DateTimeFormatter.ofPattern("M/d/y h:mm a '(UTC)'", Locale.US);
 
   private TimeUtil() {}
 
@@ -36,5 +44,19 @@ public final class TimeUtil {
 
   public static String formatTimeShort(OffsetDateTime timestamp) {
     return timestamp.format(TIME_SHORT);
+  }
+
+  /**
+   * Formats the specified {@code epochSecond} as a Discord Timestamp.
+   *
+   * @param epochSecond
+   *   The epoch to format.
+   *
+   * @return {@code eg. 1/1/30 12:00 AM (UTC)}
+   *
+   * @see <a href="https://discord.com/developers/docs/reference#message-formatting">Message Formatting</a>
+   */
+  public static String formatTimestamp(String epochSecond) {
+    return Instant.ofEpochSecond(Integer.parseInt(epochSecond)).atOffset(ZoneOffset.UTC).format(TIMESTAMP);
   }
 }

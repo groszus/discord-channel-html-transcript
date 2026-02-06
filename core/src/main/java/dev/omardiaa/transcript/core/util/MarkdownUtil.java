@@ -88,8 +88,9 @@ public final class MarkdownUtil {
     current = ITALIC.matcher(current).replaceAll(m -> "<em>$1</em>");
     current = STRIKE_THROUGH.matcher(current).replaceAll(m -> "<s>$1</s>");
     current = LINK.matcher(current).replaceAll(m -> "<a href=\"$2\" target=\"_blank\" class=\"markup\">$1</a>");
-    current = TIMESTAMP.matcher(current).replaceAll(
-      m -> "<time class=\"markup\">%s</time>".formatted(TimeUtil.formatTimestamp(m.group(1))));
+    current = TIMESTAMP
+      .matcher(current)
+      .replaceAll(m -> "<time class=\"markup\">%s</time>".formatted(TimeUtil.formatTimestamp(m.group(1))));
 
     current = HEADER_1.matcher(current).replaceAll(m -> "<h1 class=\"markup\">$1</h1>");
     current = HEADER_2.matcher(current).replaceAll(m -> "<h2 class=\"markup\">$1</h2>");

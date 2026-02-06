@@ -165,6 +165,7 @@
   --background-base-lower: oklch(0.22 0.008 285.745);
   --background-base-lowest: oklch(0.183 0.004 285.994);
   --background-surface-high: oklch(0.262 0.009 285.745);
+  --background-mod-strong: oklch(0.679 0.012 286.086 / 0.2);
   --background-mod-normal: oklch(0.679 0.012 286.086 / 0.16);
   --background-mod-subtle: oklch(0.679 0.012 286.086 / 0.08);
   --background-code: oklch(0.577 0.209 273.85 / 0.08);
@@ -183,7 +184,7 @@
   --button-brand-background: oklch(0.577 0.209 273.85);
   --button-brand-background-hover: oklch(0.497 0.168 273.077);
   --button-secondary-background: oklch(0.679 0.012 286.086 / 0.12);
-  --button-secondary-background-hover: oklch(0.679 0.012 286.086 / 0.2);
+  --button-secondary-background-hover: var(--background-mod-strong);
   --button-secondary-text: oklch(0.941 0.003 286.348);
   --button-positive-background: oklch(0.542 0.151 149.511);
   --button-positive-background-hover: oklch(0.519 0.143 149.567);
@@ -201,6 +202,10 @@
 @font-face {
   src: url(https://cdn.jsdelivr.net/gh/omardiaadev/discord-channel-html-transcript@main/src/main/resources/font/ggsansvf-VF.woff);
   font-family: "ggsans";
+}
+
+body {
+  padding-top: 5rem;
 }
 
 /* ==========================================================================
@@ -230,7 +235,6 @@
   font-size: 0.75rem;
   font-weight: 600;
   line-height: 0.8125rem;
-  display: block;
   padding: 0.125rem 0.25rem;
   color: var(--text-muted);
   background-color: var(--background-base-lower);
@@ -249,10 +253,9 @@
 }
 
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  display: flex;
-  flex-direction: column;
+  width: 100%;
   margin-bottom: auto;
   color: var(--text-normal);
 }
@@ -506,8 +509,8 @@
 .section__content {
   font-size: 0.875rem;
   display: flex;
-  flex: 1;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .section__accessory:has(img) {
@@ -563,13 +566,11 @@
 }
 
 .separator {
-  height: 1px;
-  border: none;
-  background-color: var(--button-secondary-background-hover);
+  border-top: 0.0625rem solid var(--background-mod-strong);
 }
 
 .separator[aria-hidden="true"] {
-  background-color: #00000000;
+  border-top: none;
 }
 
 .separator[data-separator-spacing="LARGE"] {
@@ -614,14 +615,14 @@
   grid-template-rows: auto;
 }
 
+.embed[data-embed-type="RICH"]:has(.embed__thumbnail__wrapper) {
+  grid-template-columns: minmax(0, 1fr) min-content;
+}
+
 .embed[data-embed-type="GIFV"] {
   display: flex;
   max-height: 300px;
   border-radius: 0.25rem;
-}
-
-.embed:has(.embed__thumbnail__wrapper) {
-  grid-template-columns: minmax(0, 1fr) min-content;
 }
 
 .embed__author, .embed__description,
