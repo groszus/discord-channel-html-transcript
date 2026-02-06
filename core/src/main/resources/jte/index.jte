@@ -1,6 +1,7 @@
 @import dev.omardiaa.transcript.core.model.payload.Message
 @import dev.omardiaa.transcript.core.model.Payload
 @import dev.omardiaa.transcript.core.util.TimeUtil
+@import java.time.temporal.ChronoUnit
 
 @param Payload payload
 
@@ -8,6 +9,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>#${payload.getChannel().getName()} | ${payload.getGuild().getName()}</title>
 
   <link
@@ -29,11 +31,17 @@
 @template.discord.ui.header(guild = payload.getGuild(), channel = payload.getChannel())
 
 <ol class="messages">
-  !{Message previousMessage = payload.getMessages().getFirst();}
+  !{Message previousMessage = null;}
 
   @for(Message message : payload.getMessages())
-    !{boolean showDivider = previousMessage.equals(message) || (previousMessage.getTimestamp().getDayOfYear() != message.getTimestamp().getDayOfYear());}
-    !{boolean showAuthor = showDivider || !previousMessage.getAuthor().equals(message.getAuthor()) || (message.getReferencedMessage() != null) || (message.getInteractionMetadata() != null);}
+    !{boolean isFirst = (previousMessage == null);}
+
+    !{boolean dateChanged = !isFirst && !previousMessage.getTimestamp().toLocalDate().isEqual(message.getTimestamp().toLocalDate());}
+    !{boolean showDivider = isFirst || dateChanged;}
+
+    !{boolean timeGapExceeded = !isFirst && ChronoUnit.MINUTES.between(previousMessage.getTimestamp(), message.getTimestamp()) > 7;}
+    !{boolean authorChanged = !isFirst && !previousMessage.getAuthor().equals(message.getAuthor());}
+    !{boolean showAuthor = showDivider || authorChanged || (message.getReferencedMessage() != null) || (message.getInteractionMetadata() != null) || timeGapExceeded;}
 
     @if(showDivider)
       @template.discord.ui.divider(message = message)
