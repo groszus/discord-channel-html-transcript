@@ -1,22 +1,18 @@
 <h1 align="center">discord-html-transcript</h1>
 
 <p align="center">
-    <strong>A Discord HTML transcript generator that preserves your favorite Discord styles</strong>
+    <strong>A Discord Java library and microservice to generate the perfect transcripts for your chats</strong>
 </p>
 
 <p align="center">
-    <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript">
-        <img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?label=Maven&color=0055D2&labelColor=0055D2"/>
-    </a>
-    <a href="https://github.com/omardiaadev/discord-html-transcript/blob/main/LICENSE">
-        <img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript?label=License&color=0055D2&labelColor=0055D2"/>
-    </a>
+    <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?label=Maven&color=0055D2&labelColor=0055D2"/></a>
+    <a href="https://github.com/omardiaadev/discord-html-transcript/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript?label=License&color=0055D2&labelColor=0055D2"/></a>
 </p>
 
 ## About
 
 This is the most
-**up-to-date** Discord transcript generator, ensuring your archive is consistent with Discord's new styles!\
+**up-to-date** Discord transcript generator, ensuring your archive is consistent with Discord's latest styles!\
 You can get a preview for the HTML file [here](https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript-api/blob/60ab0f8c62798f1678917518fe211e2e629bc8ef/examples/transcript.example.html).
 
 <details>
@@ -33,7 +29,9 @@ You can get a preview for the HTML file [here](https://htmlpreview.github.io/?ht
 
 ## Notice
 
-> **Note** This project is not affiliated with Discord Inc.
+> **Note**
+>
+> This project is not affiliated with Discord Inc.
 
 ## Features
 

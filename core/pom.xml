@@ -11,7 +11,7 @@
   <artifactId>discord-html-transcript-core</artifactId>
 
   <name>discord-html-transcript-core</name>
-  <description>A Discord HTML transcript generator that preserves your favorite Discord styles</description>
+  <description>A Discord Java library and microservice to generate the perfect transcripts for your chats</description>
   <url>https://github.com/omardiaadev/discord-html-transcript</url>
 
   <scm>
