@@ -1,16 +1,23 @@
 # Changelog
 
-## [v5.0.0] (Unreleased)
+## [v0.1.0-beta.1]
 
 ### Added
 
 - Add `@everyone` and `@here` markdown parsing.
 - Add `File` component.
-- Add "Custom Emoji" markdown.
+- Add support for "Custom Emoji" markdown.
+- Add support for Embed "GIFV" type.
+- Add support for Channel "Topic".
 
 ### Changed
 
-- Update Header and Subtext markdown parsing.
+- **Relocate maven ArtifactID from `discord-channel-html-transcript` to `discord-html-transcript`.**
+- Change to Apache License to increase adoption.
+
+### Fixed
+
+- Fix Header and Subtext markdown parsing.
 
 ## [v4.0.0]
 
