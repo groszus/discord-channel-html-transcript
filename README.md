@@ -29,8 +29,7 @@ You can get a preview for the HTML file [here](https://htmlpreview.github.io/?ht
 
 ## Notice
 
-> **Note**  
-> This project is not affiliated with Discord Inc.
+> [!NOTE] This project is not affiliated with Discord Inc.
 
 ## Features
 
