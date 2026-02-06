@@ -15,7 +15,7 @@ public final class GlobalExceptionHandler {
 
   private GlobalExceptionHandler() {}
 
-  public static void handleIncompatibleClient(IncompatibleClientException e, Context ctx) {
+  public static void handleIncompatibleVersion(IncompatibleVersionException e, Context ctx) {
     LOGGER.warn(
       "Client version \"{}\" is incompatible with the Server version \"{}\".",
       e.getClientVersion(), e.getServerVersion());
@@ -26,8 +26,8 @@ public final class GlobalExceptionHandler {
         "INCOMPATIBLE_CLIENT",
         e.getMessage(),
         Map.of(
-          "serverVersion", e.getServerVersion(),
-          "clientVersion", e.getClientVersion() == null ? "UNKNOWN" : e.getClientVersion())));
+          "server", e.getServerVersion().toString(),
+          "client", e.getClientVersion() == null ? "null" : e.getClientVersion().toString())));
   }
 
   public static void handleMismatchedInput(MismatchedInputException e, Context ctx) {

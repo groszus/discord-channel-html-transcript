@@ -1,6 +1,7 @@
 package dev.omardiaa.transcript.server.config;
 
 import dev.omardiaa.transcript.core.config.EnvironmentConfig;
+import dev.omardiaa.transcript.server.util.SemVer;
 import org.jspecify.annotations.NullMarked;
 
 import java.io.InputStream;
@@ -11,43 +12,38 @@ import java.util.Properties;
  */
 @NullMarked
 public final class ServerConfig {
-  private static final String VERSION;
+  private static final SemVer VERSION;
   private static final String HOST = EnvironmentConfig.get("SERVER_HOST", "0.0.0.0");
   private static final int PORT = EnvironmentConfig.get("SERVER_PORT", 7000);
 
   private ServerConfig() {}
 
   static {
-    Properties properties = new Properties();
-
-    try (InputStream is = ServerConfig.class.getResourceAsStream(
-      "/META-INF/maven/dev.omardiaa/discord-html-transcript-server/pom.properties")) {
-      if (is != null) {
-        properties.load(is);
-      }
-
-      VERSION = properties.getProperty("version", "DEV");
+    try (InputStream is = ServerConfig.class.getResourceAsStream("/server.properties")) {
+      Properties properties = new Properties();
+      properties.load(is);
+      VERSION = new SemVer(properties.getProperty("server.version"));
     } catch (Exception e) {
-      throw new RuntimeException("Failed to set server version from 'pom.properties'.", e);
+      throw new RuntimeException("Failed to load server version.", e);
     }
   }
 
   /**
-   * @return Server version, or {@code "DEV"} if ran in development environment.
+   * @return {@code ${project.version}}.
    */
-  public static String getVersion() {
+  public static SemVer getVersion() {
     return VERSION;
   }
 
   /**
-   * @return {@code SERVER_HOST} value, or {@code "0.0.0.0"} if {@code SERVER_HOST} variable is not specified.
+   * @return {@code SERVER_HOST} value, or {@code "0.0.0.0"} if {@code SERVER_HOST} variable returns {@code null}.
    */
   public static String getHost() {
     return HOST;
   }
 
   /**
-   * @return {@code SERVER_PORT} value, or {@code 7000} if {@code SERVER_PORT} variable is not specified.
+   * @return {@code SERVER_PORT} value, or {@code 7000} if {@code SERVER_PORT} variable returns {@code null}.
    */
   public static int getPort() {
     return PORT;
