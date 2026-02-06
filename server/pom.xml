@@ -21,6 +21,7 @@
   </scm>
 
   <properties>
+    <maven.deploy.skip>true</maven.deploy.skip>
     <graalvm.buildtools.version>0.11.4</graalvm.buildtools.version>
     <main.class>dev.omardiaa.transcript.server.Main</main.class>
   </properties>
