@@ -71,13 +71,13 @@ There are 3 ways you can use this library:
 <dependency>
   <groupId>dev.omardiaa</groupId>
   <artifactId>discord-html-transcript-core</artifactId>
-  <version>0.1.0-beta-1</version>
+  <version>0.1.0-beta.1</version>
 </dependency>
 ```
 
 ```kts
 
-implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta-1")
+implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.1")
 ```
 
 ### Library

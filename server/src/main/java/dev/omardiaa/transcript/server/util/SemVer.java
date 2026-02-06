@@ -40,7 +40,7 @@ public final class SemVer {
   }
 
   public boolean isPreRelease() {
-    return qualifier != null && !qualifier.isBlank();
+    return (this.qualifier != null) && !this.qualifier.isBlank();
   }
 
   public void checkVersion(@Nullable String clientVersion) {
