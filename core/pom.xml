@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>dev.omardiaa</groupId>
     <artifactId>discord-html-transcript</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.0-beta-1</version>
   </parent>
 
   <artifactId>discord-html-transcript-core</artifactId>
@@ -104,7 +103,6 @@
             <phase>generate-resources</phase>
             <configuration>
               <target>
-                <echo message="Syncing style.css to style.jte..."/>
                 <concat destfile="${project.basedir}/src/main/resources/jte/style.jte">
                   <header>&lt;style&gt;${line.separator}</header>
                   <fileset file="${project.basedir}/src/main/resources/style.css"/>
@@ -157,6 +155,17 @@
             <phase>verify</phase>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>0.10.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>central</publishingServerId>
+          <autoPublish>true</autoPublish>
+        </configuration>
       </plugin>
     </plugins>
   </build>
