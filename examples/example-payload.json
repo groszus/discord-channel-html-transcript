@@ -1,212 +1,59 @@
 {
   "guild": {
-    "id": "1360350098541772851",
-    "name": "omardiaadev",
-    "icon": "e263fe6110a7203f5c7df15861e4f97d",
-    "description": null,
-    "home_header": null,
-    "splash": null,
-    "discovery_splash": null,
-    "features": [
-      "NEWS",
-      "PIN_PERMISSION_MIGRATION_COMPLETE",
-      "COMMUNITY",
-      "BYPASS_SLOWMODE_PERMISSION_MIGRATION_COMPLETE",
-      "ACTIVITY_FEED_DISABLED_BY_USER"
-    ],
-    "banner": null,
-    "owner_id": "974748803305455627",
-    "application_id": null,
-    "region": "us-south",
-    "afk_channel_id": null,
-    "afk_timeout": 300,
-    "system_channel_id": "1360350099083100353",
-    "system_channel_flags": 15,
-    "widget_enabled": false,
-    "widget_channel_id": null,
-    "verification_level": 1,
-    "roles": [
-      {
-        "id": "1360350098541772851",
-        "name": "@everyone",
-        "description": null,
-        "permissions": "2222085186637377",
-        "position": 0,
-        "color": 0,
-        "colors": {
-          "primary_color": 0,
-          "secondary_color": null,
-          "tertiary_color": null
-        },
-        "hoist": false,
-        "managed": false,
-        "mentionable": false,
-        "icon": null,
-        "unicode_emoji": null,
-        "flags": 0
-      },
-      {
-        "id": "1360350892452352090",
-        "name": "❂",
-        "description": null,
-        "permissions": "8",
-        "position": 1,
-        "color": 51200,
-        "colors": {
-          "primary_color": 51200,
-          "secondary_color": null,
-          "tertiary_color": null
-        },
-        "hoist": true,
-        "managed": false,
-        "mentionable": false,
-        "icon": null,
-        "unicode_emoji": null,
-        "flags": 0
-      },
-      {
-        "id": "1444538364396306617",
-        "name": "Discohook Utils",
-        "description": null,
-        "permissions": "6756877715500048",
-        "position": 1,
-        "color": 0,
-        "colors": {
-          "primary_color": 0,
-          "secondary_color": null,
-          "tertiary_color": null
-        },
-        "hoist": false,
-        "managed": true,
-        "mentionable": false,
-        "icon": null,
-        "unicode_emoji": null,
-        "tags": {
-          "bot_id": "792842038332358656"
-        },
-        "flags": 0
-      },
-      {
-        "id": "1458491853526532283",
-        "name": "VORTEX",
-        "description": null,
-        "permissions": "8",
-        "position": 1,
-        "color": 0,
-        "colors": {
-          "primary_color": 0,
-          "secondary_color": null,
-          "tertiary_color": null
-        },
-        "hoist": false,
-        "managed": true,
-        "mentionable": false,
-        "icon": null,
-        "unicode_emoji": null,
-        "tags": {
-          "bot_id": "1458491524093575323"
-        },
-        "flags": 0
-      }
-    ],
-    "default_message_notifications": 1,
-    "mfa_level": 0,
-    "explicit_content_filter": 2,
-    "max_presences": null,
-    "max_members": 25000000,
-    "max_stage_video_channel_users": 50,
-    "max_video_channel_users": 25,
-    "vanity_url_code": null,
-    "premium_tier": 0,
-    "premium_subscription_count": 0,
-    "preferred_locale": "en-US",
-    "rules_channel_id": "1360350099083100353",
-    "safety_alerts_channel_id": null,
-    "public_updates_channel_id": "1360350099083100353",
-    "hub_type": null,
-    "premium_progress_bar_enabled": false,
-    "latest_onboarding_question_id": null,
-    "nsfw": false,
-    "nsfw_level": 0,
-    "owner_configured_content_level": 0,
-    "emojis": [
-      {
-        "id": "1459593336338776217",
-        "name": "xbox",
-        "roles": [],
-        "require_colons": true,
-        "managed": false,
-        "animated": false,
-        "available": true
-      }
-    ],
-    "stickers": [],
-    "incidents_data": null,
-    "inventory_settings": null,
-    "embed_enabled": false,
-    "embed_channel_id": null
+    "id": "1055244032105787472",
+    "name": "VORTEX",
+    "icon": "3c970034e345f0f833b0d010f10a3be7",
+    "roles": []
   },
   "channel": {
     "id": "1444536048557494373",
     "type": 0,
-    "last_message_id": "1459593425543495733",
-    "flags": 0,
-    "guild_id": "1360350098541772851",
-    "name": "discord-html-transcript-api",
-    "parent_id": "1360350185116532776",
-    "rate_limit_per_user": 0,
-    "topic": null,
-    "position": 10,
-    "permission_overwrites": [],
-    "nsfw": false
+    "name": "discord-html-transcript",
+    "topic": "A Discord HTML transcript generator that preserves your favorite Discord styles!"
   },
   "messages": [
     {
-      "type": 0,
+      "id": "1",
+      "author": {
+        "id": "1458491524093575323",
+        "username": "VORTEX",
+        "discriminator": "5928",
+        "global_name": "VORTEX",
+        "avatar": "7fab0949a0bc7a953682a6361aa91278",
+        "bot": true
+      },
       "content": "",
+      "timestamp": "2030-01-01T00:00:00.000Z",
       "mentions": [
         {
-          "id": "545902760453996546",
-          "username": "skywolfxp",
-          "avatar": "632a94e7219a5e429744285fef0bfd1e",
+          "id": "974748803305455627",
+          "username": "omardiaadev",
           "discriminator": "0",
-          "public_flags": 128,
-          "flags": 128,
-          "banner": null,
-          "accent_color": null,
-          "global_name": "Sky",
-          "avatar_decoration_data": {
-            "asset": "a_c12a5c953352c20bd6e63576e2cce3a0",
-            "sku_id": "1440174638930853956",
-            "expires_at": 1768507200
-          },
-          "collectibles": null,
-          "display_name_styles": null,
-          "banner_color": null,
-          "clan": null,
-          "primary_guild": null
+          "global_name": "Omar Diaa",
+          "avatar": "e263fe6110a7203f5c7df15861e4f97d"
+        },
+        {
+          "id": "1458491524093575323",
+          "username": "VORTEX",
+          "discriminator": "5928",
+          "global_name": "VORTEX",
+          "avatar": "7fab0949a0bc7a953682a6361aa91278",
+          "bot": true
         }
       ],
-      "mention_roles": [],
       "attachments": [],
       "embeds": [],
-      "timestamp": "2025-11-30T03:58:15.721000+00:00",
-      "edited_timestamp": "2025-12-06T04:47:51.706000+00:00",
       "flags": 32768,
       "components": [
         {
           "type": 17,
-          "id": 1,
-          "accent_color": null,
           "components": [
             {
               "type": 10,
-              "id": 2,
               "content": "# ComponentsV2"
             },
             {
               "type": 14,
-              "id": 3,
               "spacing": 1,
               "divider": true
             },
@@ -216,13 +63,11 @@
               "components": [
                 {
                   "type": 10,
-                  "id": 5,
-                  "content": "# Big Header\n## Medium Header\n### Small Header\n\n`System.out.println(\"discord-channel-html-transcript\");`\n```\npublic static void main(String args[]) {\n    System.out.println(\"Hello World!\");\n  }\n}\n```\n\n**User Mentions:** <@545902760453996546> <@0>\n**Role Mentions:** <@&420> <@&0>\n**Channel Mentions:** <#420> <#0>"
+                  "content": "### 🌍 Hello World!\nHello @everyone! I'm <@974748803305455627>, I created this library to transcribe <#1360350099083100353>. My current time is <t:1893456000>.\n\n### ☕ I Love Coding!\n`System.out.println(\"discord-html-transcript\");`\n```\npublic class Main {\n  public static void main(String args[]) {\n    System.out.println(\"Hello World!\");\n   }\n}\n```"
                 }
               ],
               "accessory": {
                 "type": 2,
-                "id": 6,
                 "style": 5,
                 "label": "Link",
                 "url": "https://github.com/omardiaadev"
@@ -230,234 +75,146 @@
             },
             {
               "type": 14,
-              "id": 7,
               "spacing": 1,
               "divider": true
             },
             {
               "type": 9,
-              "id": 8,
               "components": [
                 {
                   "type": 10,
-                  "id": 9,
                   "content": "**This** [Library](https://github.com/skywolfxp/discord-channel-html-transcript) __is__ *Awesome!*"
                 }
               ],
               "accessory": {
                 "type": 11,
-                "id": 10,
                 "media": {
-                  "id": "1446724802596311222",
                   "url": "https://avatars.githubusercontent.com/u/70555240",
-                  "proxy_url": "https://images-ext-1.discordapp.net/external/BXWqOX8dvon9CzB3kzT_GB-3FLliVkarrlxafzqihJw/https/avatars.githubusercontent.com/u/70555240",
-                  "width": 460,
-                  "height": 460,
-                  "placeholder": "n3MJLwZHaGd3iHeAeol4p3d4eXQHR3cA",
-                  "placeholder_version": 1,
-                  "content_scan_metadata": {
-                    "version": 2,
-                    "flags": 0
-                  },
-                  "content_type": "image/jpeg",
-                  "loading_state": 2,
-                  "flags": 0
-                },
-                "description": null,
-                "spoiler": false
+                  "content_type": "image/jpeg"
+                }
               }
             },
             {
               "type": 14,
-              "id": 11,
               "spacing": 2,
               "divider": true
             },
             {
               "type": 1,
-              "id": 12,
               "components": [
                 {
                   "type": 2,
-                  "id": 13,
-                  "style": 5,
-                  "label": "Button",
-                  "url": "https://discohook.app"
+                  "style": 1,
+                  "label": "Primary"
                 },
                 {
                   "type": 2,
-                  "id": 14,
-                  "style": 5,
-                  "label": "Button",
-                  "url": "https://discohook.app"
+                  "style": 2,
+                  "label": "Secondary"
                 },
                 {
                   "type": 2,
-                  "id": 15,
-                  "style": 5,
-                  "label": "Button",
-                  "url": "https://discohook.app"
+                  "style": 3,
+                  "label": "Danger"
                 },
                 {
                   "type": 2,
-                  "id": 16,
-                  "style": 5,
-                  "label": "Button",
-                  "url": "https://discohook.app"
+                  "style": 4,
+                  "label": "Success"
                 },
                 {
                   "type": 2,
-                  "id": 17,
                   "style": 5,
                   "label": "Star The Project",
                   "emoji": {
                     "name": "⭐"
                   },
-                  "url": "https://github.com/omardiaadev"
+                  "url": "https://github.com/omardiaadev/discord-html-transcript"
                 }
               ]
             }
-          ],
-          "spoiler": false
+          ]
         },
         {
           "type": 17,
-          "id": 18,
-          "accent_color": null,
+          "components": [
+            {
+              "type": 10,
+              "content": "# Media Gallery"
+            },
+            {
+              "type": 12,
+              "items": [
+                {
+                  "media": {
+                    "url": "https://avatars.githubusercontent.com/u/70555240"
+                  }
+                },
+                {
+                  "media": {
+                    "url": "https://avatars.githubusercontent.com/u/70555240"
+                  }
+                },
+                {
+                  "media": {
+                    "url": "https://avatars.githubusercontent.com/u/70555240"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": 17,
           "components": [
             {
               "type": 13,
-              "id": 19,
               "file": {
-                "id": "1446724802596311223",
-                "url": "https://cdn.discordapp.com/attachments/1444536048557494373/1446724802407829615/file.exe?ex=6963d437&is=696282b7&hm=4d6d217c96854b0ef084d08ed3737f3956936a2f17522aeb459bbb85182d811e&",
-                "proxy_url": "https://media.discordapp.net/attachments/1444536048557494373/1446724802407829615/file.exe?ex=6963d437&is=696282b7&hm=4d6d217c96854b0ef084d08ed3737f3956936a2f17522aeb459bbb85182d811e&",
-                "width": 0,
-                "height": 0,
-                "placeholder": null,
-                "placeholder_version": null,
-                "content_scan_metadata": {
-                  "version": 2,
-                  "flags": 0
-                },
-                "content_type": "application/x-msdos-program",
-                "loading_state": 2,
-                "flags": 0,
-                "attachment_id": "1446724802407829615"
+                "url": "https://avatars.githubusercontent.com/u/70555240"
               },
-              "name": "file.exe",
-              "size": 5,
-              "spoiler": false
-            },
-            {
-              "type": 13,
-              "id": 20,
-              "file": {
-                "id": "1446724802596311224",
-                "url": "https://cdn.discordapp.com/attachments/1444536048557494373/1446724802407829615/file.exe?ex=6963d437&is=696282b7&hm=4d6d217c96854b0ef084d08ed3737f3956936a2f17522aeb459bbb85182d811e&",
-                "proxy_url": "https://media.discordapp.net/attachments/1444536048557494373/1446724802407829615/file.exe?ex=6963d437&is=696282b7&hm=4d6d217c96854b0ef084d08ed3737f3956936a2f17522aeb459bbb85182d811e&",
-                "width": 0,
-                "height": 0,
-                "placeholder": null,
-                "placeholder_version": null,
-                "content_scan_metadata": {
-                  "version": 2,
-                  "flags": 0
-                },
-                "content_type": "application/x-msdos-program",
-                "loading_state": 2,
-                "flags": 0,
-                "attachment_id": "1446724802407829615"
-              },
-              "name": "file.exe",
-              "size": 5,
-              "spoiler": false
-            },
-            {
-              "type": 13,
-              "id": 21,
-              "file": {
-                "id": "1446724802596311225",
-                "url": "https://cdn.discordapp.com/attachments/1444536048557494373/1446724802407829615/file.exe?ex=6963d437&is=696282b7&hm=4d6d217c96854b0ef084d08ed3737f3956936a2f17522aeb459bbb85182d811e&",
-                "proxy_url": "https://media.discordapp.net/attachments/1444536048557494373/1446724802407829615/file.exe?ex=6963d437&is=696282b7&hm=4d6d217c96854b0ef084d08ed3737f3956936a2f17522aeb459bbb85182d811e&",
-                "width": 0,
-                "height": 0,
-                "placeholder": null,
-                "placeholder_version": null,
-                "content_scan_metadata": {
-                  "version": 2,
-                  "flags": 0
-                },
-                "content_type": "application/x-msdos-program",
-                "loading_state": 2,
-                "flags": 0,
-                "attachment_id": "1446724802407829615"
-              },
-              "name": "file.exe",
-              "size": 5,
-              "spoiler": false
-            },
-            {
-              "type": 13,
-              "id": 22,
-              "file": {
-                "id": "1446724802596311226",
-                "url": "https://cdn.discordapp.com/attachments/1444536048557494373/1446724802407829615/file.exe?ex=6963d437&is=696282b7&hm=4d6d217c96854b0ef084d08ed3737f3956936a2f17522aeb459bbb85182d811e&",
-                "proxy_url": "https://media.discordapp.net/attachments/1444536048557494373/1446724802407829615/file.exe?ex=6963d437&is=696282b7&hm=4d6d217c96854b0ef084d08ed3737f3956936a2f17522aeb459bbb85182d811e&",
-                "width": 0,
-                "height": 0,
-                "placeholder": null,
-                "placeholder_version": null,
-                "content_scan_metadata": {
-                  "version": 2,
-                  "flags": 0
-                },
-                "content_type": "application/x-msdos-program",
-                "loading_state": 2,
-                "flags": 0,
-                "attachment_id": "1446724802407829615"
-              },
-              "name": "file.exe",
-              "size": 5,
-              "spoiler": false
+              "name": "omardiaadev.png",
+              "size": 6000
             }
-          ],
-          "spoiler": false
+          ]
         }
-      ],
-      "id": "1444537992881377333",
-      "channel_id": "1444536048557494373",
-      "author": {
-        "id": "1444536066517237842",
-        "username": "VORTEX",
-        "avatar": null,
-        "discriminator": "0000",
-        "public_flags": 0,
-        "flags": 0,
-        "bot": true,
-        "global_name": null,
-        "clan": null,
-        "primary_guild": null
-      },
-      "pinned": false,
-      "mention_everyone": false,
-      "tts": false,
-      "webhook_id": "1444536066517237842"
+      ]
     },
     {
-      "type": 0,
-      "content": "",
+      "id": "2",
+      "author": {
+        "id": "974748803305455627",
+        "username": "omardiaadev",
+        "discriminator": "0",
+        "global_name": "Omar Diaa",
+        "avatar": "e263fe6110a7203f5c7df15861e4f97d"
+      },
+      "content": "# Embeds\nhttps://tenor.com/view/pokemon-pikachu-clap-clapping-clapping-gif-gif-13465728489229726846\nhttps://tenor.com/view/elmo-dance-yell-yelling-dancing-gif-13042884862118588375",
+      "timestamp": "2030-01-01T00:00:00.000Z",
+      "edited_timestamp": "2030-01-01T00:00:00.000Z",
       "mentions": [],
-      "mention_roles": [],
       "attachments": [],
       "embeds": [
         {
-          "type": "rich",
           "url": "https://discohook.app#gallery-xYCW79Yb",
+          "type": "rich",
           "title": "Title",
           "description": "Description",
-          "color": 21970,
-          "timestamp": "2026-01-01T10:00:00+00:00",
+          "footer": {
+            "text": "Footer",
+            "icon_url": "https://avatars.githubusercontent.com/u/70555240"
+          },
+          "author": {
+            "name": "Author Name",
+            "icon_url": "https://avatars.githubusercontent.com/u/70555240"
+          },
+          "timestamp": "2026-01-01T10:00:00.000Z",
+          "color": "21970",
+          "thumbnail": {
+            "url": "https://avatars.githubusercontent.com/u/70555240"
+          },
+          "image": {
+            "url": "https://avatars.githubusercontent.com/u/70555240"
+          },
           "fields": [
             {
               "name": "#1 Field Name",
@@ -484,373 +241,83 @@
               "value": "#5 Field Value",
               "inline": false
             }
-          ],
-          "author": {
-            "name": "Author Name",
-            "icon_url": "https://avatars.githubusercontent.com/u/70555240",
-            "proxy_icon_url": "https://images-ext-1.discordapp.net/external/BXWqOX8dvon9CzB3kzT_GB-3FLliVkarrlxafzqihJw/https/avatars.githubusercontent.com/u/70555240"
-          },
-          "image": {
-            "url": "https://avatars.githubusercontent.com/u/70555240",
-            "proxy_url": "https://images-ext-1.discordapp.net/external/BXWqOX8dvon9CzB3kzT_GB-3FLliVkarrlxafzqihJw/https/avatars.githubusercontent.com/u/70555240",
-            "width": 460,
-            "height": 460,
-            "content_type": "image/jpeg",
-            "placeholder": "n3MJLwZHaGd3iHeAeol4p3d4eXQHR3cA",
-            "placeholder_version": 1,
-            "flags": 0
-          },
-          "thumbnail": {
-            "url": "https://avatars.githubusercontent.com/u/70555240",
-            "proxy_url": "https://images-ext-1.discordapp.net/external/BXWqOX8dvon9CzB3kzT_GB-3FLliVkarrlxafzqihJw/https/avatars.githubusercontent.com/u/70555240",
-            "width": 460,
-            "height": 460,
-            "content_type": "image/jpeg",
-            "placeholder": "n3MJLwZHaGd3iHeAeol4p3d4eXQHR3cA",
-            "placeholder_version": 1,
-            "flags": 0
-          },
-          "footer": {
-            "text": "Footer",
-            "icon_url": "https://avatars.githubusercontent.com/u/70555240",
-            "proxy_icon_url": "https://images-ext-1.discordapp.net/external/BXWqOX8dvon9CzB3kzT_GB-3FLliVkarrlxafzqihJw/https/avatars.githubusercontent.com/u/70555240"
-          },
-          "content_scan_version": 3
-        }
-      ],
-      "timestamp": "2025-11-30T03:58:16.011000+00:00",
-      "edited_timestamp": "2025-12-04T21:27:39.550000+00:00",
-      "flags": 0,
-      "components": [],
-      "id": "1444537994097852469",
-      "channel_id": "1444536048557494373",
-      "author": {
-        "id": "1444536066517237842",
-        "username": "VORTEX",
-        "avatar": null,
-        "discriminator": "0000",
-        "public_flags": 0,
-        "flags": 0,
-        "bot": true,
-        "global_name": null,
-        "clan": null,
-        "primary_guild": null
-      },
-      "pinned": false,
-      "mention_everyone": false,
-      "tts": false,
-      "webhook_id": "1444536066517237842"
-    },
-    {
-      "type": 0,
-      "content": "# Header\n## Header\n### Header\n\nDescription",
-      "mentions": [],
-      "mention_roles": [],
-      "attachments": [],
-      "embeds": [],
-      "timestamp": "2025-11-30T07:52:53.673000+00:00",
-      "edited_timestamp": null,
-      "flags": 0,
-      "components": [],
-      "id": "1444597040091762923",
-      "channel_id": "1444536048557494373",
-      "author": {
-        "id": "974748803305455627",
-        "username": "omardiaadev",
-        "avatar": "e263fe6110a7203f5c7df15861e4f97d",
-        "discriminator": "0",
-        "public_flags": 0,
-        "flags": 0,
-        "banner": null,
-        "accent_color": null,
-        "global_name": "Omar",
-        "avatar_decoration_data": null,
-        "collectibles": null,
-        "display_name_styles": null,
-        "banner_color": null,
-        "clan": null,
-        "primary_guild": null
-      },
-      "pinned": false,
-      "mention_everyone": false,
-      "tts": false
-    },
-    {
-      "type": 0,
-      "content": "eee",
-      "mentions": [],
-      "mention_roles": [],
-      "attachments": [
+          ]
+        },
         {
-          "id": "1446894399253512302",
-          "filename": "XSefZl2F.png",
-          "size": 85358,
-          "url": "https://cdn.discordapp.com/attachments/1444536048557494373/1446894399253512302/XSefZl2F.png?ex=6963c96a&is=696277ea&hm=509724b4c403db6cb2f74e22d12fad048e5e33d2c2d5478a8dc1205ea639c14a&",
-          "proxy_url": "https://media.discordapp.net/attachments/1444536048557494373/1446894399253512302/XSefZl2F.png?ex=6963c96a&is=696277ea&hm=509724b4c403db6cb2f74e22d12fad048e5e33d2c2d5478a8dc1205ea639c14a&",
-          "width": 460,
-          "height": 460,
-          "content_type": "image/png",
-          "original_content_type": "image/png",
-          "content_scan_version": 2,
-          "placeholder": "n3MJLwZHaGd3iHeAeol4p3d4eXQHR3cA",
-          "placeholder_version": 1
+          "url": "https://tenor.com/view/pokemon-pikachu-clap-clapping-clapping-gif-gif-13465728489229726846",
+          "type": "gifv",
+          "video": {
+            "url": "https://media.tenor.com/4dz1iXzgfpAAAAPo/pacha-just-right.mp4"
+          }
         }
       ],
-      "embeds": [],
-      "timestamp": "2025-12-06T16:01:46.840000+00:00",
-      "edited_timestamp": null,
-      "flags": 0,
-      "components": [],
-      "id": "1446894399505043587",
-      "channel_id": "1444536048557494373",
-      "author": {
-        "id": "974748803305455627",
-        "username": "omardiaadev",
-        "avatar": "e263fe6110a7203f5c7df15861e4f97d",
-        "discriminator": "0",
-        "public_flags": 0,
-        "flags": 0,
-        "banner": null,
-        "accent_color": null,
-        "global_name": "Omar",
-        "avatar_decoration_data": null,
-        "collectibles": null,
-        "display_name_styles": null,
-        "banner_color": null,
-        "clan": null,
-        "primary_guild": null
-      },
-      "pinned": false,
-      "mention_everyone": false,
-      "tts": false
-    },
-    {
-      "type": 0,
-      "content": "# Packages\n1. `discord-html-transcript-api`: Core package, built with Java.\n2. `discord-html-transcript-jda`: JDA Wrapper\n3. `discord-html-transcript-discordjs`: Discord.js Wrapper\n4. `discord-html-transcript-discordpy`: Discord.py Wrapper\n## 1. discord-html-transcriber\n### Content\n- Includes a JSON schema that's required to generate the HTML using JTE.\n### Flow\nBuilt into a native image using GraalVM that's downloaded by the wrappers.\nWhen ran, it offers an API endpoint locally to accept a payload (Messages) from the wrapper.\n## 2. discord-html-transcriber-js\n### Content\n- Includes a JSON schema (DTO) to match `discord-html-transcriber`'s schema.\n### Flow\nDownloads the `discord-html-transcriber` respective to the OS, runs it locally.\nRetrieves the Messages using Discord.js, passes it to `discord-html-transcriber`'s local server to generate the HTML.",
-      "mentions": [],
-      "mention_roles": [],
-      "attachments": [],
-      "embeds": [],
-      "timestamp": "2025-12-31T21:29:37.471000+00:00",
-      "edited_timestamp": "2026-01-07T16:56:06.441000+00:00",
-      "flags": 0,
-      "components": [],
-      "id": "1456036600751456318",
-      "channel_id": "1444536048557494373",
-      "author": {
-        "id": "974748803305455627",
-        "username": "omardiaadev",
-        "avatar": "e263fe6110a7203f5c7df15861e4f97d",
-        "discriminator": "0",
-        "public_flags": 0,
-        "flags": 0,
-        "banner": null,
-        "accent_color": null,
-        "global_name": "Omar",
-        "avatar_decoration_data": null,
-        "collectibles": null,
-        "display_name_styles": null,
-        "banner_color": null,
-        "clan": null,
-        "primary_guild": null
-      },
-      "pinned": false,
-      "mention_everyone": false,
-      "tts": false,
       "reactions": [
         {
+          "count": 69,
           "emoji": {
-            "id": null,
             "name": "😂"
-          },
-          "count": 1,
-          "count_details": {
-            "burst": 0,
-            "normal": 1
-          },
-          "burst_colors": [],
-          "me_burst": false,
-          "burst_me": false,
-          "me": false,
-          "burst_count": 0
+          }
+        },
+        {
+          "count": 420,
+          "emoji": {
+            "id": "819015014018711583",
+            "name": "nopers",
+            "animated": true
+          }
         }
       ]
     },
     {
-      "type": 0,
-      "content": "<@974748803305455627> <@1458491524093575323> @everyone @here <@&1360350892452352090> <@&1444538364396306617> <#1377712113065132146> 😭 eee\nyeh 👀 hmm custom <:a_flag:1332046321946853437> eee\neee",
-      "mentions": [
-        {
-          "id": "974748803305455627",
-          "username": "omardiaadev",
-          "avatar": "e263fe6110a7203f5c7df15861e4f97d",
-          "discriminator": "0",
-          "public_flags": 0,
-          "flags": 0,
-          "banner": null,
-          "accent_color": null,
-          "global_name": "Omar",
-          "avatar_decoration_data": null,
-          "collectibles": null,
-          "display_name_styles": null,
-          "banner_color": null,
-          "clan": null,
-          "primary_guild": null
-        },
-        {
-          "id": "1458491524093575323",
-          "username": "VORTEX",
-          "avatar": "7fab0949a0bc7a953682a6361aa91278",
-          "discriminator": "5928",
-          "public_flags": 0,
-          "flags": 0,
-          "bot": true,
-          "banner": null,
-          "accent_color": null,
-          "global_name": null,
-          "avatar_decoration_data": null,
-          "collectibles": null,
-          "display_name_styles": null,
-          "banner_color": null,
-          "clan": null,
-          "primary_guild": null
-        }
-      ],
-      "mention_roles": [
-        "1444538364396306617",
-        "1360350892452352090"
-      ],
-      "attachments": [],
-      "embeds": [],
-      "timestamp": "2026-01-08T06:05:18.009000+00:00",
-      "edited_timestamp": "2026-01-10T17:03:04.270000+00:00",
-      "flags": 0,
-      "components": [],
-      "id": "1458703089832951923",
-      "channel_id": "1444536048557494373",
+      "id": "3",
       "author": {
         "id": "974748803305455627",
         "username": "omardiaadev",
-        "avatar": "e263fe6110a7203f5c7df15861e4f97d",
         "discriminator": "0",
-        "public_flags": 0,
-        "flags": 0,
-        "banner": null,
-        "accent_color": null,
-        "global_name": "Omar",
-        "avatar_decoration_data": null,
-        "collectibles": null,
-        "display_name_styles": null,
-        "banner_color": null,
-        "clan": null,
-        "primary_guild": null
+        "global_name": "Omar Diaa",
+        "avatar": "e263fe6110a7203f5c7df15861e4f97d"
       },
-      "pinned": false,
-      "mention_everyone": true,
-      "tts": false
-    },
-    {
-      "type": 0,
-      "content": "",
+      "content": "# Attachments",
+      "timestamp": "2030-01-01T00:08:00.000Z",
+      "edited_timestamp": "2030-01-01T00:00:00.000Z",
       "mentions": [],
-      "mention_roles": [],
-      "attachments": [],
-      "embeds": [],
-      "timestamp": "2026-01-10T15:37:20.161000+00:00",
-      "edited_timestamp": null,
-      "flags": 32768,
-      "components": [
-        {
-          "type": 17,
-          "id": 18,
-          "accent_color": null,
-          "components": [
-            {
-              "type": 13,
-              "id": 19,
-              "file": {
-                "id": "1459571823103709358",
-                "url": "https://cdn.discordapp.com/attachments/1444536048557494373/1459571822860304469/file.exe?ex=6963c3b0&is=69627230&hm=8b4ef0c024f246032b930d86ab72b96765f517fed42a0b9fc13d6cb8c219ac41&",
-                "proxy_url": "https://media.discordapp.net/attachments/1444536048557494373/1459571822860304469/file.exe?ex=6963c3b0&is=69627230&hm=8b4ef0c024f246032b930d86ab72b96765f517fed42a0b9fc13d6cb8c219ac41&",
-                "width": 0,
-                "height": 0,
-                "placeholder": null,
-                "placeholder_version": null,
-                "content_scan_metadata": {
-                  "version": 3,
-                  "flags": 0
-                },
-                "content_type": "application/x-msdos-program",
-                "loading_state": 2,
-                "flags": 0,
-                "attachment_id": "1459571822860304469"
-              },
-              "name": "file.exe",
-              "size": 5,
-              "spoiler": false
-            }
-          ],
-          "spoiler": false
-        }
-      ],
-      "id": "1459571823103709359",
-      "channel_id": "1444536048557494373",
-      "author": {
-        "id": "1444536066517237842",
-        "username": "VORTEX",
-        "avatar": null,
-        "discriminator": "0000",
-        "public_flags": 0,
-        "flags": 0,
-        "bot": true,
-        "global_name": null,
-        "clan": null,
-        "primary_guild": null
-      },
-      "pinned": false,
-      "mention_everyone": false,
-      "tts": false,
-      "webhook_id": "1444536066517237842"
-    },
-    {
-      "type": 0,
-      "content": "",
-      "mentions": [],
-      "mention_roles": [],
       "attachments": [
         {
-          "id": "1459572169267876073",
-          "filename": "file.exe",
-          "size": 5,
-          "url": "https://cdn.discordapp.com/attachments/1444536048557494373/1459572169267876073/file.exe?ex=6963c402&is=69627282&hm=fc3b653641b4d88040efd62dfe1058b648abb0d75dc3659f9c4489f9efba728d&",
-          "proxy_url": "https://media.discordapp.net/attachments/1444536048557494373/1459572169267876073/file.exe?ex=6963c402&is=69627282&hm=fc3b653641b4d88040efd62dfe1058b648abb0d75dc3659f9c4489f9efba728d&",
-          "content_type": "application/x-msdos-program",
-          "content_scan_version": 3
+          "filename": "omardiaadev.png",
+          "size": 85358,
+          "url": "https://avatars.githubusercontent.com/u/70555240",
+          "content_type": "image/png"
+        },
+        {
+          "filename": "omardiaadev.png",
+          "size": 85358,
+          "url": "https://avatars.githubusercontent.com/u/70555240",
+          "content_type": "image/png"
+        },
+        {
+          "filename": "omardiaadev.png",
+          "size": 85358,
+          "url": "https://avatars.githubusercontent.com/u/70555240",
+          "content_type": "image/png"
         }
       ],
       "embeds": [],
-      "timestamp": "2026-01-10T15:38:42.651000+00:00",
-      "edited_timestamp": null,
-      "flags": 0,
-      "components": [],
-      "id": "1459572169091711224",
-      "channel_id": "1444536048557494373",
-      "author": {
-        "id": "1444536066517237842",
-        "username": "VORTEX",
-        "avatar": null,
-        "discriminator": "0000",
-        "public_flags": 0,
-        "flags": 0,
-        "bot": true,
-        "global_name": null,
-        "clan": null,
-        "primary_guild": null
-      },
-      "pinned": false,
-      "mention_everyone": false,
-      "tts": false,
-      "webhook_id": "1444536066517237842"
+      "reactions": [
+        {
+          "count": 69,
+          "emoji": {
+            "name": "😂"
+          }
+        },
+        {
+          "count": 420,
+          "emoji": {
+            "id": "819015014018711583",
+            "name": "nopers",
+            "animated": true
+          }
+        }
+      ]
     }
   ]
 }

@@ -17,6 +17,7 @@ import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -153,6 +154,41 @@ public class Message {
     return files;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Message message = (Message) o;
+    return Objects.equals(id, message.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(id);
+  }
+
+  @Override
+  public String toString() {
+    return "Message{" +
+           "id='" + id + '\'' +
+           ", author=" + author +
+           ", content='" + content + '\'' +
+           ", timestamp=" + timestamp +
+           ", editedTimestamp=" + editedTimestamp +
+           ", attachments=" + attachments +
+           ", embeds=" + embeds +
+           ", reactions=" + reactions +
+           ", flags=" + flags +
+           ", referencedMessage=" + referencedMessage +
+           ", interactionMetadata=" + interactionMetadata +
+           ", components=" + components +
+           ", mentionsMap=" + mentionsMap +
+           ", images=" + images +
+           ", files=" + files +
+           '}';
+  }
+
   /**
    * Discord <a href="https://discord.com/developers/docs/resources/message#reaction-object">Reaction</a>.
    */
@@ -186,7 +222,7 @@ public class Message {
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#message-interaction-metadata-object">Message Interaction Metadata</a>.
+   * Discord <a href="https://discord.com/developers/docs/resources/message#message-interaction-metadata-object">Interaction Metadata</a>.
    */
   @NullMarked
   public static class InteractionMetadata {

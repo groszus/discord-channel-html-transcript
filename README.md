@@ -1,10 +1,16 @@
 <h1 align="center">discord-html-transcript</h1>
 
-<p align="center"><strong>A Discord HTML transcript generator that preserves your favorite Discord styles</strong></p>
+<p align="center">
+    <strong>A Discord HTML transcript generator that preserves your favorite Discord styles</strong>
+</p>
 
 <p align="center">
-    <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript-api"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript-api?label=Maven&color=0055D2&labelColor=0055D2"/></a>
-    <a href="https://github.com/omardiaadev/discord-html-transcript-api/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript-api?label=License&color=0055D2&labelColor=0055D2"/></a>
+    <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript">
+        <img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?label=Maven&color=0055D2&labelColor=0055D2"/>
+    </a>
+    <a href="https://github.com/omardiaadev/discord-html-transcript/blob/main/LICENSE">
+        <img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript?label=License&color=0055D2&labelColor=0055D2"/>
+    </a>
 </p>
 
 ## About
@@ -18,18 +24,16 @@ You can get a preview for the HTML file [here](https://htmlpreview.github.io/?ht
         <strong>Contents</strong>
     </summary>
     <ul>
-        <li><a href="#legal-compliance">Legal Compliance</a></li>
+        <li><a href="#notice">Notice</a></li>
         <li><a href="#features">Features</a></li>
-        <li><a href="#preview">Preview</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#how-to-use">How To Use</a></li>
         <li><a href="#development">Development</a></li>
     </ul>
 </details>
 
-## Legal Compliance
+## Notice
 
-> [!NOTE]
-> This project utilizes the [gg sans](core/src/main/resources/font/ggsansvf.woff) font that is the property of Discord Inc.
+> **Note** This project is not affiliated with Discord Inc.
 
 ## Features
 
@@ -48,31 +52,12 @@ You can get a preview for the HTML file [here](https://htmlpreview.github.io/?ht
 <ul>
     <li><strong>To-Do:</strong></li>
     <ul>
-        <li>Add GIF and Article Embeds</li>
+        <li>Article Embeds</li>
         <li>Add List Markdown</li>
+        <li>Add Quote Markdown</li>
         <li>Refactor CSS</li>
     </ul>
 </ul>
-
-## Installation
-
-##### Requirements
-
-- **Java 21+**
-
-```xml
-
-<dependency>
-  <groupId>dev.omardiaa</groupId>
-  <artifactId>discord-html-transcript-core</artifactId>
-  <version>1.0.0</version>
-</dependency>
-```
-
-```kts
-
-implementation("dev.omardiaa:discord-html-transcript-core:1.0.0")
-```
 
 ## How To Use
 
@@ -89,13 +74,13 @@ There are 3 ways you can use this library:
 <dependency>
   <groupId>dev.omardiaa</groupId>
   <artifactId>discord-html-transcript-core</artifactId>
-  <version>1.0.0</version>
+  <version>0.1.0-beta-1</version>
 </dependency>
 ```
 
 ```kts
 
-implementation("dev.omardiaa:discord-html-transcript-core:1.0.0")
+implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta-1")
 ```
 
 ### Library

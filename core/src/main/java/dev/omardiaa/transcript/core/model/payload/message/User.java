@@ -7,6 +7,8 @@ import dev.omardiaa.transcript.core.util.Check;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Objects;
+
 /**
  * Discord <a href="https://discord.com/developers/docs/resources/user#users-resource">User</a>.
  */
@@ -101,6 +103,20 @@ public class User {
     return !getDiscriminator().equals("0000")
       ? String.valueOf((Long.parseLong(getId()) >> 22) % 6)
       : String.valueOf(Short.parseShort(getDiscriminator()) % 5);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    User user = (User) o;
+    return Objects.equals(id, user.id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(id);
   }
 
   @Override

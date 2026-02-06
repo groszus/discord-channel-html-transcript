@@ -250,6 +250,7 @@ body {
   color: var(--text-normal);
   border-top: 0.0625rem solid var(--border-subtle);
   background-color: var(--background-base-lowest);
+  gap: 0.3rem;
 }
 
 .header {

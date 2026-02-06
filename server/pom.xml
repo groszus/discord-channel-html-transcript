@@ -15,8 +15,8 @@
   <url>https://github.com/omardiaadev/discord-html-transcript</url>
 
   <scm>
-    <connection>scm:git:git://github.com/omardiaadev/discord-html-transcript.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com:omardiaadev/discord-html-transcript.git</developerConnection>
+    <connection>scm:git:git://github.com/omardiaadev/discord-html-transcript</connection>
+    <developerConnection>scm:git:ssh:git@github.com:omardiaadev/discord-html-transcript</developerConnection>
     <url>https://github.com/omardiaadev/discord-html-transcript</url>
   </scm>
 
