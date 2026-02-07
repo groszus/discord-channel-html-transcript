@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.1.0-beta.2]
+
+### Changed
+
+- Base64 encode font instead of loading it with jsdelivr.
+
 ## [v0.1.0-beta.1]
 
 ### Added
