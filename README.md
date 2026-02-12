@@ -58,9 +58,9 @@ You can get a preview for the HTML file [here](https://htmlpreview.github.io/?ht
 
 There are 3 methods you can use this library:
 
-- [Library](#one-library): suitable for most users.
-- [Installation](#two-installation): suitable for Java developers.
-- [Self-Host](#three-self-host): suitable for any user.
+1. [Library](#one-library): suitable for most users.
+2. [Installation](#two-installation): suitable for Java developers.
+3. [Self-Host](#three-self-host): suitable for any user.
 
 ### :one: Library
 
