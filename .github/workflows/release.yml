@@ -15,6 +15,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: 'maven'
           server-id: central
           server-username: SERVER_USERNAME
           server-password: SERVER_PASSWORD
@@ -57,7 +58,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'graalvm'
-          cache: "maven"
+          cache: 'maven'
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get Project Version
@@ -70,12 +71,19 @@ jobs:
       - name: Rename Artifact
         shell: bash
         run: |
-          SOURCE="server/target/discord-html-transcript-server${{ matrix.extension }}"
-          DEST="server/target/discord-html-transcript-server-${{ env.VERSION }}-${{ matrix.suffix }}${{ matrix.extension }}"
-          mv "$SOURCE" "$DEST"
-          echo "ARTIFACT_PATH=$DEST" >> $GITHUB_ENV
+          ARTIFACT_NAME="discord-html-transcript-server-${{ env.VERSION }}-${{ matrix.suffix }}${{ matrix.extension }}"
+          mv "server/target/discord-html-transcript-server${{ matrix.extension }}" "server/target/$ARTIFACT_NAME"
+          
+          ARTIFACTS="server/target/$ARTIFACT_NAME"
+          
+          if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
+            JAR_PATH="server/target/discord-html-transcript-server-${{ env.VERSION }}.jar"
+            ARTIFACTS="$ARTIFACTS,$JAR_PATH"
+          fi
+          
+          echo "RELEASE_ARTIFACTS=$ARTIFACTS" >> $GITHUB_ENV
 
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
         with:
-          path: server/target/discord-html-transcript-server-*
+          files: ${{ env.RELEASE_ARTIFACTS }}
