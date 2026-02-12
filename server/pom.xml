@@ -21,7 +21,6 @@
   </scm>
 
   <properties>
-    <maven.deploy.skip>true</maven.deploy.skip>
     <graalvm.buildtools.version>0.11.4</graalvm.buildtools.version>
     <main.class>dev.omardiaa.transcript.server.Main</main.class>
   </properties>
@@ -46,8 +45,8 @@
   <build>
     <resources>
       <resource>
-        <filtering>true</filtering>
         <directory>src/main/resources</directory>
+        <filtering>true</filtering>
       </resource>
     </resources>
 
