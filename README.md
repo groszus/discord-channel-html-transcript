@@ -16,9 +16,7 @@ This is the most
 You can get a preview for the HTML file [here](https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/example-transcript.html).
 
 <details>
-    <summary>
-        <strong>Contents</strong>
-    </summary>
+    <summary><strong>Contents</strong></summary>
     <ul>
         <li><a href="#notice">Notice</a></li>
         <li><a href="#features">Features</a></li>
@@ -60,9 +58,13 @@ You can get a preview for the HTML file [here](https://htmlpreview.github.io/?ht
 
 There are 3 methods you can use this library:
 
-### Library
+- [Library](#library): suitable for most users.
+- [Installation](#installation): suitable for Java developers.
+- [Self-Host](#self-host): suitable for any user.
 
-**This method is suitable for most users.**
+---
+
+### Library
 
 Refer to the wrapper of choice for your bot.\
 The following libraries carefully retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
@@ -96,9 +98,10 @@ with respect to your bot's instance to handle rate limits efficiently.
     </tr>
 </table>
 
-### Installation
 
-**This method is suitable for Java users.**
+---
+
+### Installation
 
 You can include the following to directly implement the package in your bot.
 
@@ -120,9 +123,9 @@ You can include the following to directly implement the package in your bot.
 implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.1")
 ```
 
-### Self-Host
+---
 
-**This method is suitable for any user.**
+### Self-Host
 
 You can [download](https://github.com/omardiaadev/discord-html-transcript/releases) the suitable executable for the
 `discord-html-transcript-server` module.
