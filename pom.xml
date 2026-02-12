@@ -8,6 +8,10 @@
 
   <packaging>pom</packaging>
 
+  <name>discord-html-transcript-core</name>
+  <description>A Discord Java library and microservice to generate the perfect transcripts for your chats</description>
+  <url>https://github.com/omardiaadev/discord-html-transcript</url>
+
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
