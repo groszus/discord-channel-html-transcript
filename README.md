@@ -124,7 +124,8 @@ implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.1")
 
 **This method is suitable for any user.**
 
-You can [download](https://github.com) the suitable executable for the `discord-html-transcript-server` module.
+You can [download](https://github.com/omardiaadev/discord-html-transcript/releases) the suitable executable for the
+`discord-html-transcript-server` module.
 
 Further instructions are to be documented
 
