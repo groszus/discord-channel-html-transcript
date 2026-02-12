@@ -1,12 +1,6 @@
 # Changelog
 
-## [v0.1.0-beta.2]
-
-### Changed
-
-- Base64 encode font instead of loading it with jsdelivr.
-
-## [v0.1.0-beta.1]
+## [0.1.0-beta.1]
 
 ### Added
 
@@ -20,12 +14,13 @@
 
 - **Relocate maven ArtifactID from `discord-channel-html-transcript` to `discord-html-transcript`.**
 - Change to Apache License to increase adoption.
+- Base64 encode font instead of loading it with jsdelivr.
 
 ### Fixed
 
 - Fix Header and Subtext markdown parsing.
 
-## [v4.0.0]
+## [4.0.0]
 
 ### Changed
 
@@ -39,7 +34,7 @@
 
 - Fix handling of the generated tanscript output.
 
-## [v3.0.0]
+## [3.0.0]
 
 ### Changed
 
@@ -49,21 +44,21 @@
 
 - Fix NPE when loading JTE precompiled classes ([#1](https://github.com/omardiaadev/discord-channel-html-transcript/issues/1))
 
-## [v2.0.0]
+## [2.0.0]
 
 ### Changed
 
 - **Migrate the maven GroupID from `io.github.skywolfxp` to `dev.skywolfxp`.**
 - Update footer styling.
 
-## [v1.1.1]
+## [1.1.1]
 
 ### Changed
 
 - Replace Google's "DM sans" font with Discord's "gg sans" font.
 - Update footer styling.
 
-## [v1.1.0]
+## [1.1.0]
 
 ### Changed
 

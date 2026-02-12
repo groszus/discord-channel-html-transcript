@@ -1,6 +1,6 @@
 # @no-cookie-jar
 POST http://localhost:7000/transcript
-Client-Version: latest
+Server-Version: 0.1.0-beta.1
 
 # input body
 < example-payload.json

@@ -1,25 +1,25 @@
 package dev.omardiaa.transcript.server.exception;
 
-import dev.omardiaa.transcript.server.util.SemVer;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
 public class IncompatibleVersionException extends RuntimeException {
-  private final SemVer serverVersion;
-  private final @Nullable SemVer clientVersion;
+  private final @Nullable String version;
 
-  public IncompatibleVersionException(String message, SemVer serverVersion, @Nullable SemVer clientVersion) {
+  public IncompatibleVersionException(String message) {
+    this(message, null);
+  }
+
+  public IncompatibleVersionException(String message, @Nullable String version) {
     super(message);
-    this.serverVersion = serverVersion;
-    this.clientVersion = clientVersion;
+    this.version = version;
   }
 
-  public SemVer getServerVersion() {
-    return serverVersion;
-  }
-
-  public @Nullable SemVer getClientVersion() {
-    return clientVersion;
+  /**
+   * @return The incompatible version, or {@code null} if not specified.
+   */
+  public @Nullable String getVersion() {
+    return version;
   }
 }

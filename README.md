@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-    <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?label=Maven&color=0055D2&labelColor=0055D2"/></a>
-    <a href="https://github.com/omardiaadev/discord-html-transcript/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript?label=License&color=0055D2&labelColor=0055D2"/></a>
+    <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?label=Maven&labelColor=0055D2&color=FFFFFF"/></a>
+    <a href="https://github.com/omardiaadev/discord-html-transcript/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript?label=License&labelColor=0055D2&color=FFFFFF"/></a>
 </p>
 
 ## About
@@ -58,36 +58,19 @@ You can get a preview for the HTML file [here](https://htmlpreview.github.io/?ht
 
 ## How To Use
 
-There are 3 ways you can use this library:
-
-### Installation
-
-##### Requirements
-
-- **Java 21+**
-
-```xml
-
-<dependency>
-  <groupId>dev.omardiaa</groupId>
-  <artifactId>discord-html-transcript-core</artifactId>
-  <version>0.1.0-beta.1</version>
-</dependency>
-```
-
-```kts
-
-implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.1")
-```
+There are 3 methods you can use this library:
 
 ### Library
 
+**This method is suitable for most users.**
+
+Refer to the wrapper of choice for your bot.\
 The following libraries carefully retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
-with respect to your bot's instance to handle Discord's rate limiter.
+with respect to your bot's instance to handle rate limits efficiently.
 
 <table>
     <tr>
-        <th>Framework</th>
+        <th>Discord Wrapper</th>
         <th>Library</th>
     </tr>
     <tr>
@@ -113,16 +96,45 @@ with respect to your bot's instance to handle Discord's rate limiter.
     </tr>
 </table>
 
-### Self-Hosting
+### Installation
 
-- WIP
+**This method is suitable for Java users.**
+
+You can include the following to directly implement the package in your bot.
+
+##### Requirements
+
+- **Java 17+**
+
+```xml
+
+<dependency>
+  <groupId>dev.omardiaa</groupId>
+  <artifactId>discord-html-transcript-core</artifactId>
+  <version>0.1.0-beta.1</version>
+</dependency>
+```
+
+```kts
+
+implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.1")
+```
+
+### Self-Host
+
+**This method is suitable for any user.**
+
+You can [download](https://github.com) the suitable executable for the `discord-html-transcript-server` module.
+
+Further instructions are to be documented
 
 ## Development
 
-- Pass
-  `stylePath` to [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java) for live CSS updates during development.
+- Documentation WIP.
 
-## Enjoying The Package? Give it A Star!
+## Enjoying My Work?
+
+A star and a follow would mean a lot to me! I accept [donations](https://ko-fi.com/omardiaadev) as well.
 
 <a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"/></a>
 <a href="https://discord.gg/fWtQjEJgWX"><img alt="Discord" src="https://img.shields.io/discord/1055244032105787472?style=for-the-badge&logo=discord&logoColor=FFF&logoSize=auto&label=%20&color=5865F2"/></a>

@@ -1,6 +1,7 @@
 package dev.omardiaa.transcript.server.exception;
 
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import dev.omardiaa.transcript.server.config.ServerConfig;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import org.jspecify.annotations.NullMarked;
@@ -17,20 +18,21 @@ public final class GlobalExceptionHandler {
 
   public static void handleIncompatibleVersion(IncompatibleVersionException e, Context ctx) {
     LOGGER.warn(
-      "Client version \"{}\" is incompatible with the Server version \"{}\".",
-      e.getClientVersion(),
-      e.getServerVersion());
+      "{} Expected: \"{}\", Actual: \"{}\".",
+      e.getMessage(),
+      ServerConfig.getVersion(),
+      e.getVersion());
 
     ctx.status(HttpStatus.CONFLICT).json(
       new ErrorResponse(
         HttpStatus.CONFLICT,
-        "INCOMPATIBLE_CLIENT",
+        "INCOMPATIBLE_VERSION",
         e.getMessage(),
         Map.of(
-          "server",
-          e.getServerVersion().toString(),
-          "client",
-          e.getClientVersion() == null ? "null" : e.getClientVersion().toString())));
+          "expected",
+          ServerConfig.getVersion().toString(),
+          "actual",
+          e.getVersion() == null ? "null" : e.getVersion())));
   }
 
   public static void handleMismatchedInput(MismatchedInputException e, Context ctx) {

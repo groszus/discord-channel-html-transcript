@@ -6,6 +6,8 @@ import dev.omardiaa.transcript.server.config.ServerConfig;
 import dev.omardiaa.transcript.server.controller.TranscriptController;
 import dev.omardiaa.transcript.server.exception.GlobalExceptionHandler;
 import dev.omardiaa.transcript.server.exception.IncompatibleVersionException;
+import dev.omardiaa.transcript.server.model.SemVer;
+import dev.omardiaa.transcript.server.util.ServerUtil;
 import io.javalin.Javalin;
 import io.javalin.json.JavalinJackson;
 
@@ -15,7 +17,9 @@ public class Main {
     TranscriptController transcriptController = new TranscriptController();
 
     Javalin.create(config -> config.jsonMapper(jsonMapper))
-           .before(ctx -> ServerConfig.getVersion().checkVersion(ctx.header("Client-Version")))
+           .before(ctx -> ServerUtil.validateVersions(
+             ServerConfig.getVersion(),
+             new SemVer(ctx.header("Server-Version"))))
            .post("/transcript", transcriptController::create)
            .exception(MismatchedInputException.class, GlobalExceptionHandler::handleMismatchedInput)
            .exception(IncompatibleVersionException.class, GlobalExceptionHandler::handleIncompatibleVersion)

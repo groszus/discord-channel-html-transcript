@@ -1,7 +1,7 @@
 package dev.omardiaa.transcript.server.config;
 
 import dev.omardiaa.transcript.core.config.EnvironmentConfig;
-import dev.omardiaa.transcript.server.util.SemVer;
+import dev.omardiaa.transcript.server.model.SemVer;
 import org.jspecify.annotations.NullMarked;
 
 import java.io.InputStream;
@@ -19,10 +19,10 @@ public final class ServerConfig {
   private ServerConfig() {}
 
   static {
-    try (InputStream is = ServerConfig.class.getResourceAsStream("/server.properties")) {
+    try (InputStream is = ServerConfig.class.getResourceAsStream("/build.properties")) {
       Properties properties = new Properties();
       properties.load(is);
-      VERSION = new SemVer(properties.getProperty("server.version"));
+      VERSION = new SemVer(properties.getProperty("version"));
     } catch (Exception e) {
       throw new RuntimeException("Failed to load server version.", e);
     }
