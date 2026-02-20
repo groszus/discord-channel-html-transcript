@@ -20,19 +20,13 @@
     </ul>
 </details>
 
-## About
-
-This is the most
-**up-to-date** Discord transcript generator, ensuring your archive is consistent with Discord's latest styles!\
-You can get a preview for the HTML file [here](https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/example-transcript.html).
-
 ## Features
 
 - **Beautiful UI:** Modern HTML/CSS that has the look and feel of the Discord desktop client.
 - **Asynchronous:** Built with `CompletableFuture` for non-blocking performance.
 - **100% Offline:** All styling and fonts are contained in the generated HTML file.
 
-##### Detailed Features
+##### Supported Components
 
 <ul>
     <li>
@@ -78,17 +72,17 @@ with respect to your bot's instance to handle rate limits efficiently.
         <th>Library</th>
     </tr>
     <tr align="center">
-        <td><img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="48" /></td>
+        <td><img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="64" /></td>
         <td><strong>Java Discord API</strong></td>
         <td><a href="https://github.com/omardiaadev/discord-html-transcript-jda">discord-html-transcript-jda</a></td>
     </tr>
     <tr align="center">
-        <td><img alt="Discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="48" /></td>
+        <td><img alt="Discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="64" /></td>
         <td><strong>Discord.js</strong></td>
         <td><code>WIP</code></td>
     </tr>
     <tr align="center">
-        <td><img alt="Discord.py" src="https://discordpy.readthedocs.io/en/stable/_static/discord_py_logo.ico" height="48" /></td>
+        <td><img alt="Discord.py" src="https://discordpy.readthedocs.io/en/stable/_static/discord_py_logo.ico" height="64" /></td>
         <td><strong>Discord.py</strong></td>
         <td><code>WIP</code></td>
     </tr>
