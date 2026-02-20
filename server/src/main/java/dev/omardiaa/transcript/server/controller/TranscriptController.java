@@ -21,10 +21,9 @@ public class TranscriptController {
 
     ctx.future(() -> transcriber
       .transcribe(payload)
-      .thenAccept(output -> {
-        ctx.status(HttpStatus.OK);
-        ctx.header(Header.CONTENT_TYPE, ContentType.HTML);
-        ctx.result(output.toByteArray());
-      }));
+      .thenAccept(output -> ctx
+        .status(HttpStatus.OK)
+        .header(Header.CONTENT_TYPE, ContentType.HTML)
+        .result(output.toByteArray())));
   }
 }
