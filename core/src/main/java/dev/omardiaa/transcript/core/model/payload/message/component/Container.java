@@ -7,7 +7,7 @@ import org.jspecify.annotations.NullMarked;
 import java.util.List;
 
 /**
- * Discord <a href="https://discord.com/developers/docs/components/reference#container">Container</a>.
+ * Discord <a href="https://docs.discord.com/developers/components/reference#container">Container</a>.
  */
 @NullMarked
 public class Container implements Component {

@@ -7,7 +7,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Discord <a href="https://discord.com/developers/docs/resources/channel#channels-resource">Channel</a>.
+ * Discord <a href="https://docs.discord.com/developers/resources/channel#channel-object">Channel</a>.
  */
 @NullMarked
 public class Channel {
@@ -23,7 +23,7 @@ public class Channel {
     @JsonProperty(value = "name") @Nullable String name,
     @JsonProperty(value = "topic") @Nullable String topic) {
     if (type != 0) {
-      throw new IllegalArgumentException("Channel must be of type GUILD_TEXT");
+      throw new IllegalArgumentException("Channel must be of type GUILD_TEXT(0)");
     }
 
     this.id = id;

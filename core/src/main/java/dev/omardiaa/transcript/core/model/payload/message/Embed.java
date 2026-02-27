@@ -2,6 +2,7 @@ package dev.omardiaa.transcript.core.model.payload.message;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import dev.omardiaa.transcript.core.util.Check;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -10,6 +11,7 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -34,7 +36,7 @@ public class Embed {
   @JsonCreator
   public Embed(
     @JsonProperty(value = "title") @Nullable String title,
-    @JsonProperty(value = "type") @Nullable String type,
+    @JsonProperty(value = "type") @Nullable Type type,
     @JsonProperty(value = "description") @Nullable String description,
     @JsonProperty(value = "url") @Nullable String url,
     @JsonProperty(value = "timestamp") @Nullable OffsetDateTime timestamp,
@@ -46,11 +48,11 @@ public class Embed {
     @JsonProperty(value = "author") @Nullable Author author,
     @JsonProperty(value = "fields") @Nullable List<Field> fields) {
     this.title = title;
-    this.type = Type.fromType(type);
+    this.type = Objects.requireNonNullElse(type, Type.UNKNOWN);
     this.description = description;
     this.url = url;
     this.timestamp = timestamp;
-    this.color = color == null ? null : String.format("#%06X", (0xFFFFFF & color));
+    this.color = (color == null) ? null : String.format("#%06X", (0xFFFFFF & color));
     this.footer = footer;
     this.image = image;
     this.thumbnail = thumbnail;
@@ -130,11 +132,26 @@ public class Embed {
    */
   @NullMarked
   public enum Type {
-    UNKNOWN, RICH, GIFV, ARTICLE;
+    UNKNOWN("unknown"),
+    RICH("rich"),
+    GIFV("gifv"),
+    ARTICLE("article");
 
-    private static final Map<String, Type> TYPE_MAP = Arrays.stream(values()).collect(
-      Collectors.toUnmodifiableMap(v -> v.name().toLowerCase(), Function.identity()));
+    private static final Map<String, Type> TYPE_MAP = Arrays
+      .stream(values()).collect(Collectors.toUnmodifiableMap(Type::getValue, Function.identity()));
 
+    private final String value;
+
+    Type(String value) {
+      this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @JsonCreator
     public static Type fromType(@Nullable String type) {
       return TYPE_MAP.getOrDefault(type, UNKNOWN);
     }
@@ -302,7 +319,7 @@ public class Embed {
       @JsonProperty(value = "inline") @Nullable Boolean inline) {
       this.name = Check.lengthMax(name, 256, "name");
       this.value = Check.lengthMax(value, 1024, "value");
-      this.inline = Check.defaultIfNull(inline, false);
+      this.inline = Objects.requireNonNullElse(inline, false);
     }
 
     public String getName() {

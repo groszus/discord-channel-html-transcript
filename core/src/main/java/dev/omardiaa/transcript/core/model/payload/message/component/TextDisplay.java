@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Discord <a href="https://discord.com/developers/docs/components/reference#text-display">Text Display</a>.
+ * Discord <a href="https://docs.discord.com/developers/components/reference#text-display">Text Display</a>.
  */
 @NullMarked
 public class TextDisplay implements ContainerChildComponent, SectionChildComponent {

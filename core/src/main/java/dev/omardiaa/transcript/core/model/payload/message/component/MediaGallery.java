@@ -9,7 +9,7 @@ import org.jspecify.annotations.NullMarked;
 import java.util.List;
 
 /**
- * Discord <a href="https://discord.com/developers/docs/components/reference#media-gallery">Media Gallery</a>.
+ * Discord <a href="https://docs.discord.com/developers/components/reference#media-gallery">Media Gallery</a>.
  */
 @NullMarked
 public class MediaGallery implements ContainerChildComponent {
@@ -41,9 +41,6 @@ public class MediaGallery implements ContainerChildComponent {
            '}';
   }
 
-  /**
-   * Discord <a href="https://discord.com/developers/docs/components/reference#media-gallery-media-gallery-item-structure">Media Gallery Item</a>.
-   */
   @NullMarked
   public static class Item {
     private final UnfurledMediaItem media;

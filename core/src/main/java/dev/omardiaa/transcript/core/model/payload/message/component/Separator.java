@@ -2,12 +2,13 @@ package dev.omardiaa.transcript.core.model.payload.message.component;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dev.omardiaa.transcript.core.util.Check;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Objects;
+
 /**
- * Discord <a href="https://discord.com/developers/docs/components/reference#separator">Separator</a>.
+ * Discord <a href="https://docs.discord.com/developers/components/reference#separator">Separator</a>.
  */
 @NullMarked
 public class Separator implements ContainerChildComponent {
@@ -19,10 +20,10 @@ public class Separator implements ContainerChildComponent {
   public Separator(
     @JsonProperty(value = "type", required = true) int type,
     @JsonProperty(value = "divider") @Nullable Boolean divider,
-    @JsonProperty(value = "spacing") @Nullable Integer spacing) {
+    @JsonProperty(value = "spacing") @Nullable SeparatorSpacing spacing) {
     this.type = type;
-    this.divider = Check.defaultIfNull(divider, true);
-    this.spacing = SeparatorSpacing.fromValue(Check.defaultIfNull(spacing, 1));
+    this.divider = Objects.requireNonNullElse(divider, true);
+    this.spacing = Objects.requireNonNullElse(spacing, SeparatorSpacing.SMALL);
   }
 
   @Override

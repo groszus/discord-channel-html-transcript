@@ -8,7 +8,7 @@ import org.jspecify.annotations.NullMarked;
 import java.util.List;
 
 /**
- * Discord <a href="https://discord.com/developers/docs/components/reference#action-row">Action Row</a>.
+ * Discord <a href="https://docs.discord.com/developers/components/reference#action-row">Action Row</a>.
  */
 @NullMarked
 public class ActionRow implements ContainerChildComponent {

@@ -40,7 +40,7 @@ public sealed interface Emoji permits Emoji.Unicode, Emoji.Custom {
     }
 
     /**
-     * @return <a href="https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints">Formatted Emoji URL</a>.
+     * @return <a href="https://docs.discord.com/developers/reference#image-formatting">Formatted Emoji URL</a>.
      */
     @JsonIgnore
     public @NonNull String getImageUrl() {
@@ -74,7 +74,10 @@ public sealed interface Emoji permits Emoji.Unicode, Emoji.Custom {
      */
     @JsonIgnore
     public String getAsUTF8() {
-      return name.codePoints().mapToObj(code -> "&#x" + Integer.toHexString(code) + ";").collect(Collectors.joining());
+      return getName()
+        .codePoints()
+        .mapToObj(code -> "&#x" + Integer.toHexString(code) + ";")
+        .collect(Collectors.joining());
     }
 
     @Override

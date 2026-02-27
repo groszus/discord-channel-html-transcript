@@ -1,10 +1,15 @@
 package dev.omardiaa.transcript.core.model.payload.message.component;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import org.jspecify.annotations.NullMarked;
+
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@NullMarked
 public enum ButtonStyle {
   UNKNOWN(-1),
   PRIMARY(1),
@@ -22,10 +27,12 @@ public enum ButtonStyle {
     this.value = value;
   }
 
+  @JsonValue
   public int getValue() {
     return value;
   }
 
+  @JsonCreator
   public static ButtonStyle fromValue(int value) {
     return BUTTON_STYLE_MAP.getOrDefault(value, UNKNOWN);
   }

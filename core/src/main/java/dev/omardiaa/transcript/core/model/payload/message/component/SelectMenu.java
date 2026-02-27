@@ -26,7 +26,7 @@ public class SelectMenu implements ActionRowChildComponent {
     @JsonProperty(value = "type", required = true) int type,
     @JsonProperty(value = "placeholder") @Nullable String placeholder) {
     this.type = type;
-    this.placeholder = Check.lengthMax(Check.defaultIfBlank(placeholder, "Make a selection"), 150, "placeholder");
+    this.placeholder = Check.defaultIfBlank(placeholder, "Make a selection");
   }
 
   @Override

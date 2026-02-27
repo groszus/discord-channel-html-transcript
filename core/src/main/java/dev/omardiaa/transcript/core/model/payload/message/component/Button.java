@@ -3,12 +3,13 @@ package dev.omardiaa.transcript.core.model.payload.message.component;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.omardiaa.transcript.core.model.payload.common.Emoji;
-import dev.omardiaa.transcript.core.util.Check;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Objects;
+
 /**
- * Discord <a href="https://discord.com/developers/docs/components/reference#button">Button</a>.
+ * Discord <a href="https://docs.discord.com/developers/components/reference#button">Button</a>.
  */
 @NullMarked
 public class Button implements ActionRowChildComponent, SectionAccessoryComponent {
@@ -22,27 +23,25 @@ public class Button implements ActionRowChildComponent, SectionAccessoryComponen
   @JsonCreator
   public Button(
     @JsonProperty(value = "type", required = true) int type,
-    @JsonProperty(value = "style", required = true) int style,
+    @JsonProperty(value = "style", required = true) ButtonStyle style,
     @JsonProperty(value = "label") @Nullable String label,
     @JsonProperty(value = "emoji") @Nullable Emoji emoji,
     @JsonProperty(value = "url") @Nullable String url,
     @JsonProperty(value = "disabled") @Nullable Boolean disabled) {
-    if (style == ButtonStyle.LINK.getValue()) {
-      if (url == null) {
-        throw new IllegalArgumentException("Link Button cannot have null url.");
-      }
+    if ((style == ButtonStyle.LINK) && (url == null)) {
+      throw new IllegalArgumentException("Link Button cannot have null url.");
     }
 
-    if (label == null && emoji == null) {
+    if ((label == null) && (emoji == null)) {
       throw new IllegalArgumentException("Either emoji or label can be null, both must not be null.");
     }
 
     this.type = type;
-    this.style = ButtonStyle.fromValue(style);
+    this.style = style;
     this.label = label;
     this.emoji = emoji;
     this.url = url;
-    this.disabled = Check.defaultIfNull(disabled, false);
+    this.disabled = Objects.requireNonNullElse(disabled, false);
   }
 
   @Override

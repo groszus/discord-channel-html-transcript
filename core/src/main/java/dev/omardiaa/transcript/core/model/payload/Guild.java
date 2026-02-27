@@ -37,7 +37,6 @@ public class Guild {
     this.id = id;
     this.name = name;
     this.icon = icon;
-
     this.rolesMap = roles.isEmpty()
       ? Collections.emptyMap()
       : roles.stream().collect(Collectors.toUnmodifiableMap(Role::getId, Function.identity()));
@@ -60,8 +59,13 @@ public class Guild {
     return rolesMap;
   }
 
+  @JsonProperty("roles")
+  private List<Role> getRoles() {
+    return List.copyOf(rolesMap.values());
+  }
+
   /**
-   * @return <a href="https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints">Formatted Icon URL</a>,
+   * @return <a href="https://docs.discord.com/developers/reference#image-formatting">Formatted Icon URL</a>,
    * or base64 image of {@link Guild#getName()} initials if {@link Guild#getIcon()} returns {@code null}.
    */
   @JsonIgnore

@@ -6,7 +6,7 @@ import dev.omardiaa.transcript.core.model.payload.common.UnfurledMediaItem;
 import org.jspecify.annotations.NullMarked;
 
 /**
- * Discord <a href="https://discord.com/developers/docs/components/reference#thumbnail">Thumbnail</a>.
+ * Discord <a href="https://docs.discord.com/developers/components/reference#thumbnail">Thumbnail</a>.
  */
 @NullMarked
 public class Thumbnail implements Component, SectionAccessoryComponent {

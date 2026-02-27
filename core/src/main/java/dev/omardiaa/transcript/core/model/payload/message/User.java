@@ -10,7 +10,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.Objects;
 
 /**
- * Discord <a href="https://discord.com/developers/docs/resources/user#users-resource">User</a>.
+ * Discord <a href="https://docs.discord.com/developers/resources/user#user-object">User</a>.
  */
 @NullMarked
 public class User {
@@ -39,8 +39,8 @@ public class User {
     this.discriminator = discriminator;
     this.globalName = Check.defaultIfBlank(globalName, username);
     this.avatar = avatar;
-    this.bot = Check.defaultIfNull(bot, false);
-    this.system = Check.defaultIfNull(system, false);
+    this.bot = Objects.requireNonNullElse(bot, false);
+    this.system = Objects.requireNonNullElse(system, false);
   }
 
   public String getId() {
@@ -48,7 +48,7 @@ public class User {
   }
 
   public String getUsername() {
-    return username + (!getDiscriminator().equals("0") ? "#" + getDiscriminator() : "");
+    return username + (!discriminator.equals("0") ? ("#" + discriminator) : "");
   }
 
   public String getDiscriminator() {
@@ -76,33 +76,37 @@ public class User {
    */
   @JsonIgnore
   public @Nullable String getTag() {
-    if (isBot()) {
+    if (bot) {
       return "APP";
-    } else if (isSystem()) {
-      return "SYSTEM";
-    } else {
-      return null;
     }
+
+    if (system) {
+      return "SYSTEM";
+    }
+
+    return null;
   }
 
   /**
-   * @return <a href="https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints">Formatted Avatar URL</a>.
+   * @return <a href="https://docs.discord.com/developers/reference#image-formatting">Formatted Avatar URL</a>.
    */
   @JsonIgnore
   public String getAvatarUrl() {
-    return getAvatar() == null
+    return avatar == null
       ? DEFAULT_USER_AVATAR.formatted(getDefaultAvatar())
-      : USER_AVATAR.formatted(getId(), getAvatar());
+      : USER_AVATAR.formatted(id, avatar);
   }
+
+  // TODO: see why "Short.parseShort(discriminator) % 5" is always 0
 
   /**
    * @return Default Avatar Index
    */
   @JsonIgnore
   private String getDefaultAvatar() {
-    return !getDiscriminator().equals("0000")
-      ? String.valueOf((Long.parseLong(getId()) >> 22) % 6)
-      : String.valueOf(Short.parseShort(getDiscriminator()) % 5);
+    return !discriminator.equals("0000")
+      ? String.valueOf(Long.parseLong(id) >> 22 % 6)
+      : String.valueOf(Short.parseShort(discriminator) % 5);
   }
 
   @Override

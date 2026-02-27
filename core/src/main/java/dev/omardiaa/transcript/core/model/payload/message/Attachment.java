@@ -52,7 +52,7 @@ public class Attachment {
    */
   @JsonIgnore
   public boolean isImage() {
-    return (getContentType() != null) && getContentType().startsWith("image");
+    return (contentType != null) && contentType.startsWith("image");
   }
 
   /**

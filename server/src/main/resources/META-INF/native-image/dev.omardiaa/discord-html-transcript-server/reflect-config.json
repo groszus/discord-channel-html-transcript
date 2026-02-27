@@ -1,0 +1,142 @@
+[
+  {
+    "name": "dev.omardiaa.transcript.core.model.Payload",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.Channel",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.Guild",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.Message",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.Message$Reaction",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.Message$InteractionMetadata",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.common.Emoji$Custom",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.common.Emoji$Unicode",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.common.Role",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.common.Role$Colors",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.common.UnfurledMediaItem",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Attachment",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Embed",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Type",
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Footer",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Image",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Thumbnail",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Video",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Author",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Field",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.InteractionType",
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.User",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.component.ActionRow",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.component.Button",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.component.ButtonStyle",
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.component.Container",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.component.File",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.component.MediaGallery",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.component.MediaGallery$Item",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.component.Section",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.component.SelectMenu",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.component.Separator",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.component.SeparatorSpacing",
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.component.TextDisplay",
+    "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.component.Thumbnail",
+    "allDeclaredConstructors": true
+  }
+]

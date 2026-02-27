@@ -22,7 +22,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Discord <a href="https://discord.com/developers/docs/resources/message#messages-resource">Message</a>.
+ * Discord <a href="https://docs.discord.com/developers/resources/message#message-object">Message</a>.
  */
 @NullMarked
 public class Message {
@@ -75,7 +75,6 @@ public class Message {
     this.referencedMessage = referencedMessage;
     this.interactionMetadata = interactionMetadata;
     this.components = components;
-
     this.mentionsMap = mentions.isEmpty()
       ? Collections.emptyMap()
       : mentions.stream().collect(Collectors.toUnmodifiableMap(User::getId, Function.identity()));
@@ -154,6 +153,11 @@ public class Message {
     return files;
   }
 
+  @JsonProperty("mentions")
+  public List<User> getMentions() {
+    return List.copyOf(mentionsMap.values());
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == null || getClass() != o.getClass()) {
@@ -190,7 +194,7 @@ public class Message {
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#reaction-object">Reaction</a>.
+   * Discord <a href="https://docs.discord.com/developers/resources/message#reaction-object">Reaction</a>.
    */
   @NullMarked
   public static class Reaction {
@@ -231,9 +235,9 @@ public class Message {
 
     @JsonCreator
     public InteractionMetadata(
-      @JsonProperty(value = "type", required = true) int type,
+      @JsonProperty(value = "type", required = true) InteractionType type,
       @JsonProperty(value = "user", required = true) User user) {
-      this.type = InteractionType.fromValue(type);
+      this.type = type;
       this.user = user;
     }
 
