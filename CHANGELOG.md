@@ -8,6 +8,7 @@
 
 ### Changed
 
+- Compute asynchronous operations on their own dedicated thread pool instead of common thread pool.
 - Move Javalin server logic to its own class.
 
 ## [0.1.0-beta.1]
