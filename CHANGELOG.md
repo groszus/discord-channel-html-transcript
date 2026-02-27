@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.0-beta.2]
+
+### Fixed
+
+- Fix native image missing reachability metadata.
+
+### Changed
+
+- Move Javalin server logic to its own class.
+
 ## [0.1.0-beta.1]
 
 ### Added

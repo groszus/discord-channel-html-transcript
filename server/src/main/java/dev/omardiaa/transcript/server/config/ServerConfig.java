@@ -1,6 +1,7 @@
 package dev.omardiaa.transcript.server.config;
 
 import dev.omardiaa.transcript.core.config.EnvironmentConfig;
+import dev.omardiaa.transcript.server.Server;
 import dev.omardiaa.transcript.server.model.SemVer;
 import org.jspecify.annotations.NullMarked;
 
@@ -8,13 +9,14 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Helper class that holds server environment variables.
+ * A helper class for initializing {@link Server} configuration.
  */
 @NullMarked
 public final class ServerConfig {
-  private static final SemVer VERSION;
   private static final String HOST = EnvironmentConfig.get("SERVER_HOST", "0.0.0.0");
   private static final int PORT = EnvironmentConfig.get("SERVER_PORT", 7000);
+
+  private static final SemVer VERSION;
 
   private ServerConfig() {}
 

@@ -12,16 +12,24 @@ import org.jspecify.annotations.NullMarked;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 /**
- * Helper class that holds {@link Transcriber} configuration.
+ * A helper class for initializing {@link Transcriber} configuration.
  */
 @NullMarked
 public final class TranscriberConfig {
   private static final Logger LOGGER = LoggerFactory.getLogger(TranscriberConfig.class);
   private static final boolean JTE_DEV = EnvironmentConfig.get("JTE_DEV", false);
+  private static final ExecutorService EXECUTOR = Executors
+    .newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
 
   private static final TemplateEngine TEMPLATE_ENGINE;
   private static final ObjectMapper OBJECT_MAPPER;
+
+  private TranscriberConfig() {}
 
   static {
     OBJECT_MAPPER = new ObjectMapper()
@@ -39,19 +47,44 @@ public final class TranscriberConfig {
     }
   }
 
-  private TranscriberConfig() {}
+  /**
+   * @return the {@link ExecutorService} for transcription.
+   */
+  public static ExecutorService getExecutor() {
+    return EXECUTOR;
+  }
 
   /**
-   * @return Default {@link TemplateEngine}.
+   * @return the default {@link TemplateEngine}.
    */
   public static TemplateEngine getTemplateEngine() {
     return TEMPLATE_ENGINE;
   }
 
   /**
-   * @return Default {@link ObjectMapper}.
+   * @return the default {@link ObjectMapper}.
    */
   public static ObjectMapper getObjectMapper() {
     return OBJECT_MAPPER;
+  }
+
+  /**
+   * Gracefully shuts down the {@link #EXECUTOR}.
+   */
+  public static void shutdownExecutor() {
+    LOGGER.info("Shutting down executor...");
+
+    EXECUTOR.shutdown();
+
+    try {
+      if (!EXECUTOR.awaitTermination(5, TimeUnit.SECONDS)) {
+        EXECUTOR.shutdownNow();
+      }
+    } catch (InterruptedException e) {
+      EXECUTOR.shutdownNow();
+      Thread.currentThread().interrupt();
+    }
+
+    LOGGER.info("Executor has shutdown.");
   }
 }
