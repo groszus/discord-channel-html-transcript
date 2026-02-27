@@ -20,13 +20,6 @@ public final class Check {
     }
   }
 
-  public static <T> T defaultIfNull(@Nullable T arg, @NonNull T fallback) {
-    if (arg == null) {
-      return fallback;
-    }
-    return arg;
-  }
-
   public static String defaultIfBlank(@Nullable String arg, @NonNull String fallback) {
     if (arg == null || arg.isBlank()) {
       return fallback;
