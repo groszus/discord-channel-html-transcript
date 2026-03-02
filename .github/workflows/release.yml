@@ -17,7 +17,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'maven'
           server-id: central
           server-username: SERVER_USERNAME
           server-password: SERVER_PASSWORD
@@ -65,7 +64,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'graalvm-community'
-          cache: 'maven'
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get Project Version
