@@ -13,8 +13,8 @@ import java.util.Properties;
  */
 @NullMarked
 public final class ServerConfig {
-  private static final String HOST = EnvironmentConfig.get("SERVER_HOST", "0.0.0.0");
-  private static final int PORT = EnvironmentConfig.get("SERVER_PORT", 7000);
+  private static final String HOST = EnvironmentConfig.get("JAVALIN_SERVER_HOST", "127.0.0.1");
+  private static final int PORT = EnvironmentConfig.get("JAVALIN_SERVER_PORT", 7000);
 
   private static final SemVer VERSION;
 

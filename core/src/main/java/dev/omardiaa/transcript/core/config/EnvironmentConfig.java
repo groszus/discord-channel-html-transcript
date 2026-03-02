@@ -5,7 +5,7 @@ import org.jspecify.annotations.NullMarked;
 import java.util.Optional;
 
 /**
- * Helper class for loading environment variables.
+ * A helper class for loading environment variables.
  */
 @NullMarked
 public final class EnvironmentConfig {

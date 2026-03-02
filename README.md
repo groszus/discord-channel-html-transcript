@@ -53,13 +53,13 @@
 
 ## Getting Started
 
-There are 3 methods you can use this library:
+There are 3 ways to use this library:
 
-1. [Library](#one-library): suitable for most users.
+1. [Library](#one-library-recommended): suitable for most users.
 2. [Installation](#two-installation): suitable for Java developers.
-3. [Self-Host](#three-self-host): suitable for any user.
+3. [Standalone API](#three-standalone-api): suitable for any user.
 
-### :one: Library
+### :one: Library (Recommended)
 
 Refer to the wrapper of choice for your bot.\
 The following libraries carefully retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
@@ -90,9 +90,9 @@ with respect to your bot's instance to handle rate limits efficiently.
 
 ### :two: Installation
 
-You can include the following to directly implement the package in your bot.
+You can install `discord-html-transcript-core` as a Maven dependency to implement the Transcriber within your bot.
 
-##### Requirements
+##### Prerequisites
 
 - **Java 17+**
 
@@ -110,16 +110,58 @@ You can include the following to directly implement the package in your bot.
 implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.1")
 ```
 
-### :three: Self-Host
+### :three: Standalone API
 
-You can [download](https://github.com/omardiaadev/discord-html-transcript/releases) the suitable executable for the
-`discord-html-transcript-server` module.
+> [!NOTE]
+> This section of the documentation is incomplete.
 
-Further instructions are to be documented
+You can [download the latest release](https://github.com/omardiaadev/discord-html-transcript/releases) and self-host the executable as a standalone service.
+
+#### Configuration
+
+##### Environment Variables
+
+<table>
+    <tr>
+        <th>Variable</th>
+        <th>Description</th>
+        <th>Default</th>
+    </tr>
+    <tr align="center">
+        <td><code>JAVALIN_SERVER_HOST</code></td>
+        <td>The Host for the Javalin web server to use.</td>
+        <td><code>127.0.0.1</code></td>
+    </tr>
+    <tr align="center">
+        <td><code>JAVALIN_SERVER_PORT</code></td>
+        <td>The Port for the Javalin web server to use.</td>
+        <td><code>7000</code></td>
+    </tr>
+</table>
 
 ## Development
 
-- Documentation WIP.
+> [!NOTE]
+> This section of the documentation is incomplete.
+
+### Configuration
+
+#### Environment Variables
+
+You can use the following environment variables in addition the [variables](#environment-variables) mentioned above:
+
+<table>
+    <tr>
+        <th>Variable</th>
+        <th>Description</th>
+        <th>Default</th>
+    </tr>
+    <tr align="center">
+        <td><code>JTE_DEV</code></td>
+        <td>Allows you to compile templates to Java classes on demand</td>
+        <td><code>false</code></td>
+    </tr>
+</table>
 
 ## 🌟 Support The Project
 
