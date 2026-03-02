@@ -148,7 +148,7 @@ You can [download the latest release](https://github.com/omardiaadev/discord-htm
 
 #### Environment Variables
 
-You can use the following environment variables in addition the [variables](#environment-variables) mentioned above:
+In addition to the previous [variables](#environment-variables), you can specify the following during development:
 
 <table>
     <tr>

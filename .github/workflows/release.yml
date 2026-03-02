@@ -32,7 +32,7 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
   discord-html-transcript-server:
-    name: Build ${{ matrix.platform_name }}
+    name: Build ${{ matrix.platform }}-${{ matrix.arch }}
 
     permissions:
       contents: write
@@ -41,18 +41,18 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            platform_name: "Linux x64"
-            suffix: "linux-x86_64"
+            platform: "linux"
+            arch: "x64"
             extension: ""
 
           - os: windows-latest
-            platform_name: "Windows x64"
-            suffix: "windows-x86_64"
+            platform: "win32"
+            arch: "x64"
             extension: ".exe"
 
           - os: macos-latest
-            platform_name: "macOS ARM64"
-            suffix: "darwin-aarch64"
+            platform: "darwin"
+            arch: "arm64"
             extension: ""
 
     runs-on: ${{ matrix.os }}
@@ -78,7 +78,7 @@ jobs:
       - name: Rename Artifact
         shell: bash
         run: |
-          ARTIFACT_NAME="discord-html-transcript-server-${{ env.VERSION }}-${{ matrix.suffix }}${{ matrix.extension }}"
+          ARTIFACT_NAME="discord-html-transcript-server-${{ env.VERSION }}-${{ matrix.platform }}-${{ matrix.arch }}${{ matrix.extension }}"
           mv "server/target/discord-html-transcript-server${{ matrix.extension }}" "server/target/$ARTIFACT_NAME"
           
           ARTIFACTS="server/target/$ARTIFACT_NAME"
