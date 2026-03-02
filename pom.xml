@@ -49,6 +49,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!--Plugin Configuration-->
     <maven.compiler.release>17</maven.compiler.release>
+    <maven.deploy.skip>true</maven.deploy.skip>
     <!--Versions -->
     <jte.version>3.2.3</jte.version>
     <jackson.version>2.21.1</jackson.version>
