@@ -5,6 +5,9 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
+/**
+ * A helper class for performing data checks.
+ */
 public final class Check {
   private Check() {}
 

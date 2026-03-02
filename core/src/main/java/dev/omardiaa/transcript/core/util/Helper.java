@@ -15,9 +15,9 @@ public final class Helper {
 
   /**
    * @param arg
-   *   Sentence to retrieve the initials from.
+   *   the sentence to retrieve the initials from.
    *
-   * @return A {@link String} of the first 3 initials in a sentence.
+   * @return {@link String} of the first 3 initials in a sentence.
    */
   public static String getInitials(String arg) {
     return Arrays.stream(arg.trim().split("\\s+"))
@@ -29,9 +29,9 @@ public final class Helper {
 
   /**
    * @param bytes
-   *   Number of bytes to format.
+   *   the number of bytes to format.
    *
-   * @return {@code "1024 byte/KB/MB/GB"}.
+   * @return {@code eg. 1024 bytes/KB/MB/GB}.
    */
   public static String formatBytes(int bytes) {
     if (bytes < KB) {

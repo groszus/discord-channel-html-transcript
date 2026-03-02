@@ -1,5 +1,6 @@
 package dev.omardiaa.transcript.core.util;
 
+import dev.omardiaa.transcript.core.model.payload.Guild;
 import org.jspecify.annotations.NullMarked;
 
 import javax.imageio.ImageIO;
@@ -9,10 +10,21 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Base64;
 
+/**
+ * A helper class for generating icons.
+ */
 @NullMarked
 public final class IconUtil {
   private IconUtil() {}
 
+  /**
+   * Draws an Icon of {@link Guild#getName()} initials.
+   *
+   * @param str
+   *   the sentence used to retrieve the initials from.
+   *
+   * @return a base64 encoded {@code image/png} of the {@link Guild#getName()} initials.
+   */
   public static String drawGuildIcon(String str) {
     int width = 50;
     int height = 50;

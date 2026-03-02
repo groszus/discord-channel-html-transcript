@@ -18,7 +18,7 @@ public class Transcriber {
    * @param payload
    *   the {@link Payload} to transcribe.
    *
-   * @return the {@link CompletableFuture} of the raw byte output representing the transcribed channel.
+   * @return {@link CompletableFuture} of the raw byte output representing the transcribed channel.
    */
   public CompletableFuture<Utf8ByteOutput> transcribe(Payload payload) {
     return CompletableFuture.supplyAsync(

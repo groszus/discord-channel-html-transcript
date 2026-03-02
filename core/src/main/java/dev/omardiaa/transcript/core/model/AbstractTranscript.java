@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * Represents a channel as HTML in raw byte output.
+ * An abstract implementation representing a channel as HTML in raw byte output.
  */
 @NullMarked
 public abstract class AbstractTranscript {
@@ -16,14 +16,14 @@ public abstract class AbstractTranscript {
 
   /**
    * @param output
-   *   The {@link Utf8ByteOutput} of the transcribed channel.
+   *   the {@link Utf8ByteOutput} of the transcribed channel.
    */
   public AbstractTranscript(Utf8ByteOutput output) {
     this.output = output;
   }
 
   /**
-   * @return Raw byte output of the transcribed channel.
+   * @return {@link Utf8ByteOutput} of the transcribed channel.
    */
   public Utf8ByteOutput getOutput() {
     return output;
@@ -33,14 +33,14 @@ public abstract class AbstractTranscript {
    * Writes {@link Utf8ByteOutput#toByteArray()} into the specified {@code file}.
    *
    * @param file
-   *   The {@link File} to write into.
+   *   the {@link File} to write into.
    *
    * @throws IOException
    *   If an I/O error occurs while writing into the file.
    */
   public void toFile(File file) throws IOException {
     try (FileOutputStream fos = new FileOutputStream(file)) {
-      fos.write(getOutput().toByteArray());
+      fos.write(this.output.toByteArray());
     }
   }
 }

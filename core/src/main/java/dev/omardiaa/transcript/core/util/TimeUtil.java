@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /**
- * Helper class for formatting timestamps.
+ * A helper class for formatting timestamps.
  */
 @NullMarked
 public final class TimeUtil {
@@ -50,11 +50,11 @@ public final class TimeUtil {
    * Formats the specified {@code epochSecond} as a Discord Timestamp.
    *
    * @param epochSecond
-   *   The epoch to format.
+   *   the epoch to format.
    *
    * @return {@code eg. 1/1/30 12:00 AM (UTC)}
    *
-   * @see <a href="https://discord.com/developers/docs/reference#message-formatting">Message Formatting</a>
+   * @see <a href="https://docs.discord.com/developers/reference#message-formatting">Message Formatting</a>
    */
   public static String formatTimestamp(String epochSecond) {
     return Instant.ofEpochSecond(Integer.parseInt(epochSecond)).atOffset(ZoneOffset.UTC).format(TIMESTAMP);
