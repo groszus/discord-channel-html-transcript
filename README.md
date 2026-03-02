@@ -1,7 +1,7 @@
 <h1 align="center">discord-html-transcript</h1>
 
 <p align="center">
-    <strong>Generate styled archives for your tickets and chats with ease</strong>
+    <strong>Generate natively styled logs for your Discord chats</strong>
 </p>
 
 <p align="center">
@@ -55,14 +55,14 @@
 
 There are 3 ways to use this library:
 
-1. [Library](#one-library-recommended): suitable for most users.
-2. [Installation](#two-installation): suitable for Java developers.
-3. [Standalone API](#three-standalone-api): suitable for any user.
+1. [Library](#one-library-recommended): recommended for most users.
+2. [Installation](#two-installation): for Java developers.
+3. [Standalone API](#three-standalone-api): for non-Java developers.
 
 ### :one: Library (Recommended)
 
-Refer to the wrapper of choice for your bot.\
-The following libraries carefully retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
+Refer to the Discord Wrapper of choice for your bot.\
+The following libraries retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
 with respect to your bot's instance to handle rate limits efficiently.
 
 <table>
@@ -90,7 +90,7 @@ with respect to your bot's instance to handle rate limits efficiently.
 
 ### :two: Installation
 
-You can install `discord-html-transcript-core` as a Maven dependency to implement the Transcriber within your bot.
+You can install the Maven dependency to implement the Transcriber within your bot:
 
 ##### Prerequisites
 
@@ -101,13 +101,13 @@ You can install `discord-html-transcript-core` as a Maven dependency to implemen
 <dependency>
   <groupId>dev.omardiaa</groupId>
   <artifactId>discord-html-transcript-core</artifactId>
-  <version>0.1.0-beta.1</version>
+  <version>0.1.0-beta.2</version>
 </dependency>
 ```
 
 ```kts
 
-implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.1")
+implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.2")
 ```
 
 ### :three: Standalone API

@@ -9,7 +9,7 @@
   <packaging>pom</packaging>
 
   <name>discord-html-transcript</name>
-  <description>Generate styled Discord archives for your tickets and chats with ease</description>
+  <description>Generate natively styled logs for your Discord chats</description>
   <url>https://github.com/omardiaadev/discord-html-transcript</url>
 
   <licenses>
