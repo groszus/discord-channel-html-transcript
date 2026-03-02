@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import dev.omardiaa.transcript.core.service.Transcriber;
+import dev.omardiaa.transcript.core.util.EnvironmentUtil;
 import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
@@ -22,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 @NullMarked
 public final class TranscriberConfig {
   private static final Logger LOGGER = LoggerFactory.getLogger(TranscriberConfig.class);
-  private static final boolean JTE_DEV = EnvironmentConfig.get("JTE_DEV", false);
+  private static final boolean JTE_DEV = EnvironmentUtil.get("JTE_DEV", false);
   private static final ExecutorService EXECUTOR = Executors
     .newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
 

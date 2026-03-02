@@ -1,6 +1,6 @@
 package dev.omardiaa.transcript.server.config;
 
-import dev.omardiaa.transcript.core.config.EnvironmentConfig;
+import dev.omardiaa.transcript.core.util.EnvironmentUtil;
 import dev.omardiaa.transcript.server.Server;
 import dev.omardiaa.transcript.server.model.SemVer;
 import org.jspecify.annotations.NullMarked;
@@ -13,8 +13,8 @@ import java.util.Properties;
  */
 @NullMarked
 public final class ServerConfig {
-  private static final String HOST = EnvironmentConfig.get("JAVALIN_SERVER_HOST", "127.0.0.1");
-  private static final int PORT = EnvironmentConfig.get("JAVALIN_SERVER_PORT", 7000);
+  private static final String HOST = EnvironmentUtil.get("JAVALIN_SERVER_HOST", "127.0.0.1");
+  private static final int PORT = EnvironmentUtil.get("JAVALIN_SERVER_PORT", 7000);
 
   private static final SemVer VERSION;
 

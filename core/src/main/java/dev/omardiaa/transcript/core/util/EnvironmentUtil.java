@@ -1,4 +1,4 @@
-package dev.omardiaa.transcript.core.config;
+package dev.omardiaa.transcript.core.util;
 
 import org.jspecify.annotations.NullMarked;
 
@@ -8,8 +8,8 @@ import java.util.Optional;
  * A helper class for loading environment variables.
  */
 @NullMarked
-public final class EnvironmentConfig {
-  private EnvironmentConfig() {}
+public final class EnvironmentUtil {
+  private EnvironmentUtil() {}
 
   /**
    * @param key
