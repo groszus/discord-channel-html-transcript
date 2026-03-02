@@ -5,7 +5,7 @@
   <parent>
     <groupId>dev.omardiaa</groupId>
     <artifactId>discord-html-transcript</artifactId>
-    <version>0.1.0-beta.1</version>
+    <version>0.1.0-beta.2</version>
   </parent>
 
   <artifactId>discord-html-transcript-server</artifactId>
@@ -24,6 +24,7 @@
   <properties>
     <!--Plugin Configuration-->
     <gpg.skip>true</gpg.skip>
+    <maven.deploy.skip>true</maven.deploy.skip>
     <skipPublishing>true</skipPublishing>
   </properties>
 
@@ -73,6 +74,12 @@
                 <exclude>META-INF/MANIFEST.MF</exclude>
                 <exclude>**/module-info.class</exclude>
               </excludes>
+            </filter>
+            <filter>
+              <artifact>dev.omardiaa:discord-html-transcript-core</artifact>
+              <includes>
+                <include>**</include>
+              </includes>
             </filter>
           </filters>
           <transformers>

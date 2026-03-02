@@ -4,7 +4,7 @@
 
   <groupId>dev.omardiaa</groupId>
   <artifactId>discord-html-transcript</artifactId>
-  <version>0.1.0-beta.1</version>
+  <version>0.1.0-beta.2</version>
 
   <packaging>pom</packaging>
 
@@ -48,7 +48,6 @@
     <!--Project Configuration-->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!--Plugin Configuration-->
-    <maven.deploy.skip>true</maven.deploy.skip>
     <maven.compiler.release>17</maven.compiler.release>
     <!--Versions -->
     <jte.version>3.2.3</jte.version>
