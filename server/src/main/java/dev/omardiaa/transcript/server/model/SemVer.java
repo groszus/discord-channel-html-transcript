@@ -19,16 +19,17 @@ public final class SemVer {
   private final @Nullable String qualifier;
 
   /**
-   * Constructs a Semantic Version.
+   * Constructs a Semantic Version from parsing the specified {@code version}.
    *
    * @param version
-   *   The version to parse.
+   *   the version to parse.
    *
    * @throws IncompatibleVersionException
-   *   <p><ul>
-   *   <li>If the specified {@code version} returns {@code null}.</li>
-   *   <li>If the specified {@code version} can not be parsed.</li>
-   *   </ul></p>
+   *   if any of the following are true:
+   *   <ul>
+   *   <li>The specified {@code version} returns {@code null}.</li>
+   *   <li>The specified {@code version} can not be parsed.</li>
+   *   </ul>
    */
   public SemVer(@Nullable String version) {
     if (version == null || version.isBlank()) {
@@ -39,7 +40,7 @@ public final class SemVer {
 
     if (!matcher.matches()) {
       throw new IncompatibleVersionException(
-        "Version format invalid, expected format: (major).(minor).(patch)?(qualifier).",
+        "Version format invalid, expected format: [v](major).(minor).(patch)[-(qualifier)].",
         version);
     }
 
@@ -49,16 +50,25 @@ public final class SemVer {
     this.qualifier = matcher.group(4);
   }
 
+  /**
+   * @return the {@code x} in {@code x.y.z}.
+   */
   public int getMajor() {
     return major;
   }
 
+  /**
+   * @return the {@code y} in {@code x.y.z}.
+   */
   public int getMinor() {
     return minor;
   }
 
+  /**
+   * @return {@code true} if a pre-release qualifier is present, otherwise {@code false}.
+   */
   public boolean isPreRelease() {
-    return this.qualifier != null && !this.qualifier.isBlank();
+    return qualifier != null && !qualifier.isBlank();
   }
 
   @Override
@@ -80,15 +90,7 @@ public final class SemVer {
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder()
-      .append(major).append('.')
-      .append(minor).append('.')
-      .append(patch);
-
-    if (qualifier != null && !qualifier.isBlank()) {
-      sb.append('-').append(qualifier);
-    }
-
-    return sb.toString();
+    String version = major + "." + minor + "." + patch;
+    return isPreRelease() ? version + "-" + qualifier : version;
   }
 }
