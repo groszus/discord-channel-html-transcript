@@ -3,6 +3,9 @@ package dev.omardiaa.transcript.server.exception;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * Indicates that the client version is incompatible with the server version, or vice-versa.
+ */
 @NullMarked
 public class IncompatibleVersionException extends RuntimeException {
   private final @Nullable String version;
@@ -17,7 +20,7 @@ public class IncompatibleVersionException extends RuntimeException {
   }
 
   /**
-   * @return The incompatible version, or {@code null} if not specified.
+   * @return the incompatible version, or {@code null} if not specified.
    */
   public @Nullable String getVersion() {
     return version;
