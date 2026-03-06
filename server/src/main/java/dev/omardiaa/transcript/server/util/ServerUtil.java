@@ -1,44 +1,82 @@
 package dev.omardiaa.transcript.server.util;
 
+import dev.omardiaa.transcript.server.config.ServerConfig;
 import dev.omardiaa.transcript.server.exception.IncompatibleVersionException;
+import dev.omardiaa.transcript.server.exception.UnauthorizedException;
 import dev.omardiaa.transcript.server.model.SemVer;
+import io.javalin.http.Context;
 import org.jspecify.annotations.NullMarked;
 
+import java.util.Objects;
+
+/**
+ * A helper class for validating Javalin requests.
+ */
 @NullMarked
 public final class ServerUtil {
   private ServerUtil() {}
 
   /**
-   * Validates the specified {@code actual} version against the current specified {@code expected} version.
+   * Parses the {@code Server-Version} header from the provided Javalin {@link Context} and checks it against
+   * {@link ServerConfig#getVersion()}.
    * <p>
-   * Compatibility Rules:
+   * Compatibility:
    * <ul>
    * <li>Pre-release versions must match exactly.</li>
    * <li>Major versions must match exactly.</li>
-   * <li>{@code expected} minor version must be greater than or equal to the {@code actual} minor version.</li>
+   * <li>{@code expected} minor version must be greater than or equal to the {@code actualVersion} minor version.</li>
    * </ul>
    *
-   * @param expected
-   *   The current server version.
-   * @param actual
-   *   The version the client expects from the server.
+   * @param ctx
+   *   the Javalin {@link Context}.
    *
    * @throws IncompatibleVersionException
-   *   If any of the compatibility rules are violated.
+   *   if any of the compatibility rules are violated.
    */
-  public static void validateVersions(SemVer expected, SemVer actual) {
-    if ((expected.isPreRelease() || actual.isPreRelease()) && !expected.equals(actual)) {
-      throw new IncompatibleVersionException("Pre-release versions must match exactly.", actual.toString());
+  public static void validateVersion(Context ctx) {
+    SemVer actualVersion = new SemVer(ctx.header("Server-Version"));
+    SemVer expectedVersion = ServerConfig.getVersion();
+
+    if (expectedVersion.isPreRelease() || actualVersion.isPreRelease()) {
+      if (!expectedVersion.equals(actualVersion)) {
+        throw new IncompatibleVersionException("Pre-release versions must match exactly.", actualVersion.toString());
+      }
+
+      return;
     }
 
-    if (expected.getMajor() != actual.getMajor()) {
-      throw new IncompatibleVersionException("Major versions must match exactly.", actual.toString());
+    if (expectedVersion.getMajor() != actualVersion.getMajor()) {
+      throw new IncompatibleVersionException("Major versions must match exactly.", actualVersion.toString());
     }
 
-    if (expected.getMinor() < actual.getMinor()) {
+    if (expectedVersion.getMinor() < actualVersion.getMinor()) {
       throw new IncompatibleVersionException(
-        "Expected minor version must be greater than or equal to the actual minor version.",
-        actual.toString());
+        "Expected minor version must be greater than or equal to the actualVersion minor version.",
+        actualVersion.toString());
+    }
+  }
+
+  /**
+   * Parses the {@code Authorization} header from the provided Javalin {@link Context} and checks it against
+   * {@link ServerConfig#getApiKey()}.
+   *
+   * @param ctx
+   *   the Javalin {@link Context}.
+   *
+   * @throws UnauthorizedException
+   *   if the specified key in the {@code Authorization} header does not match {@link ServerConfig#getApiKey()}.
+   */
+  public static void validateApiKey(Context ctx) {
+    String authorization = ctx.header("Authorization");
+
+    if (authorization == null || !authorization.startsWith("Bearer ")) {
+      throw new UnauthorizedException();
+    }
+
+    String key = authorization.substring(7);
+
+    if (!Objects.equals(key, ServerConfig.getApiKey())) {
+      throw new UnauthorizedException();
     }
   }
 }

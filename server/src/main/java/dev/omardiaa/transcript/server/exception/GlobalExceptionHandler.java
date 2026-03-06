@@ -17,16 +17,9 @@ public final class GlobalExceptionHandler {
   private GlobalExceptionHandler() {}
 
   public static void handleIncompatibleVersion(IncompatibleVersionException e, Context ctx) {
-    LOGGER.warn(
-      "{} Expected: \"{}\", Actual: \"{}\".",
-      e.getMessage(),
-      ServerConfig.getVersion(),
-      e.getVersion());
-
     ctx.status(HttpStatus.CONFLICT).json(
       new ErrorResponse(
         HttpStatus.CONFLICT,
-        "INCOMPATIBLE_VERSION",
         e.getMessage(),
         Map.of(
           "expected",
@@ -35,14 +28,23 @@ public final class GlobalExceptionHandler {
           e.getVersion() == null ? "null" : e.getVersion())));
   }
 
-  public static void handleMismatchedInput(MismatchedInputException e, Context ctx) {
-    LOGGER.warn("Invalid JSON input.", e);
+  public static void handleUnauthorized(UnauthorizedException e, Context ctx) {
+    ctx.status(HttpStatus.UNAUTHORIZED).json(
+      new ErrorResponse(
+        HttpStatus.UNAUTHORIZED,
+        e.getMessage()));
+  }
 
+  public static void handleMismatchedInput(MismatchedInputException e, Context ctx) {
     ctx.status(HttpStatus.BAD_REQUEST).json(
       new ErrorResponse(
         HttpStatus.BAD_REQUEST,
-        "INVALID_JSON",
-        "The request body contains invalid data."));
+        "The request body contains mismatched input.",
+        Map.of(
+          "path",
+          e.getPathReference(),
+          "problem",
+          e.getOriginalMessage())));
   }
 
   public static void handleException(Exception e, Context ctx) {
@@ -51,7 +53,6 @@ public final class GlobalExceptionHandler {
     ctx.status(HttpStatus.INTERNAL_SERVER_ERROR).json(
       new ErrorResponse(
         HttpStatus.INTERNAL_SERVER_ERROR,
-        "INTERNAL_ERROR",
-        "An unexpected error occurred."));
+        "Encountered unhandled exception."));
   }
 }

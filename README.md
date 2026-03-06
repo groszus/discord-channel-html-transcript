@@ -77,13 +77,13 @@ with respect to your bot's instance to handle rate limits efficiently.
         <td><a href="https://github.com/omardiaadev/discord-html-transcript-jda">discord-html-transcript-jda</a></td>
     </tr>
     <tr align="center">
-        <td><img alt="Discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="64" /></td>
-        <td><strong>Discord.js</strong></td>
+        <td><img alt="discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="64" /></td>
+        <td><strong>discord.js</strong></td>
         <td><code>WIP</code></td>
     </tr>
     <tr align="center">
-        <td><img alt="Discord.py" src="https://discordpy.readthedocs.io/en/stable/_static/discord_py_logo.ico" height="64" /></td>
-        <td><strong>Discord.py</strong></td>
+        <td><img alt="discord.py" src="https://discordpy.readthedocs.io/en/latest/_static/discord_py_logo.ico" height="64" /></td>
+        <td><strong>discord.py</strong></td>
         <td><code>WIP</code></td>
     </tr>
 </table>
@@ -124,18 +124,28 @@ You can [download the latest release](https://github.com/omardiaadev/discord-htm
 <table>
     <tr>
         <th>Variable</th>
-        <th>Description</th>
         <th>Default</th>
     </tr>
     <tr align="center">
-        <td><code>JAVALIN_SERVER_HOST</code></td>
-        <td>The Host for the Javalin web server to use.</td>
+        <td>
+            <code>TRANSCRIPT_SERVER_HOST</code>
+            <p>Specifies a custom host for the Javalin web server.</p>
+        </td>
         <td><code>127.0.0.1</code></td>
     </tr>
     <tr align="center">
-        <td><code>JAVALIN_SERVER_PORT</code></td>
-        <td>The Port for the Javalin web server to use.</td>
+        <td>
+            <code>TRANSCRIPT_SERVER_PORT</code>
+            <p>Specifies a custom port for the Javalin web server.</p>
+        </td>
         <td><code>7000</code></td>
+    </tr>
+    <tr align="center">
+        <td>
+            <code>TRANSCRIPT_SERVER_API_KEY</code>
+            <p>Specifies an API key to validate on client requests.</p>
+        </td>
+        <td><code>-</code></td>
     </tr>
 </table>
 
@@ -153,12 +163,13 @@ In addition to the previous [variables](#environment-variables), you can specify
 <table>
     <tr>
         <th>Variable</th>
-        <th>Description</th>
         <th>Default</th>
     </tr>
     <tr align="center">
-        <td><code>JTE_DEV</code></td>
-        <td>Allows you to compile templates to Java classes on demand</td>
+        <td>
+            <code>JTE_DEV</code>
+            <p>Allows you to compile templates to Java classes on demand.</p>
+        </td>
         <td><code>false</code></td>
     </tr>
 </table>

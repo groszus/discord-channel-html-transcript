@@ -4,6 +4,8 @@ import org.jspecify.annotations.NullMarked;
 
 import java.util.Optional;
 
+// TODO: implement better error handling for when the variables can not be parsed to their type.
+
 /**
  * A helper class for loading environment variables.
  */
@@ -13,51 +15,47 @@ public final class EnvironmentUtil {
 
   /**
    * @param key
-   *   Variable name.
+   *   the variable name.
    * @param defaultValue
-   *   Default value to return if {@link System#getenv(String)} returns null.
+   *   the default value to return if {@link System#getenv(String)} returns {@code null}.
    *
-   * @return {@link System#getenv(String)},
-   * or {@code defaultValue} if {@link #getOptional(String)} is empty.
+   * @return {@link System#getenv(String)}, or {@code defaultValue} if {@link #get(String)} is empty.
    */
   public static String get(String key, String defaultValue) {
-    return getOptional(key).orElse(defaultValue);
+    return get(key).orElse(defaultValue);
   }
 
   /**
    * @param key
-   *   Variable name.
+   *   the variable name.
    * @param defaultValue
-   *   Default value to return if {@link System#getenv(String)} returns null.
+   *   the default value to return if {@link System#getenv(String)} returns {@code null}.
    *
-   * @return {@link System#getenv(String)} as {@code int},
-   * or {@code defaultValue} if {@link #getOptional(String)} is empty.
+   * @return {@link System#getenv(String)} as {@code int}, or {@code defaultValue} if {@link #get(String)} is empty.
    */
   public static int get(String key, int defaultValue) {
-    return getOptional(key).map(Integer::parseInt).orElse(defaultValue);
+    return get(key).map(Integer::parseInt).orElse(defaultValue);
   }
 
   /**
    * @param key
-   *   Variable name.
+   *   the variable name.
    * @param defaultValue
-   *   Default value to return if {@link System#getenv(String)} returns null.
+   *   the default value to return if {@link System#getenv(String)} returns {@code null}.
    *
-   * @return {@link System#getenv(String)} as {@code boolean},
-   * or {@code defaultValue} if {@link #getOptional(String)} is empty.
+   * @return {@link System#getenv(String)} as {@code boolean}, or {@code defaultValue} if {@link #get(String)} is empty.
    */
   public static boolean get(String key, boolean defaultValue) {
-    return getOptional(key).map(Boolean::parseBoolean).orElse(defaultValue);
+    return get(key).map(Boolean::parseBoolean).orElse(defaultValue);
   }
 
   /**
    * @param key
-   *   Variable name.
+   *   the variable name.
    *
    * @return {@link Optional} of {@link System#getenv(String)}.
    */
-  private static Optional<String> getOptional(String key) {
-    String value = System.getenv(key);
-    return (value == null || value.isBlank()) ? Optional.empty() : Optional.of(value);
+  public static Optional<String> get(String key) {
+    return Optional.ofNullable(System.getenv(key));
   }
 }

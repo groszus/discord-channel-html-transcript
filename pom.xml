@@ -52,7 +52,7 @@
     <!--Versions -->
     <jte.version>3.2.3</jte.version>
     <jackson.version>2.21.1</jackson.version>
-    <javalin.version>6.7.0</javalin.version>
+    <javalin.version>7.0.1</javalin.version>
     <slf4j.version>2.0.17</slf4j.version>
     <junit.version>6.0.2</junit.version>
     <graalvm.buildtools.version>0.11.4</graalvm.buildtools.version>

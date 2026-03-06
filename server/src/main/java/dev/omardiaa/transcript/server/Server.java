@@ -7,7 +7,7 @@ import dev.omardiaa.transcript.core.service.Transcriber;
 import dev.omardiaa.transcript.server.config.ServerConfig;
 import dev.omardiaa.transcript.server.exception.GlobalExceptionHandler;
 import dev.omardiaa.transcript.server.exception.IncompatibleVersionException;
-import dev.omardiaa.transcript.server.model.SemVer;
+import dev.omardiaa.transcript.server.exception.UnauthorizedException;
 import dev.omardiaa.transcript.server.util.ServerUtil;
 import io.javalin.Javalin;
 import io.javalin.http.ContentType;
@@ -15,6 +15,8 @@ import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import io.javalin.json.JavalinJackson;
 import org.jspecify.annotations.NullMarked;
+
+import java.util.Map;
 
 /**
  * A singleton class for initializing, configuring, and running the Javalin server.
@@ -29,13 +31,30 @@ public final class Server {
   private Server() {
     this.transcriber = new Transcriber();
     this.javalin = Javalin
-      .create(config -> config.jsonMapper(new JavalinJackson(TranscriberConfig.getObjectMapper(), true)))
-      .events(config -> config.serverStopped(TranscriberConfig::shutdownExecutor))
-      .before(ctx -> ServerUtil.validateVersions(ServerConfig.getVersion(), new SemVer(ctx.header("Server-Version"))))
-      .post("/transcript", this::transcriptHandler)
-      .exception(MismatchedInputException.class, GlobalExceptionHandler::handleMismatchedInput)
-      .exception(IncompatibleVersionException.class, GlobalExceptionHandler::handleIncompatibleVersion)
-      .exception(Exception.class, GlobalExceptionHandler::handleException);
+      .create(config -> {
+        config.startup.showJavalinBanner = false;
+        config.startup.showOldJavalinVersionWarning = false;
+
+        config.jetty.host = ServerConfig.getHost();
+        config.jetty.port = ServerConfig.getPort();
+
+        config.jsonMapper(new JavalinJackson(TranscriberConfig.getObjectMapper(), false));
+
+        config.routes
+          .get("/health", this::healthHandler)
+          .post("/transcript", this::transcriptHandler)
+          .beforeMatched(ServerUtil::validateVersion)
+          .exception(IncompatibleVersionException.class, GlobalExceptionHandler::handleIncompatibleVersion)
+          .exception(UnauthorizedException.class, GlobalExceptionHandler::handleUnauthorized)
+          .exception(MismatchedInputException.class, GlobalExceptionHandler::handleMismatchedInput)
+          .exception(Exception.class, GlobalExceptionHandler::handleException);
+
+        config.events.serverStopped(TranscriberConfig::shutdownExecutor);
+
+        if (ServerConfig.getApiKey() != null) {
+          config.routes.before(ServerUtil::validateApiKey);
+        }
+      });
   }
 
   /**
@@ -46,17 +65,27 @@ public final class Server {
   }
 
   /**
-   * Starts the Javalin server with the properties defined in {@link ServerConfig}.
+   * Starts the Javalin server.
    */
   public void start() {
-    this.javalin.start(ServerConfig.getHost(), ServerConfig.getPort());
+    javalin.start();
   }
 
   /**
    * Stops the Javalin server.
    */
   public void stop() {
-    this.javalin.stop();
+    javalin.stop();
+  }
+
+  /**
+   * {@code GET /health} route handler.
+   *
+   * @param ctx
+   *   the Javalin {@link Context}.
+   */
+  private void healthHandler(Context ctx) {
+    ctx.status(HttpStatus.OK).json(Map.of("version", ServerConfig.getVersion().toString()));
   }
 
   /**
@@ -68,7 +97,7 @@ public final class Server {
   private void transcriptHandler(Context ctx) {
     Payload payload = ctx.bodyStreamAsClass(Payload.class);
 
-    ctx.future(() -> this.transcriber
+    ctx.future(() -> transcriber
       .transcribe(payload)
       .thenAccept(output -> ctx
         .status(HttpStatus.OK)
