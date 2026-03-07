@@ -1,5 +1,6 @@
 package dev.omardiaa.transcript.server.util;
 
+import dev.omardiaa.transcript.core.util.Check;
 import dev.omardiaa.transcript.server.config.ServerConfig;
 import dev.omardiaa.transcript.server.exception.IncompatibleVersionException;
 import dev.omardiaa.transcript.server.exception.UnauthorizedException;
@@ -10,14 +11,14 @@ import org.jspecify.annotations.NullMarked;
 import java.util.Objects;
 
 /**
- * A helper class for validating Javalin requests.
+ * A utility class for validating Javalin requests.
  */
 @NullMarked
 public final class ServerUtil {
   private ServerUtil() {}
 
   /**
-   * Parses the {@code Server-Version} header from the provided Javalin {@link Context} and checks it against
+   * Parses the {@code Server-Version} header from the provided Javalin {@link Context} and compares it with
    * {@link ServerConfig#getVersion()}.
    * <p>
    * Compatibility:
@@ -51,13 +52,13 @@ public final class ServerUtil {
 
     if (expectedVersion.getMinor() < actualVersion.getMinor()) {
       throw new IncompatibleVersionException(
-        "Expected minor version must be greater than or equal to the actualVersion minor version.",
+        "Expected minor version must be greater than or equal to the actual minor version.",
         actualVersion.toString());
     }
   }
 
   /**
-   * Parses the {@code Authorization} header from the provided Javalin {@link Context} and checks it against
+   * Parses the {@code Authorization} header from the provided Javalin {@link Context} and compares it with
    * {@link ServerConfig#getApiKey()}.
    *
    * @param ctx
@@ -67,13 +68,14 @@ public final class ServerUtil {
    *   if the specified key in the {@code Authorization} header does not match {@link ServerConfig#getApiKey()}.
    */
   public static void validateApiKey(Context ctx) {
-    String authorization = ctx.header("Authorization");
+    String authHeader = ctx.header("Authorization");
+    String authType = "Bearer ";
 
-    if (authorization == null || !authorization.startsWith("Bearer ")) {
+    if (Check.isBlank(authHeader) || !authHeader.startsWith(authType)) {
       throw new UnauthorizedException();
     }
 
-    String key = authorization.substring(7);
+    String key = authHeader.substring(authType.length());
 
     if (!Objects.equals(key, ServerConfig.getApiKey())) {
       throw new UnauthorizedException();

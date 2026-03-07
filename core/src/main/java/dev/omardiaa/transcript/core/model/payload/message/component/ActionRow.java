@@ -26,7 +26,7 @@ public class ActionRow implements ContainerChildComponent {
     }
 
     this.type = type;
-    this.components = Check.minSize(components, "components", 1);
+    this.components = Check.sizeMin(components, "components", 1);
   }
 
   @Override

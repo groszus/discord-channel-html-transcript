@@ -1,5 +1,6 @@
 package dev.omardiaa.transcript.server.model;
 
+import dev.omardiaa.transcript.core.util.Check;
 import dev.omardiaa.transcript.server.exception.IncompatibleVersionException;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -8,6 +9,9 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A class representing a <a href="https://semver.org/">Semantic Version</a>.
+ */
 @NullMarked
 public final class SemVer {
   private static final Pattern SEMVER = Pattern.compile(
@@ -32,7 +36,7 @@ public final class SemVer {
    *   </ul>
    */
   public SemVer(@Nullable String version) {
-    if (version == null || version.isBlank()) {
+    if (Check.isBlank(version)) {
       throw new IncompatibleVersionException("Version can not be null.");
     }
 
@@ -68,7 +72,7 @@ public final class SemVer {
    * @return {@code true} if a pre-release qualifier is present, otherwise {@code false}.
    */
   public boolean isPreRelease() {
-    return qualifier != null && !qualifier.isBlank();
+    return !Check.isBlank(qualifier);
   }
 
   @Override

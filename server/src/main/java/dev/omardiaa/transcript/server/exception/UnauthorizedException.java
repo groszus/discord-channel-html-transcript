@@ -1,10 +1,10 @@
 package dev.omardiaa.transcript.server.exception;
 
 /**
- * Indicates that the client does not have authorization to connect to the server.
+ * Indicates that the client's request lacks valid credentials.
  */
 public class UnauthorizedException extends RuntimeException {
   public UnauthorizedException() {
-    super("An unauthorized client attempted to connect to the server.");
+    super("Failed to authroize client, invalid or missing 'Bearer' token.");
   }
 }

@@ -21,7 +21,7 @@ public class MediaGallery implements ContainerChildComponent {
     @JsonProperty(value = "type", required = true) int type,
     @JsonProperty(value = "items", required = true) List<Item> items) {
     this.type = type;
-    this.items = Check.lengthBetween(items, "items", 1, 10);
+    this.items = Check.sizeBetween(items, "items", 1, 10);
   }
 
   @Override

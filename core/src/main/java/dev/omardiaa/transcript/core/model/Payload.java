@@ -41,7 +41,7 @@ public class Payload {
     @JsonProperty("stylePath") @Nullable String stylePath) {
     this.guild = guild;
     this.channel = channel;
-    this.messages = Check.minSize(messages, "messages", 1);
+    this.messages = Check.sizeMin(messages, "messages", 1);
     this.stylePath = stylePath;
   }
 

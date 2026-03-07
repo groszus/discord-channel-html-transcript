@@ -158,7 +158,8 @@ public class Embed {
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-footer-structure">Embed Footer</a>.
+   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-footer-structure">Embed
+   * Footer</a>.
    */
   @NullMarked
   public static class Footer {
@@ -169,7 +170,7 @@ public class Embed {
     public Footer(
       @JsonProperty(value = "text", required = true) String text,
       @JsonProperty(value = "icon_url") @Nullable String iconUrl) {
-      this.text = Check.lengthMax(text, 2048, "text");
+      this.text = Check.lengthMax(text, "text", 2048);
       this.iconUrl = iconUrl;
     }
 
@@ -191,7 +192,8 @@ public class Embed {
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-image-structure">Embed Image</a>.
+   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-image-structure">Embed
+   * Image</a>.
    */
   @NullMarked
   public static class Image {
@@ -215,7 +217,9 @@ public class Embed {
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-thumbnail-structure">Embed Thumbnail</a>.
+   * Discord <a
+   * href="https://discord.com/developers/docs/resources/message#embed-object-embed-thumbnail-structure">Embed
+   * Thumbnail</a>.
    */
   @NullMarked
   public static class Thumbnail {
@@ -239,7 +243,8 @@ public class Embed {
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-video-structure">Embed Video</a>.
+   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-video-structure">Embed
+   * Video</a>.
    */
   @NullMarked
   public static class Video {
@@ -263,7 +268,8 @@ public class Embed {
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-author-structure">Embed Author</a>.
+   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-author-structure">Embed
+   * Author</a>.
    */
   @NullMarked
   public static class Author {
@@ -276,7 +282,7 @@ public class Embed {
       @JsonProperty(value = "name", required = true) String name,
       @JsonProperty(value = "url") @Nullable String url,
       @JsonProperty(value = "icon_url") @Nullable String iconUrl) {
-      this.name = Check.lengthMax(name, 256, "name");
+      this.name = Check.lengthMax(name, "name", 256);
       this.url = url;
       this.iconUrl = iconUrl;
     }
@@ -304,7 +310,8 @@ public class Embed {
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-field-structure">Embed Field</a>.
+   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-field-structure">Embed
+   * Field</a>.
    */
   @NullMarked
   public static class Field {
@@ -317,8 +324,8 @@ public class Embed {
       @JsonProperty(value = "name", required = true) String name,
       @JsonProperty(value = "value", required = true) String value,
       @JsonProperty(value = "inline") @Nullable Boolean inline) {
-      this.name = Check.lengthMax(name, 256, "name");
-      this.value = Check.lengthMax(value, 1024, "value");
+      this.name = Check.lengthMax(name, "name", 256);
+      this.value = Check.lengthMax(value, "value", 1024);
       this.inline = Objects.requireNonNullElse(inline, false);
     }
 
