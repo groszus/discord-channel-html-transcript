@@ -53,7 +53,7 @@
 
 ## Getting Started
 
-There are 3 ways to use this library:
+There are 3 ways you can use this library:
 
 1. [Library](#one-library-recommended): recommended for most users.
 2. [Installation](#two-installation): for Java developers.
@@ -61,40 +61,49 @@ There are 3 ways to use this library:
 
 ### :one: Library (Recommended)
 
-Refer to the Discord Wrapper of choice for your bot.\
 The following libraries retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
 with respect to your bot's instance to handle rate limits efficiently.
 
+Choose the library that corresponds with the Discord API you use.
+
+
 <table>
     <tr>
-        <th></th>
-        <th>Discord Wrapper</th>
+        <th>Discord API</th>
         <th>Library</th>
     </tr>
     <tr align="center">
-        <td><img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="64" /></td>
-        <td><strong>Java Discord API</strong></td>
+        <td>
+            <img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="64" />
+            <p>Java Discord API</p>
+        </td>
         <td><a href="https://github.com/omardiaadev/discord-html-transcript-jda">discord-html-transcript-jda</a></td>
     </tr>
     <tr align="center">
-        <td><img alt="discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="64" /></td>
-        <td><strong>discord.js</strong></td>
+        <td>
+            <img alt="discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="64" />
+            <p>discord.js</p>
+        </td>
         <td><code>WIP</code></td>
     </tr>
     <tr align="center">
-        <td><img alt="discord.py" src="https://discordpy.readthedocs.io/en/latest/_static/discord_py_logo.ico" height="64" /></td>
-        <td><strong>discord.py</strong></td>
+        <td>
+            <img alt="discord.py" src="https://discordpy.readthedocs.io/en/latest/_static/discord_py_logo.ico" height="64" />
+            <p>discord.py</p>
+        </td>
         <td><code>WIP</code></td>
     </tr>
 </table>
 
 ### :two: Installation
 
-You can install the Maven dependency to implement the Transcriber within your bot:
+You can install the core implementation as a Maven dependency:
 
-##### Prerequisites
+#### Prerequisites
 
-- **Java 17+**
+- Java 17+
+
+<a href="#two-installation"><img alt="Maven" src="https://img.shields.io/badge/Maven-C71A36?logo=apachemaven"></a>
 
 ```xml
 
@@ -104,6 +113,8 @@ You can install the Maven dependency to implement the Transcriber within your bo
   <version>0.1.0-beta.2</version>
 </dependency>
 ```
+
+<a href="#two-installation"><img alt="Gradle" src="https://img.shields.io/badge/Gradle-02303A?logo=gradle"></a>
 
 ```kts
 
