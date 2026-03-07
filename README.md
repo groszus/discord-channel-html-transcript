@@ -1,8 +1,6 @@
 <h1 align="center">discord-html-transcript</h1>
 
-<p align="center">
-    <strong>Generate natively styled logs for your Discord chats</strong>
-</p>
+<p align="center"><strong>Generate natively styled logs for your Discord chats</strong></p>
 
 <p align="center">
     <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?label=Maven&color=0055D2"></a>
@@ -18,12 +16,13 @@
         <li>
             <a href="#getting-started">Getting Started</a>
             <ul>
-                <li><a href="#one-library-recommended">1️⃣ Library (Recommended)</a></li>
-                <li><a href="#two-installation">2️⃣ Installation</a></li>
-                <li><a href="#three-standalone-api">3️⃣ Standalone API</a></li>
+                <li><a href="#1-library-recommended">1. Library (Recommended)</a></li>
+                <li><a href="#2-installation">2. Installation</a></li>
+                <li><a href="#3-standalone-api">3. Standalone API</a></li>
             </ul>
         </li>
         <li><a href="#development">Development</a></li>
+        <li><a href="#-support">Support</a></li>
     </ul>
 </details>
 
@@ -46,10 +45,9 @@
 
 ##### To-Do
 
-- [ ] Refine Markdown
-- [ ] Refactor CSS
+- [ ] Refactor CSS and Markdown.
 
-> [!NOTE]
+> [!IMPORTANT]
 > This project is not affiliated with Discord Inc.
 
 ## Preview
@@ -62,11 +60,11 @@
 
 There are 3 ways to use this library:
 
-1. [Library](#one-library-recommended): recommended for most users.
-2. [Installation](#two-installation): for custom Java implementations.
-3. [Standalone API](#three-standalone-api): for non-Java developers.
+1. [**Library**](#1-library-recommended): recommended for most users.
+2. [**Installation**](#2-installation): for custom Java implementations.
+3. [**Standalone API**](#3-standalone-api): for non-Java developers.
 
-### :one: Library (Recommended)
+### 1. Library (Recommended)
 
 The following libraries automatically retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
 while safely handling Discord's rate limits.
@@ -101,7 +99,7 @@ Choose the library that corresponds with the Discord API you use:
     </tr>
 </table>
 
-### :two: Installation
+### 2. Installation
 
 You can install the core implementation as a Maven dependency:
 
@@ -109,7 +107,7 @@ You can install the core implementation as a Maven dependency:
 
 - Java 17+
 
-<a href="#two-installation"><img alt="Maven" src="https://img.shields.io/badge/Maven-C71A36?logo=apachemaven"></a>
+[![Maven](https://img.shields.io/badge/Maven-C71A36?logo=apachemaven)](#2-installation)
 
 ```xml
 
@@ -120,20 +118,20 @@ You can install the core implementation as a Maven dependency:
 </dependency>
 ```
 
-<a href="#two-installation"><img alt="Gradle" src="https://img.shields.io/badge/Gradle-02303A?logo=gradle"></a>
+[![Gradle](https://img.shields.io/badge/Gradle-02303A?logo=gradle)](#2-installation)
 
 ```kts
 
 implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.2")
 ```
 
-### :three: Standalone API
+### 3. Standalone API
 
 > [!NOTE]
 > This section of the documentation is incomplete.
 
-You can [download the latest release](https://github.com/omardiaadev/discord-html-transcript/releases) and run the
-executable as a standalone web server.
+You can [download](https://github.com/omardiaadev/discord-html-transcript/releases) and run the executable as a
+standalone web server.
 
 #### Configuration
 
@@ -163,7 +161,6 @@ executable as a standalone web server.
             <code>TRANSCRIPT_SERVER_API_KEY</code>
             <p>The secret key required to authenticate client requests.</p>
         </td>
-        <td><code>-</code></td>
     </tr>
 </table>
 
@@ -176,13 +173,15 @@ executable as a standalone web server.
     - **Required:** Yes.
     - **Example:** `0.1.0-beta.2`
 
-- **`Authorization`**: Authenticates the request using the server's API key.
+- **`Authorization`**:
+  Authenticates the client's request using the server's API key.
     - **Required:** Yes, if [`TRANSCRIPT_SERVER_API_KEY`](#environment-variables) is set.
     - **Example:** `Bearer <key>`
 
 ##### Endpoints
 
-- **`GET /health`**: Retrieves basic server information.
+- **`GET /health`**:
+  Retrieves basic server information.
     - **Returns:** JSON object containing the server version.
 - **`POST /transcript`**:
   Accepts a transcript [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java) and asynchronously
@@ -225,7 +224,7 @@ In addition to the previous [variables](#environment-variables), you can specify
     </tr>
 </table>
 
-## 🌟 Support The Project
+## 🌟 Support
 
 If you found this useful, please consider starring the repository 🌟!
 
