@@ -1,82 +1,54 @@
 # Changelog
 
+## [0.1.0-beta.3]
+
+### discord-html-transcript-core
+
+#### Changed
+
+- Update runtime data validation.
+
+### discord-html-transcript-server
+
+#### Added
+
+- Add `TRANSCRIPT_SERVER_API_KEY` environment variable for authentication.
+
+#### Changed
+
+- Bump Javalin to `7.0.1`.
+
 ## [0.1.0-beta.2]
 
-### Fixed
+### discord-html-transcript-server
+
+#### Fixed
 
 - Fix native image missing reachability metadata.
 
-### Changed
+#### Changed
 
 - Compute asynchronous operations on their own dedicated thread pool instead of common thread pool.
-- Move Javalin server logic to its own class.
+- Update Javalin server logic to its own singleton class.
 - Update environment variable names to avoid clashing with other variables.
 
 ## [0.1.0-beta.1]
 
-### Added
+### discord-html-transcript-core
 
-- Add `@everyone` and `@here` markdown parsing.
-- Add `File` component.
-- Add support for "Custom Emoji" markdown.
-- Add support for Embed "GIFV" type.
-- Add support for Channel "Topic".
+#### Added
 
-### Changed
+- Support for `@everyone` and `@here` markdown parsing.
+- Support for `File` component.
+- Support for "Custom Emoji" markdown.
+- Support for Embed "GIFV" type.
+- Support for Channel "Topic".
+
+#### Changed
 
 - **Relocate maven ArtifactID from `discord-channel-html-transcript` to `discord-html-transcript`.**
-- Change to Apache License to increase adoption.
 - Base64 encode font instead of loading it with jsdelivr.
 
-### Fixed
+#### Fixed
 
 - Fix Header and Subtext markdown parsing.
-
-## [4.0.0]
-
-### Changed
-
-- **Migrate maven GroupID from `dev.skywolfxp` to `dev.omardiaa`.**
-- Add Discord Components V2.
-- Add message formatting inside embeds.
-- Add `style.css` to test resources for modification during testing.
-- Update the Trancript to be returned in a CompletableFuture.
-
-### Fixed
-
-- Fix handling of the generated tanscript output.
-
-## [3.0.0]
-
-### Changed
-
-- Remove the ability to construct Transcript with a custom TemplateEngine.
-
-### Fixed
-
-- Fix NPE when loading JTE precompiled classes ([#1](https://github.com/omardiaadev/discord-channel-html-transcript/issues/1))
-
-## [2.0.0]
-
-### Changed
-
-- **Migrate the maven GroupID from `io.github.skywolfxp` to `dev.skywolfxp`.**
-- Update footer styling.
-
-## [1.1.1]
-
-### Changed
-
-- Replace Google's "DM sans" font with Discord's "gg sans" font.
-- Update footer styling.
-
-## [1.1.0]
-
-### Changed
-
-- Update HTML and CSS to match Discord's new 2025 interface.
-
-### Fixed
-
-- Fix Discord markdown parsing only the first matched mention.
-- Fix role mention background and foreground colors.

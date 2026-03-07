@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import dev.omardiaa.transcript.server.config.ServerConfig;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import io.javalin.http.UnauthorizedResponse;
 import org.jspecify.annotations.NullMarked;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,7 @@ public final class GlobalExceptionHandler {
           e.getVersion() == null ? "null" : e.getVersion())));
   }
 
-  public static void handleUnauthorized(UnauthorizedException e, Context ctx) {
+  public static void handleUnauthorized(UnauthorizedResponse e, Context ctx) {
     ctx.status(HttpStatus.UNAUTHORIZED).json(
       new ErrorResponse(
         HttpStatus.UNAUTHORIZED,

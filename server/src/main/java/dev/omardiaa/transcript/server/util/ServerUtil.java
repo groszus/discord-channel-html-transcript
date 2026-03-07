@@ -3,9 +3,9 @@ package dev.omardiaa.transcript.server.util;
 import dev.omardiaa.transcript.core.util.Check;
 import dev.omardiaa.transcript.server.config.ServerConfig;
 import dev.omardiaa.transcript.server.exception.IncompatibleVersionException;
-import dev.omardiaa.transcript.server.exception.UnauthorizedException;
 import dev.omardiaa.transcript.server.model.SemVer;
 import io.javalin.http.Context;
+import io.javalin.http.UnauthorizedResponse;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.Objects;
@@ -64,21 +64,25 @@ public final class ServerUtil {
    * @param ctx
    *   the Javalin {@link Context}.
    *
-   * @throws UnauthorizedException
-   *   if the specified key in the {@code Authorization} header does not match {@link ServerConfig#getApiKey()}.
+   * @throws UnauthorizedResponse
+   *   if the provided key in the {@code Authorization} header does not match {@link ServerConfig#getApiKey()}.
    */
   public static void validateApiKey(Context ctx) {
     String authHeader = ctx.header("Authorization");
     String authType = "Bearer ";
 
-    if (Check.isBlank(authHeader) || !authHeader.startsWith(authType)) {
-      throw new UnauthorizedException();
+    if (Check.isBlank(authHeader)) {
+      throw new UnauthorizedResponse("Authorization header is missing.");
+    }
+
+    if (!authHeader.startsWith(authType)) {
+      throw new UnauthorizedResponse("Authorization header must start with \"Bearer \".");
     }
 
     String key = authHeader.substring(authType.length());
 
     if (!Objects.equals(key, ServerConfig.getApiKey())) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedResponse("API Key is invalid.");
     }
   }
 }

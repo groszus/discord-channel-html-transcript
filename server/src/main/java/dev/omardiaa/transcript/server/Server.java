@@ -7,12 +7,12 @@ import dev.omardiaa.transcript.core.service.Transcriber;
 import dev.omardiaa.transcript.server.config.ServerConfig;
 import dev.omardiaa.transcript.server.exception.GlobalExceptionHandler;
 import dev.omardiaa.transcript.server.exception.IncompatibleVersionException;
-import dev.omardiaa.transcript.server.exception.UnauthorizedException;
 import dev.omardiaa.transcript.server.util.ServerUtil;
 import io.javalin.Javalin;
 import io.javalin.http.ContentType;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import io.javalin.http.UnauthorizedResponse;
 import io.javalin.json.JavalinJackson;
 import org.jspecify.annotations.NullMarked;
 
@@ -45,7 +45,7 @@ public final class Server {
           .post("/transcript", this::transcriptHandler)
           .beforeMatched(ServerUtil::validateVersion)
           .exception(IncompatibleVersionException.class, GlobalExceptionHandler::handleIncompatibleVersion)
-          .exception(UnauthorizedException.class, GlobalExceptionHandler::handleUnauthorized)
+          .exception(UnauthorizedResponse.class, GlobalExceptionHandler::handleUnauthorized)
           .exception(MismatchedInputException.class, GlobalExceptionHandler::handleMismatchedInput)
           .exception(Exception.class, GlobalExceptionHandler::handleException);
 
