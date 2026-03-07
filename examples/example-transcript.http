@@ -11,6 +11,6 @@ Authorization: Bearer <TRANSCRIPT_SERVER_API_KEY>
 ###
 
 # @no-log
-GET http://<TRANSCRIPT_SERVER_HOST>:<TRANSCRIPT_SERVER_PORT>/health
+GET https://<TRANSCRIPT_SERVER_HOST>:<TRANSCRIPT_SERVER_PORT>/health
 Server-Version: 0.1.0-beta.2
 Authorization: Bearer <TRANSCRIPT_SERVER_API_KEY>

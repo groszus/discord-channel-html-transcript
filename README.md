@@ -5,9 +5,9 @@
 </p>
 
 <p align="center">
-    <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?label=Maven&color=0055D2"/></a>
-    <a href="https://github.com/omardiaadev/discord-html-transcript/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript?label=License&color=0055D2"/></a>
-    <a href="https://discord.gg/fWtQjEJgWX"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=FFF&color=5865F2"/></a>
+    <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?label=Maven&color=0055D2"></a>
+    <a href="https://github.com/omardiaadev/discord-html-transcript/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript?label=License&color=0055D2"></a>
+    <a href="https://discord.gg/fWtQjEJgWX"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=FFF&color=5865F2"></a>
 </p>
 
 <details>
@@ -15,7 +15,14 @@
     <ul>
         <li><a href="#features">Features</a></li>
         <li><a href="#preview">Preview</a></li>
-        <li><a href="#getting-started">Getting Started</a></li>
+        <li>
+            <a href="#getting-started">Getting Started</a>
+            <ul>
+                <li><a href="#one-library-recommended">1️⃣ Library (Recommended)</a></li>
+                <li><a href="#two-installation">2️⃣ Installation</a></li>
+                <li><a href="#three-standalone-api">3️⃣ Standalone API</a></li>
+            </ul>
+        </li>
         <li><a href="#development">Development</a></li>
     </ul>
 </details>
@@ -31,7 +38,7 @@
 <ul>
     <li>
         <strong>ComponentsV2</strong>
-        <img alt="NEW" src="https://img.shields.io/badge/NEW-FF2E2E" height="12"/>
+        <img alt="NEW" src="https://img.shields.io/badge/NEW-FF2E2E" height="12">
     </li>
     <li><strong>Markdown:</strong> Standard Markup, Mentions, Custom Emojis, and more...</li>
     <li><strong>Message Accessories:</strong> Attachments, Embeds, Reactions, References, and more...</li>
@@ -48,24 +55,23 @@
 ## Preview
 
 <a href="https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/example-transcript.html">
-    <img alt="discord-html-transcript" src="https://res.cloudinary.com/omardiaadev/image/upload/v1771423142/discord-html-transcript_ocjq03.png"/>
+    <img alt="discord-html-transcript" src="https://res.cloudinary.com/omardiaadev/image/upload/v1771423142/discord-html-transcript_ocjq03.png">
 </a>
 
 ## Getting Started
 
-There are 3 ways you can use this library:
+There are 3 ways to use this library:
 
 1. [Library](#one-library-recommended): recommended for most users.
-2. [Installation](#two-installation): for Java developers.
+2. [Installation](#two-installation): for custom Java implementations.
 3. [Standalone API](#three-standalone-api): for non-Java developers.
 
 ### :one: Library (Recommended)
 
-The following libraries retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
-with respect to your bot's instance to handle rate limits efficiently.
+The following libraries automatically retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
+while safely handling Discord's rate limits.
 
-Choose the library that corresponds with the Discord API you use.
-
+Choose the library that corresponds with the Discord API you use:
 
 <table>
     <tr>
@@ -74,21 +80,21 @@ Choose the library that corresponds with the Discord API you use.
     </tr>
     <tr align="center">
         <td>
-            <img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="64" />
+            <img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="96" />
             <p>Java Discord API</p>
         </td>
         <td><a href="https://github.com/omardiaadev/discord-html-transcript-jda">discord-html-transcript-jda</a></td>
     </tr>
     <tr align="center">
         <td>
-            <img alt="discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="64" />
+            <img alt="discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="96" />
             <p>discord.js</p>
         </td>
         <td><code>WIP</code></td>
     </tr>
     <tr align="center">
         <td>
-            <img alt="discord.py" src="https://discordpy.readthedocs.io/en/latest/_static/discord_py_logo.ico" height="64" />
+            <img alt="discord.py" src="https://discordpy.readthedocs.io/en/latest/_static/discord_py_logo.ico" height="96" />
             <p>discord.py</p>
         </td>
         <td><code>WIP</code></td>
@@ -126,7 +132,8 @@ implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.2")
 > [!NOTE]
 > This section of the documentation is incomplete.
 
-You can [download the latest release](https://github.com/omardiaadev/discord-html-transcript/releases) and self-host the executable as a standalone service.
+You can [download the latest release](https://github.com/omardiaadev/discord-html-transcript/releases) and run the
+executable as a standalone web server.
 
 #### Configuration
 
@@ -140,25 +147,39 @@ You can [download the latest release](https://github.com/omardiaadev/discord-htm
     <tr align="center">
         <td>
             <code>TRANSCRIPT_SERVER_HOST</code>
-            <p>Specifies a custom host for the Javalin web server.</p>
+            <p>The host for the Javalin web server.</p>
         </td>
         <td><code>127.0.0.1</code></td>
     </tr>
     <tr align="center">
         <td>
             <code>TRANSCRIPT_SERVER_PORT</code>
-            <p>Specifies a custom port for the Javalin web server.</p>
+            <p>The port for the Javalin web server.</p>
         </td>
         <td><code>7000</code></td>
     </tr>
     <tr align="center">
         <td>
             <code>TRANSCRIPT_SERVER_API_KEY</code>
-            <p>Specifies an API key to validate on client requests.</p>
+            <p>The secret key required to authenticate client requests.</p>
         </td>
         <td><code>-</code></td>
     </tr>
 </table>
+
+#### Usage
+
+The standalone server requires
+a [`Server-Version`](server/src/main/java/dev/omardiaa/transcript/server/util/ServerUtil.java)
+header in all HTTP requests to ensure compatibility between your server and client.
+
+- Pre-release versions must match exactly.
+- Major versions must match exactly.
+- Actual server minor version must be greater than or equal to the `Server-Version` minor version.
+
+> [!NOTE]
+> If `TRANSCRIPT_SERVER_API_KEY` was set, the server will require an `Authorization` Bearer token to authenticate the
+> HTTP requests.
 
 ## Development
 
@@ -187,7 +208,7 @@ In addition to the previous [variables](#environment-variables), you can specify
 
 ## 🌟 Support The Project
 
-If you found this useful, please consider giving it a 🌟!
+If you found this useful, please consider starring the repository 🌟!
 
 <a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"/></a>
 <a href="https://ko-fi.com/omardiaadev"><img alt="Ko-fi" src="https://img.shields.io/badge/ko--fi-FF6433?style=for-the-badge&logo=kofi&logoColor=FFF"/></a>
