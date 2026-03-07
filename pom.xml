@@ -52,10 +52,7 @@
     <!--Versions -->
     <jte.version>3.2.3</jte.version>
     <jackson.version>2.21.1</jackson.version>
-    <javalin.version>7.0.1</javalin.version>
     <slf4j.version>2.0.17</slf4j.version>
-    <junit.version>6.0.2</junit.version>
-    <graalvm.buildtools.version>0.11.4</graalvm.buildtools.version>
   </properties>
 
   <dependencyManagement>
@@ -87,7 +84,7 @@
       <dependency>
         <groupId>io.javalin</groupId>
         <artifactId>javalin</artifactId>
-        <version>${javalin.version}</version>
+        <version>7.0.1</version>
       </dependency>
 
       <dependency>
@@ -105,7 +102,7 @@
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter</artifactId>
-        <version>${junit.version}</version>
+        <version>6.0.3</version>
         <scope>test</scope>
       </dependency>
     </dependencies>
@@ -137,7 +134,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>3.4.0</version>
+          <version>3.5.0</version>
         </plugin>
 
         <plugin>
@@ -155,13 +152,13 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
-          <version>3.6.1</version>
+          <version>3.6.2</version>
         </plugin>
 
         <plugin>
           <groupId>org.graalvm.buildtools</groupId>
           <artifactId>native-maven-plugin</artifactId>
-          <version>${graalvm.buildtools.version}</version>
+          <version>0.11.4</version>
         </plugin>
 
         <plugin>
