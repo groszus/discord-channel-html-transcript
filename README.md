@@ -80,21 +80,21 @@ Choose the library that corresponds with the Discord API you use:
     </tr>
     <tr align="center">
         <td>
-            <img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="96" />
+            <img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="64">
             <p>Java Discord API</p>
         </td>
         <td><a href="https://github.com/omardiaadev/discord-html-transcript-jda">discord-html-transcript-jda</a></td>
     </tr>
     <tr align="center">
         <td>
-            <img alt="discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="96" />
+            <img alt="discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="64">
             <p>discord.js</p>
         </td>
         <td><code>WIP</code></td>
     </tr>
     <tr align="center">
         <td>
-            <img alt="discord.py" src="https://discordpy.readthedocs.io/en/latest/_static/discord_py_logo.ico" height="96" />
+            <img alt="discord.py" src="https://discordpy.readthedocs.io/en/latest/_static/discord_py_logo.ico" height="64">
             <p>discord.py</p>
         </td>
         <td><code>WIP</code></td>
@@ -169,17 +169,36 @@ executable as a standalone web server.
 
 #### Usage
 
-The standalone server requires
-a [`Server-Version`](server/src/main/java/dev/omardiaa/transcript/server/util/ServerUtil.java)
-header in all HTTP requests to ensure compatibility between your server and client.
+##### Headers
+
+- [**`Server-Version`**](server/src/main/java/dev/omardiaa/transcript/server/util/ServerUtil.java):
+  Specifies the server version required by the client to ensure compatibility.
+    - **Required:** Yes.
+    - **Example:** `0.1.0-beta.2`
+
+- **`Authorization`**: Authenticates the request using the server's API key.
+    - **Required:** Yes, if [`TRANSCRIPT_SERVER_API_KEY`](#environment-variables) is set.
+    - **Example:** `Bearer <key>`
+
+##### Endpoints
+
+- **`GET /health`**: Retrieves basic server information.
+    - **Returns:** JSON object containing the server version.
+- **`POST /transcript`**:
+  Accepts a transcript [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java) and asynchronously
+  generates an HTML byte stream.
+    - **Returns:** HTML byte stream.
+
+##### Versioning
+
+The server validates the `Server-Version` header on every request using the following rules:
 
 - Pre-release versions must match exactly.
 - Major versions must match exactly.
-- Actual server minor version must be greater than or equal to the `Server-Version` minor version.
+- Server minor version must be greater than or equal to the `Server-Version` minor version.
 
-> [!NOTE]
-> If `TRANSCRIPT_SERVER_API_KEY` was set, the server will require an `Authorization` Bearer token to authenticate the
-> HTTP requests.
+> [!TIP]
+> Refer to [transcript.http](examples/transcript.http) to see an example of the HTTP requests.
 
 ## Development
 

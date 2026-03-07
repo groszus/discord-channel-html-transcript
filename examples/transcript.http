@@ -3,10 +3,10 @@ Server-Version: 0.1.0-beta.2
 Authorization: Bearer <TRANSCRIPT_SERVER_API_KEY>
 
 # input body
-< example-payload.json
+< payload.json
 
 # output and override html file
->>! example-transcript.html
+>>! transcript.html
 
 ###
 

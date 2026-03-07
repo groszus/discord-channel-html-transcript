@@ -1,8 +1,8 @@
 ### Development ###
 .tool-versions
-examples/test*
 target/
 jte-classes
+http
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
