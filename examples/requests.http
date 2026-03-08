@@ -1,5 +1,5 @@
 POST https://<TRANSCRIPT_SERVER_HOST>:<TRANSCRIPT_SERVER_PORT>/transcript
-Server-Version: 0.1.0-beta.2
+Server-Version: 0.1.0-beta.3
 Authorization: Bearer <TRANSCRIPT_SERVER_API_KEY>
 
 # input body
@@ -12,5 +12,5 @@ Authorization: Bearer <TRANSCRIPT_SERVER_API_KEY>
 
 # @no-log
 GET https://<TRANSCRIPT_SERVER_HOST>:<TRANSCRIPT_SERVER_PORT>/health
-Server-Version: 0.1.0-beta.2
+Server-Version: 0.1.0-beta.3
 Authorization: Bearer <TRANSCRIPT_SERVER_API_KEY>

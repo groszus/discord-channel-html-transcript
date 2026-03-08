@@ -114,7 +114,7 @@ You can install the core implementation as a Maven dependency:
 <dependency>
   <groupId>dev.omardiaa</groupId>
   <artifactId>discord-html-transcript-core</artifactId>
-  <version>0.1.0-beta.2</version>
+  <version>0.1.0-beta.3</version>
 </dependency>
 ```
 
@@ -122,7 +122,7 @@ You can install the core implementation as a Maven dependency:
 
 ```kts
 
-implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.2")
+implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.3")
 ```
 
 ### 3. Standalone API
@@ -212,7 +212,7 @@ The server validates the `Server-Version` header on every request using the foll
 - Server minor version must be greater than or equal to the `Server-Version` minor version.
 
 > [!TIP]
-> Refer to [transcript.http](examples/transcript.http) to see an example of the HTTP requests.
+> Refer to [requests.http](examples/requests.http) to see an example of the HTTP requests.
 
 ## Development
 
