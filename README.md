@@ -22,7 +22,7 @@
             </ul>
         </li>
         <li><a href="#development">Development</a></li>
-        <li><a href="#-support">Support</a></li>
+        <li><a href="#support">Support</a></li>
     </ul>
 </details>
 
@@ -140,27 +140,19 @@ standalone web server.
 <table>
     <tr>
         <th>Variable</th>
-        <th>Default</th>
+        <th>Description</th>
     </tr>
-    <tr align="center">
-        <td>
-            <code>TRANSCRIPT_SERVER_HOST</code>
-            <p>The host for the Javalin web server.</p>
-        </td>
-        <td><code>127.0.0.1</code></td>
+    <tr>
+        <td><code>TRANSCRIPT_SERVER_HOST</code></td>
+        <td>Specifies custom host for the Javalin web server.<br>(default: <code>127.0.0.1</code>)</td>
     </tr>
-    <tr align="center">
-        <td>
-            <code>TRANSCRIPT_SERVER_PORT</code>
-            <p>The port for the Javalin web server.</p>
-        </td>
-        <td><code>7000</code></td>
+    <tr>
+        <td><code>TRANSCRIPT_SERVER_PORT</code></td>
+        <td>Specifies custom port for the Javalin web server.<br>(default: <code>7000</code>)</td>
     </tr>
-    <tr align="center">
-        <td>
-            <code>TRANSCRIPT_SERVER_API_KEY</code>
-            <p>The secret key required to authenticate client requests.</p>
-        </td>
+    <tr>
+        <td><code>TRANSCRIPT_SERVER_API_KEY</code></td>
+        <td>Specifies secret key for authenticating client requests.</td>
     </tr>
 </table>
 
@@ -168,25 +160,48 @@ standalone web server.
 
 ##### Headers
 
-- [**`Server-Version`**](server/src/main/java/dev/omardiaa/transcript/server/util/ServerUtil.java):
-  Specifies the server version required by the client to ensure compatibility.
-    - **Required:** Yes.
-    - **Example:** `0.1.0-beta.2`
-
-- **`Authorization`**:
-  Authenticates the client's request using the server's API key.
-    - **Required:** Yes, if [`TRANSCRIPT_SERVER_API_KEY`](#environment-variables) is set.
-    - **Example:** `Bearer <key>`
+<table>
+    <tr>
+        <th>Header</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><code>Server-Version</code></td>
+        <td>
+            Validates the server version required by the client to ensure compatibility.
+            <br>
+            Required.
+        </td>
+    </tr>
+    <tr>
+        <td><code>Authorization</code></td>
+        <td>
+            Authenticates the client's request using the server's API key.
+            <br>
+            Required, if <code>TRANSCRIPT_SERVER_API_KEY</code> is set.
+        </td>
+    </tr>
+</table>
 
 ##### Endpoints
 
-- **`GET /health`**:
-  Retrieves basic server information.
-    - **Returns:** JSON object containing the server version.
-- **`POST /transcript`**:
-  Accepts a transcript [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java) and asynchronously
-  generates an HTML byte stream.
-    - **Returns:** HTML byte stream.
+<table>
+    <tr>
+        <th>Endpoint</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><code>GET /health</code></td>
+        <td>Retrieves basic server information.</td>
+    </tr>
+    <tr>
+        <td><code>POST /transcript</code></td>
+        <td>
+            Accepts a transcript <a href="core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java">Payload</a>
+            and asynchronously generates an HTML byte stream.
+        </td>
+    </tr>
+</table>
 
 ##### Versioning
 
@@ -213,20 +228,17 @@ In addition to the previous [variables](#environment-variables), you can specify
 <table>
     <tr>
         <th>Variable</th>
-        <th>Default</th>
+        <th>Description</th>
     </tr>
-    <tr align="center">
-        <td>
-            <code>JTE_DEV</code>
-            <p>Allows you to compile templates to Java classes on demand.</p>
-        </td>
-        <td><code>false</code></td>
+    <tr>
+        <td><code>JTE_DEV</code></td>
+        <td>Allows you to compile templates to Java classes on demand.</td>
     </tr>
 </table>
 
-## 🌟 Support
+## Support
 
-If you found this useful, please consider starring the repository 🌟!
+If you found this useful, please consider giving it a 🌟!
 
 <a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"/></a>
 <a href="https://ko-fi.com/omardiaadev"><img alt="Ko-fi" src="https://img.shields.io/badge/ko--fi-FF6433?style=for-the-badge&logo=kofi&logoColor=FFF"/></a>
