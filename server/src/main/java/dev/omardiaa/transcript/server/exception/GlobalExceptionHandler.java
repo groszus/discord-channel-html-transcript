@@ -17,15 +17,15 @@ public final class GlobalExceptionHandler {
 
   private GlobalExceptionHandler() {}
 
-  public static void handleIncompatibleVersion(IncompatibleVersionException e, Context ctx) {
+  public static void handleMismatchedVersion(MismatchedVersionException e, Context ctx) {
     ctx.status(HttpStatus.CONFLICT).json(
       new ErrorResponse(
         HttpStatus.CONFLICT,
         e.getMessage(),
         Map.of(
-          "expected",
+          "server",
           ServerConfig.getVersion().toString(),
-          "actual",
+          "client",
           e.getVersion() == null ? "null" : e.getVersion())));
   }
 

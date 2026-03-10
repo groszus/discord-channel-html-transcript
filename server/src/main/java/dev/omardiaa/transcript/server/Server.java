@@ -6,7 +6,7 @@ import dev.omardiaa.transcript.core.model.Payload;
 import dev.omardiaa.transcript.core.service.Transcriber;
 import dev.omardiaa.transcript.server.config.ServerConfig;
 import dev.omardiaa.transcript.server.exception.GlobalExceptionHandler;
-import dev.omardiaa.transcript.server.exception.IncompatibleVersionException;
+import dev.omardiaa.transcript.server.exception.MismatchedVersionException;
 import dev.omardiaa.transcript.server.util.ServerUtil;
 import io.javalin.Javalin;
 import io.javalin.http.ContentType;
@@ -44,7 +44,7 @@ public final class Server {
           .get("/health", this::healthHandler)
           .post("/transcript", this::transcriptHandler)
           .beforeMatched(ServerUtil::validateVersion)
-          .exception(IncompatibleVersionException.class, GlobalExceptionHandler::handleIncompatibleVersion)
+          .exception(MismatchedVersionException.class, GlobalExceptionHandler::handleMismatchedVersion)
           .exception(UnauthorizedResponse.class, GlobalExceptionHandler::handleUnauthorized)
           .exception(MismatchedInputException.class, GlobalExceptionHandler::handleMismatchedInput)
           .exception(Exception.class, GlobalExceptionHandler::handleException);

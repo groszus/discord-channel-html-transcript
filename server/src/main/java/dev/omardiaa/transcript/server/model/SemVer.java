@@ -1,7 +1,7 @@
 package dev.omardiaa.transcript.server.model;
 
 import dev.omardiaa.transcript.core.util.Check;
-import dev.omardiaa.transcript.server.exception.IncompatibleVersionException;
+import dev.omardiaa.transcript.server.exception.MismatchedVersionException;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -28,7 +28,7 @@ public final class SemVer {
    * @param version
    *   the version to parse.
    *
-   * @throws IncompatibleVersionException
+   * @throws MismatchedVersionException
    *   if any of the following are true:
    *   <ul>
    *   <li>The specified {@code version} returns {@code null}.</li>
@@ -37,13 +37,13 @@ public final class SemVer {
    */
   public SemVer(@Nullable String version) {
     if (Check.isBlank(version)) {
-      throw new IncompatibleVersionException("Version can not be null.");
+      throw new MismatchedVersionException("Version can not be null.");
     }
 
     Matcher matcher = SEMVER.matcher(version);
 
     if (!matcher.matches()) {
-      throw new IncompatibleVersionException(
+      throw new MismatchedVersionException(
         "Version format invalid, expected format: [v](major).(minor).(patch)[-(qualifier)].",
         version);
     }

@@ -2,7 +2,7 @@ package dev.omardiaa.transcript.server.util;
 
 import dev.omardiaa.transcript.core.util.Check;
 import dev.omardiaa.transcript.server.config.ServerConfig;
-import dev.omardiaa.transcript.server.exception.IncompatibleVersionException;
+import dev.omardiaa.transcript.server.exception.MismatchedVersionException;
 import dev.omardiaa.transcript.server.model.SemVer;
 import io.javalin.http.Context;
 import io.javalin.http.UnauthorizedResponse;
@@ -25,35 +25,35 @@ public final class ServerUtil {
    * <ul>
    * <li>Pre-release versions must match exactly.</li>
    * <li>Major versions must match exactly.</li>
-   * <li>{@code expected} minor version must be greater than or equal to the {@code actualVersion} minor version.</li>
+   * <li>Server minor version must be greater than or equal to the Client minor version.</li>
    * </ul>
    *
    * @param ctx
    *   the Javalin {@link Context}.
    *
-   * @throws IncompatibleVersionException
+   * @throws MismatchedVersionException
    *   if any of the compatibility rules are violated.
    */
   public static void validateVersion(Context ctx) {
-    SemVer actualVersion = new SemVer(ctx.header("Server-Version"));
-    SemVer expectedVersion = ServerConfig.getVersion();
+    SemVer clientVersion = new SemVer(ctx.header("Server-Version"));
+    SemVer serverVersion = ServerConfig.getVersion();
 
-    if (expectedVersion.isPreRelease() || actualVersion.isPreRelease()) {
-      if (!expectedVersion.equals(actualVersion)) {
-        throw new IncompatibleVersionException("Pre-release versions must match exactly.", actualVersion.toString());
+    if (serverVersion.isPreRelease() || clientVersion.isPreRelease()) {
+      if (!serverVersion.equals(clientVersion)) {
+        throw new MismatchedVersionException("Pre-release versions must match exactly.", clientVersion.toString());
       }
 
       return;
     }
 
-    if (expectedVersion.getMajor() != actualVersion.getMajor()) {
-      throw new IncompatibleVersionException("Major versions must match exactly.", actualVersion.toString());
+    if (serverVersion.getMajor() != clientVersion.getMajor()) {
+      throw new MismatchedVersionException("Major versions must match exactly.", clientVersion.toString());
     }
 
-    if (expectedVersion.getMinor() < actualVersion.getMinor()) {
-      throw new IncompatibleVersionException(
-        "Expected minor version must be greater than or equal to the actual minor version.",
-        actualVersion.toString());
+    if (serverVersion.getMinor() < clientVersion.getMinor()) {
+      throw new MismatchedVersionException(
+        "Server minor version must be greater than or equal to the Client minor version.",
+        clientVersion.toString());
     }
   }
 
