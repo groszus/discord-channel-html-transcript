@@ -44,9 +44,9 @@ public final class Server {
           .get("/health", this::healthHandler)
           .post("/transcript", this::transcriptHandler)
           .beforeMatched(ServerUtil::validateVersion)
+          .exception(MismatchedInputException.class, GlobalExceptionHandler::handleMismatchedInput)
           .exception(MismatchedVersionException.class, GlobalExceptionHandler::handleMismatchedVersion)
           .exception(UnauthorizedResponse.class, GlobalExceptionHandler::handleUnauthorized)
-          .exception(MismatchedInputException.class, GlobalExceptionHandler::handleMismatchedInput)
           .exception(Exception.class, GlobalExceptionHandler::handleException);
 
         config.events.serverStopped(TranscriberConfig::shutdownExecutor);

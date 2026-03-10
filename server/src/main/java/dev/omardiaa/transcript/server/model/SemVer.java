@@ -23,7 +23,7 @@ public final class SemVer {
   private final @Nullable String qualifier;
 
   /**
-   * Constructs a Semantic Version from parsing the specified {@code version}.
+   * Constructs a Semantic Version from parsing the provided {@code version}.
    *
    * @param version
    *   the version to parse.
@@ -31,8 +31,8 @@ public final class SemVer {
    * @throws MismatchedVersionException
    *   if any of the following are true:
    *   <ul>
-   *   <li>The specified {@code version} returns {@code null}.</li>
-   *   <li>The specified {@code version} can not be parsed.</li>
+   *   <li>The provided {@code version} returns {@code null}.</li>
+   *   <li>The provided {@code version} can not be parsed.</li>
    *   </ul>
    */
   public SemVer(@Nullable String version) {
@@ -44,7 +44,7 @@ public final class SemVer {
 
     if (!matcher.matches()) {
       throw new MismatchedVersionException(
-        "Version format invalid, expected format: [v](major).(minor).(patch)[-(qualifier)].",
+        "Invalid version format. Expected format: [v](major).(minor).(patch)[-(qualifier)]",
         version);
     }
 

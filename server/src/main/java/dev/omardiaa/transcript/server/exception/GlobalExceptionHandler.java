@@ -17,6 +17,18 @@ public final class GlobalExceptionHandler {
 
   private GlobalExceptionHandler() {}
 
+  public static void handleMismatchedInput(MismatchedInputException e, Context ctx) {
+    ctx.status(HttpStatus.BAD_REQUEST).json(
+      new ErrorResponse(
+        HttpStatus.BAD_REQUEST,
+        "The request body contains mismatched input.",
+        Map.of(
+          "path",
+          e.getPathReference(),
+          "problem",
+          e.getOriginalMessage())));
+  }
+
   public static void handleMismatchedVersion(MismatchedVersionException e, Context ctx) {
     ctx.status(HttpStatus.CONFLICT).json(
       new ErrorResponse(
@@ -34,18 +46,6 @@ public final class GlobalExceptionHandler {
       new ErrorResponse(
         HttpStatus.UNAUTHORIZED,
         e.getMessage()));
-  }
-
-  public static void handleMismatchedInput(MismatchedInputException e, Context ctx) {
-    ctx.status(HttpStatus.BAD_REQUEST).json(
-      new ErrorResponse(
-        HttpStatus.BAD_REQUEST,
-        "The request body contains mismatched input.",
-        Map.of(
-          "path",
-          e.getPathReference(),
-          "problem",
-          e.getOriginalMessage())));
   }
 
   public static void handleException(Exception e, Context ctx) {
