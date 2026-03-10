@@ -7,6 +7,7 @@
 #### Fixed
 
 - Include missing reachability metadata for error responses.
+- Include missing exit handlers.
 
 ## [0.1.0-beta.3]
 
