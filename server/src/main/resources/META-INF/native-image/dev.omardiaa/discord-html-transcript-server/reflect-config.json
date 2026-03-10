@@ -138,5 +138,10 @@
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.Thumbnail",
     "allDeclaredConstructors": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.server.exception.ErrorResponse",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   }
 ]

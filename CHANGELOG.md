@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.0-beta.4]
+
+### discord-html-transcript-server
+
+#### Fixed
+
+- Include missing reachability metadata for error responses.
+
 ## [0.1.0-beta.3]
 
 ### discord-html-transcript-core
