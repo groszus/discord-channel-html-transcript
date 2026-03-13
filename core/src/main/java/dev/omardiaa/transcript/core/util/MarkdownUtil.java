@@ -12,6 +12,7 @@ import org.jspecify.annotations.NullMarked;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 @NullMarked
 public final class MarkdownUtil {
@@ -129,28 +130,36 @@ public final class MarkdownUtil {
       String userId = m.group(1);
       User user = message.getMentionsMap().get(userId);
 
+      String result;
+
       if (user == null) {
-        return "<span class=\"mention\"><@%s></span>".formatted(userId);
+        result = "<span class=\"mention\"><@%s></span>".formatted(userId);
       } else {
-        return "<a href=\"https://discord.com/users/%s\" class=\"mention\">@%s</a>".formatted(
+        result = "<a href=\"https://discord.com/users/%s\" class=\"mention\">@%s</a>".formatted(
           userId, user.getGlobalName());
       }
+
+      return Matcher.quoteReplacement(result);
     });
 
     current = MENTION_ROLE.matcher(current).replaceAll(m -> {
       String roleId = m.group(1);
       Role role = guild.getRolesMap().get(roleId);
 
+      String result;
+
       if (role == null) {
-        return "<span class=\"mention\">@unknown-role</span>";
+        result = "<span class=\"mention\">@unknown-role</span>";
       } else {
         if (role.getColors().getPrimaryColor() == 0) {
-          return "<span class=\"mention\">@%s</span>".formatted(role.getName());
+          result = "<span class=\"mention\">@%s</span>".formatted(role.getName());
         } else {
-          return "<span class=\"mention\" style=\"color: #%1$06X; background-color: #%1$06X10;\" onmouseover=\"this.style.backgroundColor='#%1$06X30';\" onmouseout=\"this.style.backgroundColor='#%1$06X10';\">@%2$s</span>\n".formatted(
+          result = "<span class=\"mention\" style=\"color: #%1$06X; background-color: #%1$06X10;\" onmouseover=\"this.style.backgroundColor='#%1$06X30';\" onmouseout=\"this.style.backgroundColor='#%1$06X10';\">@%2$s</span>\n".formatted(
             role.getColors().getPrimaryColor(), role.getName());
         }
       }
+
+      return Matcher.quoteReplacement(result);
     });
 
     current = MENTION_CHANNEL.matcher(current).replaceAll(m -> {
