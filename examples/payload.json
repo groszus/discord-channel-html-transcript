@@ -3,7 +3,15 @@
     "id": "1055244032105787472",
     "name": "VORTEX",
     "icon": "3c970034e345f0f833b0d010f10a3be7",
-    "roles": []
+    "roles": [
+      {
+        "id": "1468338544916299968",
+        "name": "Developer",
+        "colors": {
+          "primary_color": 8729843
+        }
+      }
+    ]
   },
   "channel": {
     "id": "1444536048557494373",
@@ -63,7 +71,7 @@
               "components": [
                 {
                   "type": 10,
-                  "content": "### 🌍 Hello World!\nHello @everyone! I'm <@974748803305455627>, I created this library to transcribe <#1360350099083100353>. My current time is <t:1893456000>.\n\n### ☕ I Love Coding!\n`System.out.println(\"discord-html-transcript\");`\n```\npublic class Main {\n  public static void main(String args[]) {\n    System.out.println(\"Hello World!\");\n   }\n}\n```"
+                  "content": "### 🌍 Hello World!\nHello <@&1468338544916299968>s! I'm <@974748803305455627>, I created this library to transcribe <#1360350099083100353>. My current time is <t:1893456000>.\n\n### ☕ I Love Coding!\n`System.out.println(\"discord-html-transcript\");`\n```\npublic class Main {\n  public static void main(String args[]) {\n    System.out.println(\"Hello World!\");\n   }\n}\n```"
                 }
               ],
               "accessory": {

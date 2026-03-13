@@ -11,6 +11,8 @@ import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @NullMarked
@@ -125,52 +127,57 @@ public final class MarkdownUtil {
   public static String parseMarkup(Guild guild, Message message, String content) {
     String current = parseMarkup(content);
 
-    current = MENTION_USER.matcher(current).replaceAll(m -> {
-      String userId = m.group(1);
-      User user = message.getMentionsMap().get(userId);
+    current = MENTION_USER.matcher(current).replaceAll(m -> parseMarkupUserMention(m, message));
+    current = MENTION_ROLE.matcher(current).replaceAll(m -> parseMarkupRoleMention(m, guild));
 
-      if (user == null) {
-        return "<span class=\"mention\"><@%s></span>".formatted(userId);
-      } else {
-        return "<a href=\"https://discord.com/users/%s\" class=\"mention\">@%s</a>".formatted(
-          userId, user.getGlobalName());
-      }
-    });
+    // parses to "unknown" since there's no reliable way to retrieve a guild's channels' names.
+    current = MENTION_CHANNEL.matcher(current).replaceAll(
+      m -> "<span class=\"mention\">%s<em>unknown</em></span>\n".formatted(SVG_CHANNEL_ICON));
 
-    current = MENTION_ROLE.matcher(current).replaceAll(m -> {
-      String roleId = m.group(1);
-      Role role = guild.getRolesMap().get(roleId);
-
-      if (role == null) {
-        return "<span class=\"mention\">@unknown-role</span>";
-      } else {
-        if (role.getColors().getPrimaryColor() == 0) {
-          return "<span class=\"mention\">@%s</span>".formatted(role.getName());
-        } else {
-          return "<span class=\"mention\" style=\"color: #%1$06X; background-color: #%1$06X10;\" onmouseover=\"this.style.backgroundColor='#%1$06X30';\" onmouseout=\"this.style.backgroundColor='#%1$06X10';\">@%2$s</span>\n".formatted(
-            role.getColors().getPrimaryColor(), role.getName());
-        }
-      }
-    });
-
-    current = MENTION_CHANNEL.matcher(current).replaceAll(m -> {
-      return "<span class=\"mention\">%s<em>unknown</em></span>\n".formatted(SVG_CHANNEL_ICON);
-      /* if (channel == null) {
-         return "<span class=\"mention\">%s<em>unknown</em></span>\n".formatted(SVG_CHANNEL_ICON);
-       } else {
-         return "<a href=\"https:discord.com/channels/%s/%s\" class=\"mention\">%s<span class=\"mention__channel-name\">%s</span></a>\n".formatted(
-           guild.getId(), channelId, SVG_CHANNEL_ICON, channel.getName());
-       }*/
-    });
-
-    current = CUSTOM_EMOJI.matcher(current).replaceAll(m -> {
-      String emojiName = m.group(1);
-      String emojiUrl = Emoji.Custom.CUSTOM_EMOJI.formatted(m.group(2));
-
-      return "<img src=\"%1$s\" alt=\"%2$s\" title=\"%2$s\" class=\"markup\"/>".formatted(emojiUrl, emojiName);
-    });
+    current = CUSTOM_EMOJI.matcher(current).replaceAll(
+      m -> "<img src=\"%2$s\" alt=\"%1$s\" title=\"%1$s\" class=\"markup\">"
+        .formatted(m.group(1), Emoji.Custom.CUSTOM_EMOJI.formatted(m.group(2))));
 
     return current;
+  }
+
+  private static String parseMarkupUserMention(MatchResult m, Message message) {
+    String userId = m.group(1);
+    User user = message.getMentionsMap().get(userId);
+
+    String result;
+
+    if (user == null) {
+      result = "<span class=\"mention\"><@%s></span>".formatted(userId);
+    } else {
+      result = "<a href=\"https://discord.com/users/%s\" class=\"mention\">@%s</a>"
+        .formatted(userId, user.getGlobalName());
+    }
+
+    return Matcher.quoteReplacement(result);
+  }
+
+  private static String parseMarkupRoleMention(MatchResult m, Guild guild) {
+    String roleId = m.group(1);
+    Role role = guild.getRolesMap().get(roleId);
+
+    if (role == null) {
+      return "<span class=\"mention\">@unknown-role</span>";
+    }
+
+    String result;
+    int primaryColor = role.getColors().getPrimaryColor();
+
+    if (primaryColor == 0) {
+      result = "<span class=\"mention\">@%s</span>".formatted(role.getName());
+    } else {
+      String hexColor = Integer.toHexString(primaryColor);
+      result =
+        "<span class=\"mention\" style=\"color: #%1$s; background-color: #%1$s10;\" onmouseover=\"this.style.backgroundColor='#%1$s30';\" onmouseout=\"this.style.backgroundColor='#%1$s10';\">@%2$s</span>"
+          .formatted(hexColor, role.getName());
+    }
+
+    return Matcher.quoteReplacement(result);
   }
 
   private static String escape(String input) {
