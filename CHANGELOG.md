@@ -9,6 +9,12 @@
 - Include missing reachability metadata for error responses.
 - Include missing exit handlers.
 
+### discord-html-transcript-core
+
+#### Fixed
+
+- Prevent `IllegalArgumentException` when parsed user or role mentions' names contain `$` by @martinsshox.
+
 ## [0.1.0-beta.3]
 
 ### discord-html-transcript-core
