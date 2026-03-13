@@ -88,7 +88,7 @@ Choose the library that corresponds with the Discord API you use:
             <img alt="discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="64">
             <p>discord.js</p>
         </td>
-        <td><code>WIP</code></td>
+        <td><a href="https://github.com/omardiaadev/discord-html-transcript-discordjs">discord-html-transcript-discordjs</a></td>
     </tr>
     <tr align="center">
         <td>
@@ -240,5 +240,5 @@ In addition to the previous [variables](#environment-variables), you can specify
 
 If you found this useful, please consider giving it a 🌟!
 
-<a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"/></a>
-<a href="https://ko-fi.com/omardiaadev"><img alt="Ko-fi" src="https://img.shields.io/badge/ko--fi-FF6433?style=for-the-badge&logo=kofi&logoColor=FFF"/></a>
+<a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"></a>
+<a href="https://ko-fi.com/omardiaadev"><img alt="Ko-fi" src="https://img.shields.io/badge/ko--fi-FF6433?style=for-the-badge&logo=kofi&logoColor=FFF"></a>

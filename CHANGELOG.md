@@ -13,7 +13,7 @@
 
 #### Fixed
 
-- Prevent `IllegalArgumentException` when parsed user or role mentions' names contain `$` by @martinsshox.
+- Prevent `IllegalArgumentException` when parsing user or role mentions' names contain `$` by @martinsshox.
 
 ## [0.1.0-beta.3]
 
