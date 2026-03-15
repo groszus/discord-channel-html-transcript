@@ -5,23 +5,23 @@
 <p align="center">
     <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?label=Maven&color=0055D2"></a>
     <a href="https://github.com/omardiaadev/discord-html-transcript/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript?label=License&color=0055D2"></a>
-    <a href="https://discord.gg/fWtQjEJgWX"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=FFF&color=5865F2"></a>
+    <a href="https://discord.omardiaa.dev"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=FFF&color=5865F2"></a>
 </p>
 
 <details>
-    <summary>Contents</summary>
+    <summary>Table of Contents</summary>
     <ul>
         <li><a href="#features">Features</a></li>
         <li><a href="#preview">Preview</a></li>
         <li>
-            <a href="#getting-started">Getting Started</a>
+            <a href="#usage">Usage</a>
             <ul>
                 <li><a href="#1-library-recommended">1. Library (Recommended)</a></li>
                 <li><a href="#2-installation">2. Installation</a></li>
                 <li><a href="#3-standalone-api">3. Standalone API</a></li>
             </ul>
         </li>
-        <li><a href="#development">Development</a></li>
+        <li><a href="#contributing">Contributing</a></li>
         <li><a href="#support">Support</a></li>
     </ul>
 </details>
@@ -32,7 +32,7 @@
 - **Asynchronous:** Built with `CompletableFuture` for non-blocking performance.
 - **100% Offline:** All styling and fonts are contained in the generated HTML file.
 
-##### Supported Components
+**Supported Components**
 
 <ul>
     <li>
@@ -43,7 +43,7 @@
     <li><strong>Message Accessories:</strong> Attachments, Embeds, Reactions, References, and more...</li>
 </ul>
 
-##### To-Do
+**To-Do**
 
 - [ ] Refactor CSS and Markdown.
 
@@ -52,11 +52,11 @@
 
 ## Preview
 
-<a href="https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/example-transcript.html">
-    <img alt="discord-html-transcript" src="https://res.cloudinary.com/omardiaadev/image/upload/v1771423142/discord-html-transcript_ocjq03.png">
+<a title="Click For Full Preview" href="https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/example-transcript.html">
+    <img alt="Preview" src="https://res.cloudinary.com/omardiaadev/image/upload/v1771423142/discord-html-transcript_ocjq03.png">
 </a>
 
-## Getting Started
+## Usage
 
 There are 3 ways to use this library:
 
@@ -105,7 +105,7 @@ You can install the core implementation as a Maven dependency:
 
 #### Prerequisites
 
-- Java 17+
+- **Java 17+**
 
 [![Maven](https://img.shields.io/badge/Maven-C71A36?logo=apachemaven)](#2-installation)
 
@@ -176,7 +176,7 @@ standalone web server.
     <tr>
         <td><code>Authorization</code></td>
         <td>
-            Authenticates the client's request using the server's API key.
+            Authenticates client requests.
             <br>
             Required, if <code>TRANSCRIPT_SERVER_API_KEY</code> is set.
         </td>
@@ -205,36 +205,18 @@ standalone web server.
 
 ##### Versioning
 
-The server validates the `Server-Version` header on every request using the following rules:
+The server validates the [`Server-Version`](#headers) header using the following rules:
 
 - Pre-release versions must match exactly.
 - Major versions must match exactly.
 - Server minor version must be greater than or equal to the `Server-Version` minor version.
 
 > [!TIP]
-> Refer to [requests.http](examples/requests.http) to see an example of the HTTP requests.
+> HTTP request examples can be found at [requests](examples/requests.http).
 
-## Development
+## [Contributing](CONTRIBUTING.md)
 
-> [!NOTE]
-> This section of the documentation is incomplete.
-
-### Configuration
-
-#### Environment Variables
-
-In addition to the previous [variables](#environment-variables), you can specify the following during development:
-
-<table>
-    <tr>
-        <th>Variable</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td><code>JTE_DEV</code></td>
-        <td>Allows you to compile templates to Java classes on demand.</td>
-    </tr>
-</table>
+Need help? Wanna request a feature? [Join us today](https://discord.omardiaa.dev)!
 
 ## Support
 

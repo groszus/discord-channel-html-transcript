@@ -1,15 +1,15 @@
-### Development ###
-.tool-versions
+# Java
+jte-classes/
 target/
-jte-classes
-http
+
+# IntelliJ IDEA
+*.iml
+.idea/
+!.idea/runConfigurations
+
+# Environment
+http/
+.tool-versions
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-
-# IntelliJ IDEA
-*.iws
-*.iml
-*.ipr
-.idea/*
-!.idea/runConfigurations
