@@ -35,20 +35,18 @@ public final class MarkdownUtil {
   // Standard
   private final static Pattern CODE_BLOCK = Pattern.compile("```(.*?)```", Pattern.DOTALL);
   private final static Pattern CODE_INLINE = Pattern.compile("`(?!`)(.*)`");
-
   private final static Pattern BOLD = Pattern.compile("\\*\\*(?!\\*)(.+?)\\*\\*");
   private final static Pattern UNDERLINE = Pattern.compile("__(?!_)(.+?)__");
   private final static Pattern ITALIC = Pattern.compile("[*_](?![*_])(.+?)[_*]");
   private final static Pattern STRIKE_THROUGH = Pattern.compile("~~(.+?)~~");
   private final static Pattern LINK = Pattern.compile("\\[(.*?)]\\((\\S*?)\\)");
-  private final static Pattern TIMESTAMP = Pattern.compile("&lt;t:(\\d+)(?::[tTdDfFsSR])?&gt;");
-
-  private final static Pattern HEADER_1 = Pattern.compile("^\\s*#\\s+(.+)", Pattern.MULTILINE);
-  private final static Pattern HEADER_2 = Pattern.compile("^\\s*##\\s+(.+)", Pattern.MULTILINE);
-  private final static Pattern HEADER_3 = Pattern.compile("^\\s*###\\s+(.+)", Pattern.MULTILINE);
+  private final static Pattern HEADER = Pattern.compile("^\\s*(#{1,3})\\s+(.+)", Pattern.MULTILINE);
   private final static Pattern SUBTEXT = Pattern.compile("^\\s*-#\\s+(.+)", Pattern.MULTILINE);
 
-  // Extras
+  // Discord Markdown
+  private final static Pattern TIMESTAMP = Pattern.compile("&lt;t:(\\d+)(?::[tTdDfFsSR])?&gt;");
+
+  // Discord Markdown Extra
   private final static Pattern MENTION_USER = Pattern.compile("&lt;@(\\d+)&gt;");
   private final static Pattern MENTION_ROLE = Pattern.compile("&lt;@&amp;(\\d+)&gt;");
   private final static Pattern MENTION_CHANNEL = Pattern.compile("&lt;#(\\d+)&gt;");
@@ -59,7 +57,7 @@ public final class MarkdownUtil {
   private MarkdownUtil() {}
 
   /**
-   * Parses the specified {@code content} into styled HTML.
+   * Parses the provided {@code content} into styled HTML.
    *
    * @param content
    *   The content to parse.
@@ -90,13 +88,11 @@ public final class MarkdownUtil {
     current = ITALIC.matcher(current).replaceAll(m -> "<em>$1</em>");
     current = STRIKE_THROUGH.matcher(current).replaceAll(m -> "<s>$1</s>");
     current = LINK.matcher(current).replaceAll(m -> "<a href=\"$2\" target=\"_blank\" class=\"markup\">$1</a>");
-    current = TIMESTAMP
-      .matcher(current)
-      .replaceAll(m -> "<time class=\"markup\">%s</time>".formatted(TimeUtil.formatTimestamp(m.group(1))));
+    current = TIMESTAMP.matcher(current).replaceAll(
+      m -> "<time class=\"markup\">%s</time>".formatted(TimeUtil.formatTimestamp(m.group(1))));
 
-    current = HEADER_1.matcher(current).replaceAll(m -> "<h1 class=\"markup\">$1</h1>");
-    current = HEADER_2.matcher(current).replaceAll(m -> "<h2 class=\"markup\">$1</h2>");
-    current = HEADER_3.matcher(current).replaceAll(m -> "<h3 class=\"markup\">$1</h3>");
+    current = HEADER.matcher(current).replaceAll(
+      m -> "<h%1$s class=\"markup\">%2$s</h%1$s>".formatted(m.group(1).length(), m.group(2)));
     current = SUBTEXT.matcher(current).replaceAll(m -> "<small class=\"markup\">$1</small>");
 
     current = MENTION_EVERYONE.matcher(current).replaceAll(m -> "<span class=\"mention\">@$1</span>");
@@ -189,37 +185,32 @@ public final class MarkdownUtil {
   private static String wrapTextNodes(String html) {
     StringBuilder sb = new StringBuilder();
     StringBuilder textBuffer = new StringBuilder();
+
     boolean insideTag = false;
 
     for (int i = 0; i < html.length(); i++) {
       char c = html.charAt(i);
 
       if (c == '<') {
-        // Entering a tag.
-        // 1. Flush any text we collected into a span
         if (!textBuffer.isEmpty()) {
           sb.append("<span>").append(textBuffer).append("</span>");
           textBuffer.setLength(0);
         }
-        // 2. Start the tag
+
         insideTag = true;
         sb.append(c);
       } else if (c == '>') {
-        // Exiting a tag
         insideTag = false;
         sb.append(c);
       } else {
         if (insideTag) {
-          // Inside a tag (e.g. class="..."), just append
           sb.append(c);
         } else {
-          // Outside a tag (Raw Text), buffer it
           textBuffer.append(c);
         }
       }
     }
 
-    // Flush any remaining text at the end of the string
     if (!textBuffer.isEmpty()) {
       sb.append("<span>").append(textBuffer).append("</span>");
     }
