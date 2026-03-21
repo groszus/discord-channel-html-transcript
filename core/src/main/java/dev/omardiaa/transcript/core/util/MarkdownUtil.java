@@ -39,7 +39,8 @@ public final class MarkdownUtil {
   private final static Pattern UNDERLINE = Pattern.compile("__(?!_)(.+?)__");
   private final static Pattern ITALIC = Pattern.compile("[*_](?![*_])(.+?)[_*]");
   private final static Pattern STRIKE_THROUGH = Pattern.compile("~~(.+?)~~");
-  private final static Pattern LINK = Pattern.compile("\\[(.*?)]\\((\\S*?)\\)");
+  private final static Pattern LINK = Pattern.compile(
+    "\\[(.*?)]\\((https?://[a-zA-Z0-9.-]+[/\\w .-]*/?)\\)|(https?://[a-zA-Z0-9.-]+[/\\w .-]*/?)");
   private final static Pattern HEADER = Pattern.compile("^\\s*(#{1,3})\\s+(.+)", Pattern.MULTILINE);
   private final static Pattern SUBTEXT = Pattern.compile("^\\s*-#\\s+(.+)", Pattern.MULTILINE);
 
@@ -51,7 +52,6 @@ public final class MarkdownUtil {
   private final static Pattern MENTION_ROLE = Pattern.compile("&lt;@&amp;(\\d+)&gt;");
   private final static Pattern MENTION_CHANNEL = Pattern.compile("&lt;#(\\d+)&gt;");
   private final static Pattern MENTION_EVERYONE = Pattern.compile("@(everyone|here)");
-
   private final static Pattern CUSTOM_EMOJI = Pattern.compile("&lt;a?:(\\w+):(\\d+)&gt;");
 
   private MarkdownUtil() {}
@@ -83,19 +83,39 @@ public final class MarkdownUtil {
 
     current = escape(current).replaceAll("\n", "<br>\n");
 
-    current = BOLD.matcher(current).replaceAll(m -> "<strong>$1</strong>");
-    current = UNDERLINE.matcher(current).replaceAll(m -> "<u>$1</u>");
-    current = ITALIC.matcher(current).replaceAll(m -> "<em>$1</em>");
-    current = STRIKE_THROUGH.matcher(current).replaceAll(m -> "<s>$1</s>");
-    current = LINK.matcher(current).replaceAll(m -> "<a href=\"$2\" target=\"_blank\" class=\"markup\">$1</a>");
+    current = BOLD.matcher(current).replaceAll("<strong>$1</strong>");
+
+    current = UNDERLINE.matcher(current).replaceAll("<u>$1</u>");
+
+    current = ITALIC.matcher(current).replaceAll("<em>$1</em>");
+
+    current = STRIKE_THROUGH.matcher(current).replaceAll("<s>$1</s>");
+
+    current = LINK.matcher(current).replaceAll(m -> {
+      String markdownText = m.group(1);
+
+      if (markdownText != null && markdownText.isBlank()) {
+        return m.group(0);
+      }
+
+      String markdownUrl = m.group(2);
+      String url = m.group(3);
+
+      String href = markdownUrl != null ? markdownUrl : url;
+      String text = markdownText != null ? markdownText : url;
+
+      return "<a href=\"%s\" target=\"_blank\" class=\"markup\">%s</a>".formatted(href, text);
+    });
+
     current = TIMESTAMP.matcher(current).replaceAll(
       m -> "<time class=\"markup\">%s</time>".formatted(TimeUtil.formatTimestamp(m.group(1))));
 
     current = HEADER.matcher(current).replaceAll(
       m -> "<h%1$s class=\"markup\">%2$s</h%1$s>".formatted(m.group(1).length(), m.group(2)));
-    current = SUBTEXT.matcher(current).replaceAll(m -> "<small class=\"markup\">$1</small>");
 
-    current = MENTION_EVERYONE.matcher(current).replaceAll(m -> "<span class=\"mention\">@$1</span>");
+    current = SUBTEXT.matcher(current).replaceAll("<small class=\"markup\">$1</small>");
+
+    current = MENTION_EVERYONE.matcher(current).replaceAll("<span class=\"mention\">@$1</span>");
 
     current = wrapTextNodes(current);
 
@@ -118,7 +138,7 @@ public final class MarkdownUtil {
    *
    * @return The styled HTML with extras.
    *
-   * @see <a href="https://discord.com/developers/docs/reference#message-formatting">Message Formatting</a>
+   * @see <a href="https://docs.discord.com/developers/reference#message-formatting">Message Formatting</a>
    */
   public static String parseMarkup(Guild guild, Message message, String content) {
     String current = parseMarkup(content);
@@ -141,16 +161,12 @@ public final class MarkdownUtil {
     String userId = m.group(1);
     User user = message.getMentionsMap().get(userId);
 
-    String result;
-
     if (user == null) {
-      result = "<span class=\"mention\"><@%s></span>".formatted(userId);
-    } else {
-      result = "<a href=\"https://discord.com/users/%s\" class=\"mention\">@%s</a>"
-        .formatted(userId, user.getGlobalName());
+      return Matcher.quoteReplacement("<span class=\"mention\"><@%s></span>".formatted(userId));
     }
 
-    return Matcher.quoteReplacement(result);
+    return Matcher.quoteReplacement(
+      "<a href=\"https://discord.com/users/%s\" class=\"mention\">@%s</a>".formatted(userId, user.getGlobalName()));
   }
 
   private static String parseMarkupRoleMention(MatchResult m, Guild guild) {
@@ -161,19 +177,17 @@ public final class MarkdownUtil {
       return "<span class=\"mention\">@unknown-role</span>";
     }
 
-    String result;
     int primaryColor = role.getColors().getPrimaryColor();
 
     if (primaryColor == 0) {
-      result = "<span class=\"mention\">@%s</span>".formatted(role.getName());
-    } else {
-      String hexColor = Integer.toHexString(primaryColor);
-      result =
-        "<span class=\"mention\" style=\"color: #%1$s; background-color: #%1$s10;\" onmouseover=\"this.style.backgroundColor='#%1$s30';\" onmouseout=\"this.style.backgroundColor='#%1$s10';\">@%2$s</span>"
-          .formatted(hexColor, role.getName());
+      return Matcher.quoteReplacement("<span class=\"mention\">@%s</span>".formatted(role.getName()));
     }
 
-    return Matcher.quoteReplacement(result);
+    String hexColor = Integer.toHexString(primaryColor);
+
+    return Matcher.quoteReplacement(
+      "<span class=\"mention\" style=\"color: #%1$s; background-color: #%1$s10;\" onmouseover=\"this.style.backgroundColor='#%1$s30';\" onmouseout=\"this.style.backgroundColor='#%1$s10';\">@%2$s</span>"
+        .formatted(hexColor, role.getName()));
   }
 
   private static String escape(String input) {
