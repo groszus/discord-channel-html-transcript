@@ -2,18 +2,31 @@
 
 ## [0.1.0-beta.4]
 
+### discord-html-transcript-core
+
+#### Added
+
+- Support for Block Quote markdown.
+
+#### Changed
+
+- Bump jackson from 2.21.1 to 2.21.2.
+
+#### Fixed
+
+- Prevent `IllegalArgumentException` when parsing user or role mentions' names contain `$`.
+- Parse normal links.
+
 ### discord-html-transcript-server
+
+#### Changed
+
+- Bump javalin from 7.0.1 to 7.1.0.
 
 #### Fixed
 
 - Include missing reachability metadata for error responses.
 - Include missing exit handlers.
-
-### discord-html-transcript-core
-
-#### Fixed
-
-- Prevent `IllegalArgumentException` when parsing user or role mentions' names contain `$` in #5
 
 ## [0.1.0-beta.3]
 

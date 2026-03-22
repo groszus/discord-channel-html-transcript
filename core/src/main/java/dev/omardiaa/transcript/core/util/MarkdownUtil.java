@@ -43,6 +43,7 @@ public final class MarkdownUtil {
     "\\[(.*?)]\\((https?://[a-zA-Z0-9.-]+[/\\w .-]*/?)\\)|(https?://[a-zA-Z0-9.-]+[/\\w .-]*/?)");
   private final static Pattern HEADER = Pattern.compile("^\\s*(#{1,3})\\s+(.+)", Pattern.MULTILINE);
   private final static Pattern SUBTEXT = Pattern.compile("^\\s*-#\\s+(.+)", Pattern.MULTILINE);
+  private final static Pattern QUOTE = Pattern.compile("^(&gt; .+(?:\\n&gt; .+)*)", Pattern.MULTILINE);
 
   // Discord Markdown
   private final static Pattern TIMESTAMP = Pattern.compile("&lt;t:(\\d+)(?::[tTdDfFsSR])?&gt;");
@@ -114,6 +115,12 @@ public final class MarkdownUtil {
       m -> "<h%1$s class=\"markup\">%2$s</h%1$s>".formatted(m.group(1).length(), m.group(2)));
 
     current = SUBTEXT.matcher(current).replaceAll("<small class=\"markup\">$1</small>");
+
+    current = QUOTE.matcher(current).replaceAll(m -> {
+      String quote = m.group(1).replaceAll("&gt; ", "");
+      return "<div class=\"markup__blockquote__container\"><div class=\"markup__blockquote__divider\"></div><blockquote class=\"markup\">%s</blockquote></div>"
+        .formatted(quote);
+    });
 
     current = MENTION_EVERYONE.matcher(current).replaceAll("<span class=\"mention\">@$1</span>");
 
