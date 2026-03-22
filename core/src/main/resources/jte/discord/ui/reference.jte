@@ -5,11 +5,10 @@
 @param Message message
 
 @if(message.getReferencedMessage() != null)
-  !{Message referencedMessage = message.getReferencedMessage();}
   <div class="reference__spine"></div>
 
   <div class="reference user-select-none">
-    !{User author = referencedMessage.getAuthor();}
+    !{User author = message.getReferencedMessage().getAuthor();}
 
     <img
       src="${author.getAvatarUrl()}"
@@ -17,10 +16,8 @@
       class="reference__author__avatar"
     />
 
-    @if(author.isBot())
-      <span class="author__tag">APP</span>
-    @elseif(author.isSystem())
-      <span class="author__tag user-select-none">SYSTEM</span>
+    @if(author.getTag() != null)
+      <span class="author__tag user-select-none">${author.getTag()}</span>
     @endif
 
     <a
@@ -32,29 +29,10 @@
     </a>
 
     <a
-      href="#${referencedMessage.getId()}"
+      href="#${message.getReferencedMessage().getId()}"
       class="reference__message__context"
     >
-      @if(referencedMessage.getContent().isEmpty())
-        <i>Click to see attachment</i>
-      @else
-        ${referencedMessage.getContent()}
-      @endif
-
-      @if(!referencedMessage.getAttachments().isEmpty() || referencedMessage.getContent().isEmpty())
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="20"
-          height="20"
-          fill="currentColor"
-        >
-          <path
-            d="M2 5a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5Zm13.35 8.13 3.5 4.67c.37.5.02 1.2-.6 1.2H5.81a.75.75 0 0 1-.59-1.22l1.86-2.32a1.5 1.5 0 0 1 2.34 0l.5.64 2.23-2.97a2 2 0 0 1 3.2 0ZM10.2 5.98c.23-.91-.88-1.55-1.55-.9a.93.93 0 0 1-1.3 0c-.67-.65-1.78-.01-1.55.9a.93.93 0 0 1-.65 1.12c-.9.26-.9 1.54 0 1.8.48.14.77.63.65 1.12-.23.91.88 1.55 1.55.9a.93.93 0 0 1 1.3 0c.67.65 1.78.01 1.55-.9a.93.93 0 0 1 .65-1.12c.9-.26.9-1.54 0-1.8a.93.93 0 0 1-.65-1.12Z"
-            fill-rule="evenodd"
-          />
-        </svg>
-      @endif
+      Click to see message
     </a>
   </div>
 @endif

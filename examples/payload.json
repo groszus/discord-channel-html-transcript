@@ -71,7 +71,7 @@
               "components": [
                 {
                   "type": 10,
-                  "content": "### 🌍 Hello World!\nHello <@&1468338544916299968>s! I'm <@974748803305455627>, I created this library to transcribe <#1360350099083100353>. My current time is <t:1893456000>.\n\n### ☕ I Love Coding!\n`System.out.println(\"discord-html-transcript\");`\n```\npublic class Main {\n  public static void main(String args[]) {\n    System.out.println(\"Hello World!\");\n   }\n}\n```"
+                  "content": "### 🌍 Hello World!\nHello <@&1468338544916299968>s! I'm <@974748803305455627>, I created this library to transcribe <#1360350099083100353>. My current time is <t:1893456000>."
                 }
               ],
               "accessory": {
@@ -91,7 +91,7 @@
               "components": [
                 {
                   "type": 10,
-                  "content": "**This** [Library](https://github.com/skywolfxp/discord-channel-html-transcript) __is__ *Awesome!*"
+                  "content": "### Links\n- Link: https://omardiaa.dev/\n- Masked Link: [omardiaa](https://omardiaa.dev/)\n### Quote\n> The code you write makes you a programmer.\n> The code you delete makes you a GOOD programmer.\n> - Mario Fusco, Java developer\n### Code\n`System.out.println(\"discord-html-transcript\");`\n```\npublic class Main {\n  public static void main(String args[]) {\n    System.out.println(\"Hello World!\");\n   }\n}\n```"
                 }
               ],
               "accessory": {
@@ -196,7 +196,7 @@
         "global_name": "Omar Diaa",
         "avatar": "e263fe6110a7203f5c7df15861e4f97d"
       },
-      "content": "# Embeds\nhttps://tenor.com/view/pokemon-pikachu-clap-clapping-clapping-gif-gif-13465728489229726846\nhttps://tenor.com/view/elmo-dance-yell-yelling-dancing-gif-13042884862118588375",
+      "content": "# Embeds\nhttps://tenor.com/view/pacha-okay-great-meme-just-perfect-gif-13268829466700541863",
       "timestamp": "2030-01-01T00:00:00.000Z",
       "edited_timestamp": "2030-01-01T00:00:00.000Z",
       "mentions": [],
@@ -252,10 +252,10 @@
           ]
         },
         {
-          "url": "https://tenor.com/view/pokemon-pikachu-clap-clapping-clapping-gif-gif-13465728489229726846",
+          "url": "https://tenor.com/view/pacha-okay-great-meme-just-perfect-gif-13268829466700541863",
           "type": "gifv",
           "video": {
-            "url": "https://media.tenor.com/4dz1iXzgfpAAAAPo/pacha-just-right.mp4"
+            "url": "https://media.tenor.com/uCRaGUPr76cAAAPo/pacha-okay.mp4"
           }
         }
       ],
