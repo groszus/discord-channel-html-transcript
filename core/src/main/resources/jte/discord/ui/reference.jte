@@ -14,11 +14,9 @@
       src="${author.getAvatarUrl()}"
       alt="${author.getUsername()}"
       class="reference__author__avatar"
-    />
+    >
 
-    @if(author.getTag() != null)
-      <span class="author__tag user-select-none">${author.getTag()}</span>
-    @endif
+    @template.discord.message.user.tag(user = message.getAuthor())
 
     <a
       href="https://discord.com/users/${author.getId()}"
@@ -47,7 +45,7 @@
       src="${user.getAvatarUrl()}"
       alt="${user.getUsername()}"
       class="reference__author__avatar"
-    />
+    >
 
     <a
       href="https://discord.com/users/${user.getId()}"

@@ -76,9 +76,7 @@
               ${message.getAuthor().getGlobalName()}
             </a>
 
-            @if(message.getAuthor().getTag() != null)
-              <span class="author__tag user-select-none">${message.getAuthor().getTag()}</span>
-            @endif
+            @template.discord.message.user.tag(user = message.getAuthor())
 
             <div class="author__timestamp">
               @template.discord.ui.timestamp(timestamp = message.getTimestamp())
