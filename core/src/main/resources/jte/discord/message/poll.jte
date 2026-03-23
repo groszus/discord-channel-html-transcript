@@ -1,5 +1,4 @@
 @import dev.omardiaa.transcript.core.model.payload.message.Poll
-@import dev.omardiaa.transcript.core.model.payload.common.Emoji
 @import dev.omardiaa.transcript.core.util.TimeUtil
 
 @param Poll poll
@@ -16,15 +15,7 @@
     @for(Poll.Answer answer : poll.answers())
       <li class="poll__answer">
         @if(answer.pollMedia().emoji() != null)
-          @if(answer.pollMedia().emoji() instanceof Emoji.Custom customEmoji)
-            <img
-              src="${customEmoji.getImageUrl()}"
-              alt="${customEmoji.getName()}"
-              class="poll__answer__emoji"
-            />
-          @elseif(answer.pollMedia().emoji() instanceof Emoji.Unicode unicodeEmoji)
-            <span class="poll__answer__emoji">$unsafe{unicodeEmoji.getAsUTF8()}</span>
-          @endif
+          @template.util.emoji(emoji = answer.pollMedia().emoji(), classes = "poll__answer__emoji")
         @endif
 
         <span class="poll__answer__text">${answer.pollMedia().text()}</span>

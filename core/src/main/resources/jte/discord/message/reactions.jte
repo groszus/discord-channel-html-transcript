@@ -1,5 +1,4 @@
 @import dev.omardiaa.transcript.core.model.payload.Message
-@import dev.omardiaa.transcript.core.model.payload.common.Emoji
 
 @param Message message
 
@@ -7,16 +6,7 @@
   <div class="reactions user-select-none">
     @for(Message.Reaction reaction : message.getReactions())
       <div class="reaction">
-        @if(reaction.getEmoji() instanceof Emoji.Custom customEmoji)
-          <img
-            src="${customEmoji.getImageUrl()}"
-            alt="${customEmoji.getName()}"
-            class="reaction__emoji"
-          />
-        @elseif(reaction.getEmoji() instanceof Emoji.Unicode unicodeEmoji)
-          <span class="reaction__emoji">$unsafe{unicodeEmoji.getAsUTF8()}</span>
-        @endif
-
+        @template.util.emoji(emoji = reaction.getEmoji(), classes = "reaction__emoji")
         <span class="reaction__count">${reaction.getCount()}</span>
       </div>
     @endfor

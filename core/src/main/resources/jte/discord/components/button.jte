@@ -1,6 +1,5 @@
 @import dev.omardiaa.transcript.core.model.payload.message.component.Button
 @import dev.omardiaa.transcript.core.model.payload.message.component.ButtonStyle
-@importdev.omardiaa.transcript.core.model.payload.common.Emoji
 
 @param Button button
 
@@ -13,17 +12,7 @@
   class="button user-select-none"
 >
   @if(button.getEmoji() != null)
-    @if(button.getEmoji() instanceof Emoji.Custom customEmoji)
-      <img
-        src="${customEmoji.getImageUrl()}"
-        alt="${customEmoji.getName()}"
-        class="button__emoji"
-      />
-    @elseif(button.getEmoji() instanceof Emoji.Unicode unicodeEmoji)
-      <span class="button__emoji">
-        $unsafe{unicodeEmoji.getAsUTF8()}
-      </span>
-    @endif
+    @template.util.emoji(emoji = button.getEmoji(), classes = "button__emoji")
   @endif
 
   @if(button.getLabel() != null)
