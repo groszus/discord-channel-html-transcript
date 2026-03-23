@@ -8,19 +8,19 @@
 
   <div class="reference user-select-none">
     <img
-      src="${message.referencedMessage().author().getAvatarUrl()}"
-      alt="${message.referencedMessage().author().getUsername()}"
+      src="${message.referencedMessage().author().avatarUrl()}"
+      alt="${message.referencedMessage().author().username()}"
       class="reference__author__avatar"
     >
 
     @template.discord.message.user.tag(user = message.author())
 
     <a
-      href="https://discord.com/users/${message.referencedMessage().author().getId()}"
-      title="${message.referencedMessage().author().getUsername()}"
+      href="https://discord.com/users/${message.referencedMessage().author().id()}"
+      title="${message.referencedMessage().author().username()}"
       class="reference__author__name"
     >
-      ${message.referencedMessage().author().getGlobalName()}
+      ${message.referencedMessage().author().globalName()}
     </a>
 
     <a
@@ -37,17 +37,17 @@
 
   <div class="reference user-select-none">
     <img
-      src="${message.interactionMetadata().user().getAvatarUrl()}"
-      alt="${message.interactionMetadata().user().getUsername()}"
+      src="${message.interactionMetadata().user().avatarUrl()}"
+      alt="${message.interactionMetadata().user().username()}"
       class="reference__author__avatar"
     >
 
     <a
-      href="https://discord.com/users/${message.interactionMetadata().user().getId()}"
-      title="${message.interactionMetadata().user().getUsername()}"
+      href="https://discord.com/users/${message.interactionMetadata().user().id()}"
+      title="${message.interactionMetadata().user().username()}"
       class="reference__author__name"
     >
-      ${message.interactionMetadata().user().getGlobalName()}
+      ${message.interactionMetadata().user().globalName()}
     </a>
 
     <span class="reference__interaction__content">used</span>

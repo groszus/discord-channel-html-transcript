@@ -4,7 +4,7 @@
 
 <div class="select-menu user-select-none">
   <span class="select-menu__placeholder">
-    ${selectMenu.getPlaceholder()}
+    ${selectMenu.placeholder()}
   </span>
 
   <svg

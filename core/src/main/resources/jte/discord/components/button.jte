@@ -4,22 +4,22 @@
 @param Button button
 
 <a
-  href="${button.isDisabled() ? null : button.getUrl()}"
-  aria-disabled="${button.isDisabled()}"
+  href="${button.disabled() ? null : button.url()}"
+  aria-disabled="${button.disabled()}"
   role="button"
   target="_blank"
-  data-button-style="${button.getStyle().name()}"
+  data-button-style="${button.style().name()}"
   class="button user-select-none"
 >
-  @if(button.getEmoji() != null)
-    @template.util.emoji(emoji = button.getEmoji(), classes = "button__emoji")
+  @if(button.emoji() != null)
+    @template.util.emoji(emoji = button.emoji(), classes = "button__emoji")
   @endif
 
-  @if(button.getLabel() != null)
-    <span>${button.getLabel()}</span>
+  @if(button.label() != null)
+    <span>${button.label()}</span>
   @endif
 
-  @if(button.getStyle() == ButtonStyle.LINK)
+  @if(button.style() == ButtonStyle.LINK)
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"

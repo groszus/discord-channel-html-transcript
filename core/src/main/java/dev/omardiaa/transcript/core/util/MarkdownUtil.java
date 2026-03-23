@@ -212,21 +212,21 @@ public final class MarkdownUtil {
           .create("a")
           .attribute("href", "https://discord.com/users/" + userId)
           .classes("mention")
-          .build(Matcher.quoteReplacement("@" + user.getGlobalName()));
+          .build(Matcher.quoteReplacement("@" + user.globalName()));
       });
 
     content = MENTION_ROLE.matcher(content).replaceAll(
       m -> {
-        Role role = guild.getRolesMap().get(m.group(1));
+        Role role = guild.rolesMap().get(m.group(1));
 
         if (role == null) {
           return HtmlBuilder.create("span").classes("mention").build("@unknown-role");
         }
 
-        int primaryColor = role.getColors().getPrimaryColor();
+        int primaryColor = role.colors().primaryColor();
 
         if (primaryColor == 0) {
-          return HtmlBuilder.create("span").classes("mention").build("@" + Matcher.quoteReplacement(role.getName()));
+          return HtmlBuilder.create("span").classes("mention").build("@" + Matcher.quoteReplacement(role.name()));
         }
 
         String hexColor = Integer.toHexString(primaryColor);
@@ -237,7 +237,7 @@ public final class MarkdownUtil {
           .attribute("onmouseover", "this.style.backgroundColor='#%1$s30';".formatted(hexColor))
           .attribute("onmouseout", "this.style.backgroundColor='#%1$s10';".formatted(hexColor))
           .classes("mention")
-          .build(Matcher.quoteReplacement(role.getName()));
+          .build(Matcher.quoteReplacement(role.name()));
       });
 
     // parses to "unknown" since there's no reliable way to retrieve a guild's channels' names.

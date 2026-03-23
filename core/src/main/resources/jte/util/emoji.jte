@@ -5,10 +5,10 @@
 
 @if(emoji instanceof Emoji.Custom customEmoji)
   <img
-    src="${customEmoji.getImageUrl()}"
-    alt="${customEmoji.getName()}"
+    src="${customEmoji.imageUrl()}"
+    alt="${customEmoji.name()}"
     class="${classes}"
   />
 @elseif(emoji instanceof Emoji.Unicode unicodeEmoji)
-  <span class="${classes}">$unsafe{unicodeEmoji.getAsUTF8()}</span>
+  <span class="${classes}">$unsafe{unicodeEmoji.asUTF8()}</span>
 @endif

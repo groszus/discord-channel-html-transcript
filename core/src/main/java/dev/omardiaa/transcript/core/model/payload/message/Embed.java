@@ -16,23 +16,23 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object">Embed</a>.
+ * <a href="https://docs.discord.com/developers/resources/message#embed-object">Embed</a>
  */
 @NullMarked
-public class Embed {
-  private final @Nullable String title;
-  private final Type type;
-  private final @Nullable String description;
-  private final @Nullable String url;
-  private final @Nullable OffsetDateTime timestamp;
-  private final @Nullable String color;
-  private final @Nullable Footer footer;
-  private final @Nullable Image image;
-  private final @Nullable Thumbnail thumbnail;
-  private final @Nullable Video video;
-  private final @Nullable Author author;
-  private final @Nullable List<Field> fields;
-
+public record Embed(
+  @Nullable String title,
+  Type type,
+  @Nullable String description,
+  @Nullable String url,
+  @Nullable OffsetDateTime timestamp,
+  @Nullable String color,
+  @Nullable Footer footer,
+  @Nullable Image image,
+  @Nullable Thumbnail thumbnail,
+  @Nullable Video video,
+  @Nullable Author author,
+  @Nullable List<Field> fields
+) {
   @JsonCreator
   public Embed(
     @JsonProperty(value = "title") @Nullable String title,
@@ -46,96 +46,29 @@ public class Embed {
     @JsonProperty(value = "thumbnail") @Nullable Thumbnail thumbnail,
     @JsonProperty(value = "video") @Nullable Video video,
     @JsonProperty(value = "author") @Nullable Author author,
-    @JsonProperty(value = "fields") @Nullable List<Field> fields) {
-    this.title = title;
-    this.type = Objects.requireNonNullElse(type, Type.UNKNOWN);
-    this.description = description;
-    this.url = url;
-    this.timestamp = timestamp;
-    this.color = (color == null) ? null : String.format("#%06X", (0xFFFFFF & color));
-    this.footer = footer;
-    this.image = image;
-    this.thumbnail = thumbnail;
-    this.video = video;
-    this.author = author;
-    this.fields = fields;
-  }
-
-  public @Nullable String getTitle() {
-    return title;
-  }
-
-  public Type getType() {
-    return type;
-  }
-
-  public @Nullable String getDescription() {
-    return description;
-  }
-
-  public @Nullable String getUrl() {
-    return url;
-  }
-
-  public @Nullable OffsetDateTime getTimestamp() {
-    return timestamp;
-  }
-
-  public @Nullable String getColor() {
-    return color;
-  }
-
-  public @Nullable Footer getFooter() {
-    return footer;
-  }
-
-  public @Nullable Image getImage() {
-    return image;
-  }
-
-  public @Nullable Thumbnail getThumbnail() {
-    return thumbnail;
-  }
-
-  public @Nullable Video getVideo() {
-    return video;
-  }
-
-  public @Nullable Author getAuthor() {
-    return author;
-  }
-
-  public @Nullable List<Field> getFields() {
-    return fields;
-  }
-
-  @Override
-  public String toString() {
-    return "Embed{" +
-           "title='" + title + '\'' +
-           ", type=" + type +
-           ", description='" + description + '\'' +
-           ", url='" + url + '\'' +
-           ", timestamp=" + timestamp +
-           ", color='" + color + '\'' +
-           ", footer=" + footer +
-           ", image=" + image +
-           ", thumbnail=" + thumbnail +
-           ", video=" + video +
-           ", author=" + author +
-           ", fields=" + fields +
-           '}';
+    @JsonProperty(value = "fields") @Nullable List<Field> fields
+  ) {
+    this(
+      title,
+      Objects.requireNonNullElse(type, Type.UNKNOWN),
+      description,
+      url,
+      timestamp,
+      color == null ? null : String.format("#%06X", (0xFFFFFF & color)),
+      footer,
+      image,
+      thumbnail,
+      video,
+      author,
+      fields);
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-types">Embed Types</a>.
+   * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-types">Embed Types</a>
    */
   @NullMarked
   public enum Type {
-    UNKNOWN("unknown"),
-    RICH("rich"),
-    GIFV("gifv"),
-    ARTICLE("article");
+    UNKNOWN("unknown"), RICH("rich"), GIFV("gifv"), ARTICLE("article");
 
     private static final Map<String, Type> TYPE_MAP = Arrays
       .stream(values()).collect(Collectors.toUnmodifiableMap(Type::getValue, Function.identity()));
@@ -158,196 +91,108 @@ public class Embed {
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-footer-structure">Embed
-   * Footer</a>.
+   * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-footer-structure">Embed Footer</a>
    */
   @NullMarked
-  public static class Footer {
-    private final String text;
-    private final @Nullable String iconUrl;
-
+  public record Footer(
+    String text,
+    @Nullable String iconUrl
+  ) {
     @JsonCreator
     public Footer(
       @JsonProperty(value = "text", required = true) String text,
-      @JsonProperty(value = "icon_url") @Nullable String iconUrl) {
+      @JsonProperty(value = "icon_url") @Nullable String iconUrl
+    ) {
       this.text = Check.lengthMax(text, "text", 2048);
       this.iconUrl = iconUrl;
     }
-
-    public String getText() {
-      return text;
-    }
-
-    public @Nullable String getIconUrl() {
-      return iconUrl;
-    }
-
-    @Override
-    public String toString() {
-      return "Footer{" +
-             "text='" + text + '\'' +
-             ", iconUrl='" + iconUrl + '\'' +
-             '}';
-    }
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-image-structure">Embed
-   * Image</a>.
+   * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-image-structure">Embed Image</a>
    */
   @NullMarked
-  public static class Image {
-    private final String url;
-
+  public record Image(
+    String url
+  ) {
     @JsonCreator
-    public Image(@JsonProperty(value = "url", required = true) String url) {
+    public Image(
+      @JsonProperty(value = "url", required = true) String url
+    ) {
       this.url = url;
     }
-
-    public String getUrl() {
-      return url;
-    }
-
-    @Override
-    public String toString() {
-      return "Image{" +
-             "url='" + url + '\'' +
-             '}';
-    }
   }
 
   /**
-   * Discord <a
-   * href="https://discord.com/developers/docs/resources/message#embed-object-embed-thumbnail-structure">Embed
-   * Thumbnail</a>.
+   * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-thumbnail-structure">Embed Thumbnail</a>
    */
   @NullMarked
-  public static class Thumbnail {
-    private final String url;
-
+  public record Thumbnail(
+    String url
+  ) {
     @JsonCreator
-    public Thumbnail(@JsonProperty(value = "url", required = true) String url) {
+    public Thumbnail(
+      @JsonProperty(value = "url", required = true) String url
+    ) {
       this.url = url;
     }
-
-    public String getUrl() {
-      return url;
-    }
-
-    @Override
-    public String toString() {
-      return "Thumbnail{" +
-             "url='" + url + '\'' +
-             '}';
-    }
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-video-structure">Embed
-   * Video</a>.
+   * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-video-structure">Embed Video</a>
    */
   @NullMarked
-  public static class Video {
-    private final @Nullable String url;
-
+  public record Video(
+    String url
+  ) {
     @JsonCreator
-    public Video(@JsonProperty(value = "url") @Nullable String url) {
+    public Video(
+      @JsonProperty(value = "url", required = true) String url
+    ) {
       this.url = url;
     }
-
-    public @Nullable String getUrl() {
-      return url;
-    }
-
-    @Override
-    public String toString() {
-      return "Video{" +
-             "url='" + url + '\'' +
-             '}';
-    }
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-author-structure">Embed
-   * Author</a>.
+   * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-author-structure">Embed Author</a>
    */
   @NullMarked
-  public static class Author {
-    private final String name;
-    private final @Nullable String url;
-    private final @Nullable String iconUrl;
-
+  public record Author(
+    String name,
+    @Nullable String url,
+    @Nullable String iconUrl
+  ) {
     @JsonCreator
     public Author(
       @JsonProperty(value = "name", required = true) String name,
       @JsonProperty(value = "url") @Nullable String url,
-      @JsonProperty(value = "icon_url") @Nullable String iconUrl) {
+      @JsonProperty(value = "icon_url") @Nullable String iconUrl
+    ) {
       this.name = Check.lengthMax(name, "name", 256);
       this.url = url;
       this.iconUrl = iconUrl;
     }
-
-    public String getName() {
-      return name;
-    }
-
-    public @Nullable String getUrl() {
-      return url;
-    }
-
-    public @Nullable String getIconUrl() {
-      return iconUrl;
-    }
-
-    @Override
-    public String toString() {
-      return "Author{" +
-             "name='" + name + '\'' +
-             ", url='" + url + '\'' +
-             ", iconUrl='" + iconUrl + '\'' +
-             '}';
-    }
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#embed-object-embed-field-structure">Embed
-   * Field</a>.
+   * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-field-structure">Embed Field</a>
    */
   @NullMarked
-  public static class Field {
-    private final String name;
-    private final String value;
-    private final boolean inline;
-
+  public record Field(
+    String name,
+    String value,
+    boolean inline
+  ) {
     @JsonCreator
     public Field(
       @JsonProperty(value = "name", required = true) String name,
       @JsonProperty(value = "value", required = true) String value,
-      @JsonProperty(value = "inline") @Nullable Boolean inline) {
-      this.name = Check.lengthMax(name, "name", 256);
-      this.value = Check.lengthMax(value, "value", 1024);
-      this.inline = Objects.requireNonNullElse(inline, false);
-    }
-
-    public String getName() {
-      return name;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    public boolean isInline() {
-      return inline;
-    }
-
-    @Override
-    public String toString() {
-      return "Field{" +
-             "name='" + name + '\'' +
-             ", value='" + value + '\'' +
-             ", inline=" + inline +
-             '}';
+      @JsonProperty(value = "inline") @Nullable Boolean inline
+    ) {
+      this(
+        Check.lengthMax(name, "name", 256),
+        Check.lengthMax(value, "value", 1024),
+        Objects.requireNonNullElse(inline, false).booleanValue());
     }
   }
 }

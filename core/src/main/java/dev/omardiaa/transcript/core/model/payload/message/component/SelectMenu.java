@@ -9,40 +9,24 @@ import org.jspecify.annotations.Nullable;
 /**
  * Discord Select Menus:
  * <ul>
- *   <li><a href="https://discord.com/developers/docs/components/reference#string-select">String Select</a></li>
- *   <li><a href="https://discord.com/developers/docs/components/reference#user-select">User Select</a></li>
- *   <li><a href="https://discord.com/developers/docs/components/reference#role-select">Role Select</a></li>
- *   <li><a href="https://discord.com/developers/docs/components/reference#mentionable-select">Mentionable Select</a></li>
- *   <li><a href="https://discord.com/developers/docs/components/reference#channel-select">Channel Select</a></li>
+ *   <li><a href="https://docs.discord.com/developers/components/reference#string-select">String Select</a></li>
+ *   <li><a href="https://docs.discord.com/developers/components/reference#user-select">User Select</a></li>
+ *   <li><a href="https://docs.discord.com/developers/components/reference#role-select">Role Select</a></li>
+ *   <li><a href="https://docs.discord.com/developers/components/reference#mentionable-select">Mentionable Select</a></li>
+ *   <li><a href="https://docs.discord.com/developers/components/reference#channel-select">Channel Select</a></li>
  * </ul>
  */
 @NullMarked
-public class SelectMenu implements ActionRowChildComponent {
-  private final int type;
-  private final String placeholder;
-
+public record SelectMenu(
+  int type,
+  String placeholder
+) implements ActionRowChildComponent {
   @JsonCreator
   public SelectMenu(
     @JsonProperty(value = "type", required = true) int type,
-    @JsonProperty(value = "placeholder") @Nullable String placeholder) {
+    @JsonProperty(value = "placeholder") @Nullable String placeholder
+  ) {
     this.type = type;
     this.placeholder = Check.defaultIfBlank(placeholder, "Make a selection");
-  }
-
-  @Override
-  public int getType() {
-    return type;
-  }
-
-  public String getPlaceholder() {
-    return placeholder;
-  }
-
-  @Override
-  public String toString() {
-    return "SelectMenu{" +
-           "type=" + type +
-           ", placeholder='" + placeholder + '\'' +
-           '}';
   }
 }

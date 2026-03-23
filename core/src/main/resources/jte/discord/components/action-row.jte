@@ -6,7 +6,7 @@
 @param ActionRow actionRow
 
 <div class="action-row">
-  @for(ActionRowChildComponent component : actionRow.getComponents())
+  @for(ActionRowChildComponent component : actionRow.components())
     @if(component instanceof Button button)
       @template.discord.components.button(button = button)
     @elseif(component instanceof SelectMenu selectMenu)

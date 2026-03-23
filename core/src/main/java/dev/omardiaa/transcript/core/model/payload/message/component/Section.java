@@ -7,43 +7,22 @@ import org.jspecify.annotations.NullMarked;
 import java.util.List;
 
 /**
- * Discord <a href="https://docs.discord.com/developers/components/reference#section">Section</a>.
+ * <a href="https://docs.discord.com/developers/components/reference#section">Section</a>
  */
 @NullMarked
-public class Section implements ContainerChildComponent {
-  private final int type;
-  private final List<SectionChildComponent> components;
-  private final SectionAccessoryComponent accessory;
-
+public record Section(
+  int type,
+  List<SectionChildComponent> components,
+  SectionAccessoryComponent accessory
+) implements ContainerChildComponent {
   @JsonCreator
   public Section(
     @JsonProperty(value = "type", required = true) int type,
     @JsonProperty(value = "components", required = true) List<SectionChildComponent> components,
-    @JsonProperty(value = "accessory", required = true) SectionAccessoryComponent accessory) {
+    @JsonProperty(value = "accessory", required = true) SectionAccessoryComponent accessory
+  ) {
     this.type = type;
     this.components = components;
     this.accessory = accessory;
-  }
-
-  @Override
-  public int getType() {
-    return type;
-  }
-
-  public List<SectionChildComponent> getComponents() {
-    return components;
-  }
-
-  public SectionAccessoryComponent getAccessory() {
-    return accessory;
-  }
-
-  @Override
-  public String toString() {
-    return "Section{" +
-           "type=" + type +
-           ", components=" + components +
-           ", accessory=" + accessory +
-           '}';
   }
 }

@@ -7,35 +7,19 @@ import org.jspecify.annotations.NullMarked;
 import java.util.List;
 
 /**
- * Discord <a href="https://docs.discord.com/developers/components/reference#container">Container</a>.
+ * <a href="https://docs.discord.com/developers/components/reference#container">Container</a>
  */
 @NullMarked
-public class Container implements Component {
-  private final int type;
-  private final List<ContainerChildComponent> components;
-
+public record Container(
+  int type,
+  List<ContainerChildComponent> components
+) implements Component {
   @JsonCreator
   public Container(
     @JsonProperty(value = "type", required = true) int type,
-    @JsonProperty(value = "components", required = true) List<ContainerChildComponent> components) {
+    @JsonProperty(value = "components", required = true) List<ContainerChildComponent> components
+  ) {
     this.type = type;
     this.components = components;
-  }
-
-  @Override
-  public int getType() {
-    return type;
-  }
-
-  public List<ContainerChildComponent> getComponents() {
-    return components;
-  }
-
-  @Override
-  public String toString() {
-    return "Container{" +
-           "type=" + type +
-           ", components=" + components +
-           '}';
   }
 }

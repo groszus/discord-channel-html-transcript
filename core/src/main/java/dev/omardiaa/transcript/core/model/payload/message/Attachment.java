@@ -9,41 +9,26 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Discord <a href="https://discord.com/developers/docs/resources/message#attachment-object">Attachment</a>.
+ * <a href="https://docs.discord.com/developers/resources/message#attachment-object">Attachment</a>
  */
 @NullMarked
-public class Attachment {
-  private final String filename;
-  private final @Nullable String contentType;
-  private final int size;
-  private final String url;
-
+public record Attachment(
+  String filename,
+  @Nullable String contentType,
+  int size,
+  String url
+) {
   @JsonCreator
   public Attachment(
     @JsonProperty(value = "filename", required = true) String filename,
     @JsonProperty(value = "content_type") @Nullable String contentType,
     @JsonProperty(value = "size", required = true) int size,
-    @JsonProperty(value = "url", required = true) String url) {
+    @JsonProperty(value = "url", required = true) String url
+  ) {
     this.filename = filename;
     this.contentType = contentType;
     this.size = size;
     this.url = url;
-  }
-
-  public String getFilename() {
-    return filename;
-  }
-
-  public @Nullable String getContentType() {
-    return contentType;
-  }
-
-  public int getSize() {
-    return size;
-  }
-
-  public String getUrl() {
-    return url;
   }
 
   /**
@@ -52,24 +37,16 @@ public class Attachment {
    */
   @JsonIgnore
   public boolean isImage() {
-    return (contentType != null) && contentType.startsWith("image");
+    return contentType != null && contentType.startsWith("image");
   }
 
   /**
-   * @return Constructs {@link File} from {@link Attachment}.
+   * Constructs a new {@link File} from {@link Attachment}
+   *
+   * @return a new {@link File}.
    */
   @JsonIgnore
   public File toFile() {
-    return new File(13, new UnfurledMediaItem(getUrl()), getFilename(), getSize());
-  }
-
-  @Override
-  public String toString() {
-    return "Attachment{" +
-           "filename='" + filename + '\'' +
-           ", contentType='" + contentType + '\'' +
-           ", size=" + size +
-           ", url='" + url + '\'' +
-           '}';
+    return new File(13, new UnfurledMediaItem(url), filename, size);
   }
 }

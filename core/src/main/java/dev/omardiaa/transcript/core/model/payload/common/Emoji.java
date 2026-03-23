@@ -1,90 +1,51 @@
 package dev.omardiaa.transcript.core.model.payload.common;
 
-import com.fasterxml.jackson.annotation.*;
-import org.jspecify.annotations.NonNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.stream.Collectors;
 
 /**
- * Discord <a href="https://discord.com/developers/docs/resources/emoji#emoji-resource">Emoji</a>.
+ * <a href="https://docs.discord.com/developers/resources/emoji#emoji-object">Emoji</a>
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, defaultImpl = Emoji.Unicode.class)
 @JsonSubTypes({
   @JsonSubTypes.Type(value = Emoji.Unicode.class),
   @JsonSubTypes.Type(value = Emoji.Custom.class)
 })
+@NullMarked
 public sealed interface Emoji permits Emoji.Unicode, Emoji.Custom {
-  String getName();
+  String name();
 
-  final class Custom implements Emoji {
+  record Custom(
+    @JsonProperty(value = "id", required = true) String id,
+    @JsonProperty(value = "name", required = true) String name
+  ) implements Emoji {
     public final static String CUSTOM_EMOJI = "https://cdn.discordapp.com/emojis/%s.webp?animated=true";
 
-    private final String id;
-    private final String name;
-
-    @JsonCreator
-    public Custom(
-      @JsonProperty(value = "id", required = true) String id,
-      @JsonProperty(value = "name", required = true) String name) {
-      this.id = id;
-      this.name = name;
-    }
-
-    public String getId() {
-      return id;
-    }
-
-    @Override
-    public String getName() {
-      return name;
-    }
-
     /**
-     * @return <a href="https://docs.discord.com/developers/reference#image-formatting">Formatted Emoji URL</a>.
+     * @return <a href="https://docs.discord.com/developers/reference#image-formatting">Formatted Emoji URL</a>
      */
-    @JsonIgnore
-    public @NonNull String getImageUrl() {
-      return CUSTOM_EMOJI.formatted(getId());
-    }
 
-    @Override
-    public String toString() {
-      return "Custom{" +
-             "id='" + id + '\'' +
-             ", name='" + name + '\'' +
-             '}';
+    public @JsonIgnore String imageUrl() {
+      return CUSTOM_EMOJI.formatted(id);
     }
   }
 
-  final class Unicode implements Emoji {
-    private final String name;
-
-    @JsonCreator
-    public Unicode(@JsonProperty(value = "name", required = true) String name) {
-      this.name = name;
-    }
-
-    @Override
-    public String getName() {
-      return name;
-    }
-
+  record Unicode(
+    @JsonProperty(value = "name", required = true) String name
+  ) implements Emoji {
     /**
-     * @return HTML Emoji.
+     * @return HTML Unicode Emoji.
      */
-    @JsonIgnore
-    public String getAsUTF8() {
-      return getName()
+    public @JsonIgnore String asUTF8() {
+      return name
         .codePoints()
         .mapToObj(code -> "&#x" + Integer.toHexString(code) + ";")
         .collect(Collectors.joining());
-    }
-
-    @Override
-    public String toString() {
-      return "Unicode{" +
-             "name='" + name + '\'' +
-             '}';
     }
   }
 }

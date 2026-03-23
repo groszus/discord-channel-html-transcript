@@ -2,6 +2,6 @@
 
 @param User user
 
-@if(user.getTag() != null)
-  <span class="author__tag user-select-none">${user.getTag()}</span>
+@if(user.tag() != null)
+  <span class="author__tag user-select-none">${user.tag()}</span>
 @endif

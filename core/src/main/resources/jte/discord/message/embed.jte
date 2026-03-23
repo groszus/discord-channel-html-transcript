@@ -8,11 +8,11 @@
 @param Embed embed
 @param Message message
 
-@if(embed.getType() == Embed.Type.GIFV)
-  @if(embed.getVideo() != null)
+@if(embed.type() == Embed.Type.GIFV)
+  @if(embed.video() != null)
     <video
-      src="${embed.getVideo().getUrl()}"
-      data-embed-type="${embed.getType().name()}"
+      src="${embed.video().url()}"
+      data-embed-type="${embed.type().name()}"
       class="embed"
       playsinline <%-- iOS --%>
       autoplay
@@ -20,112 +20,111 @@
       loop
     ></video>
   @endif
-@elseif (embed.getType() == Embed.Type.RICH)
+@elseif (embed.type() == Embed.Type.RICH)
   <article
-    style="${embed.getColor() == null ? "" : "border-left-color: " + embed.getColor()}"
-    data-embed-type="${embed.getType()}"
+    style="${embed.color() == null ? "" : "border-left-color: " + embed.color()}"
+    data-embed-type="${embed.type()}"
     class="embed"
   >
-    @if(embed.getAuthor() != null)
+    @if(embed.author() != null)
       <div class="embed__author embed__margin">
-        @if(embed.getAuthor().getIconUrl() != null)
+        @if(embed.author().iconUrl() != null)
           <img
-            src="${embed.getAuthor().getIconUrl()}"
+            src="${embed.author().iconUrl()}"
             alt="Embed Author"
             class="embed__author__icon"
           />
         @endif
 
-        @if(embed.getAuthor().getUrl() != null)
+        @if(embed.author().url() != null)
           <a
-            href="${embed.getAuthor().getUrl()}"
+            href="${embed.author().url()}"
             class="embed__author__name markup"
           >
-            ${embed.getAuthor().getName()}
+            ${embed.author().name()}
           </a>
         @else
-          <span class="embed__author__name">${embed.getAuthor().getName()}</span>
+          <span class="embed__author__name">${embed.author().name()}</span>
         @endif
       </div>
     @endif
 
-    @if(embed.getTitle() != null)
+    @if(embed.title() != null)
       <div class="embed__title embed__margin">
-        @if(embed.getUrl() != null)
+        @if(embed.url() != null)
           <a
-            href="${embed.getUrl()}"
+            href="${embed.url()}"
             class="markup"
           >
-            ${embed.getTitle()}
+            ${embed.title()}
           </a>
         @else
-          <span>${embed.getTitle()}</span>
+          <span>${embed.title()}</span>
         @endif
       </div>
     @endif
 
-    @if(embed.getDescription() != null)
+    @if(embed.description() != null)
       <div class="embed__description embed__margin">
-        <span>$unsafe{MarkdownUtil.parseMarkup(guild, message, embed.getDescription())}</span>
+        <span>$unsafe{MarkdownUtil.parseMarkup(guild, message, embed.description())}</span>
       </div>
     @endif
 
-    @if((embed.getFields() != null) && !embed.getFields().isEmpty())
+    @if((embed.fields() != null) && !embed.fields().isEmpty())
       <div class="embed__fields">
-        @for(Embed.Field field : embed.getFields())
+        @for(Embed.Field field : embed.fields())
           <div
-            data-embed-field-inline="${field.isInline()}"
+            data-embed-field-inline="${field.inline()}"
             class="embed__field"
           >
             <div class="embed__field__name">
-              <span>${field.getName()}</span>
+              <span>${field.name()}</span>
             </div>
 
             <div class="embed__field__value">
-              <span>${field.getValue()}</span>
+              <span>${field.value()}</span>
             </div>
           </div>
         @endfor
       </div>
     @endif
 
-    @if(embed.getImage() != null)
+    @if(embed.image() != null)
       <div class="embed__image__wrapper">
         <img
-          src="${embed.getImage().getUrl()}"
+          src="${embed.image().url()}"
           alt="Embed Image"
           class="embed__image"
         />
       </div>
     @endif
 
-    @if(embed.getThumbnail() != null)
+    @if(embed.thumbnail() != null)
       <div class="embed__thumbnail__wrapper">
         <img
-          src="${embed.getThumbnail().getUrl()}"
+          src="${embed.thumbnail().url()}"
           alt="Embed Thumbnail"
           class="embed__thumbnail"
         />
       </div>
     @endif
 
-    @if(embed.getFooter() != null)
+    @if(embed.footer() != null)
       <div class="embed__footer embed__margin">
-        @if(embed.getFooter().getIconUrl() != null)
+        @if(embed.footer().iconUrl() != null)
           <img
-            src="${embed.getFooter().getIconUrl()}"
+            src="${embed.footer().iconUrl()}"
             alt="Embed Footer Icon"
             class="embed__footer__icon"
           />
         @endif
 
         <span class="embed__footer__text">
-        <span>${embed.getFooter().getText()}</span>
+        <span>${embed.footer().text()}</span>
 
-        @if(embed.getTimestamp() != null)
-          <span>•</span>
-
-          <span>${TimeUtil.formatDateShort(embed.getTimestamp())}</span>
+        @if(embed.timestamp() != null)
+          <span>&bull;</span>
+          <span>${TimeUtil.formatDateShort(embed.timestamp())}</span>
         @endif
       </span>
       </div>

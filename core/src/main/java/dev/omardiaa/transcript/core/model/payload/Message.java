@@ -18,7 +18,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * <a href="https://docs.discord.com/developers/resources/message#message-object">Message</a>.
+ * <a href="https://docs.discord.com/developers/resources/message#message-object">Message</a>
  */
 @NullMarked
 public record Message(
@@ -72,7 +72,7 @@ public record Message(
       poll,
       mentions.isEmpty()
         ? Collections.emptyMap()
-        : mentions.stream().collect(Collectors.toUnmodifiableMap(User::getId, Function.identity())),
+        : mentions.stream().collect(Collectors.toUnmodifiableMap(User::id, Function.identity())),
       attachments.stream().filter(Attachment::isImage).toList(),
       attachments.stream().filter(a -> !a.isImage()).map(Attachment::toFile).toList());
   }

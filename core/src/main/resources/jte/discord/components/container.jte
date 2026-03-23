@@ -3,11 +3,11 @@
 @import dev.omardiaa.transcript.core.model.payload.message.component.*
 
 @param Guild guild
-@param Container container
 @param Message message
+@param Container container
 
 <div class="container">
-  @for(ContainerChildComponent component : container.getComponents())
+  @for(ContainerChildComponent component : container.components())
     @if(component instanceof ActionRow actionRow)
       @template.discord.components.action-row(actionRow = actionRow)
     @elseif(component instanceof TextDisplay textDisplay)

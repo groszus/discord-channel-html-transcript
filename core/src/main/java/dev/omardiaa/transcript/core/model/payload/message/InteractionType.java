@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Discord <a href="https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-object-interaction-type">Interaction Type</a>.
+ * <a href="https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-object-interaction-type">Interaction Type</a>
  */
 public enum InteractionType {
   UNKNOWN(-1),

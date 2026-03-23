@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
- * Discord <a href="https://discord.com/developers/docs/components/reference#anatomy-of-a-component">Component</a>.
+ * <a href="https://docs.discord.com/developers/components/reference#anatomy-of-a-component">Component</a>
  */
 @JsonTypeInfo(
   use = JsonTypeInfo.Id.NAME,
@@ -26,5 +26,5 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
   @JsonSubTypes.Type(value = Container.class, name = "17")
 })
 public interface Component {
-  int getType();
+  int type();
 }

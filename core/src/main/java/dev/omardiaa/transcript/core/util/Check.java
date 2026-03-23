@@ -23,7 +23,7 @@ public final class Check {
    * @throws IllegalArgumentException
    *   if the {@code expression} evaluates to {@code false}.
    */
-  private static void check(boolean expression, String message, Object... messageArgs) {
+  public static void check(boolean expression, String message, Object... messageArgs) {
     if (!expression) {
       throw new IllegalArgumentException(String.format(message, messageArgs));
     }
@@ -72,19 +72,19 @@ public final class Check {
   /**
    * @param arg
    *   the string to validate.
+   * @param argName
+   *   the name of the argument, used in the exception message.
    * @param min
    *   the minimum allowed length (inclusive).
    * @param max
    *   the maximum allowed length (inclusive).
-   * @param argName
-   *   the name of the argument, used in the exception message.
    *
    * @return the validated string.
    *
    * @throws IllegalArgumentException
    *   if the string is {@code null}, or if its length is outside the provided range.
    */
-  public static String lengthRange(String arg, int min, int max, String argName) {
+  public static String lengthRange(String arg, String argName, int min, int max) {
     notNull(arg, argName);
     long length = arg.codePoints().count();
     check(

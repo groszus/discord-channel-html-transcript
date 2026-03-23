@@ -18,12 +18,12 @@ public final class IconUtil {
   private IconUtil() {}
 
   /**
-   * Draws an Icon of {@link Guild#getName()} initials.
+   * Draws an Icon of {@link Guild#name()} initials.
    *
    * @param str
    *   the sentence used to retrieve the initials from.
    *
-   * @return a base64 encoded {@code image/png} of the {@link Guild#getName()} initials.
+   * @return a base64 encoded {@code image/png} of the {@link Guild#name()} initials.
    */
   public static String drawGuildIcon(String str) {
     int width = 50;

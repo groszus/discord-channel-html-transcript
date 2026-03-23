@@ -7,7 +7,7 @@
 @if(!message.images().isEmpty())
   <div class="images" data-count="${message.images().size()}">
     @for(Attachment image : message.images())
-      @template.util.image(src = image.getUrl())
+      @template.util.image(src = image.url())
     @endfor
   </div>
 @endif

@@ -12,24 +12,27 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
+/**
+ * A model class for the required payload to transcribe.
+ *
+ * @see Transcriber#transcribe(Payload)
+ */
 @NullMarked
-public class Payload {
-  private final Guild guild;
-  private final Channel channel;
-  private final List<Message> messages;
-  private final @Nullable String stylePath;
-
+public record Payload(
+  Guild guild,
+  Channel channel,
+  List<Message> messages,
+  @Nullable String stylePath
+) {
   /**
-   * Constructs a payload that's used to generate the HTML.
-   *
    * @param guild
-   *   Discord Guild.
+   *   the Discord Guild.
    * @param channel
-   *   Discord Channel from {@code guild}.
+   *   the Discord Channel that belongs to the provided {@code guild}.
    * @param messages
-   *   Discord Messages from {@code channel}.
+   *   the Discord Messages that belong to the provided {@code channel}.
    * @param stylePath
-   *   Only specify if you want to use an alternative {@code style.css}.
+   *   the custom {@code style.css} path.
    *
    * @see Transcriber#transcribe(Payload)
    */
@@ -38,36 +41,11 @@ public class Payload {
     @JsonProperty("guild") Guild guild,
     @JsonProperty("channel") Channel channel,
     @JsonProperty("messages") List<Message> messages,
-    @JsonProperty("stylePath") @Nullable String stylePath) {
+    @JsonProperty("stylePath") @Nullable String stylePath
+  ) {
     this.guild = guild;
     this.channel = channel;
     this.messages = Check.sizeMin(messages, "messages", 1);
     this.stylePath = stylePath;
-  }
-
-  public Guild getGuild() {
-    return guild;
-  }
-
-  public Channel getChannel() {
-    return channel;
-  }
-
-  public List<Message> getMessages() {
-    return messages;
-  }
-
-  public @Nullable String getStylePath() {
-    return stylePath;
-  }
-
-  @Override
-  public String toString() {
-    return "Payload{" +
-           "guild=" + guild +
-           ", channel=" + channel +
-           ", messages=" + messages +
-           ", testStylePath='" + stylePath + '\'' +
-           '}';
   }
 }

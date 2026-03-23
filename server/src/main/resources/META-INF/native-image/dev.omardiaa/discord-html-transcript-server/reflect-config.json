@@ -1,15 +1,18 @@
 [
   {
     "name": "dev.omardiaa.transcript.core.model.Payload",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.Channel",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.Guild",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.Message",
@@ -18,59 +21,73 @@
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.common.Emoji$Custom",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.common.Emoji$Unicode",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.common.Role",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.common.Role$Colors",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.common.UnfurledMediaItem",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.Attachment",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.Embed",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Type",
+    "allDeclaredConstructors": true,
     "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Footer",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Image",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Thumbnail",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Video",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Author",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.Embed$Field",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.InteractionMetadata",
@@ -117,11 +134,13 @@
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.ActionRow",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.Button",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.ButtonStyle",
@@ -129,31 +148,38 @@
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.Container",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.File",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.MediaGallery",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.MediaGallery$Item",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.Section",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.SelectMenu",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.Separator",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.SeparatorSpacing",
@@ -161,11 +187,13 @@
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.TextDisplay",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.component.Thumbnail",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.server.exception.ErrorResponse",

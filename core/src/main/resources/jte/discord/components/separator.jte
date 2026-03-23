@@ -3,7 +3,7 @@
 @param Separator separator
 
 <hr
-  aria-hidden="${!separator.isDivider()}"
-  data-separator-spacing="${separator.getSpacing().name()}"
+  aria-hidden="${!separator.divider()}"
+  data-separator-spacing="${separator.spacing().name()}"
   class="separator"
 />

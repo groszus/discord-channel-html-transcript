@@ -8,18 +8,18 @@
 
 <div class="section">
   <div class="section__content">
-    @for(SectionChildComponent component : section.getComponents())
+    @for(SectionChildComponent component : section.components())
       @if(component instanceof TextDisplay textDisplay)
-        @template.discord.message.content(guild = guild, message = message, content = textDisplay.getContent())
+        @template.discord.message.content(guild = guild, message = message, content = textDisplay.content())
       @endif
     @endfor
   </div>
 
   <div class="section__accessory">
-    @if(section.getAccessory() instanceof Button button)
+    @if(section.accessory() instanceof Button button)
       @template.discord.components.button(button = button)
-    @elseif(section.getAccessory() instanceof Thumbnail thumbnail)
-      @template.util.image(src = thumbnail.getMedia().getUrl())
+    @elseif(section.accessory() instanceof Thumbnail thumbnail)
+      @template.util.image(src = thumbnail.media().url())
     @endif
   </div>
 </div>

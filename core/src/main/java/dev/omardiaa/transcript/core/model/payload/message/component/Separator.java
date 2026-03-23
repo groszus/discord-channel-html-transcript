@@ -8,43 +8,23 @@ import org.jspecify.annotations.Nullable;
 import java.util.Objects;
 
 /**
- * Discord <a href="https://docs.discord.com/developers/components/reference#separator">Separator</a>.
+ * <a href="https://docs.discord.com/developers/components/reference#separator">Separator</a>
  */
 @NullMarked
-public class Separator implements ContainerChildComponent {
-  private final int type;
-  private final boolean divider;
-  private final SeparatorSpacing spacing;
-
+public record Separator(
+  int type,
+  boolean divider,
+  SeparatorSpacing spacing
+) implements ContainerChildComponent {
   @JsonCreator
   public Separator(
     @JsonProperty(value = "type", required = true) int type,
     @JsonProperty(value = "divider") @Nullable Boolean divider,
-    @JsonProperty(value = "spacing") @Nullable SeparatorSpacing spacing) {
-    this.type = type;
-    this.divider = Objects.requireNonNullElse(divider, true);
-    this.spacing = Objects.requireNonNullElse(spacing, SeparatorSpacing.SMALL);
-  }
-
-  @Override
-  public int getType() {
-    return type;
-  }
-
-  public boolean isDivider() {
-    return divider;
-  }
-
-  public SeparatorSpacing getSpacing() {
-    return spacing;
-  }
-
-  @Override
-  public String toString() {
-    return "Separator{" +
-           "type=" + type +
-           ", divider=" + divider +
-           ", spacing=" + spacing +
-           '}';
+    @JsonProperty(value = "spacing") @Nullable SeparatorSpacing spacing
+  ) {
+    this(
+      type,
+      Objects.requireNonNullElse(divider, true).booleanValue(),
+      Objects.requireNonNullElse(spacing, SeparatorSpacing.SMALL));
   }
 }

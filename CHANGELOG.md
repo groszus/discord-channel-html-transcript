@@ -12,6 +12,7 @@
 #### Changed
 
 - Bump jackson from 2.21.1 to 2.21.2.
+- Update all payload models from POJOs to Records.
 
 #### Fixed
 

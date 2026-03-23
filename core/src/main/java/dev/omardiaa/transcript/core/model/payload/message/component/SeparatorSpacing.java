@@ -10,11 +10,12 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * <a href="https://docs.discord.com/developers/components/reference#separator">Separator Spacing</a>
+ */
 @NullMarked
 public enum SeparatorSpacing {
-  UNKNOWN(-1),
-  SMALL(1),
-  LARGE(2);
+  UNKNOWN(-1), SMALL(1), LARGE(2);
 
   private static final Map<Integer, SeparatorSpacing> SEPARATOR_SPACING_MAP = Arrays
     .stream(values()).collect(Collectors.toUnmodifiableMap(SeparatorSpacing::getValue, Function.identity()));

@@ -8,12 +8,12 @@
 <header class="header user-select-none">
   <div class="header__guild">
     <img
-      src="${guild.getIconUrl()}"
-      alt="${guild.getName()}"
+      src="${guild.iconUrl()}"
+      alt="${guild.name()}"
       class="header__guild__icon"
     />
 
-    <span class="header__guild__name">${guild.getName()}</span>
+    <span class="header__guild__name">${guild.name()}</span>
   </div>
 
   <div class="header__channel">
@@ -29,11 +29,11 @@
       />
     </svg>
 
-    <h1 class="header__channel__title">${channel.getName()}</h1>
+    <h1 class="header__channel__title">${channel.name()}</h1>
 
-    @if(channel.getTopic() != null)
+    @if(channel.topic() != null)
       <span class="header__channel__divider">&bull;</span>
-      <p class="header__channel__topic markup">$unsafe{MarkdownUtil.parseMarkup(channel.getTopic())}</p>
+      <p class="header__channel__topic markup">$unsafe{MarkdownUtil.parseMarkup(channel.topic())}</p>
     @endif
   </div>
 </header>
