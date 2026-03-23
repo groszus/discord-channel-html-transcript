@@ -7,6 +7,7 @@
 #### Added
 
 - Support for Block Quote markdown.
+- Support for Message Poll.
 
 #### Changed
 

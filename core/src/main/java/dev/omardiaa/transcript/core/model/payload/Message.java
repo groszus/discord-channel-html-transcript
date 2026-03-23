@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.omardiaa.transcript.core.model.payload.common.Emoji;
-import dev.omardiaa.transcript.core.model.payload.message.Attachment;
-import dev.omardiaa.transcript.core.model.payload.message.Embed;
-import dev.omardiaa.transcript.core.model.payload.message.InteractionType;
-import dev.omardiaa.transcript.core.model.payload.message.User;
+import dev.omardiaa.transcript.core.model.payload.message.*;
 import dev.omardiaa.transcript.core.model.payload.message.component.Component;
 import dev.omardiaa.transcript.core.model.payload.message.component.File;
 import org.jspecify.annotations.NullMarked;
@@ -38,6 +35,7 @@ public class Message {
   private final @Nullable Message referencedMessage;
   private final @Nullable InteractionMetadata interactionMetadata;
   private final @Nullable List<Component> components;
+  private final @Nullable Poll poll;
 
   @JsonIgnore
   private final Map<String, User> mentionsMap;
@@ -62,7 +60,8 @@ public class Message {
     @JsonProperty(value = "flags") @Nullable Integer flags,
     @JsonProperty(value = "referenced_message") @Nullable Message referencedMessage,
     @JsonProperty(value = "interaction_metadata") @Nullable InteractionMetadata interactionMetadata,
-    @JsonProperty(value = "components") @Nullable List<Component> components) {
+    @JsonProperty(value = "components") @Nullable List<Component> components,
+    @JsonProperty(value = "poll") @Nullable Poll poll) {
     this.id = id;
     this.author = author;
     this.content = content;
@@ -75,6 +74,7 @@ public class Message {
     this.referencedMessage = referencedMessage;
     this.interactionMetadata = interactionMetadata;
     this.components = components;
+    this.poll = poll;
     this.mentionsMap = mentions.isEmpty()
       ? Collections.emptyMap()
       : mentions.stream().collect(Collectors.toUnmodifiableMap(User::getId, Function.identity()));
@@ -128,6 +128,10 @@ public class Message {
 
   public @Nullable List<Component> getComponents() {
     return components;
+  }
+
+  public @Nullable Poll getPoll() {
+    return poll;
   }
 
   /**
@@ -187,6 +191,7 @@ public class Message {
            ", referencedMessage=" + referencedMessage +
            ", interactionMetadata=" + interactionMetadata +
            ", components=" + components +
+           ", poll=" + poll +
            ", mentionsMap=" + mentionsMap +
            ", images=" + images +
            ", files=" + files +
@@ -226,7 +231,9 @@ public class Message {
   }
 
   /**
-   * Discord <a href="https://discord.com/developers/docs/resources/message#message-interaction-metadata-object">Interaction Metadata</a>.
+   * Discord <a
+   * href="https://discord.com/developers/docs/resources/message#message-interaction-metadata-object">Interaction
+   * Metadata</a>.
    */
   @NullMarked
   public static class InteractionMetadata {

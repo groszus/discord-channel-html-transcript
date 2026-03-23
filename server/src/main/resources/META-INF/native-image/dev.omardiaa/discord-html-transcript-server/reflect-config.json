@@ -84,6 +84,31 @@
     "allDeclaredMethods": true
   },
   {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Poll",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Poll$Media",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Poll$Answer",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Poll$Results",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Poll$AnswerCount",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
     "name": "dev.omardiaa.transcript.core.model.payload.message.User",
     "allDeclaredConstructors": true
   },

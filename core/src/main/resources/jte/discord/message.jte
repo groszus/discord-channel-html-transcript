@@ -17,14 +17,18 @@
   @endif
 
   <div class="message__accessories">
-    @template.discord.message.attachments(message = message)
+    @if(message.getPoll() != null)
+      @template.discord.message.poll(poll = message.getPoll())
+    @else
+      @template.discord.message.attachments(message = message)
 
-    @for(Embed embed : message.getEmbeds())
-      @template.discord.message.embed(guild = guild, message = message, embed = embed)
-    @endfor
+      @for(Embed embed : message.getEmbeds())
+        @template.discord.message.embed(guild = guild, message = message, embed = embed)
+      @endfor
 
-    @template.discord.message.components(guild = guild, message = message)
+      @template.discord.message.components(guild = guild, message = message)
 
-    @template.discord.message.reactions(message = message)
+      @template.discord.message.reactions(message = message)
+    @endif
   </div>
 </div>

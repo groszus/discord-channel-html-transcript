@@ -71,7 +71,7 @@
               "components": [
                 {
                   "type": 10,
-                  "content": "### 🌍 Hello World!\nHello <@&1468338544916299968>s! I'm <@974748803305455627>, I created this library to transcribe <#1360350099083100353>. My current time is <t:1893456000>."
+                  "content": "### 🌍 Hello World!\nHello <@&1468338544916299968>s! I'm <@974748803305455627> <:hmmm:1320578753696366622>, I created this library to transcribe <#1360350099083100353>. My current time is <t:1893456000>."
                 }
               ],
               "accessory": {
@@ -326,6 +326,91 @@
           }
         }
       ]
+    },
+    {
+      "id": "4",
+      "author": {
+        "id": "974748803305455627",
+        "username": "omardiaadev",
+        "discriminator": "0",
+        "global_name": "Omar Diaa",
+        "avatar": "e263fe6110a7203f5c7df15861e4f97d"
+      },
+      "content": "# Referenced Message",
+      "timestamp": "2030-01-01T00:08:00.000Z",
+      "mentions": [],
+      "attachments": [],
+      "embeds": [],
+      "referenced_message": {
+        "id": "3",
+        "author": {
+          "id": "974748803305455627",
+          "username": "omardiaadev",
+          "discriminator": "0",
+          "global_name": "Omar Diaa",
+          "avatar": "e263fe6110a7203f5c7df15861e4f97d"
+        },
+        "content": "",
+        "timestamp": "2030-01-01T00:08:00.000Z",
+        "edited_timestamp": "2030-01-01T00:00:00.000Z",
+        "mentions": [],
+        "attachments": [],
+        "embeds": []
+      }
+    },
+    {
+      "id": "5",
+      "author": {
+        "id": "1458491524093575323",
+        "username": "VORTEX",
+        "discriminator": "5928",
+        "global_name": "VORTEX",
+        "avatar": "7fab0949a0bc7a953682a6361aa91278",
+        "bot": true
+      },
+      "content": "",
+      "timestamp": "2030-01-01T00:08:00.000Z",
+      "mentions": [],
+      "attachments": [],
+      "embeds": [],
+      "poll": {
+        "question": {
+          "text": "Question"
+        },
+        "answers": [
+          {
+            "answer_id": 1,
+            "poll_media": {
+              "text": "yes",
+              "emoji": {
+                "id": "1482825788062568672",
+                "name": "github"
+              }
+            }
+          },
+          {
+            "answer_id": 2,
+            "poll_media": {
+              "text": "no",
+              "emoji": {
+                "id": null,
+                "name": "😂"
+              }
+            }
+          },
+          {
+            "answer_id": 3,
+            "poll_media": {
+              "text": "maybe"
+            }
+          }
+        ],
+        "expiry": "2030-01-01T00:08:00.000Z",
+        "allow_multiselect": false,
+        "results": {
+          "answer_counts": []
+        }
+      }
     }
   ]
 }

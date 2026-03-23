@@ -40,7 +40,7 @@
         <img alt="NEW" src="https://img.shields.io/badge/NEW-FF2E2E" height="12">
     </li>
     <li><strong>Markdown:</strong> Standard Markup, Mentions, Custom Emojis, and more...</li>
-    <li><strong>Message Accessories:</strong> Attachments, Embeds, Reactions, References, and more...</li>
+    <li><strong>Message Accessories:</strong> Attachments, Embeds, Polls, References, and more...</li>
 </ul>
 
 **To-Do**
@@ -53,7 +53,7 @@
 ## Preview
 
 <a title="Click For Full Preview" href="https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/transcript.html">
-    <img alt="Preview" src="https://res.cloudinary.com/omardiaadev/image/upload/v1771423142/discord-html-transcript_ocjq03.png">
+    <img alt="Preview" src="https://res.cloudinary.com/omardiaadev/image/upload/discord-html-transcript_ocjq03.png">
 </a>
 
 ## Usage
@@ -66,7 +66,7 @@ There are 3 ways to use this library:
 
 ### 1. Library (Recommended)
 
-The following libraries automatically retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
+The following libraries retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
 while safely handling Discord's rate limits.
 
 Choose the library that corresponds with the Discord API you use:

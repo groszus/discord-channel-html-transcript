@@ -185,7 +185,8 @@
       --text-normal: oklch(0.952 0.001 286.375);
       --text-secondary: oklch(0.74 0.01 286.154);
       --text-muted: oklch(0.671 0.01 279.601);
-      --text-link: oklch(0.67 0.152 254.26);
+      --text-subtle: oklch(0.745 0.009 278.589);
+      --text-link: oklch(0.667 0.15 254.514);
 
       --header-primary: oklch(0.988 0 89.876);
       --header-bar-background: var(--background-base-lower);
@@ -360,14 +361,9 @@
     }
 
     .reference__message__context {
-      line-height: inherit;
-      display: flex;
-      overflow: hidden;
-      align-items: center;
-      max-height: 18px;
+      font-style: italic;
       opacity: 0.64;
       color: var(--header-primary);
-      gap: 0.25rem;
     }
 
     .reference__message__context:hover {
@@ -752,6 +748,88 @@
       color: var(--text-normal);
     }
 
+    .poll {
+      overflow: hidden;
+      min-width: 302px;
+      max-width: 472px;
+      margin: 0.25rem 0;
+      padding: 1rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.5rem;
+      background-color: var(--background-surface-high);
+    }
+
+    .poll__header {
+      display: grid;
+      gap: 0.25rem 0.5rem;
+      grid-template-areas: "question" "prompt";
+      grid-template-columns: 1fr 24px;
+    }
+
+    .poll__header__question {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.25;
+      word-break: break-word;
+      color: var(--header-primary);
+      grid-area: question;
+    }
+
+    .poll__header__prompt {
+      font-size: .875rem;
+      color: var(--text-muted);
+      grid-area: prompt;
+    }
+
+    .poll__answers {
+      display: grid;
+      margin: 0.5rem 0 1rem;
+      gap: 0.5rem;
+    }
+
+    .poll__answer {
+      display: flex;
+      overflow: hidden;
+      align-items: center;
+      min-height: 50px;
+      padding: 0.5rem 1rem;
+      word-break: break-word;
+      color: oklch(0.953 0.003 286.349);
+      border-radius: 0.5rem;
+      background-color: var(--border-faint);
+      gap: 0.75rem;
+    }
+
+    .poll__answer__emoji {
+      font-size: 1.125rem;
+      width: 22px;
+      height: 22px;
+    }
+
+    .poll__answer__text {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-inline-end: auto;
+    }
+
+    .poll__details {
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      min-height: 38px;
+      gap: 0.5rem;
+    }
+
+    .poll_details__votes {
+      font-weight: 500;
+      color: var(--header-primary);
+    }
+
+    .poll_details__expiry {
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
     .reactions {
       display: flex;
       align-items: center;
@@ -943,11 +1021,6 @@
       gap: 0.25rem;
     }
 
-    .components > .images,
-    .container > .images {
-
-    }
-
     .images[data-count="1"] {
       max-width: 350px;
     }
@@ -1089,8 +1162,24 @@
     img.markup {
       width: 20px;
       height: 20px;
-      vertical-align: bottom;
+      vertical-align: text-top;
       object-fit: contain;
+    }
+
+    blockquote.markup {
+      color: var(--text-subtle);
+      padding-inline: 0.75rem 0.5rem;
+    }
+
+    .markup__blockquote__divider {
+      width: 4px;
+      border-radius: 0.25rem;
+      background-color: var(--spine-default);
+    }
+
+    .markup__blockquote__container {
+      display: flex;
+      margin: 0.25rem 0;
     }
 
     .mention {
@@ -1286,14 +1375,19 @@
                   <div class="message__content markup">
                     <h3 class="markup"><span>🌍 Hello World!</span><br></h3><span>
 Hello <span
+                    onmouseout="this.style.backgroundColor='#8534f310';"
                     style="color: #8534f3; background-color: #8534f310;"
                     onmouseover="this.style.backgroundColor='#8534f330';"
-                    onmouseout="this.style.backgroundColor='#8534f310';"
                     class="mention"
                   >Developer</span>s! I'm <a
                     href="https://discord.com/users/974748803305455627"
                     class="mention"
-                  >@Omar Diaa</a>, I created this library to transcribe <span class="mention"><svg
+                  >@Omar Diaa</a> <img
+                    src="https://cdn.discordapp.com/emojis/1320578753696366622.webp?animated=true"
+                    alt="hmmm"
+                    title="hmmm"
+                    class="markup"
+                  >, I created this library to transcribe <span class="mention"><svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
@@ -1349,19 +1443,15 @@ Hello <span
 
                   <div class="message__content markup">
                     <h3 class="markup"><span>Links</span><br></h3><span>
-- Link: </span><a href="https://omardiaa.dev/" target="_blank" class="markup"><span>https://omardiaa.dev/</span></a><br><span>
-- Masked Link: </span><a href="https://omardiaa.dev/" target="_blank" class="markup"><span>omardiaa</span></a><br><span>
-</span>
-                    <h3 class="markup"><span>Quote</span><br></h3><span>
-</span>
+- Link: </span><a href="https://omardiaa.dev/" class="markup" target="_blank"><span>https://omardiaa.dev/</span></a><br><span>
+- Masked Link: </span><a href="https://omardiaa.dev/" class="markup" target="_blank"><span>omardiaa</span></a><br>
+                    <h3 class="markup"><span>Quote</span><br></h3>
                     <div class="markup__blockquote__container">
                       <div class="markup__blockquote__divider"></div>
                       <blockquote class="markup"><span>The code you write makes you a programmer.</span><br><span>
 The code you delete makes you a GOOD programmer.</span><br><span>
 - Mario Fusco, Java developer</span><br></blockquote>
                     </div>
-                    <span>
-</span>
                     <h3 class="markup"><span>Code</span><br></h3><span>
 <code data-code-style="INLINE" class="markup">System.out.println("discord-html-transcript");</code></span><br><span>
 <pre><code data-code-style="BLOCK" class="markup">
@@ -1633,12 +1723,12 @@ public class Main {
       <div id="2">
 
         <div class="message__content markup">
-          <h1 class="markup"><span>Embeds</span><br></h1><span>
-</span><a
-          href="https://tenor.com/view/pacha-okay-great-meme-just-perfect-gif-13268829466700541863"
-          target="_blank"
-          class="markup"
-        ><span>https://tenor.com/view/pacha-okay-great-meme-just-perfect-gif-13268829466700541863</span></a>
+          <h1 class="markup"><span>Embeds</span><br></h1>
+          <a
+            href="https://tenor.com/view/pacha-okay-great-meme-just-perfect-gif-13268829466700541863"
+            class="markup"
+            target="_blank"
+          ><span>https://tenor.com/view/pacha-okay-great-meme-just-perfect-gif-13268829466700541863</span></a>
         </div>
 
         <div class="message__edited user-select-none">
@@ -2044,6 +2134,289 @@ public class Main {
               <span class="reaction__count">420</span>
             </div>
 
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </li>
+
+  <li
+    data-show-author="true"
+    class="message"
+  >
+
+    <div class="reference__spine"></div>
+
+    <div class="reference user-select-none">
+
+      <img
+        src="https://cdn.discordapp.com/avatars/974748803305455627/e263fe6110a7203f5c7df15861e4f97d.webp?animated=true"
+        alt="omardiaadev"
+        class="reference__author__avatar"
+      >
+
+      <a
+        href="https://discord.com/users/974748803305455627"
+        title="omardiaadev"
+        class="reference__author__name"
+      >
+        Omar Diaa
+      </a>
+
+      <a
+        href="#3"
+        class="reference__message__context"
+      >
+        Click to see message
+      </a>
+    </div>
+
+    <div class="author__avatar__container user-select-none">
+
+      <img
+        src="https://cdn.discordapp.com/avatars/974748803305455627/e263fe6110a7203f5c7df15861e4f97d.webp?animated=true"
+        alt="Avatar"
+        class="author__avatar"
+      />
+
+    </div>
+
+    <div>
+
+      <h3 class="author">
+        <a
+          href="https://discord.com/users/974748803305455627"
+          title="omardiaadev"
+          class="author__name"
+        >
+          Omar Diaa
+        </a>
+
+        <div class="author__timestamp">
+
+          <div class="timestamp">
+            <time>Tuesday, January 1, 2030 at 12:08 AM (UTC)</time>
+
+            <div class="timestamp__caret">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 10"
+                width="16"
+                height="10"
+                fill="none"
+                class="timestamp__caret-fill"
+                style="overflow-clip-margin: content-box; overflow: hidden;"
+              >
+                <path
+                  d="M10.3426 7.0715C9.14163 8.57272 6.85837 8.57272 5.65739 7.0715L0 -0.000244141L16 -0.000244141L10.3426 7.0715Z"
+                  class="timestamp__caret-fill"
+                />
+
+                <mask
+                  id="timestamp-caret-mask"
+                  x="0"
+                  y="-1"
+                  width="16"
+                  height="10"
+                  style="mask-type: alpha;"
+                >
+                  <path
+                    d="M10.3426 7.0715C9.14163 8.57272 6.85837 8.57272 5.65739 7.0715L0 -0.000244141L16 -0.000244141L10.3426 7.0715Z"
+                    class="timestamp__caret-fill"
+                  />
+                </mask>
+
+                <g mask="url(#timestamp-caret-mask)">
+                  <path
+                    d="M9.93457 6.84546C8.93433 8.06766 7.06567 8.06766 6.06543 6.84546L0.0546875 -0.500244L15.9453 -0.500244L9.93457 6.84546Z"
+                    class="timestamp__caret-stroke"
+                  />
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <time>1/1/30, 12:08 AM (UTC)</time>
+        </div>
+      </h3>
+
+      <div id="4">
+
+        <div class="message__content markup">
+          <h1 class="markup"><span>Referenced Message</span></h1>
+        </div>
+
+        <div class="message__accessories">
+
+        </div>
+      </div>
+
+    </div>
+  </li>
+
+  <li
+    data-show-author="true"
+    class="message"
+  >
+
+    <div class="author__avatar__container user-select-none">
+
+      <img
+        src="https://cdn.discordapp.com/avatars/1458491524093575323/7fab0949a0bc7a953682a6361aa91278.webp?animated=true"
+        alt="Avatar"
+        class="author__avatar"
+      />
+
+    </div>
+
+    <div>
+
+      <h3 class="author">
+        <a
+          href="https://discord.com/users/1458491524093575323"
+          title="VORTEX#5928"
+          class="author__name"
+        >
+          VORTEX
+        </a>
+
+        <span class="author__tag user-select-none">APP</span>
+
+        <div class="author__timestamp">
+
+          <div class="timestamp">
+            <time>Tuesday, January 1, 2030 at 12:08 AM (UTC)</time>
+
+            <div class="timestamp__caret">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 10"
+                width="16"
+                height="10"
+                fill="none"
+                class="timestamp__caret-fill"
+                style="overflow-clip-margin: content-box; overflow: hidden;"
+              >
+                <path
+                  d="M10.3426 7.0715C9.14163 8.57272 6.85837 8.57272 5.65739 7.0715L0 -0.000244141L16 -0.000244141L10.3426 7.0715Z"
+                  class="timestamp__caret-fill"
+                />
+
+                <mask
+                  id="timestamp-caret-mask"
+                  x="0"
+                  y="-1"
+                  width="16"
+                  height="10"
+                  style="mask-type: alpha;"
+                >
+                  <path
+                    d="M10.3426 7.0715C9.14163 8.57272 6.85837 8.57272 5.65739 7.0715L0 -0.000244141L16 -0.000244141L10.3426 7.0715Z"
+                    class="timestamp__caret-fill"
+                  />
+                </mask>
+
+                <g mask="url(#timestamp-caret-mask)">
+                  <path
+                    d="M9.93457 6.84546C8.93433 8.06766 7.06567 8.06766 6.06543 6.84546L0.0546875 -0.500244L15.9453 -0.500244L9.93457 6.84546Z"
+                    class="timestamp__caret-stroke"
+                  />
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <time>1/1/30, 12:08 AM (UTC)</time>
+        </div>
+      </h3>
+
+      <div id="5">
+
+        <div class="message__content markup">
+
+        </div>
+
+        <div class="message__accessories">
+
+          <div class="poll">
+            <div class="poll__header">
+              <h4 class="poll__header__question">Question</h4>
+              <span class="poll__header__prompt">Select one answer</span>
+            </div>
+
+            <ul class="poll__answers">
+
+              <li class="poll__answer">
+
+                <img
+                  src="https://cdn.discordapp.com/emojis/1482825788062568672.webp?animated=true"
+                  alt="github"
+                  class="poll__answer__emoji"
+                />
+
+                <span class="poll__answer__text">yes</span>
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                >
+                  <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="M12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                  />
+                </svg>
+              </li>
+
+              <li class="poll__answer">
+
+                <img
+                  src="https://cdn.discordapp.com/emojis/null.webp?animated=true"
+                  alt="😂"
+                  class="poll__answer__emoji"
+                />
+
+                <span class="poll__answer__text">no</span>
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                >
+                  <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="M12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                  />
+                </svg>
+              </li>
+
+              <li class="poll__answer">
+
+                <span class="poll__answer__text">maybe</span>
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                >
+                  <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="M12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                  />
+                </svg>
+              </li>
+
+            </ul>
+
+            <div class="poll__details">
+    <span class="poll_details__votes">
+      0 votes
+    </span>
+              <span class="poll_details__expiry">&bull;</span>
+              <time class="poll_details__expiry">1/1/30, 12:08 AM (UTC)</time>
+            </div>
           </div>
 
         </div>
