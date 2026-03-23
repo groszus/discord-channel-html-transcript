@@ -379,7 +379,6 @@
         },
         "answers": [
           {
-            "answer_id": 1,
             "poll_media": {
               "text": "yes",
               "emoji": {
@@ -389,7 +388,6 @@
             }
           },
           {
-            "answer_id": 2,
             "poll_media": {
               "text": "no",
               "emoji": {
@@ -399,7 +397,6 @@
             }
           },
           {
-            "answer_id": 3,
             "poll_media": {
               "text": "maybe"
             }

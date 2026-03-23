@@ -114,7 +114,7 @@ You can install the core implementation as a Maven dependency:
 <dependency>
   <groupId>dev.omardiaa</groupId>
   <artifactId>discord-html-transcript-core</artifactId>
-  <version>0.1.0-beta.3</version>
+  <version>0.1.0-beta.4</version>
 </dependency>
 ```
 
@@ -122,7 +122,7 @@ You can install the core implementation as a Maven dependency:
 
 ```kts
 
-implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.3")
+implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.4")
 ```
 
 ### 3. Standalone API
