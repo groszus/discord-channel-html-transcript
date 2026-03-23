@@ -292,7 +292,7 @@ body {
   align-items: center;
   height: 46px;
   padding: 0.5rem 0.75rem;
-  border-bottom: 0.0625rem solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
   background-color: var(--header-bar-background);
   gap: 0.75rem;
 }
@@ -301,6 +301,10 @@ body {
   font-weight: 500;
   overflow: hidden;
   color: var(--text-normal);
+}
+
+.header__channel__divider {
+  color: oklch(0.682 0.012 286.088 / 0.2);
 }
 
 /* TODO: Implement better alternative for "max-width" */
