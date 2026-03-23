@@ -13,15 +13,8 @@
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.Message",
-    "allDeclaredConstructors": true
-  },
-  {
-    "name": "dev.omardiaa.transcript.core.model.payload.Message$Reaction",
-    "allDeclaredConstructors": true
-  },
-  {
-    "name": "dev.omardiaa.transcript.core.model.payload.Message$InteractionMetadata",
-    "allDeclaredConstructors": true
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.common.Emoji$Custom",
@@ -80,6 +73,11 @@
     "allDeclaredConstructors": true
   },
   {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.InteractionMetadata",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
     "name": "dev.omardiaa.transcript.core.model.payload.message.InteractionType",
     "allDeclaredMethods": true
   },
@@ -105,6 +103,11 @@
   },
   {
     "name": "dev.omardiaa.transcript.core.model.payload.message.Poll$AnswerCount",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  },
+  {
+    "name": "dev.omardiaa.transcript.core.model.payload.message.Reaction",
     "allDeclaredConstructors": true,
     "allDeclaredMethods": true
   },

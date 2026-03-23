@@ -9,7 +9,7 @@
     discord-html-transcript
   </a>
 
-  <span>•</span>
+  <span>&bull;</span>
 
   <span>Not affiliated with Discord Inc.</span>
 </div>

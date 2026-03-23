@@ -202,7 +202,7 @@ public final class MarkdownUtil {
     content = MENTION_USER.matcher(content).replaceAll(
       m -> {
         String userId = m.group(1);
-        User user = message.getMentionsMap().get(userId);
+        User user = message.mentionsMap().get(userId);
 
         if (user == null) {
           return HtmlBuilder.create("span").classes("mention").build("<@" + userId + ">");

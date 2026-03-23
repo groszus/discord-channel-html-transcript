@@ -256,6 +256,7 @@ body {
 
 .header {
   position: fixed;
+  z-index: 10;
   top: 0;
   width: 100%;
   margin-bottom: auto;
@@ -368,7 +369,6 @@ body {
 }
 
 .reference__message__context:hover {
-  cursor: pointer;
   opacity: 1;
 }
 
@@ -382,7 +382,7 @@ body {
   padding: 0 0.125rem;
   color: var(--text-link);
   border-radius: 0.1875rem;
-  background-color: rgba(88, 101, 242, 0.3);
+  background-color: oklch(0.577 0.209 273.85 / 0.3);
   gap: 0.25rem;
 }
 

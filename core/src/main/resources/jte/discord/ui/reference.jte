@@ -1,33 +1,30 @@
-@import dev.omardiaa.transcript.core.model.payload.message.User
 @import dev.omardiaa.transcript.core.model.payload.Message
 @import dev.omardiaa.transcript.core.model.payload.message.InteractionType
 
 @param Message message
 
-@if(message.getReferencedMessage() != null)
+@if(message.referencedMessage() != null)
   <div class="reference__spine"></div>
 
   <div class="reference user-select-none">
-    !{User author = message.getReferencedMessage().getAuthor();}
-
     <img
-      src="${author.getAvatarUrl()}"
-      alt="${author.getUsername()}"
+      src="${message.referencedMessage().author().getAvatarUrl()}"
+      alt="${message.referencedMessage().author().getUsername()}"
       class="reference__author__avatar"
     >
 
-    @template.discord.message.user.tag(user = message.getAuthor())
+    @template.discord.message.user.tag(user = message.author())
 
     <a
-      href="https://discord.com/users/${author.getId()}"
-      title="${author.getUsername()}"
+      href="https://discord.com/users/${message.referencedMessage().author().getId()}"
+      title="${message.referencedMessage().author().getUsername()}"
       class="reference__author__name"
     >
-      ${author.getGlobalName()}
+      ${message.referencedMessage().author().getGlobalName()}
     </a>
 
     <a
-      href="#${message.getReferencedMessage().getId()}"
+      href="#${message.referencedMessage().id()}"
       class="reference__message__context"
     >
       Click to see message
@@ -35,24 +32,22 @@
   </div>
 @endif
 
-@if((message.getInteractionMetadata() != null) && (message.getInteractionMetadata().getType() == InteractionType.APPLICATION_COMMAND))
+@if((message.interactionMetadata() != null) && (message.interactionMetadata().type() == InteractionType.APPLICATION_COMMAND))
   <div class="reference__spine"></div>
 
   <div class="reference user-select-none">
-    !{User user = message.getInteractionMetadata().getUser();}
-
     <img
-      src="${user.getAvatarUrl()}"
-      alt="${user.getUsername()}"
+      src="${message.interactionMetadata().user().getAvatarUrl()}"
+      alt="${message.interactionMetadata().user().getUsername()}"
       class="reference__author__avatar"
     >
 
     <a
-      href="https://discord.com/users/${user.getId()}"
-      title="${user.getUsername()}"
+      href="https://discord.com/users/${message.interactionMetadata().user().getId()}"
+      title="${message.interactionMetadata().user().getUsername()}"
       class="reference__author__name"
     >
-      ${user.getGlobalName()}
+      ${message.interactionMetadata().user().getGlobalName()}
     </a>
 
     <span class="reference__interaction__content">used</span>

@@ -4,14 +4,14 @@
 
 @param Message message
 
-@if(!message.getImages().isEmpty())
-  <div class="images" data-count="${message.getImages().size()}">
-    @for(Attachment image : message.getImages())
+@if(!message.images().isEmpty())
+  <div class="images" data-count="${message.images().size()}">
+    @for(Attachment image : message.images())
       @template.util.image(src = image.getUrl())
     @endfor
   </div>
 @endif
 
-@for(File file : message.getFiles())
+@for(File file : message.files())
   @template.discord.components.file(file = file)
 @endfor

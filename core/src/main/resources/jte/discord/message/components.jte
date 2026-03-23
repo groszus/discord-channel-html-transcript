@@ -5,10 +5,10 @@
 @param Guild guild
 @param Message message
 
-@if(message.getComponents() != null)
+@if(message.components() != null)
   @if (message.isComponentsV2())
     <div class="components">
-      @for(Component component : message.getComponents())
+      @for(Component component : message.components())
         @if(component instanceof ActionRow actionRow)
           @template.discord.components.action-row(actionRow = actionRow)
         @elseif(component instanceof Section section)
@@ -27,7 +27,7 @@
       @endfor
     </div>
   @else
-    @for(ActionRow actionRow : message.getComponents().stream().filter(c -> c instanceof ActionRow).map(c -> (ActionRow) c).toList())
+    @for(ActionRow actionRow : message.components().stream().filter(c -> c instanceof ActionRow).map(c -> (ActionRow) c).toList())
       @template.discord.components.action-row(actionRow = actionRow)
     @endfor
   @endif

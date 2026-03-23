@@ -36,12 +36,12 @@
   @for(Message message : payload.getMessages())
     !{boolean isFirst = (previousMessage == null);}
 
-    !{boolean dateChanged = !isFirst && !previousMessage.getTimestamp().toLocalDate().isEqual(message.getTimestamp().toLocalDate());}
+    !{boolean dateChanged = !isFirst && !previousMessage.timestamp().toLocalDate().isEqual(message.timestamp().toLocalDate());}
     !{boolean showDivider = isFirst || dateChanged;}
 
-    !{boolean timeGapExceeded = !isFirst && ChronoUnit.MINUTES.between(previousMessage.getTimestamp(), message.getTimestamp()) > 7;}
-    !{boolean authorChanged = !isFirst && !previousMessage.getAuthor().equals(message.getAuthor());}
-    !{boolean showAuthor = showDivider || authorChanged || (message.getReferencedMessage() != null) || (message.getInteractionMetadata() != null) || timeGapExceeded;}
+    !{boolean timeGapExceeded = !isFirst && ChronoUnit.MINUTES.between(previousMessage.timestamp(), message.timestamp()) > 7;}
+    !{boolean authorChanged = !isFirst && !previousMessage.author().equals(message.author());}
+    !{boolean showAuthor = showDivider || authorChanged || (message.referencedMessage() != null) || (message.interactionMetadata() != null) || timeGapExceeded;}
 
     @if(showDivider)
       @template.discord.ui.divider(message = message)
@@ -56,12 +56,12 @@
       <div class="author__avatar__container user-select-none">
         @if(showAuthor)
           <img
-            src="${message.getAuthor().getAvatarUrl()}"
+            src="${message.author().getAvatarUrl()}"
             alt="Avatar"
             class="author__avatar"
           />
         @else
-          <time class="message__timestamp">${TimeUtil.formatTimeShort(message.getTimestamp())}</time>
+          <time class="message__timestamp">${TimeUtil.formatTimeShort(message.timestamp())}</time>
         @endif
       </div>
 
@@ -69,19 +69,19 @@
         @if(showAuthor)
           <h3 class="author">
             <a
-              href="https://discord.com/users/${message.getAuthor().getId()}"
-              title="${message.getAuthor().getUsername()}"
+              href="https://discord.com/users/${message.author().getId()}"
+              title="${message.author().getUsername()}"
               class="author__name"
             >
-              ${message.getAuthor().getGlobalName()}
+              ${message.author().getGlobalName()}
             </a>
 
-            @template.discord.message.user.tag(user = message.getAuthor())
+            @template.discord.message.user.tag(user = message.author())
 
             <div class="author__timestamp">
-              @template.discord.ui.timestamp(timestamp = message.getTimestamp())
+              @template.discord.ui.timestamp(timestamp = message.timestamp())
 
-              <time>${TimeUtil.formatDateShort(message.getTimestamp())}</time>
+              <time>${TimeUtil.formatDateShort(message.timestamp())}</time>
             </div>
           </h3>
         @endif

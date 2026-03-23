@@ -3,7 +3,6 @@ package dev.omardiaa.transcript.core.model.payload;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dev.omardiaa.transcript.core.model.payload.common.Emoji;
 import dev.omardiaa.transcript.core.model.payload.message.*;
 import dev.omardiaa.transcript.core.model.payload.message.component.Component;
 import dev.omardiaa.transcript.core.model.payload.message.component.File;
@@ -19,33 +18,28 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Discord <a href="https://docs.discord.com/developers/resources/message#message-object">Message</a>.
+ * <a href="https://docs.discord.com/developers/resources/message#message-object">Message</a>.
  */
 @NullMarked
-public class Message {
-  private final String id;
-  private final User author;
-  private final String content;
-  private final OffsetDateTime timestamp;
-  private final @Nullable OffsetDateTime editedTimestamp;
-  private final List<Attachment> attachments;
-  private final List<Embed> embeds;
-  private final @Nullable List<Reaction> reactions;
-  private final @Nullable Integer flags;
-  private final @Nullable Message referencedMessage;
-  private final @Nullable InteractionMetadata interactionMetadata;
-  private final @Nullable List<Component> components;
-  private final @Nullable Poll poll;
+public record Message(
+  String id,
+  User author,
+  String content,
+  OffsetDateTime timestamp,
+  @Nullable OffsetDateTime editedTimestamp,
+  List<Attachment> attachments,
+  List<Embed> embeds,
+  @Nullable List<Reaction> reactions,
+  @Nullable Integer flags,
+  @Nullable Message referencedMessage,
+  @Nullable InteractionMetadata interactionMetadata,
+  @Nullable List<Component> components,
+  @Nullable Poll poll,
 
-  @JsonIgnore
-  private final Map<String, User> mentionsMap;
-
-  @JsonIgnore
-  private final List<Attachment> images;
-
-  @JsonIgnore
-  private final List<File> files;
-
+  @JsonIgnore Map<String, User> mentionsMap,
+  @JsonIgnore List<Attachment> images,
+  @JsonIgnore List<File> files
+) {
   @JsonCreator
   public Message(
     @JsonProperty(value = "id", required = true) String id,
@@ -62,76 +56,25 @@ public class Message {
     @JsonProperty(value = "interaction_metadata") @Nullable InteractionMetadata interactionMetadata,
     @JsonProperty(value = "components") @Nullable List<Component> components,
     @JsonProperty(value = "poll") @Nullable Poll poll) {
-    this.id = id;
-    this.author = author;
-    this.content = content;
-    this.timestamp = timestamp;
-    this.editedTimestamp = editedTimestamp;
-    this.attachments = attachments;
-    this.embeds = embeds;
-    this.reactions = reactions;
-    this.flags = flags;
-    this.referencedMessage = referencedMessage;
-    this.interactionMetadata = interactionMetadata;
-    this.components = components;
-    this.poll = poll;
-    this.mentionsMap = mentions.isEmpty()
-      ? Collections.emptyMap()
-      : mentions.stream().collect(Collectors.toUnmodifiableMap(User::getId, Function.identity()));
-    this.images = attachments.stream().filter(Attachment::isImage).toList();
-    this.files = attachments.stream().filter(a -> !a.isImage()).map(Attachment::toFile).toList();
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public User getAuthor() {
-    return author;
-  }
-
-  public String getContent() {
-    return content;
-  }
-
-  public OffsetDateTime getTimestamp() {
-    return timestamp;
-  }
-
-  public @Nullable OffsetDateTime getEditedTimestamp() {
-    return editedTimestamp;
-  }
-
-  public List<Attachment> getAttachments() {
-    return attachments;
-  }
-
-  public List<Embed> getEmbeds() {
-    return embeds;
-  }
-
-  public @Nullable List<Reaction> getReactions() {
-    return reactions;
-  }
-
-  public @Nullable Integer getFlags() {
-    return flags;
-  }
-
-  public @Nullable Message getReferencedMessage() {
-    return referencedMessage;
-  }
-
-  public @Nullable InteractionMetadata getInteractionMetadata() {
-    return interactionMetadata;
-  }
-
-  public @Nullable List<Component> getComponents() {
-    return components;
-  }
-
-  public @Nullable Poll getPoll() {
-    return poll;
+    this(
+      id,
+      author,
+      content,
+      timestamp,
+      editedTimestamp,
+      attachments,
+      embeds,
+      reactions,
+      flags,
+      referencedMessage,
+      interactionMetadata,
+      components,
+      poll,
+      mentions.isEmpty()
+        ? Collections.emptyMap()
+        : mentions.stream().collect(Collectors.toUnmodifiableMap(User::getId, Function.identity())),
+      attachments.stream().filter(Attachment::isImage).toList(),
+      attachments.stream().filter(a -> !a.isImage()).map(Attachment::toFile).toList());
   }
 
   /**
@@ -140,26 +83,6 @@ public class Message {
   @JsonIgnore
   public boolean isComponentsV2() {
     return (this.flags != null) && ((this.flags & (1 << 15)) != 0);
-  }
-
-  @JsonIgnore
-  public Map<String, User> getMentionsMap() {
-    return mentionsMap;
-  }
-
-  @JsonIgnore
-  public List<Attachment> getImages() {
-    return images;
-  }
-
-  @JsonIgnore
-  public List<File> getFiles() {
-    return files;
-  }
-
-  @JsonProperty("mentions")
-  public List<User> getMentions() {
-    return List.copyOf(mentionsMap.values());
   }
 
   @Override
@@ -174,94 +97,5 @@ public class Message {
   @Override
   public int hashCode() {
     return Objects.hashCode(id);
-  }
-
-  @Override
-  public String toString() {
-    return "Message{" +
-           "id='" + id + '\'' +
-           ", author=" + author +
-           ", content='" + content + '\'' +
-           ", timestamp=" + timestamp +
-           ", editedTimestamp=" + editedTimestamp +
-           ", attachments=" + attachments +
-           ", embeds=" + embeds +
-           ", reactions=" + reactions +
-           ", flags=" + flags +
-           ", referencedMessage=" + referencedMessage +
-           ", interactionMetadata=" + interactionMetadata +
-           ", components=" + components +
-           ", poll=" + poll +
-           ", mentionsMap=" + mentionsMap +
-           ", images=" + images +
-           ", files=" + files +
-           '}';
-  }
-
-  /**
-   * Discord <a href="https://docs.discord.com/developers/resources/message#reaction-object">Reaction</a>.
-   */
-  @NullMarked
-  public static class Reaction {
-    private final int count;
-    private final Emoji emoji;
-
-    public Reaction(
-      @JsonProperty(value = "count", required = true) int count,
-      @JsonProperty(value = "emoji", required = true) Emoji emoji) {
-      this.count = count;
-      this.emoji = emoji;
-    }
-
-    public int getCount() {
-      return count;
-    }
-
-    public Emoji getEmoji() {
-      return emoji;
-    }
-
-    @Override
-    public String toString() {
-      return "Reaction{" +
-             "count=" + count +
-             ", emoji=" + emoji +
-             '}';
-    }
-  }
-
-  /**
-   * Discord <a
-   * href="https://discord.com/developers/docs/resources/message#message-interaction-metadata-object">Interaction
-   * Metadata</a>.
-   */
-  @NullMarked
-  public static class InteractionMetadata {
-    private final InteractionType type;
-    private final User user;
-
-    @JsonCreator
-    public InteractionMetadata(
-      @JsonProperty(value = "type", required = true) InteractionType type,
-      @JsonProperty(value = "user", required = true) User user) {
-      this.type = type;
-      this.user = user;
-    }
-
-    public InteractionType getType() {
-      return type;
-    }
-
-    public User getUser() {
-      return user;
-    }
-
-    @Override
-    public String toString() {
-      return "InteractionMetadata{" +
-             "type=" + type +
-             ", user=" + user +
-             '}';
-    }
   }
 }
