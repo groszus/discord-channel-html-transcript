@@ -109,11 +109,6 @@
             <groupId>org.graalvm.buildtools</groupId>
             <artifactId>native-maven-plugin</artifactId>
             <extensions>true</extensions>
-            <configuration>
-              <buildArgs>
-                <buildArg>--install-exit-handlers</buildArg>
-              </buildArgs>
-            </configuration>
             <executions>
               <execution>
                 <id>build-native</id>
@@ -140,9 +135,6 @@
               <debug>true</debug>
               <verbose>true</verbose>
               <quickBuild>true</quickBuild>
-              <buildArgs>
-                <buildArg>--install-exit-handlers</buildArg>
-              </buildArgs>
             </configuration>
             <executions>
               <execution>
