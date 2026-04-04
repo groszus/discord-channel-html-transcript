@@ -1,8 +1,8 @@
-@import dev.omardiaa.transcript.core.model.payload.Message
+@import java.time.OffsetDateTime
 @import dev.omardiaa.transcript.core.util.TimeUtil
 
-@param Message message
+@param OffsetDateTime timestamp
 
 <div class="divider user-select-none">
-  <time class="divider__content">${TimeUtil.formatDateLong(message.timestamp())}</time>
+  <time class="divider__content">${TimeUtil.formatDateLong(timestamp)}</time>
 </div>

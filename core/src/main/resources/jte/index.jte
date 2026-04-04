@@ -44,7 +44,7 @@
     !{boolean showAuthor = showDivider || authorChanged || (message.referencedMessage() != null) || (message.interactionMetadata() != null) || timeGapExceeded;}
 
     @if(showDivider)
-      @template.discord.ui.divider(message = message)
+      @template.discord.ui.divider(timestamp = message.timestamp())
     @endif
 
     <li

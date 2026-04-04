@@ -1,5 +1,5 @@
-@import dev.omardiaa.transcript.core.util.TimeUtil
 @import java.time.OffsetDateTime
+@import dev.omardiaa.transcript.core.util.TimeUtil
 
 @param OffsetDateTime timestamp
 

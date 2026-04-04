@@ -1,5 +1,5 @@
-@import dev.omardiaa.transcript.core.model.payload.message.Reaction
 @import java.util.List
+@import dev.omardiaa.transcript.core.model.payload.message.Reaction
 
 @param List<Reaction> reactions
 

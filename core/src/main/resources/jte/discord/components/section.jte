@@ -1,7 +1,11 @@
 @import dev.omardiaa.transcript.core.model.payload.Guild
 @import dev.omardiaa.transcript.core.model.payload.Message
 @import dev.omardiaa.transcript.core.model.payload.PayloadOptions
-@import dev.omardiaa.transcript.core.model.payload.message.component.*
+@import dev.omardiaa.transcript.core.model.payload.message.component.Section
+@import dev.omardiaa.transcript.core.model.payload.message.component.SectionChildComponent
+@import dev.omardiaa.transcript.core.model.payload.message.component.Button
+@import dev.omardiaa.transcript.core.model.payload.message.component.Thumbnail
+@import dev.omardiaa.transcript.core.model.payload.message.component.TextDisplay
 
 @param Guild guild
 @param Message message

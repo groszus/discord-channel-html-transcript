@@ -1,6 +1,6 @@
+@import dev.omardiaa.transcript.core.util.MarkdownUtil
 @import dev.omardiaa.transcript.core.model.payload.Guild
 @import dev.omardiaa.transcript.core.model.payload.Message
-@import dev.omardiaa.transcript.core.util.MarkdownUtil
 
 @param Guild guild
 @param Message message

@@ -1,5 +1,5 @@
-@import dev.omardiaa.transcript.core.model.payload.message.Poll
 @import dev.omardiaa.transcript.core.util.TimeUtil
+@import dev.omardiaa.transcript.core.model.payload.message.Poll
 
 @param Poll poll
 
