@@ -3,11 +3,13 @@
 
 @param List<Reaction> reactions
 
-<div class="reactions user-select-none">
-  @for(Reaction reaction : reactions)
-    <div class="reaction">
-      @template.util.emoji(emoji = reaction.emoji(), classes = "reaction__emoji")
-      <span class="reaction__count">${reaction.count()}</span>
-    </div>
-  @endfor
-</div>
+@if(reactions != null && !reactions.isEmpty())
+  <div class="reactions user-select-none">
+    @for(Reaction reaction : reactions)
+      <div class="reaction">
+        @template.util.emoji(emoji = reaction.emoji(), classes = "reaction__emoji")
+        <span class="reaction__count">${reaction.count()}</span>
+      </div>
+    @endfor
+  </div>
+@endif
