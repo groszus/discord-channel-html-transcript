@@ -2,9 +2,17 @@
 
 ## [0.1.0-beta.5] (Unreleased)
 
+#### Changed
+
+- Use GraalVM 25 instead of GraalVM 17.
+
 ### discord-html-transcript-core
 
 ### discord-html-transcript-server
+
+#### Changed
+
+- Replace maven resource filtering with templating-maven-plugin resource filtering for setting server version.
 
 ## [0.1.0-beta.4]
 

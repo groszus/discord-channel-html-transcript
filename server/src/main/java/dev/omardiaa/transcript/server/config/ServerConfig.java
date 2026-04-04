@@ -6,9 +6,6 @@ import dev.omardiaa.transcript.server.model.SemVer;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-import java.io.InputStream;
-import java.util.Properties;
-
 /**
  * A helper class for initializing {@link Server} configuration.
  */
@@ -17,20 +14,9 @@ public final class ServerConfig {
   private static final @Nullable String API_KEY = EnvironmentUtil.get("TRANSCRIPT_SERVER_API_KEY").orElse(null);
   private static final String HOST = EnvironmentUtil.get("TRANSCRIPT_SERVER_HOST", "127.0.0.1");
   private static final int PORT = EnvironmentUtil.get("TRANSCRIPT_SERVER_PORT", 7000);
-
-  private static final SemVer VERSION;
+  private static final SemVer VERSION = new SemVer(ServerInfo.VERSION);
 
   private ServerConfig() {}
-
-  static {
-    try (InputStream is = ServerConfig.class.getResourceAsStream("/build.properties")) {
-      Properties properties = new Properties();
-      properties.load(is);
-      VERSION = new SemVer(properties.getProperty("version"));
-    } catch (Exception e) {
-      throw new RuntimeException("Failed to load server properties.", e);
-    }
-  }
 
   /**
    * @return {@code TRANSCRIPT_SERVER_API_KEY} value, or {@code null} if variable is not specified.
