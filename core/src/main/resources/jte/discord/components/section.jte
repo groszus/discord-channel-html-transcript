@@ -1,10 +1,12 @@
 @import dev.omardiaa.transcript.core.model.payload.Guild
 @import dev.omardiaa.transcript.core.model.payload.Message
+@import dev.omardiaa.transcript.core.model.payload.PayloadOptions
 @import dev.omardiaa.transcript.core.model.payload.message.component.*
 
 @param Guild guild
-@param Section section
 @param Message message
+@param Section section
+@param PayloadOptions options
 
 <div class="section">
   <div class="section__content">
@@ -19,7 +21,7 @@
     @if(section.accessory() instanceof Button button)
       @template.discord.components.button(button = button)
     @elseif(section.accessory() instanceof Thumbnail thumbnail)
-      @template.util.image(src = thumbnail.media().url())
+      @template.util.image(src = thumbnail.media().url(), options = options.attachment())
     @endif
   </div>
 </div>

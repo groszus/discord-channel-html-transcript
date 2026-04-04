@@ -8,6 +8,9 @@
 
 ### discord-html-transcript-core
 
+- Support for optional payload options.
+- Support for downloading and encoding attachments into the transcript file.
+
 ### discord-html-transcript-server
 
 #### Changed

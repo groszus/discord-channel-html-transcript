@@ -2,20 +2,58 @@ package dev.omardiaa.transcript.core.util;
 
 import dev.omardiaa.transcript.core.model.payload.Guild;
 import org.jspecify.annotations.NullMarked;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Base64;
 
 /**
- * A helper class for generating icons.
+ * A helper class for images.
  */
 @NullMarked
-public final class IconUtil {
-  private IconUtil() {}
+public final class ImageUtil {
+  private static final Logger LOGGER = LoggerFactory.getLogger(ImageUtil.class);
+
+  private ImageUtil() {}
+
+  /**
+   * Attempts to download and encode the attachment at the provided {@code url} into a Base64 Data URI.
+   *
+   * @param url
+   *   the remote URL of the attachment to download.
+   *
+   * @return a Base64 encoded Data URI string, or the {@code url} if the download or encoding fails.
+   */
+  public static String downloadAndEncode(String url) {
+    try {
+      HttpRequest request = HttpRequest.newBuilder(URI.create(url)).build();
+      HttpResponse<byte[]> response = HttpUtil.getClient().send(request, HttpResponse.BodyHandlers.ofByteArray());
+
+      if (response.statusCode() >= 400) {
+        LOGGER.warn("Failed to download {}, falling back to image URL.", url);
+        return url;
+      }
+
+      String contentType = response.headers().firstValue("Content-Type").orElse("application/octet-stream");
+
+      return "data:" + contentType + ";base64," + Base64.getEncoder().encodeToString(response.body());
+    } catch (IOException e) {
+      LOGGER.warn("Failed to download {}, falling back to image URL.", url);
+      return url;
+    } catch (InterruptedException e) {
+      LOGGER.warn("Failed to download {}, falling back to image URL.", url);
+      Thread.currentThread().interrupt();
+      return url;
+    }
+  }
 
   /**
    * Draws an Icon of {@link Guild#name()} initials.
@@ -26,6 +64,7 @@ public final class IconUtil {
    * @return a base64 encoded {@code image/png} of the {@link Guild#name()} initials.
    */
   public static String drawGuildIcon(String str) {
+    // TODO: find an alternative to ImageIO as this will crash the native image
     int width = 50;
     int height = 50;
 

@@ -1,6 +1,6 @@
 <h1 align="center">discord-html-transcript</h1>
 
-<p align="center"><strong>Generate natively styled logs for your Discord chats</strong></p>
+<p align="center"><strong>Generate natively styled Discord chat logs</strong></p>
 
 <p align="center">
     <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?label=Maven&color=0055D2"></a>
@@ -13,16 +13,8 @@
     <ul>
         <li><a href="#features">Features</a></li>
         <li><a href="#preview">Preview</a></li>
-        <li>
-            <a href="#usage">Usage</a>
-            <ul>
-                <li><a href="#1-library-recommended">1. Library (Recommended)</a></li>
-                <li><a href="#2-installation">2. Installation</a></li>
-                <li><a href="#3-standalone-api">3. Standalone API</a></li>
-            </ul>
-        </li>
+        <li><a href="#usage">Usage</a></li>
         <li><a href="#contributing">Contributing</a></li>
-        <li><a href="#support">Support</a></li>
     </ul>
 </details>
 
@@ -178,7 +170,7 @@ standalone web server.
         <td>
             Authenticates client requests.
             <br>
-            Required, if <code>TRANSCRIPT_SERVER_API_KEY</code> is set.
+            Required if <code>TRANSCRIPT_SERVER_API_KEY</code> is set.
         </td>
     </tr>
 </table>
@@ -197,8 +189,7 @@ standalone web server.
     <tr>
         <td><code>POST /transcript</code></td>
         <td>
-            Accepts a transcript <a href="core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java">Payload</a>
-            and asynchronously generates an HTML byte stream.
+            Accepts a transcript Payload and asynchronously generates an HTML byte stream.
         </td>
     </tr>
 </table>
@@ -214,13 +205,35 @@ The server validates the [`Server-Version`](#headers) header using the following
 > [!TIP]
 > HTTP request examples can be found at [requests](examples/requests.http).
 
-## [Contributing](CONTRIBUTING.md)
+##### Payload
+
+You can specify an `options` object in your payload to specify transcript options:
+
+```json5
+{
+  "options": {
+    "attachment": {
+      // If set to "true", attachments referenced in the payload will be downloaded and encoded into a Base64 Data URI.
+      "save": false
+    },
+    "style": {
+      // Path to custom styles.css.
+      "path": null
+    }
+  }
+}
+```
+
+## Contributing
+
+**If you found discord-html-transcript useful, please consider giving it a 🌟!**
 
 Need help? Wanna request a feature? [Join us today](https://discord.omardiaa.dev)!
 
-## Support
+---
 
-If you found this useful, please consider giving it a 🌟!
-
-<a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"></a>
-<a href="https://ko-fi.com/omardiaadev"><img alt="Ko-fi" src="https://img.shields.io/badge/ko--fi-FF6433?style=for-the-badge&logo=kofi&logoColor=FFF"></a>
+<div align="center">
+    <p>Made with ❤️ by <a href="https://github.com/omardiaadev"><b>Omar Diaa</b></a></p>
+    <a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"></a>
+    <a href="https://ko-fi.com/omardiaadev"><img alt="Ko-fi" src="https://img.shields.io/badge/ko--fi-FF6433?style=for-the-badge&logo=kofi&logoColor=FFF"></a>
+</div>

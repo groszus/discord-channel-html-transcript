@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.omardiaa.transcript.core.model.payload.common.Role;
-import dev.omardiaa.transcript.core.util.IconUtil;
+import dev.omardiaa.transcript.core.util.ImageUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -36,7 +36,7 @@ public record Guild(
     this(
       name,
       icon == null
-        ? IconUtil.drawGuildIcon(name)
+        ? ImageUtil.drawGuildIcon(name)
         : GUILD_ICON.formatted(id, icon),
       roles.isEmpty()
         ? Collections.emptyMap()

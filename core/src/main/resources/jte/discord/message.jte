@@ -1,9 +1,11 @@
 @import dev.omardiaa.transcript.core.model.payload.Guild
 @import dev.omardiaa.transcript.core.model.payload.Message
+@import dev.omardiaa.transcript.core.model.payload.PayloadOptions
 @import dev.omardiaa.transcript.core.model.payload.message.Embed
 
 @param Guild guild
 @param Message message
+@param PayloadOptions options
 
 <div id="${message.id()}">
   @template.discord.message.content(guild = guild, message = message, content = message.content())
@@ -20,13 +22,13 @@
     @if(message.poll() != null)
       @template.discord.message.poll(poll = message.poll())
     @else
-      @template.discord.message.attachments(message = message)
+      @template.discord.message.attachments(message = message, options = options)
 
       @for(Embed embed : message.embeds())
         @template.discord.message.embed(guild = guild, message = message, embed = embed)
       @endfor
 
-      @template.discord.message.components(guild = guild, message = message)
+      @template.discord.message.components(guild = guild, message = message, options = options)
 
       @if(message.reactions() != null)
         @template.discord.message.reactions(reactions = message.reactions())
