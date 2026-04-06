@@ -11,7 +11,6 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -50,11 +49,11 @@ public record Embed(
   ) {
     this(
       title,
-      Objects.requireNonNullElse(type, Type.UNKNOWN),
+      type != null ? type : Type.UNKNOWN,
       description,
       url,
       timestamp,
-      color == null ? null : String.format("#%06X", (0xFFFFFF & color)),
+      color != null ? String.format("#%06X", (0xFFFFFF & color)) : null,
       footer,
       image,
       thumbnail,
@@ -66,7 +65,6 @@ public record Embed(
   /**
    * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-types">Embed Types</a>
    */
-  @NullMarked
   public enum Type {
     UNKNOWN("unknown"), RICH("rich"), GIFV("gifv"), ARTICLE("article");
 
@@ -93,7 +91,6 @@ public record Embed(
   /**
    * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-footer-structure">Embed Footer</a>
    */
-  @NullMarked
   public record Footer(
     String text,
     @Nullable String iconUrl
@@ -111,7 +108,6 @@ public record Embed(
   /**
    * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-image-structure">Embed Image</a>
    */
-  @NullMarked
   public record Image(
     String url
   ) {
@@ -126,7 +122,6 @@ public record Embed(
   /**
    * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-thumbnail-structure">Embed Thumbnail</a>
    */
-  @NullMarked
   public record Thumbnail(
     String url
   ) {
@@ -141,7 +136,6 @@ public record Embed(
   /**
    * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-video-structure">Embed Video</a>
    */
-  @NullMarked
   public record Video(
     String url
   ) {
@@ -156,7 +150,6 @@ public record Embed(
   /**
    * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-author-structure">Embed Author</a>
    */
-  @NullMarked
   public record Author(
     String name,
     @Nullable String url,
@@ -177,7 +170,6 @@ public record Embed(
   /**
    * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-field-structure">Embed Field</a>
    */
-  @NullMarked
   public record Field(
     String name,
     String value,
@@ -192,7 +184,7 @@ public record Embed(
       this(
         Check.lengthMax(name, "name", 256),
         Check.lengthMax(value, "value", 1024),
-        Objects.requireNonNullElse(inline, false).booleanValue());
+        inline != null ? inline : false);
     }
   }
 }
