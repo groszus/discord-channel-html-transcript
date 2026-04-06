@@ -4,10 +4,8 @@ import org.jspecify.annotations.NullMarked;
 
 import java.util.Optional;
 
-// TODO: implement better error handling for when the variables can not be parsed to their type.
-
 /**
- * A helper class for loading environment variables.
+ * A helper class for environment variables.
  */
 @NullMarked
 public final class EnvironmentUtil {
@@ -32,9 +30,19 @@ public final class EnvironmentUtil {
    *   the default value to return if {@link System#getenv(String)} returns {@code null}.
    *
    * @return {@link System#getenv(String)} as {@code int}, or {@code defaultValue} if {@link #get(String)} is empty.
+   *
+   * @throws IllegalArgumentException
+   *   if the {@link #get(String)} returns a value that's not an {@code int}.
    */
   public static int get(String key, int defaultValue) {
-    return get(key).map(Integer::parseInt).orElse(defaultValue);
+    return get(key).map(value -> {
+      try {
+        return Integer.parseInt(value);
+      } catch (NumberFormatException e) {
+        throw new IllegalArgumentException(
+          "Environment variable '" + key + "' has invalid value '" + value + "'. Expected an integer.");
+      }
+    }).orElse(defaultValue);
   }
 
   /**
