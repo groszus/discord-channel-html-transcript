@@ -36,6 +36,42 @@ public record PayloadOptions(
     this(null, null);
   }
 
+  public static class Builder {
+    private boolean saveImages = false;
+    private @Nullable String path = null;
+
+    /**
+     * @param saveImages
+     *   whether images should be downloaded and saved, defaults to {@code false}.
+     *
+     * @return the {@link PayloadOptions.Builder} instance for chaining.
+     */
+    public Builder saveImages(boolean saveImages) {
+      this.saveImages = saveImages;
+      return this;
+    }
+
+    /**
+     * @param path
+     *   the path to a custom {@code style.css}, defaults to inline styles if {@code null}.
+     *
+     * @return the {@link PayloadOptions.Builder} instance for chaining.
+     */
+    public Builder path(@Nullable String path) {
+      this.path = path;
+      return this;
+    }
+
+    /**
+     * Constructs a new {@link PayloadOptions} instance.
+     *
+     * @return the new {@link PayloadOptions} instance.
+     */
+    public PayloadOptions build() {
+      return new PayloadOptions(new AttachmentOptions(saveImages), new StyleOptions(path));
+    }
+  }
+
   /**
    * @param saveImages
    *   whether images should be downloaded and saved.
