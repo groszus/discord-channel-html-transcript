@@ -13,6 +13,18 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
+/**
+ * @param guild
+ *   the Discord Guild.
+ * @param channel
+ *   the Discord Channel that belongs to the provided {@code guild}.
+ * @param messages
+ *   the Discord Messages that belong to the provided {@code channel}.
+ * @param options
+ *   the transcript options.
+ *
+ * @see Transcriber#transcribe(Payload)
+ */
 @NullMarked
 public record Payload(
   Guild guild,
@@ -42,6 +54,6 @@ public record Payload(
     this.guild = guild;
     this.channel = channel;
     this.messages = Check.sizeMin(messages, "messages", 1);
-    this.options = options == null ? new PayloadOptions() : options;
+    this.options = options != null ? options : new PayloadOptions();
   }
 }

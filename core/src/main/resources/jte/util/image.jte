@@ -6,7 +6,7 @@
 
 <div class="image__wrapper">
   <img
-    src="${options.save() ? ImageUtil.downloadAndEncode(src) : src}"
+    src="${options.saveImages() ? ImageUtil.downloadAndEncode(src) : src}"
     alt="Image"
     class="image"
   />

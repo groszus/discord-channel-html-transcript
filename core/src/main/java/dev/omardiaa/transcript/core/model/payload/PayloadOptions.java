@@ -6,6 +6,12 @@ import dev.omardiaa.transcript.core.util.Check;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+/**
+ * @param attachment
+ *   the attachment options.
+ * @param style
+ *   the style options.
+ */
 @NullMarked
 public record PayloadOptions(
   AttachmentOptions attachment,
@@ -13,48 +19,52 @@ public record PayloadOptions(
 ) {
   /**
    * @param attachment
-   *   Attachment options.
+   *   the attachment options.
    * @param style
-   *   Style options.
+   *   the style options.
    */
   @JsonCreator
   public PayloadOptions(
     @JsonProperty(value = "attachment") @Nullable AttachmentOptions attachment,
     @JsonProperty(value = "style") @Nullable StyleOptions style
   ) {
-    this.attachment = attachment == null ? new AttachmentOptions(null) : attachment;
-    this.style = style == null ? new StyleOptions(null) : style;
+    this.attachment = attachment != null ? attachment : new AttachmentOptions(null);
+    this.style = style != null ? style : new StyleOptions(null);
   }
 
   public PayloadOptions() {
     this(null, null);
   }
 
+  /**
+   * @param saveImages
+   *   whether images should be downloaded and saved.
+   */
   public record AttachmentOptions(
-    boolean save
+    boolean saveImages
   ) {
     /**
-     * Constructs a new {@link AttachmentOptions} instance.
-     *
-     * @param save
-     *   whether or not the attachments should be downloaded and saved, fallbacks to {@code false} if not specified.
+     * @param saveImages
+     *   whether images should be downloaded and saved, defaults to {@code false} if {@code null}.
      */
     @JsonCreator
     public AttachmentOptions(
-      @JsonProperty(value = "save") @Nullable Boolean save
+      @JsonProperty(value = "save_images") @Nullable Boolean saveImages
     ) {
-      this(save != null && save);
+      this(saveImages != null ? saveImages : false);
     }
   }
 
+  /**
+   * @param path
+   *   the path to a custom {@code style.css}, defaults to inline styles if {@code null}.
+   */
   public record StyleOptions(
     @Nullable String path
   ) {
     /**
-     * Constructs a new {@link StyleOptions} instance.
-     *
      * @param path
-     *   path to custom {@code style.css}, fallbacks to default inline styles if not specified.
+     *   the path to a custom {@code style.css}, defaults to inline styles if {@code null}.
      */
     @JsonCreator
     public StyleOptions(
