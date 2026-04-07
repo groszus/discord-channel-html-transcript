@@ -10,6 +10,7 @@
 
 - Support for optional payload options.
 - Support for downloading and encoding attachments into the transcript file.
+- Extend embed support for types `link` and `article`.
 
 ### discord-html-transcript-server
 

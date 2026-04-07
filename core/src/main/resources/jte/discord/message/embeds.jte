@@ -20,12 +20,20 @@
         loop
       ></video>
     @endif
-  @elseif (embed.type() == Embed.Type.RICH)
+  @elseif(embed.type() == Embed.Type.RICH || embed.type() == Embed.Type.ARTICLE || embed.type() == Embed.Type.LINK)
     <article
       style="${embed.color() == null ? "" : "border-left-color: " + embed.color()}"
       data-embed-type="${embed.type()}"
       class="embed"
     >
+      @if(embed.provider() != null)
+        <div class="embed__provider embed__margin">
+          @if(embed.provider().name() != null)
+            <span>${embed.provider().name()}</span>
+          @endif
+        </div>
+      @endif
+
       @if(embed.author() != null)
         <div class="embed__author embed__margin">
           @if(embed.author().iconUrl() != null)
@@ -39,6 +47,7 @@
           @if(embed.author().url() != null)
             <a
               href="${embed.author().url()}"
+              target="_blank"
               class="embed__author__name markup"
             >
               ${embed.author().name()}
@@ -54,6 +63,7 @@
           @if(embed.url() != null)
             <a
               href="${embed.url()}"
+              target="_blank"
               class="markup"
             >
               ${embed.title()}
@@ -66,7 +76,7 @@
 
       @if(embed.description() != null)
         <div class="embed__description embed__margin">
-          <span>$unsafe{MarkdownUtil.parseMarkup(guild, message, embed.description())}</span>
+          $unsafe{MarkdownUtil.parseMarkup(guild, message, embed.description())}
         </div>
       @endif
 
@@ -120,13 +130,13 @@
           @endif
 
           <span class="embed__footer__text">
-        <span>${embed.footer().text()}</span>
+            <span>${embed.footer().text()}</span>
 
-        @if(embed.timestamp() != null)
-          <span>&bull;</span>
-          <span>${TimeUtil.formatDateShort(embed.timestamp())}</span>
-        @endif
-      </span>
+            @if(embed.timestamp() != null)
+              <span>&bull;</span>
+              <span>${TimeUtil.formatDateShort(embed.timestamp())}</span>
+            @endif
+          </span>
         </div>
       @endif
     </article>

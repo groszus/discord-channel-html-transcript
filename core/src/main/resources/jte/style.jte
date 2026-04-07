@@ -636,6 +636,13 @@ body {
   margin-top: 0.5rem;
 }
 
+.embed__provider {
+  font-size: .75rem;
+  font-weight: var(--font-weight-normal);
+  grid-column: 1/1;
+  line-height: 1rem;
+}
+
 .embed__author {
   display: flex;
   align-items: center;

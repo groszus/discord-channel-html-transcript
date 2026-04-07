@@ -29,6 +29,7 @@ public record Embed(
   @Nullable Image image,
   @Nullable Thumbnail thumbnail,
   @Nullable Video video,
+  @Nullable Provider provider,
   @Nullable Author author,
   @Nullable List<Field> fields
 ) {
@@ -44,6 +45,7 @@ public record Embed(
     @JsonProperty(value = "image") @Nullable Image image,
     @JsonProperty(value = "thumbnail") @Nullable Thumbnail thumbnail,
     @JsonProperty(value = "video") @Nullable Video video,
+    @JsonProperty(value = "provider") @Nullable Provider provider,
     @JsonProperty(value = "author") @Nullable Author author,
     @JsonProperty(value = "fields") @Nullable List<Field> fields
   ) {
@@ -58,6 +60,7 @@ public record Embed(
       image,
       thumbnail,
       video,
+      provider,
       author,
       fields);
   }
@@ -66,7 +69,7 @@ public record Embed(
    * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-types">Embed Types</a>
    */
   public enum Type {
-    UNKNOWN("unknown"), RICH("rich"), GIFV("gifv"), ARTICLE("article");
+    UNKNOWN("unknown"), RICH("rich"), GIFV("gifv"), ARTICLE("article"), LINK("link");
 
     private static final Map<String, Type> TYPE_MAP = Arrays
       .stream(values()).collect(Collectors.toUnmodifiableMap(Type::getValue, Function.identity()));
@@ -143,6 +146,23 @@ public record Embed(
     public Video(
       @JsonProperty(value = "url", required = true) String url
     ) {
+      this.url = url;
+    }
+  }
+
+  /**
+   * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-provider-structure">Embed Provider</a>
+   */
+  public record Provider(
+    @Nullable String name,
+    @Nullable String url
+  ) {
+    @JsonCreator
+    public Provider(
+      @JsonProperty(value = "name") @Nullable String name,
+      @JsonProperty(value = "url") @Nullable String url
+    ) {
+      this.name = name;
       this.url = url;
     }
   }
