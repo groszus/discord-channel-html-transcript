@@ -207,7 +207,7 @@ The server validates the [`Server-Version`](#headers) header using the following
 
 ##### Payload
 
-You can specify an `options` object in your payload to specify transcript options:
+You can specify the `options` object in your payload to specify transcript options:
 
 ```json5
 {
@@ -231,7 +231,7 @@ You can specify an `options` object in your payload to specify transcript option
 Need help? Wanna request a feature? [Join us today](https://discord.omardiaa.dev)!
 
 <div align="center">
-    <p><i>Made With ❤️ By <a href="https://github.com/omardiaadev"><b>Omar Diaa</b></a></i></p>
+    <p>Made With ❤️ By <a href="https://github.com/omardiaadev"><b>Omar Diaa</b></a></p>
     <a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"></a>
     <a href="https://ko-fi.com/omardiaadev"><img alt="Ko-fi" src="https://img.shields.io/badge/ko--fi-FF6433?style=for-the-badge&logo=kofi&logoColor=FFF"></a>
 </div>

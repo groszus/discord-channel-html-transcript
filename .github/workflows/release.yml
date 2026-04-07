@@ -29,7 +29,7 @@ jobs:
 
   discord-html-transcript-server:
     name: Build ${{ matrix.platform }}-${{ matrix.arch }}
-
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: write
 
@@ -51,8 +51,6 @@ jobs:
             arch: "arm64"
             extension: ""
 
-    runs-on: ${{ matrix.os }}
-
     steps:
       - uses: actions/checkout@v6
 
@@ -64,29 +62,25 @@ jobs:
           cache: 'maven'
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get Project Version
-        shell: bash
-        run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
-
       - name: Build Native Image
         run: mvn package -Pnative -DskipTests -am -pl server
 
-      - name: Rename Artifacts
+      - name: Prepare Artifacts
         shell: bash
         run: |
-          ARTIFACT_NAME="discord-html-transcript-server-${{ env.VERSION }}-${{ matrix.platform }}-${{ matrix.arch }}${{ matrix.extension }}"
-          mv "server/target/discord-html-transcript-server${{ matrix.extension }}" "server/target/$ARTIFACT_NAME"
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           
-          ARTIFACTS="server/target/$ARTIFACT_NAME"
+          mkdir -p artifacts
+          
+          mv "server/target/discord-html-transcript-server${{ matrix.extension }}" \
+             "artifacts/discord-html-transcript-${{ env.VERSION }}-${{ matrix.platform }}-${{ matrix.arch }}${{ matrix.extension }}"
           
           if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
-            JAR_PATH="server/target/discord-html-transcript-server-${{ env.VERSION }}.jar"
-            ARTIFACTS="$ARTIFACTS,$JAR_PATH"
+            mv "server/target/discord-html-transcript-server-${VERSION}.jar" \
+               "artifacts/discord-html-transcript-${VERSION}.jar"
           fi
-          
-          echo "RELEASE_ARTIFACTS=$ARTIFACTS" >> $GITHUB_ENV
 
       - name: Upload Artifacts
         uses: softprops/action-gh-release@v2
         with:
-          files: ${{ env.RELEASE_ARTIFACTS }}
+          files: artifacts/*
