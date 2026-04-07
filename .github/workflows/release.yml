@@ -19,13 +19,17 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
           server-id: central
-          server-username: ${{ secrets.SERVER_USERNAME }}
-          server-password: ${{ secrets.SERVER_PASSWORD }}
-          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          server-username: SERVER_USERNAME
+          server-password: SERVER_PASSWORD
+          gpg-passphrase: GPG_PASSPHRASE
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
 
       - name: Publish to Maven Central
         run: mvn deploy -Ppublish -DskipTests -pl !server
+        env:
+          SERVER_USERNAME: ${{ secrets.SERVER_USERNAME }}
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
   discord-html-transcript-server:
     name: Build ${{ matrix.platform }}-${{ matrix.arch }}
