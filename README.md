@@ -106,7 +106,7 @@ You can install the core implementation as a Maven dependency:
 <dependency>
   <groupId>dev.omardiaa</groupId>
   <artifactId>discord-html-transcript-core</artifactId>
-  <version>0.1.0-beta.4</version>
+  <version>0.1.0-beta.5</version>
 </dependency>
 ```
 
@@ -114,7 +114,7 @@ You can install the core implementation as a Maven dependency:
 
 ```kts
 
-implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.4")
+implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.5")
 ```
 
 ### 3. Standalone API
@@ -230,10 +230,8 @@ You can specify an `options` object in your payload to specify transcript option
 
 Need help? Wanna request a feature? [Join us today](https://discord.omardiaa.dev)!
 
----
-
 <div align="center">
-    <p>Made with ❤️ by <a href="https://github.com/omardiaadev"><b>Omar Diaa</b></a></p>
+    <p><i>Made With ❤️ By <a href="https://github.com/omardiaadev"><b>Omar Diaa</b></a></i></p>
     <a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"></a>
     <a href="https://ko-fi.com/omardiaadev"><img alt="Ko-fi" src="https://img.shields.io/badge/ko--fi-FF6433?style=for-the-badge&logo=kofi&logoColor=FFF"></a>
 </div>

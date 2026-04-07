@@ -1,6 +1,12 @@
 # Changelog
 
-## [0.1.0-beta.5] (Unreleased)
+## [0.1.0-beta.6] (Unreleased)
+
+### discord-html-transcript-core
+
+### discord-html-transcript-server
+
+## [0.1.0-beta.5]
 
 #### Changed
 

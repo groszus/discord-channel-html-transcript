@@ -4,12 +4,12 @@
 
   <groupId>dev.omardiaa</groupId>
   <artifactId>discord-html-transcript</artifactId>
-  <version>0.1.0-beta.4</version>
+  <version>0.1.0-beta.5</version>
 
   <packaging>pom</packaging>
 
   <name>discord-html-transcript</name>
-  <description>Generate natively styled logs for your Discord chats</description>
+  <description>Generate natively styled Discord chat logs</description>
   <url>https://github.com/omardiaadev/discord-html-transcript</url>
 
   <licenses>
