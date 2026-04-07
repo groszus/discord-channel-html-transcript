@@ -18,7 +18,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * A helper class for initializing {@link Transcriber} configuration.
+ * A class for configuring the {@link Transcriber}.
  */
 @NullMarked
 public final class TranscriberConfig {
@@ -26,18 +26,16 @@ public final class TranscriberConfig {
   private static final boolean JTE_DEV = EnvironmentUtil.get("JTE_DEV", false);
   private static final ExecutorService EXECUTOR = Executors
     .newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
+  private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
+    .registerModule(new JavaTimeModule())
+    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+    .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
 
   private static final TemplateEngine TEMPLATE_ENGINE;
-  private static final ObjectMapper OBJECT_MAPPER;
 
   private TranscriberConfig() {}
 
   static {
-    OBJECT_MAPPER = new ObjectMapper()
-      .registerModule(new JavaTimeModule())
-      .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-      .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
-
     if (JTE_DEV) {
       TEMPLATE_ENGINE = TemplateEngine.create(new ResourceCodeResolver("jte"), ContentType.Html);
       TEMPLATE_ENGINE.setBinaryStaticContent(true);
@@ -56,17 +54,17 @@ public final class TranscriberConfig {
   }
 
   /**
-   * @return the default {@link TemplateEngine}.
-   */
-  public static TemplateEngine getTemplateEngine() {
-    return TEMPLATE_ENGINE;
-  }
-
-  /**
    * @return the default {@link ObjectMapper}.
    */
   public static ObjectMapper getObjectMapper() {
     return OBJECT_MAPPER;
+  }
+
+  /**
+   * @return the default {@link TemplateEngine}.
+   */
+  public static TemplateEngine getTemplateEngine() {
+    return TEMPLATE_ENGINE;
   }
 
   /**
