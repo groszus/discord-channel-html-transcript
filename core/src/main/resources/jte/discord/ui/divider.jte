@@ -4,5 +4,5 @@
 @param OffsetDateTime timestamp
 
 <div class="divider user-select-none">
-  <time>${TimeUtil.formatDateLong(timestamp)}</time>
+  <time class="divider__content">${TimeUtil.formatDateLong(timestamp)}</time>
 </div>

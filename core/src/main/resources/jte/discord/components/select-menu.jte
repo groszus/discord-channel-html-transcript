@@ -3,7 +3,9 @@
 @param SelectMenu selectMenu
 
 <div class="select-menu user-select-none">
-  <span class="select-menu__placeholder">${selectMenu.placeholder()}</span>
+  <span class="select-menu__placeholder">
+    ${selectMenu.placeholder()}
+  </span>
 
   <svg
     xmlns="http://www.w3.org/2000/svg"
