@@ -96,6 +96,11 @@
       "allDeclaredMethods": true
     },
     {
+      "type": "dev.omardiaa.transcript.core.model.payload.message.Embed$Provider",
+      "allDeclaredConstructors": true,
+      "allDeclaredMethods": true
+    },
+    {
       "type": "dev.omardiaa.transcript.core.model.payload.message.Embed$Author",
       "allDeclaredConstructors": true,
       "allDeclaredMethods": true
