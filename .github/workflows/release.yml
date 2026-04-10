@@ -77,7 +77,7 @@ jobs:
           mkdir -p artifacts
           
           mv "server/target/discord-html-transcript-server${{ matrix.extension }}" \
-             "artifacts/discord-html-transcript-${{ env.VERSION }}-${{ matrix.platform }}-${{ matrix.arch }}${{ matrix.extension }}"
+             "artifacts/discord-html-transcript-${VERSION}-${{ matrix.platform }}-${{ matrix.arch }}${{ matrix.extension }}"
           
           if [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
             mv "server/target/discord-html-transcript-server-${VERSION}.jar" \
