@@ -38,7 +38,7 @@ public final class MarkdownUtil {
   private final static Pattern ITALIC = Pattern.compile("[*_](?![*_])(.+?)[_*]");
   private final static Pattern STRIKE_THROUGH = Pattern.compile("~~(.+?)~~");
   private final static Pattern LINK = Pattern.compile(
-    "\\[(.*?)]\\((https?://[a-zA-Z0-9.-]+[/\\w .-]*/?)\\)|(https?://[a-zA-Z0-9.-]+[/\\w .-]*/?)");
+    "\\[(.*?)]\\((https?://[\\w.:/?#\\[\\]@-]*)\\)|(https?://[\\w.:/?#\\[\\]@-]*)");
 
   private final static Pattern HEADER = Pattern.compile("^\\s*(#{1,3})\\s+(.+)", Pattern.MULTILINE);
   private final static Pattern SUBTEXT = Pattern.compile("^\\s*-#\\s+(.+)", Pattern.MULTILINE);
