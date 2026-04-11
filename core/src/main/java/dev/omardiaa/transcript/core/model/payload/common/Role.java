@@ -15,7 +15,6 @@ public record Role(
   /**
    * <a href="https://docs.discord.com/developers/topics/permissions#role-object-role-colors-object">Role Colors</a>
    */
-  @NullMarked
   public record Colors(
     @JsonProperty(value = "primary_color", required = true) int primaryColor
   ) {}
