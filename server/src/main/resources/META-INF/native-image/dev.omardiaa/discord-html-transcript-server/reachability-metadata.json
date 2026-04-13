@@ -215,5 +215,10 @@
       "allDeclaredConstructors": true,
       "allDeclaredMethods": true
     }
+  ],
+  "resources": [
+    {
+      "glob": "simplelogger.properties"
+    }
   ]
 }
