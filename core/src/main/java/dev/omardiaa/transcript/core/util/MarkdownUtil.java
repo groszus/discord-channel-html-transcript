@@ -77,7 +77,6 @@ public final class MarkdownUtil {
         String codeBlock = HtmlBuilder
           .create("code")
           .attribute("data-code-style", "BLOCK")
-          .classes("markup")
           .build(m.group(1));
 
         codeMasks.put(
@@ -95,7 +94,6 @@ public final class MarkdownUtil {
           HtmlBuilder
             .create("code")
             .attribute("data-code-style", "INLINE")
-            .classes("markup")
             .build(m.group(1)));
 
         return code;
@@ -126,44 +124,28 @@ public final class MarkdownUtil {
         .create("a")
         .attribute("href", href)
         .attribute("target", "_blank")
-        .classes("markup")
         .build(text);
     });
 
     content = TIMESTAMP.matcher(content).replaceAll(
       m -> HtmlBuilder
         .create("time")
-        .classes("markup")
         .build(TimeUtil.formatTimestamp(m.group(1))));
 
     content = HEADER.matcher(content).replaceAll(
       m -> HtmlBuilder
         .create("h" + m.group(1).length())
-        .classes("markup")
         .build(m.group(2)));
 
     content = SUBTEXT.matcher(content).replaceAll(
       m -> HtmlBuilder
         .create("s")
-        .classes("markup")
         .build(m.group(1)));
 
-    content = QUOTE.matcher(content).replaceAll(m -> {
-      String div = HtmlBuilder
-        .create("div")
-        .classes("markup__blockquote__divider")
-        .build();
-
-      String blockquote = HtmlBuilder
+    content = QUOTE.matcher(content).replaceAll(
+      m -> HtmlBuilder
         .create("blockquote")
-        .classes("markup")
-        .build(m.group(1).replace("&gt; ", ""));
-
-      return HtmlBuilder
-        .create("div")
-        .classes("markup__blockquote__container")
-        .build(div + blockquote);
-    });
+        .build(m.group(1).replace("&gt; ", "")));
 
     content = MENTION_EVERYONE.matcher(content).replaceAll(
       m -> HtmlBuilder
@@ -233,9 +215,9 @@ public final class MarkdownUtil {
 
         return HtmlBuilder
           .create("span")
-          .attribute("style", "color: #%1$s; background-color: #%1$s10;".formatted(hexColor))
-          .attribute("onmouseover", "this.style.backgroundColor='#%1$s30';".formatted(hexColor))
-          .attribute("onmouseout", "this.style.backgroundColor='#%1$s10';".formatted(hexColor))
+          .attribute("style", "color: #" + hexColor + "; background-color: #" + hexColor + "10;")
+          .attribute("onmouseover", "this.style.backgroundColor='#" + hexColor + "30';")
+          .attribute("onmouseout", "this.style.backgroundColor='#" + hexColor + "10';")
           .classes("mention")
           .build(Matcher.quoteReplacement(role.name()));
       });
@@ -245,7 +227,7 @@ public final class MarkdownUtil {
       m -> HtmlBuilder
         .create("span")
         .classes("mention")
-        .build(SVG_CHANNEL_ICON + "<em>unknown</em>"));
+        .build(SVG_CHANNEL_ICON + "<i>unknown</i>"));
 
     content = CUSTOM_EMOJI.matcher(content).replaceAll(
       m -> {
@@ -257,7 +239,6 @@ public final class MarkdownUtil {
           .attribute("title", name)
           .attribute("alt", name)
           .attribute("src", src)
-          .classes("markup")
           .build();
       });
 

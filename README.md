@@ -35,10 +35,6 @@
     <li><strong>Message Accessories:</strong> Attachments, Embeds, Polls, References, and more...</li>
 </ul>
 
-**To-Do**
-
-- [ ] Refactor CSS and Markdown.
-
 > [!IMPORTANT]
 > This project is not affiliated with Discord Inc.
 
@@ -61,7 +57,7 @@ There are 3 ways to use this library:
 The following libraries retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
 while safely handling Discord's rate limits.
 
-Choose the library that corresponds with the Discord API you use:
+Pick the library of choice:
 
 <table>
     <tr>
@@ -213,12 +209,14 @@ You can specify the `options` object in your payload to specify transcript optio
 {
   "options": {
     "attachment": {
-      // If set to "true", attachments referenced in the payload will be downloaded and encoded into a Base64 Data URI.
-      "save": false
+      // If set to "true", attachments referenced in the payload will be downloaded and encoded into a Base64 Data URI
+      // default: false
+      "save_images": true
     },
     "style": {
-      // Path to custom styles.css.
-      "path": null
+      // If set, the custom style.css will be used instead of the inline styles.
+      // default: null
+      "path": "path/to/style.css"
     }
   }
 }
@@ -226,9 +224,9 @@ You can specify the `options` object in your payload to specify transcript optio
 
 ## Contributing
 
-**If you found discord-html-transcript useful, please consider giving it a 🌟!**
+**If you found `discord-html-transcript` useful, please consider giving it a 🌟!**
 
-Need help? Wanna request a feature? [Join us today](https://discord.omardiaa.dev)!
+Need help? [Ask the Community](https://discord.omardiaa.dev)!
 
 <div align="center">
     <p>Made With ❤️ By <a href="https://github.com/omardiaadev"><b>Omar Diaa</b></a></p>

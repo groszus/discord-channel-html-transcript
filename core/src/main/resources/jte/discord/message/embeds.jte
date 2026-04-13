@@ -48,7 +48,7 @@
             <a
               href="${embed.author().url()}"
               target="_blank"
-              class="embed__author__name markup"
+              class="embed__author__name"
             >
               ${embed.author().name()}
             </a>
@@ -59,12 +59,11 @@
       @endif
 
       @if(embed.title() != null)
-        <div class="embed__title embed__margin">
+        <div class="embed__title embed__margin markup">
           @if(embed.url() != null)
             <a
               href="${embed.url()}"
               target="_blank"
-              class="markup"
             >
               ${embed.title()}
             </a>
