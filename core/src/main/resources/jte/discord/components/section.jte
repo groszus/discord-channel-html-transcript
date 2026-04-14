@@ -21,7 +21,7 @@
     @endfor
   </div>
 
-  <div class="section__accessory">
+  <div class="section__accessory user-select-none">
     @if(section.accessory() instanceof Button button)
       @template.discord.components.button(button = button)
     @elseif(section.accessory() instanceof Thumbnail thumbnail)

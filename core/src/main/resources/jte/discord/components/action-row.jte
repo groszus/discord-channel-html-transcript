@@ -5,7 +5,7 @@
 
 @param ActionRow actionRow
 
-<div class="action-row">
+<div class="action-row user-select-none">
   @for(ActionRowChildComponent component : actionRow.components())
     @if(component instanceof Button button)
       @template.discord.components.button(button = button)

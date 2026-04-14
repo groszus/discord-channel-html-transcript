@@ -114,6 +114,16 @@
       "allDeclaredMethods": true
     },
     {
+      "type": "dev.omardiaa.transcript.core.model.payload.message.MessageSnapshot",
+      "allDeclaredConstructors": true,
+      "allDeclaredMethods": true
+    },
+    {
+      "type": "dev.omardiaa.transcript.core.model.payload.message.MessageSnapshot$Message",
+      "allDeclaredConstructors": true,
+      "allDeclaredMethods": true
+    },
+    {
       "type": "dev.omardiaa.transcript.core.model.payload.message.Poll",
       "allDeclaredConstructors": true,
       "allDeclaredMethods": true

@@ -48,6 +48,7 @@
     @endif
 
     <li
+      id="${message.id()}"
       data-show-author="${showAuthor}"
       class="message"
     >

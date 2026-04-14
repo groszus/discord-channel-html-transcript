@@ -5,7 +5,6 @@
 
 <div class="file__container">
   <svg
-    xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 72 96"
     width="30"
     height="40"

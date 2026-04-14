@@ -31,6 +31,7 @@ public record Message(
   List<Embed> embeds,
   @Nullable List<Reaction> reactions,
   @Nullable Integer flags,
+  @Nullable List<MessageSnapshot> messageSnapshots,
   @Nullable Message referencedMessage,
   @Nullable InteractionMetadata interactionMetadata,
   @Nullable List<Component> components,
@@ -52,10 +53,12 @@ public record Message(
     @JsonProperty(value = "embeds", required = true) List<Embed> embeds,
     @JsonProperty(value = "reactions") @Nullable List<Reaction> reactions,
     @JsonProperty(value = "flags") @Nullable Integer flags,
+    @JsonProperty(value = "message_snapshots") @Nullable List<MessageSnapshot> messageSnapshots,
     @JsonProperty(value = "referenced_message") @Nullable Message referencedMessage,
     @JsonProperty(value = "interaction_metadata") @Nullable InteractionMetadata interactionMetadata,
     @JsonProperty(value = "components") @Nullable List<Component> components,
-    @JsonProperty(value = "poll") @Nullable Poll poll) {
+    @JsonProperty(value = "poll") @Nullable Poll poll
+  ) {
     this(
       id,
       author,
@@ -66,6 +69,7 @@ public record Message(
       embeds,
       reactions,
       flags,
+      messageSnapshots,
       referencedMessage,
       interactionMetadata,
       components,
@@ -87,7 +91,7 @@ public record Message(
 
   @Override
   public boolean equals(Object o) {
-    if (o == null || getClass() != o.getClass()) {
+    if (getClass() != o.getClass()) {
       return false;
     }
     Message message = (Message) o;

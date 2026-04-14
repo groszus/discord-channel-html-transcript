@@ -209,6 +209,10 @@ body {
   padding-top: 5rem;
 }
 
+svg {
+  fill: currentColor;
+}
+
 a:hover {
   text-decoration: underline;
 }
@@ -368,6 +372,7 @@ a:hover {
 
   &:hover {
     opacity: 1;
+    text-decoration-line: none;
   }
 }
 
@@ -422,11 +427,15 @@ a:hover {
   --background: var(--button-secondary-background);
   --background-hover: var(--button-secondary-background-hover);
 
-  &:not([aria-disabled="true"]):hover {
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:not([data-button-disabled="true"]):hover {
     background-color: var(--background-hover);
   }
 
-  &[aria-disabled="true"] {
+  &[data-button-disabled="true"] {
     cursor: not-allowed;
     opacity: 0.5;
   }
@@ -436,8 +445,7 @@ a:hover {
     --background-hover: var(--button-brand-background-hover);
   }
 
-  &[data-button-style="SECONDARY"],
-  &[data-button-style="LINK"] {
+  &:is([data-button-style="SECONDARY"], [data-button-style="LINK"]) {
     --background: var(--button-secondary-background);
     --background-hover: var(--button-secondary-background-hover);
   }
@@ -464,7 +472,6 @@ a:hover {
   width: 16px;
   height: 16px;
   margin-left: 0.5rem;
-  fill: var(--button-secondary-text);
 }
 
 .container {
@@ -476,11 +483,6 @@ a:hover {
   border-radius: 0.5rem;
   background-color: var(--background-surface-high);
   gap: 0.5rem;
-
-  & > .file__container {
-    margin-top: 0;
-    box-shadow: 0 1px 4px 0 oklch(0 0 0 / 0.14);
-  }
 }
 
 .file__container {
@@ -493,6 +495,11 @@ a:hover {
   border-radius: 0.5rem;
   background-color: var(--background-surface-high);
   gap: 0.5rem;
+
+  .container > & {
+    margin-top: 0;
+    box-shadow: 0 1px 4px 0 oklch(0 0 0 / 0.14);
+  }
 }
 
 .file {
@@ -923,7 +930,7 @@ a:hover {
 }
 
 .messages {
-  padding: 0 1rem 1.5rem 1rem;
+  padding: 0 1rem 1.5rem;
 }
 
 .message {
@@ -933,6 +940,10 @@ a:hover {
   &[data-show-author="true"] {
     align-items: normal;
     padding-top: 1rem;
+  }
+
+  &:hover .message__timestamp {
+    opacity: 1;
   }
 }
 
@@ -948,22 +959,35 @@ a:hover {
   gap: 0.25rem;
 }
 
-.message:has(.message__edited) {
-  flex-direction: row;
+.message-snapshot {
+  position: relative;
+  margin: 0.25rem 0;
+  padding: 0 0 0 1rem;
+
+  &::before {
+    position: absolute;
+    width: 4px;
+    content: "";
+    border-radius: 0.125rem;
+    background-color: var(--border-subtle);
+    inset: 0;
+  }
+}
+
+.message-snapshot__header {
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  gap: 0.25rem;
+
 }
 
 .message__timestamp {
   font-size: 0.6875rem;
-  line-height: 1.375rem;
-  z-index: 1;
-  width: 40px;
-  height: 22px;
   opacity: 0;
   color: var(--text-muted);
-}
-
-.message__container:hover .message__timestamp {
-  opacity: 1;
 }
 
 .message__edited {
@@ -985,33 +1009,30 @@ a:hover {
   font-weight: 500;
   position: absolute;
   display: none;
-  align-items: center;
   align-self: self-end;
-  box-sizing: border-box;
   margin-bottom: 1.75rem;
   padding: 0.5rem 0.75rem;
   color: var(--text-normal);
   border-radius: 0.5rem;
   background-color: var(--background-surface-high);
-  box-shadow: inset 0 0 0 0.0625rem var(--border-subtle), 0 0.75rem 1.5rem 0 hsl(none 0% 0%/0.24);
-  gap: 0.5rem;
+  box-shadow: inset 0 0 0 0.0625rem var(--border-subtle), 0 0.75rem 1.5rem 0 oklch(0 0 none / 0.24);
 }
 
 .timestamp__caret {
   position: absolute;
   top: calc(100% - 3px);
+  color: var(--border-subtle);
   inset-inline-start: 50%;
-  -webkit-margin-start: -0.5rem;
   margin-inline-start: -0.5rem;
-}
 
-.timestamp__caret-fill {
-  fill: var(--background-surface-high);
-}
+  mask {
+    mask-type: alpha;
+  }
 
-.timestamp__caret-stroke {
-  stroke: var(--border-subtle);
-  stroke-opacity: 1;
+  g path {
+    stroke: var(--border-subtle);
+    fill: var(--background-surface-high);
+  }
 }
 
 .images {
@@ -1042,8 +1063,7 @@ a:hover {
     grid-row: span 2;
   }
 
-  &[data-count="3"] > :nth-child(2),
-  &[data-count="3"] > :nth-child(3) {
+  &[data-count="3"] > :nth-child(n+2) {
     grid-column: span 2;
   }
 
@@ -1204,10 +1224,6 @@ a:hover {
   &:hover {
     color: white;
     background-color: var(--brand-500);
-  }
-
-  a {
-    cursor: pointer;
   }
 }
 

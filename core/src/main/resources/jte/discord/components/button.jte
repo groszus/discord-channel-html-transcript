@@ -5,11 +5,10 @@
 
 <a
   href="${button.disabled() ? null : button.url()}"
-  aria-disabled="${button.disabled()}"
-  role="button"
   target="_blank"
+  data-button-disabled="${button.disabled()}"
   data-button-style="${button.style().name()}"
-  class="button user-select-none"
+  class="button"
 >
   @if(button.emoji() != null)
     @template.util.emoji(emoji = button.emoji(), classes = "button__emoji")
@@ -21,7 +20,6 @@
 
   @if(button.style() == ButtonStyle.LINK)
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       class="button__link-icon"
     >
