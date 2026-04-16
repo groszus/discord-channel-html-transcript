@@ -33,7 +33,8 @@ public record User(
     @JsonProperty(value = "global_name") @Nullable String globalName,
     @JsonProperty(value = "avatar") @Nullable String avatar,
     @JsonProperty(value = "bot") @Nullable Boolean bot,
-    @JsonProperty(value = "system") @Nullable Boolean system) {
+    @JsonProperty(value = "system") @Nullable Boolean system
+  ) {
     this(
       id,
       Check.lengthRange(username, "username", 2, 32),
@@ -69,7 +70,7 @@ public record User(
 
   @Override
   public boolean equals(Object o) {
-    if (o == null || getClass() != o.getClass()) {
+    if (getClass() != o.getClass()) {
       return false;
     }
     User user = (User) o;

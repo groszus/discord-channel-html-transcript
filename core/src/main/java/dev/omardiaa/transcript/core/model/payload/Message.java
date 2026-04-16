@@ -35,6 +35,7 @@ public record Message(
   @Nullable Message referencedMessage,
   @Nullable InteractionMetadata interactionMetadata,
   @Nullable List<Component> components,
+  @Nullable List<StickerItem> stickerItems,
   @Nullable Poll poll,
 
   @JsonIgnore Map<String, User> mentionsMap,
@@ -57,6 +58,7 @@ public record Message(
     @JsonProperty(value = "referenced_message") @Nullable Message referencedMessage,
     @JsonProperty(value = "interaction_metadata") @Nullable InteractionMetadata interactionMetadata,
     @JsonProperty(value = "components") @Nullable List<Component> components,
+    @JsonProperty(value = "sticker_items") @Nullable List<StickerItem> stickerItems,
     @JsonProperty(value = "poll") @Nullable Poll poll
   ) {
     this(
@@ -73,6 +75,7 @@ public record Message(
       referencedMessage,
       interactionMetadata,
       components,
+      stickerItems,
       poll,
       mentions.isEmpty()
         ? Collections.emptyMap()

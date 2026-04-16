@@ -28,6 +28,8 @@
 
     @template.discord.message.components(guild = guild, message = message, options = options)
 
+    @template.discord.message.stickers(message = message)
+
     @template.discord.message.reactions(reactions = message.reactions())
   @endif
 </div>

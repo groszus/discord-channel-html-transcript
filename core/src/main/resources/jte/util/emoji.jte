@@ -5,7 +5,7 @@
 
 @if(emoji instanceof Emoji.Custom customEmoji)
   <img
-    src="${customEmoji.imageUrl()}"
+    src="${customEmoji.iconUrl()}"
     alt="${customEmoji.name()}"
     class="${classes}"
   />

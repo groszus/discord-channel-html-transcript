@@ -24,14 +24,14 @@ public sealed interface Emoji permits Emoji.Unicode, Emoji.Custom {
   }
 
   record Custom(String id, String name) implements Emoji {
-    public final static String CUSTOM_EMOJI = "https://cdn.discordapp.com/emojis/%s.webp?animated=true";
+    public static final String CUSTOM_EMOJI_URL = "https://cdn.discordapp.com/emojis/%s.webp?animated=true";
 
     /**
-     * @return <a href="https://docs.discord.com/developers/reference#image-formatting">Formatted Emoji URL</a>
+     * @return <a href="https://docs.discord.com/developers/reference#image-formatting">Image Formatting</a>
      */
     @JsonIgnore
-    public String imageUrl() {
-      return CUSTOM_EMOJI.formatted(id);
+    public String iconUrl() {
+      return CUSTOM_EMOJI_URL.formatted(id);
     }
   }
 

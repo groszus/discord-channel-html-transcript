@@ -232,7 +232,7 @@ public final class MarkdownUtil {
     content = CUSTOM_EMOJI.matcher(content).replaceAll(
       m -> {
         String name = m.group(1);
-        String src = Emoji.Custom.CUSTOM_EMOJI.formatted(m.group(2));
+        String src = Emoji.Custom.CUSTOM_EMOJI_URL.formatted(m.group(2));
 
         return HtmlBuilder
           .create("img")
