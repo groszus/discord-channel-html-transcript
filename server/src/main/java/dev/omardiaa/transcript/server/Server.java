@@ -2,6 +2,7 @@ package dev.omardiaa.transcript.server;
 
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import dev.omardiaa.transcript.core.config.TranscriberConfig;
+import dev.omardiaa.transcript.core.exception.TranscriberException;
 import dev.omardiaa.transcript.core.model.Payload;
 import dev.omardiaa.transcript.core.service.Transcriber;
 import dev.omardiaa.transcript.server.config.ServerConfig;
@@ -44,6 +45,7 @@ public final class Server {
           .get("/health", this::healthHandler)
           .post("/transcript", this::transcriptHandler)
           .beforeMatched(ServerUtil::validateVersion)
+          .exception(TranscriberException.class, GlobalExceptionHandler::handleTranscriber)
           .exception(MismatchedInputException.class, GlobalExceptionHandler::handleMismatchedInput)
           .exception(MismatchedVersionException.class, GlobalExceptionHandler::handleMismatchedVersion)
           .exception(UnauthorizedResponse.class, GlobalExceptionHandler::handleUnauthorized)

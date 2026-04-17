@@ -1,6 +1,7 @@
 package dev.omardiaa.transcript.server.exception;
 
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import dev.omardiaa.transcript.core.exception.TranscriberException;
 import dev.omardiaa.transcript.server.config.ServerConfig;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
@@ -16,6 +17,13 @@ public final class GlobalExceptionHandler {
   private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
   private GlobalExceptionHandler() {}
+
+  public static void handleTranscriber(TranscriberException e, Context ctx) {
+    ctx.status(HttpStatus.BAD_REQUEST).json(
+      new ErrorResponse(
+        HttpStatus.BAD_REQUEST,
+        e.getMessage()));
+  }
 
   public static void handleMismatchedInput(MismatchedInputException e, Context ctx) {
     ctx.status(HttpStatus.BAD_REQUEST).json(

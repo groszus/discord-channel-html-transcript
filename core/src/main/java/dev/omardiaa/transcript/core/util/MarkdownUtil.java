@@ -1,5 +1,6 @@
 package dev.omardiaa.transcript.core.util;
 
+import dev.omardiaa.transcript.core.exception.TranscriberException;
 import dev.omardiaa.transcript.core.model.payload.Guild;
 import dev.omardiaa.transcript.core.model.payload.Message;
 import dev.omardiaa.transcript.core.model.payload.common.Emoji;
@@ -55,16 +56,19 @@ public final class MarkdownUtil {
   private MarkdownUtil() {}
 
   /**
-   * Parses the provided {@code content} into styled HTML.
+   * Parses the provided {@code content} into markdown as HTML.
    *
    * @param content
-   *   The content to parse.
+   *   the content to parse.
    *
-   * @return The styled HTML.
+   * @return the markdown as HTML.
+   *
+   * @throws TranscriberException
+   *   if the provided {@code content} is blank.
    */
   public static String parseMarkup(String content) {
     if (content.isBlank()) {
-      return "";
+      throw new TranscriberException("Received empty content.");
     }
 
     boolean hasCode = CODE_BLOCK.asPredicate().test(content) || CODE_INLINE.asPredicate().test(content);
@@ -165,17 +169,19 @@ public final class MarkdownUtil {
   }
 
   /**
-   * Parses the provided {@code content} into styled HTML with extra Discord entities.
+   * Parses the provided {@code content} into Discord's extra markdown as HTML.
    *
    * @param guild
-   *   The guild the message was sent in.
+   *   the guild the {@code message} belongs to.
    * @param message
-   *   The message that contains {@code content}.
+   *   the message that contains {@code content}.
    * @param content
-   *   The content to parse.
+   *   the content to parse.
    *
-   * @return The styled HTML with extra Discord entities.
+   * @return Discord's extra markdown as HTML.
    *
+   * @throws TranscriberException
+   *   if the provided {@code content} is blank.
    * @see <a href="https://docs.discord.com/developers/reference#message-formatting">Message Formatting</a>
    */
   public static String parseMarkup(Guild guild, Message message, String content) {
@@ -295,7 +301,7 @@ public final class MarkdownUtil {
   }
 
   /**
-   * Checks if a StringBuilder is blank without allocating a new String.
+   * Checks if a StringBuilder is blank without allocating new Strings.
    */
   private static boolean isBufferBlank(StringBuilder sb) {
     for (int i = 0; i < sb.length(); i++) {
