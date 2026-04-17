@@ -3,7 +3,6 @@ package dev.omardiaa.transcript.core.model.payload.message;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
-import dev.omardiaa.transcript.core.util.Check;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -36,7 +35,7 @@ public record Embed(
   @JsonCreator
   public Embed(
     @JsonProperty(value = "title") @Nullable String title,
-    @JsonProperty(value = "type") @Nullable Type type,
+    @JsonProperty(value = "type") Type type,
     @JsonProperty(value = "description") @Nullable String description,
     @JsonProperty(value = "url") @Nullable String url,
     @JsonProperty(value = "timestamp") @Nullable OffsetDateTime timestamp,
@@ -51,7 +50,7 @@ public record Embed(
   ) {
     this(
       title,
-      type != null ? type : Type.UNKNOWN,
+      type,
       description,
       url,
       timestamp,
@@ -62,7 +61,8 @@ public record Embed(
       video,
       provider,
       author,
-      fields);
+      fields
+    );
   }
 
   /**
@@ -103,7 +103,7 @@ public record Embed(
       @JsonProperty(value = "text", required = true) String text,
       @JsonProperty(value = "icon_url") @Nullable String iconUrl
     ) {
-      this.text = Check.lengthMax(text, "text", 2048);
+      this.text = text;
       this.iconUrl = iconUrl;
     }
   }
@@ -181,7 +181,7 @@ public record Embed(
       @JsonProperty(value = "url") @Nullable String url,
       @JsonProperty(value = "icon_url") @Nullable String iconUrl
     ) {
-      this.name = Check.lengthMax(name, "name", 256);
+      this.name = name;
       this.url = url;
       this.iconUrl = iconUrl;
     }
@@ -202,9 +202,10 @@ public record Embed(
       @JsonProperty(value = "inline") @Nullable Boolean inline
     ) {
       this(
-        Check.lengthMax(name, "name", 256),
-        Check.lengthMax(value, "value", 1024),
-        inline != null ? inline : false);
+        name,
+        value,
+        inline != null ? inline : false
+      );
     }
   }
 }

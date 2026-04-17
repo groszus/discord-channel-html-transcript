@@ -18,12 +18,11 @@ public record User(
   String username,
   @Nullable String discriminator,
   String globalName,
-
   @JsonIgnore String avatarUrl,
   @JsonIgnore @Nullable String tag
 ) {
-  public static final String DEFAULT_USER_AVATAR = "https://cdn.discordapp.com/embed/avatars/%s.png";
-  public static final String USER_AVATAR = "https://cdn.discordapp.com/avatars/%s/%s.webp?animated=true";
+  public static final String DEFAULT_USER_AVATAR_URL = "https://cdn.discordapp.com/embed/avatars/%s.png";
+  public static final String USER_AVATAR_URL = "https://cdn.discordapp.com/avatars/%s/%s.webp?animated=true";
 
   @JsonCreator
   public User(
@@ -37,31 +36,30 @@ public record User(
   ) {
     this(
       id,
-      Check.lengthRange(username, "username", 2, 32),
+      username,
       discriminator.equals("0") ? null : discriminator,
       Check.defaultIfBlank(globalName, username),
       resolveAvatarUrl(id, discriminator, avatar),
-      resolveTag(bot, system));
+      resolveTag(bot, system)
+    );
   }
 
   private static String resolveAvatarUrl(String id, String discriminator, @Nullable String avatar) {
     if (avatar != null) {
-      return USER_AVATAR.formatted(id, avatar);
-    }
-
-    if (discriminator.equals("0") || discriminator.equals("0000")) {
-      return DEFAULT_USER_AVATAR.formatted((Long.parseLong(id) >> 22) % 6);
+      return USER_AVATAR_URL.formatted(id, avatar);
+    } else if (discriminator.equals("0")) {
+      return DEFAULT_USER_AVATAR_URL.formatted((Long.parseLong(id) >> 22) % 6);
     } else {
-      return DEFAULT_USER_AVATAR.formatted(Short.parseShort(discriminator) % 5);
+      return DEFAULT_USER_AVATAR_URL.formatted(Short.parseShort(discriminator) % 5);
     }
   }
 
   private static @Nullable String resolveTag(@Nullable Boolean bot, @Nullable Boolean system) {
-    if (Boolean.TRUE.equals(bot)) {
+    if (bot != null && bot) {
       return "APP";
     }
 
-    if (Boolean.TRUE.equals(system)) {
+    if (system != null && system) {
       return "SYSTEM";
     }
 

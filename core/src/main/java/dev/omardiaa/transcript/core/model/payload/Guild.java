@@ -8,7 +8,6 @@ import dev.omardiaa.transcript.core.util.ImageUtil;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -20,11 +19,10 @@ import java.util.stream.Collectors;
 @NullMarked
 public record Guild(
   String name,
-
   @JsonIgnore String iconUrl,
-  @JsonIgnore Map<String, Role> rolesMap
+  @JsonIgnore @Nullable Map<String, Role> rolesMap
 ) {
-  public static final String GUILD_ICON = "https://cdn.discordapp.com/icons/%s/%s.webp?animated=true";
+  public static final String GUILD_ICON_URL = "https://cdn.discordapp.com/icons/%s/%s.webp?animated=true";
 
   @JsonCreator
   public Guild(
@@ -37,9 +35,9 @@ public record Guild(
       name,
       icon == null
         ? ImageUtil.drawGuildIcon(name)
-        : GUILD_ICON.formatted(id, icon),
+        : GUILD_ICON_URL.formatted(id, icon),
       roles.isEmpty()
-        ? Collections.emptyMap()
+        ? null
         : roles.stream().collect(Collectors.toUnmodifiableMap(Role::id, Function.identity())));
   }
 }

@@ -3,5 +3,5 @@
 @param User user
 
 @if(user.tag() != null)
-  <span class="author__tag user-select-none">${user.tag()}</span>
+  <span class="author__tag">${user.tag()}</span>
 @endif

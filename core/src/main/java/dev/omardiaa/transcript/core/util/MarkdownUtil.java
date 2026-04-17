@@ -206,7 +206,7 @@ public final class MarkdownUtil {
 
     content = MENTION_ROLE.matcher(content).replaceAll(
       m -> {
-        Role role = guild.rolesMap().get(m.group(1));
+        Role role = Optional.ofNullable(guild.rolesMap()).map(roles -> roles.get(m.group(1))).orElse(null);
 
         if (role == null) {
           return HtmlBuilder.create("span").classes("mention").build("@unknown-role");

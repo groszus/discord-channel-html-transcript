@@ -71,59 +71,6 @@ public final class Check {
 
   /**
    * @param arg
-   *   the string to validate.
-   * @param argName
-   *   the name of the argument, used in the exception message.
-   * @param min
-   *   the minimum allowed length (inclusive).
-   * @param max
-   *   the maximum allowed length (inclusive).
-   *
-   * @return the validated string.
-   *
-   * @throws IllegalArgumentException
-   *   if the string is {@code null}, or if its length is outside the provided range.
-   */
-  public static String lengthRange(String arg, String argName, int min, int max) {
-    notNull(arg, argName);
-    long length = arg.codePoints().count();
-    check(
-      min <= length && length <= max,
-      "\"%s\" must be between %d and %d characters! Found %s characters.",
-      argName,
-      min,
-      max,
-      length);
-    return arg;
-  }
-
-  /**
-   * @param arg
-   *   the string to validate.
-   * @param argName
-   *   the name of the argument, used in the exception message.
-   * @param max
-   *   the maximum allowed length (inclusive).
-   *
-   * @return the validated string.
-   *
-   * @throws IllegalArgumentException
-   *   if the string is {@code null}, or if its length exceeds the provided {@code max}.
-   */
-  public static String lengthMax(String arg, String argName, int max) {
-    notNull(arg, argName);
-    long length = arg.codePoints().count();
-    check(
-      length <= max,
-      "\"%s\" must not be longer than %d characters! Found %s characters.",
-      argName,
-      max,
-      length);
-    return arg;
-  }
-
-  /**
-   * @param arg
    *   the {@link Collection} to validate.
    * @param min
    *   the minimum allowed size (inclusive).
@@ -150,7 +97,8 @@ public final class Check {
       argName,
       min,
       max,
-      size);
+      size
+    );
     return arg;
   }
 
@@ -179,7 +127,8 @@ public final class Check {
       "\"%s\" may not have less than %d element(s)! Found %d elements.",
       argName,
       min,
-      size);
+      size
+    );
     return arg;
   }
 }

@@ -3,7 +3,6 @@ package dev.omardiaa.transcript.core.model.payload.message;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.omardiaa.transcript.core.model.payload.common.Emoji;
-import dev.omardiaa.transcript.core.util.Check;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -48,7 +47,7 @@ public record Poll(
       @JsonProperty(value = "text", required = true) String text,
       @JsonProperty(value = "emoji") @Nullable Emoji emoji
     ) {
-      this.text = Check.lengthMax(text, "text", 300);
+      this.text = text;
       this.emoji = emoji;
     }
   }
