@@ -1,5 +1,4 @@
 @import dev.omardiaa.transcript.core.util.TimeUtil
-@import dev.omardiaa.transcript.core.util.MarkdownUtil
 @import dev.omardiaa.transcript.core.model.payload.Guild
 @import dev.omardiaa.transcript.core.model.payload.Message
 @import dev.omardiaa.transcript.core.model.payload.message.Embed
@@ -75,7 +74,7 @@
 
       @if(embed.description() != null)
         <div class="embed__description embed__margin">
-          $unsafe{MarkdownUtil.parseMarkup(guild, message, embed.description())}
+          @template.discord.message.content(guild = guild, message = message, content = embed.description())
         </div>
       @endif
 
