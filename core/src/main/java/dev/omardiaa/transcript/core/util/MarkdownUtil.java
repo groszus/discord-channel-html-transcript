@@ -10,6 +10,7 @@ import org.jspecify.annotations.NullMarked;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -190,7 +191,7 @@ public final class MarkdownUtil {
     content = MENTION_USER.matcher(content).replaceAll(
       m -> {
         String userId = m.group(1);
-        User user = message.mentionsMap().get(userId);
+        User user = Optional.ofNullable(message.mentionsMap()).map(mentions -> mentions.get(userId)).orElse(null);
 
         if (user == null) {
           return HtmlBuilder.create("span").classes("mention").build("<@" + userId + ">");

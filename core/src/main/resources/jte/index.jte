@@ -1,4 +1,3 @@
-@import java.time.temporal.ChronoUnit
 @import dev.omardiaa.transcript.core.util.TimeUtil
 @import dev.omardiaa.transcript.core.model.Payload
 @import dev.omardiaa.transcript.core.model.payload.Message
@@ -34,16 +33,9 @@
   !{Message previousMessage = null;}
 
   @for(Message message : payload.messages())
-    !{boolean isFirst = previousMessage == null;}
+    !{boolean showAuthor = message.showAuthor(previousMessage);}
 
-    !{boolean dateChanged = !isFirst && !previousMessage.timestamp().toLocalDate().isEqual(message.timestamp().toLocalDate());}
-    !{boolean showDivider = isFirst || dateChanged;}
-
-    !{boolean timeGapExceeded = !isFirst && ChronoUnit.MINUTES.between(previousMessage.timestamp(), message.timestamp()) > 7;}
-    !{boolean authorChanged = !isFirst && !previousMessage.author().equals(message.author());}
-    !{boolean showAuthor = showDivider || authorChanged || (message.referencedMessage() != null) || (message.interactionMetadata() != null) || timeGapExceeded;}
-
-    @if(showDivider)
+    @if(message.showDivider(previousMessage))
       @template.discord.ui.divider(timestamp = message.timestamp())
     @endif
 
@@ -71,6 +63,7 @@
           <h3 class="author">
             <a
               href="https://discord.com/users/${message.author().id()}"
+              target="_blank"
               title="${message.author().username()}${message.author().discriminator() == null ? "" : "#" + message.author().discriminator()}"
               class="author__name"
             >

@@ -1,11 +1,11 @@
 package dev.omardiaa.transcript.core.service;
 
+import dev.omardiaa.transcript.core.config.TranscriberConfig;
 import dev.omardiaa.transcript.core.model.Payload;
 import dev.omardiaa.transcript.core.model.payload.Channel;
 import dev.omardiaa.transcript.core.model.payload.Guild;
 import dev.omardiaa.transcript.core.model.payload.Message;
 import dev.omardiaa.transcript.core.model.payload.PayloadOptions;
-import gg.jte.output.Utf8ByteOutput;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -53,7 +53,7 @@ class TranscriberTest {
 
   @Test
   void shouldTranscribe() throws IOException {
-    Utf8ByteOutput output = Assertions.assertTimeoutPreemptively(
+    Payload payload = Assertions.assertTimeoutPreemptively(
       Duration.ofSeconds(30),
       () -> {
         CompletableFuture<Guild> guildFuture = fetcher.getGuild(DISCORD_GUILD_ID);
@@ -71,16 +71,19 @@ class TranscriberTest {
               channelFuture.join(),
               messagesFuture.join(),
               new PayloadOptions()))
-          .thenCompose(transcriber::transcribe)
           .join();
       }
     );
 
-    Path targetDir = Path.of("target");
-    Files.createDirectories(targetDir);
-    Path filePath = targetDir.resolve("transcript.html");
+    Path dir = Path.of("target");
+    Files.createDirectories(dir);
 
-    Files.write(filePath, output.toByteArray());
-    LOGGER.info("Saved: file://{}", filePath.toAbsolutePath());
+    Path htmlPath = dir.resolve("transcript.html");
+    Files.write(htmlPath, transcriber.transcribe(payload).join().toByteArray());
+    LOGGER.info("Saved: file://{}", htmlPath.toAbsolutePath());
+
+    Path jsonPath = dir.resolve("transcript.json");
+    TranscriberConfig.getObjectMapper().writerWithDefaultPrettyPrinter().writeValue(jsonPath.toFile(), payload);
+    LOGGER.info("Saved: file://{}", jsonPath.toAbsolutePath());
   }
 }

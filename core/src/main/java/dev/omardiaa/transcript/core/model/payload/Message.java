@@ -10,7 +10,8 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.time.OffsetDateTime;
-import java.util.Collections;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -38,12 +39,12 @@ public record Message(
   @Nullable List<StickerItem> stickerItems,
   @Nullable Poll poll,
 
-  @JsonIgnore Map<String, User> mentionsMap,
+  @JsonIgnore @Nullable Map<String, User> mentionsMap,
   @JsonIgnore List<Attachment> images,
   @JsonIgnore List<File> files
 ) {
   @JsonCreator
-  public Message(
+  public static Message create(
     @JsonProperty(value = "id", required = true) String id,
     @JsonProperty(value = "author", required = true) User author,
     @JsonProperty(value = "content", required = true) String content,
@@ -61,7 +62,18 @@ public record Message(
     @JsonProperty(value = "sticker_items") @Nullable List<StickerItem> stickerItems,
     @JsonProperty(value = "poll") @Nullable Poll poll
   ) {
-    this(
+    List<Attachment> images = new ArrayList<>();
+    List<File> files = new ArrayList<>();
+
+    for (Attachment attachment : attachments) {
+      if (attachment.isImage()) {
+        images.add(attachment);
+      } else {
+        files.add(attachment.toFile());
+      }
+    }
+
+    return new Message(
       id,
       author,
       content,
@@ -78,10 +90,10 @@ public record Message(
       stickerItems,
       poll,
       mentions.isEmpty()
-        ? Collections.emptyMap()
+        ? null
         : mentions.stream().collect(Collectors.toUnmodifiableMap(User::id, Function.identity())),
-      attachments.stream().filter(Attachment::isImage).toList(),
-      attachments.stream().filter(a -> !a.isImage()).map(Attachment::toFile).toList());
+      images,
+      files);
   }
 
   /**
@@ -89,7 +101,38 @@ public record Message(
    */
   @JsonIgnore
   public boolean isComponentsV2() {
-    return (this.flags != null) && ((this.flags & (1 << 15)) != 0);
+    return (flags != null) && ((flags & 1 << 15) != 0);
+  }
+
+  /**
+   * @param previousMessage
+   *   the previous message.
+   *
+   * @return {@code true} if a divider should be rendered.
+   */
+  @JsonIgnore
+  public boolean showDivider(@Nullable Message previousMessage) {
+    return previousMessage == null || !previousMessage.timestamp().toLocalDate().isEqual(timestamp.toLocalDate());
+  }
+
+  /**
+   * @param previousMessage
+   *   the previous message.
+   *
+   * @return {@code true} if the author should be rendered.
+   */
+  @JsonIgnore
+  public boolean showAuthor(@Nullable Message previousMessage) {
+    if (
+      showDivider(previousMessage)
+      || previousMessage.author().equals(author)
+      || referencedMessage != null
+      || interactionMetadata != null
+    ) {
+      return true;
+    } else {
+      return ChronoUnit.MINUTES.between(previousMessage.timestamp(), timestamp) > 7;
+    }
   }
 
   @Override

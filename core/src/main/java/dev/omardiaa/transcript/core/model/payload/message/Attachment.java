@@ -32,8 +32,7 @@ public record Attachment(
   }
 
   /**
-   * @return {@code true} if the attachment's
-   * <a href="https://en.wikipedia.org/wiki/Media_type">Media Type</a> is {@code image/*}.
+   * @return {@code true} if this attachment's {@code contentType} is {@code image/*}.
    */
   @JsonIgnore
   public boolean isImage() {
@@ -41,7 +40,7 @@ public record Attachment(
   }
 
   /**
-   * Constructs a new {@link File} from {@link Attachment}
+   * Constructs a new {@link File} from this {@link Attachment}.
    *
    * @return a new {@link File}.
    */
