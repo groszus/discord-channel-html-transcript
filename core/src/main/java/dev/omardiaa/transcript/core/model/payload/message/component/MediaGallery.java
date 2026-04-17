@@ -28,7 +28,6 @@ public record MediaGallery(
   /**
    * <a href="https://docs.discord.com/developers/components/reference#media-gallery-media-gallery-item-structure">Media Gallery Item</a>
    */
-  @NullMarked
   public record Item(
     UnfurledMediaItem media
   ) {
