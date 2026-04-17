@@ -11,23 +11,14 @@ import org.jspecify.annotations.Nullable;
  */
 @NullMarked
 public record Channel(
-  String id,
-  int type,
   String name,
   @Nullable String topic
 ) {
   @JsonCreator
   public Channel(
-    @JsonProperty(value = "id", required = true) String id,
-    @JsonProperty(value = "type", required = true) int type,
     @JsonProperty(value = "name") @Nullable String name,
-    @JsonProperty(value = "topic") @Nullable String topic) {
-    if (type != 0) {
-      throw new IllegalArgumentException("Channel must be of type GUILD_TEXT (0)");
-    }
-
-    this.id = id;
-    this.type = type;
+    @JsonProperty(value = "topic") @Nullable String topic
+  ) {
     this.name = Check.defaultIfBlank(name, "unknown");
     this.topic = topic;
   }
