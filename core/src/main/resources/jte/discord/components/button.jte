@@ -1,5 +1,4 @@
 @import dev.omardiaa.transcript.core.model.payload.message.component.Button
-@import dev.omardiaa.transcript.core.model.payload.message.component.ButtonStyle
 
 @param Button button
 
@@ -18,7 +17,7 @@
     <span>${button.label()}</span>
   @endif
 
-  @if(button.style() == ButtonStyle.LINK)
+  @if(button.style() == Button.Style.LINK)
     <svg
       viewBox="0 0 24 24"
       class="button__link-icon"

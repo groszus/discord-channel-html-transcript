@@ -1,13 +1,13 @@
 package dev.omardiaa.transcript.core.model.payload.message.component;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import dev.omardiaa.transcript.core.model.payload.common.Emoji;
 import dev.omardiaa.transcript.core.util.Check;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-
-// TODO: cleanup
 
 /**
  * <a href="https://docs.discord.com/developers/components/reference#button">Button</a>
@@ -15,20 +15,27 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public record Button(
   int type,
-  ButtonStyle style,
+  Style style,
   @Nullable String label,
   @Nullable Emoji emoji,
   @Nullable String url,
   boolean disabled
 ) implements ActionRowChildComponent, SectionAccessoryComponent {
+  public Button {
+    Check.check(
+      !((label == null) && (emoji == null)),
+      "Either emoji or label can be null, both must not be null."
+    );
+  }
+
   @JsonCreator
   public Button(
     @JsonProperty(value = "type", required = true) int type,
-    @JsonProperty(value = "style", required = true) ButtonStyle style,
+    @JsonProperty(value = "style", required = true) Style style,
     @JsonProperty(value = "label") @Nullable String label,
     @JsonProperty(value = "emoji") @Nullable Emoji emoji,
     @JsonProperty(value = "url") @Nullable String url,
-    @JsonProperty(value = "disabled", defaultValue = "false") @Nullable Boolean disabled
+    @JsonProperty(value = "disabled") @Nullable Boolean disabled
   ) {
     this(
       type,
@@ -36,14 +43,26 @@ public record Button(
       label,
       emoji,
       url,
-      disabled != null && disabled);
+      disabled != null ? disabled : false
+    );
+  }
 
-    Check.check(
-      !((style == ButtonStyle.LINK) && (url == null)),
-      "Link Button cannot have null url.");
+  /**
+   * <a href="https://docs.discord.com/developers/components/reference#button-button-styles">Button Styles</a>
+   */
+  public enum Style {
+    @JsonEnumDefaultValue UNKNOWN(-1),
+    PRIMARY(1),
+    SECONDARY(2),
+    SUCCESS(3),
+    DANGER(4),
+    LINK(5);
 
-    Check.check(
-      !((label == null) && (emoji == null)),
-      "Either emoji or label can be null, both must not be null.");
+    @JsonValue
+    public final int value;
+
+    Style(int value) {
+      this.value = value;
+    }
   }
 }

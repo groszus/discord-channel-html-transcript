@@ -29,6 +29,7 @@ public final class TranscriberConfig {
   private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
     .registerModule(new JavaTimeModule())
     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+    .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE, true)
     .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
 
   private static final TemplateEngine TEMPLATE_ENGINE;

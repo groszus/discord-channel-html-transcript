@@ -21,6 +21,10 @@
       "allDeclaredMethods": true
     },
     {
+      "type": "dev.omardiaa.transcript.core.model.payload.Message$Type",
+      "allDeclaredFields": true
+    },
+    {
       "type": "dev.omardiaa.transcript.core.model.payload.PayloadOptions",
       "allDeclaredConstructors": true,
       "allDeclaredMethods": true
@@ -66,8 +70,7 @@
     },
     {
       "type": "dev.omardiaa.transcript.core.model.payload.message.Embed$Type",
-      "allDeclaredConstructors": true,
-      "allDeclaredMethods": true
+      "allDeclaredFields": true
     },
     {
       "type": "dev.omardiaa.transcript.core.model.payload.message.Embed$Footer",
@@ -111,7 +114,7 @@
     },
     {
       "type": "dev.omardiaa.transcript.core.model.payload.message.InteractionType",
-      "allDeclaredMethods": true
+      "allDeclaredFields": true
     },
     {
       "type": "dev.omardiaa.transcript.core.model.payload.message.MessageSnapshot",
@@ -154,6 +157,11 @@
       "allDeclaredMethods": true
     },
     {
+      "type": "dev.omardiaa.transcript.core.model.payload.message.StickerItem",
+      "allDeclaredConstructors": true,
+      "allDeclaredMethods": true
+    },
+    {
       "type": "dev.omardiaa.transcript.core.model.payload.message.User",
       "allDeclaredConstructors": true
     },
@@ -168,8 +176,8 @@
       "allDeclaredMethods": true
     },
     {
-      "type": "dev.omardiaa.transcript.core.model.payload.message.component.ButtonStyle",
-      "allDeclaredMethods": true
+      "type": "dev.omardiaa.transcript.core.model.payload.message.component.Button$Style",
+      "allDeclaredFields": true
     },
     {
       "type": "dev.omardiaa.transcript.core.model.payload.message.component.Container",
@@ -207,8 +215,8 @@
       "allDeclaredMethods": true
     },
     {
-      "type": "dev.omardiaa.transcript.core.model.payload.message.component.SeparatorSpacing",
-      "allDeclaredMethods": true
+      "type": "dev.omardiaa.transcript.core.model.payload.message.component.Separator$Spacing",
+      "allDeclaredFields": true
     },
     {
       "type": "dev.omardiaa.transcript.core.model.payload.message.component.TextDisplay",

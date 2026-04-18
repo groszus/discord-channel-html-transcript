@@ -1,17 +1,13 @@
 package dev.omardiaa.transcript.core.model.payload.message;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.time.OffsetDateTime;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * <a href="https://docs.discord.com/developers/resources/message#embed-object">Embed</a>
@@ -69,26 +65,11 @@ public record Embed(
    * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-types">Embed Types</a>
    */
   public enum Type {
-    UNKNOWN("unknown"), RICH("rich"), GIFV("gifv"), ARTICLE("article"), LINK("link");
-
-    private static final Map<String, Type> TYPE_MAP = Arrays
-      .stream(values()).collect(Collectors.toUnmodifiableMap(Type::getValue, Function.identity()));
-
-    private final String value;
-
-    Type(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @JsonCreator
-    public static Type fromType(@Nullable String type) {
-      return TYPE_MAP.getOrDefault(type, UNKNOWN);
-    }
+    @JsonEnumDefaultValue UNKNOWN,
+    @JsonProperty("rich") RICH,
+    @JsonProperty("gifv") GIFV,
+    @JsonProperty("article") ARTICLE,
+    @JsonProperty("link") LINK
   }
 
   /**
@@ -154,16 +135,13 @@ public record Embed(
    * <a href="https://docs.discord.com/developers/resources/message#embed-object-embed-provider-structure">Embed Provider</a>
    */
   public record Provider(
-    @Nullable String name,
-    @Nullable String url
+    @Nullable String name
   ) {
     @JsonCreator
     public Provider(
-      @JsonProperty(value = "name") @Nullable String name,
-      @JsonProperty(value = "url") @Nullable String url
+      @JsonProperty(value = "name") @Nullable String name
     ) {
       this.name = name;
-      this.url = url;
     }
   }
 
