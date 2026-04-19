@@ -1,8 +1,6 @@
 package dev.omardiaa.transcript.core.model.payload;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import dev.omardiaa.transcript.core.model.payload.message.*;
 import dev.omardiaa.transcript.core.model.payload.message.component.Component;
 import dev.omardiaa.transcript.core.model.payload.message.component.File;
@@ -31,6 +29,7 @@ public record Message(
   List<Attachment> attachments,
   List<Embed> embeds,
   @Nullable List<Reaction> reactions,
+  Type type,
   @Nullable Integer flags,
   @Nullable List<MessageSnapshot> messageSnapshots,
   @Nullable Message referencedMessage,
@@ -38,7 +37,6 @@ public record Message(
   @Nullable List<Component> components,
   @Nullable List<StickerItem> stickerItems,
   @Nullable Poll poll,
-
   @JsonIgnore @Nullable Map<String, User> mentionsMap,
   @JsonIgnore List<Attachment> images,
   @JsonIgnore List<File> files
@@ -54,6 +52,7 @@ public record Message(
     @JsonProperty(value = "attachments", required = true) List<Attachment> attachments,
     @JsonProperty(value = "embeds", required = true) List<Embed> embeds,
     @JsonProperty(value = "reactions") @Nullable List<Reaction> reactions,
+    @JsonProperty(value = "type", required = true) Type type,
     @JsonProperty(value = "flags") @Nullable Integer flags,
     @JsonProperty(value = "message_snapshots") @Nullable List<MessageSnapshot> messageSnapshots,
     @JsonProperty(value = "referenced_message") @Nullable Message referencedMessage,
@@ -82,6 +81,7 @@ public record Message(
       attachments,
       embeds,
       reactions,
+      type,
       flags,
       messageSnapshots,
       referencedMessage,
@@ -93,7 +93,8 @@ public record Message(
         ? null
         : mentions.stream().collect(Collectors.toUnmodifiableMap(User::id, Function.identity())),
       images,
-      files);
+      files
+    );
   }
 
   /**
@@ -135,6 +136,19 @@ public record Message(
     }
   }
 
+  /**
+   * @return {@code true} if this message has any accessories (attachments, embeds, reactions, etc...).
+   */
+  @JsonIgnore
+  public boolean hasAccessories() {
+    return poll != null
+           || !attachments.isEmpty()
+           || !embeds.isEmpty()
+           || (components != null && !components.isEmpty())
+           || (stickerItems != null && !stickerItems.isEmpty())
+           || (reactions != null && !reactions.isEmpty());
+  }
+
   @Override
   public boolean equals(Object o) {
     if (getClass() != o.getClass()) {
@@ -147,5 +161,18 @@ public record Message(
   @Override
   public int hashCode() {
     return Objects.hashCode(id);
+  }
+
+  public enum Type {
+    @JsonEnumDefaultValue UNKNOWN(-1),
+    DEFAULT(0),
+    THREAD_CREATED(18);
+
+    @JsonValue
+    public final int value;
+
+    Type(int value) {
+      this.value = value;
+    }
   }
 }

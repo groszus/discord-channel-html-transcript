@@ -9,7 +9,7 @@
       <img
         src="${stickerItem.iconUrl()}"
         alt="Sticker"
-        class="message__sticker"
+        class="sticker"
       >
     @endif
   @endfor

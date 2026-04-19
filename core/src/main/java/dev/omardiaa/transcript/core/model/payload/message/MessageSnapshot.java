@@ -9,7 +9,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.time.OffsetDateTime;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -37,13 +37,12 @@ public record MessageSnapshot(
     List<Embed> embeds,
     @Nullable Integer flags,
     @Nullable List<Component> components,
-
-    @JsonIgnore Map<String, User> mentionsMap,
+    @JsonIgnore @Nullable Map<String, User> mentionsMap,
     @JsonIgnore List<Attachment> images,
     @JsonIgnore List<File> files
   ) {
     @JsonCreator
-    public Message(
+    public static Message create(
       @JsonProperty(value = "content", required = true) String content,
       @JsonProperty(value = "timestamp", required = true) OffsetDateTime timestamp,
       @JsonProperty(value = "edited_timestamp") @Nullable OffsetDateTime editedTimestamp,
@@ -53,7 +52,18 @@ public record MessageSnapshot(
       @JsonProperty(value = "flags") @Nullable Integer flags,
       @JsonProperty(value = "components") @Nullable List<Component> components
     ) {
-      this(
+      List<Attachment> images = new ArrayList<>();
+      List<File> files = new ArrayList<>();
+
+      for (Attachment attachment : attachments) {
+        if (attachment.isImage()) {
+          images.add(attachment);
+        } else {
+          files.add(attachment.toFile());
+        }
+      }
+
+      return new Message(
         content,
         timestamp,
         editedTimestamp,
@@ -62,10 +72,11 @@ public record MessageSnapshot(
         flags,
         components,
         mentions.isEmpty()
-          ? Collections.emptyMap()
+          ? null
           : mentions.stream().collect(Collectors.toUnmodifiableMap(User::id, Function.identity())),
-        attachments.stream().filter(Attachment::isImage).toList(),
-        attachments.stream().filter(a -> !a.isImage()).map(Attachment::toFile).toList());
+        images,
+        files
+      );
     }
   }
 }

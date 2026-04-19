@@ -64,13 +64,19 @@ class TranscriberTest {
           .allOf(
             guildFuture,
             channelFuture,
-            messagesFuture)
+            messagesFuture
+          )
           .thenApply(
             v -> new Payload(
               guildFuture.join(),
               channelFuture.join(),
               messagesFuture.join(),
-              new PayloadOptions()))
+              new PayloadOptions(
+                null,
+                new PayloadOptions.StyleOptions(
+                  "/home/omardiaa/Dev/Projects/discord/lib/discord-html-transcript/core/src/main/resources/style.css")
+              )
+            ))
           .join();
       }
     );

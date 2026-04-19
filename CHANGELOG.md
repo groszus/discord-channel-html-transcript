@@ -4,6 +4,8 @@
 
 ### discord-html-transcript-core
 
+- Support for threads.
+
 ### discord-html-transcript-server
 
 ## [0.1.0-beta.5]

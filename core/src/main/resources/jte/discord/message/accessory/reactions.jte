@@ -1,11 +1,11 @@
-@import java.util.List
+@import dev.omardiaa.transcript.core.model.payload.Message
 @import dev.omardiaa.transcript.core.model.payload.message.Reaction
 
-@param List<Reaction> reactions
+@param Message message
 
-@if(reactions != null && !reactions.isEmpty())
+@if(message.reactions() != null && !message.reactions().isEmpty())
   <div class="reactions user-select-none">
-    @for(Reaction reaction : reactions)
+    @for(Reaction reaction : message.reactions())
       <div class="reaction">
         @template.util.emoji(emoji = reaction.emoji(), classes = "reaction__emoji")
         <span class="reaction__count">${reaction.count()}</span>
