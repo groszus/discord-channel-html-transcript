@@ -19,10 +19,9 @@ public final class MarkdownUtil {
   private static final String SVG_CHANNEL_ICON =
     """
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill="currentColor"
-      class="mention__channel-icon"
+      height="16"
+      width="16"
     >
       <path
         fill-rule="evenodd"
@@ -72,10 +71,11 @@ public final class MarkdownUtil {
       throw new TranscriberException("Received empty content.");
     }
 
-    boolean hasCode = CODE_BLOCK.asPredicate().test(content) || CODE_INLINE.asPredicate().test(content);
-    Map<String, String> codeMasks = hasCode ? new HashMap<>() : null;
+    Map<String, String> codeMasks = CODE_BLOCK.asPredicate().test(content) || CODE_INLINE.asPredicate().test(content)
+      ? new HashMap<>()
+      : null;
 
-    if (hasCode) {
+    if (codeMasks != null) {
       content = CODE_BLOCK.matcher(content).replaceAll(m -> {
         String codeMaskId = "%%" + (codeMasks.size() + 1) + "%%";
 
@@ -86,7 +86,8 @@ public final class MarkdownUtil {
 
         codeMasks.put(
           codeMaskId,
-          HtmlBuilder.create("pre").build(codeBlock));
+          HtmlBuilder.create("pre").build(codeBlock)
+        );
 
         return codeMaskId;
       });
@@ -99,7 +100,8 @@ public final class MarkdownUtil {
           HtmlBuilder
             .create("code")
             .attribute("data-code-style", "INLINE")
-            .build(m.group(1)));
+            .build(m.group(1))
+        );
 
         return code;
       });
@@ -107,7 +109,7 @@ public final class MarkdownUtil {
 
     content = StringUtil.escape(content).replace("\n", "<br>\n");
 
-    content = BOLD.matcher(content).replaceAll(m -> HtmlBuilder.create("strong").build(m.group(1)));
+    content = BOLD.matcher(content).replaceAll(m -> HtmlBuilder.create("b").build(m.group(1)));
     content = UNDERLINE.matcher(content).replaceAll(m -> HtmlBuilder.create("u").build(m.group(1)));
     content = ITALIC.matcher(content).replaceAll(m -> HtmlBuilder.create("em").build(m.group(1)));
     content = STRIKE_THROUGH.matcher(content).replaceAll(m -> HtmlBuilder.create("s").build(m.group(1)));
@@ -160,9 +162,9 @@ public final class MarkdownUtil {
 
     content = wrapText(content);
 
-    if (hasCode) {
-      for (Map.Entry<String, String> mask : codeMasks.entrySet()) {
-        content = content.replace(mask.getKey(), mask.getValue());
+    if (codeMasks != null) {
+      for (Map.Entry<String, String> entry : codeMasks.entrySet()) {
+        content = content.replace(entry.getKey(), entry.getValue());
       }
     }
 

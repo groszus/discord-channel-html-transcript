@@ -1276,13 +1276,3 @@ a:hover {
     background-color: var(--brand-500);
   }
 }
-
-.mention__channel-icon {
-  width: 16px;
-  height: 16px;
-}
-
-.mention__channel-name {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}

@@ -69,7 +69,9 @@ public final class HtmlBuilder {
   public String build(String content) {
     StringBuilder output = new StringBuilder().append("<").append(tag).append(" ");
 
-    attributes.forEach((name, value) -> output.append(name).append("=\"").append(value).append("\""));
+    for (Map.Entry<String, String> entry : this.attributes.entrySet()) {
+      output.append(entry.getKey()).append("=\"").append(entry.getValue()).append("\"");
+    }
 
     output.append(">");
 
