@@ -41,6 +41,7 @@ class TranscriberTest {
   private static final String DISCORD_BOT_TOKEN = System.getenv("DISCORD_BOT_TOKEN");
   private static final String DISCORD_GUILD_ID = System.getenv("DISCORD_GUILD_ID");
   private static final String DISCORD_CHANNEL_ID = System.getenv("DISCORD_CHANNEL_ID");
+  private static final String STYLE_PATH = System.getenv("DISCORD_HTML_TRANSCRIPT_STYLE_PATH");
 
   private static Transcriber transcriber;
   private static TranscriberFetcher fetcher;
@@ -71,11 +72,7 @@ class TranscriberTest {
               guildFuture.join(),
               channelFuture.join(),
               messagesFuture.join(),
-              new PayloadOptions(
-                null,
-                new PayloadOptions.StyleOptions(
-                  "/home/omardiaa/Dev/Projects/discord/lib/discord-html-transcript/core/src/main/resources/style.css")
-              )
+              new PayloadOptions.Builder().path(STYLE_PATH).build()
             ))
           .join();
       }
