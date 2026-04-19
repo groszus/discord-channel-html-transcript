@@ -7,11 +7,13 @@
 
 <header class="header user-select-none">
   <div class="header__guild">
-    <img
-      src="${guild.iconUrl()}"
-      alt="${guild.name()}"
-      class="header__guild__icon"
-    />
+    @if(guild.iconUrl() != null)
+      <img
+        src="${guild.iconUrl()}"
+        alt="${guild.name()}"
+        class="header__guild__icon"
+      />
+    @endif
 
     <span class="header__guild__name">${guild.name()}</span>
   </div>
