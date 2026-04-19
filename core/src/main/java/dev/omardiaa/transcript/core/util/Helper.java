@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 @NullMarked
 public final class Helper {
-  private final static long KB = 1024;
-  private final static long MB = KB * KB;
-  private final static long GB = MB * KB;
+  private static final int KB = 1024;
+  private static final int MB = KB * KB;
+  private static final int GB = MB * KB;
 
   private Helper() {}
 
@@ -37,11 +37,11 @@ public final class Helper {
     if (bytes < KB) {
       return "%s bytes".formatted(bytes);
     } else if (bytes < MB) {
-      return "%.2f KB".formatted((double) bytes / KB);
+      return "%.2f KB".formatted((float) bytes / KB);
     } else if (bytes < GB) {
-      return "%.2f MB".formatted((double) bytes / MB);
+      return "%.2f MB".formatted((float) bytes / MB);
     } else {
-      return "%.2f GB".formatted((double) bytes / GB);
+      return "%.2f GB".formatted((float) bytes / GB);
     }
   }
 }
