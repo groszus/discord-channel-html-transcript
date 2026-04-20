@@ -5,7 +5,7 @@
 If you don't have the time to contribute code, you can still support the project by:
 
 - **Starring** the repository.
-- **Following** my GitHub profile.
+- **Sharing** the project with others.
 
 ## Guide
 
@@ -13,17 +13,15 @@ If you don't have the time to contribute code, you can still support the project
 
 If you're stuck, need clarification, or just want to discuss the project, the community is here to help!
 
-You can join my [Discord Server](https://discord.omardiaa.dev) to directly ask away.
-
-### I Want To Contribute
-
-Ready to jump into the code? The quick [development](#development) guide below will help you get your
-local environment running.
+You can join the [Discord Server](https://discord.omardiaa.dev) to ask us directly.
 
 ## Development
 
-> [!NOTE]
-> This section of the documentation is incomplete.
+### Prerequisites
+
+- **Java 17** or higher.
+
+### Clone The Repository
 
 1. **Clone the repository:**
     ```shell

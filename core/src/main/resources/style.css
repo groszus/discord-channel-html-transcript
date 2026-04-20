@@ -372,8 +372,8 @@ a:hover {
   color: var(--header-primary);
 
   &:hover {
-    opacity: 1;
     text-decoration: none;
+    opacity: 1;
   }
 }
 

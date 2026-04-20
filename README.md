@@ -20,9 +20,9 @@
 
 ## Features
 
-- **Beautiful UI:** Modern HTML/CSS that has the look and feel of the Discord desktop client.
-- **Asynchronous:** Built with `CompletableFuture` for non-blocking performance.
-- **100% Offline:** All styling and fonts are contained in the generated HTML file.
+- **Beautiful UI:** Modern styling that replicates the look and feel of the Discord desktop client.
+- **Asynchronous:** Built with `CompletableFuture` for high performance.
+- **100% Offline:** Built to contain all information in one file.
 
 **Supported Components**
 
@@ -31,8 +31,8 @@
         <strong>ComponentsV2</strong>
         <img alt="NEW" src="https://img.shields.io/badge/NEW-FF2E2E" height="12">
     </li>
-    <li><strong>Markdown:</strong> Standard Markup, Mentions, Custom Emojis, and more...</li>
-    <li><strong>Message Accessories:</strong> Attachments, Embeds, Polls, References, and more...</li>
+    <li><strong>Markdown:</strong> Standard Markup, Mentions, Custom Emojis, and more.</li>
+    <li><strong>Message Accessories:</strong> Attachments, Embeds, Polls, References, and more.</li>
 </ul>
 
 > [!IMPORTANT]
@@ -40,28 +40,21 @@
 
 ## Preview
 
-<a title="Click For Full Preview" href="https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/transcript.html">
+<a title="✨" href="https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/transcript.html">
     <img alt="Preview" src="https://res.cloudinary.com/omardiaadev/image/upload/discord-html-transcript_ocjq03.png">
 </a>
 
 ## Usage
 
-There are 3 ways to use this library:
-
-1. [**Library**](#1-library-recommended): recommended for most users.
-2. [**Installation**](#2-installation): for custom Java implementations.
-3. [**Standalone API**](#3-standalone-api): for non-Java developers.
+There are 3 ways to use this tool:
 
 ### 1. Library (Recommended)
 
-The following libraries retrieve the required [Payload](core/src/main/java/dev/omardiaa/transcript/core/model/Payload.java)
-while safely handling Discord's rate limits.
-
-Pick the library of choice:
+Use the referenced library if you're building your bot with any of the following APIs:
 
 <table>
     <tr>
-        <th>Discord API</th>
+        <th>API</th>
         <th>Library</th>
     </tr>
     <tr align="center">
@@ -89,7 +82,7 @@ Pick the library of choice:
 
 ### 2. Installation
 
-You can install the core implementation as a Maven dependency:
+For custom Java implementations, you can install the core library directly via Maven or Gradle:
 
 #### Prerequisites
 
@@ -102,7 +95,7 @@ You can install the core implementation as a Maven dependency:
 <dependency>
   <groupId>dev.omardiaa</groupId>
   <artifactId>discord-html-transcript-core</artifactId>
-  <version>0.1.0-beta.5</version>
+  <version>0.1.0-beta.6</version>
 </dependency>
 ```
 
@@ -110,13 +103,12 @@ You can install the core implementation as a Maven dependency:
 
 ```kts
 
-implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.5")
+implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.6")
 ```
 
 ### 3. Standalone API
 
-> [!NOTE]
-> This section of the documentation is incomplete.
+This section refers to [discord-html-transcript-server](server/src/main/java/dev/omardiaa/transcript/server).
 
 You can [download](https://github.com/omardiaadev/discord-html-transcript/releases) and run the executable as a
 standalone web server.
@@ -131,16 +123,22 @@ standalone web server.
         <th>Description</th>
     </tr>
     <tr>
-        <td><code>TRANSCRIPT_SERVER_HOST</code></td>
-        <td>Specifies custom host for the Javalin web server.<br>(default: <code>127.0.0.1</code>)</td>
+        <td><code>DISCORD_HTML_TRANSCRIPT_HOST</code></td>
+        <td>Specifies a custom host for the server.
+            <br>
+            (default: <code>127.0.0.1</code>)
+            </td>
     </tr>
     <tr>
-        <td><code>TRANSCRIPT_SERVER_PORT</code></td>
-        <td>Specifies custom port for the Javalin web server.<br>(default: <code>7000</code>)</td>
+        <td><code>DISCORD_HTML_TRANSCRIPT_PORT</code></td>
+        <td>Specifies a custom port for the server.
+            <br>
+            (default: <code>7000</code>)
+        </td>
     </tr>
     <tr>
-        <td><code>TRANSCRIPT_SERVER_API_KEY</code></td>
-        <td>Specifies secret key for authenticating client requests.</td>
+        <td><code>DISCORD_HTML_TRANSCRIPT_API_KEY</code></td>
+        <td>Specifies a secret key to authenticate client requests.</td>
     </tr>
 </table>
 
@@ -166,7 +164,9 @@ standalone web server.
         <td>
             Authenticates client requests.
             <br>
-            Required if <code>TRANSCRIPT_SERVER_API_KEY</code> is set.
+            Required if <code>DISCORD_HTML_TRANSCRIPT_API_KEY</code> is set.
+            <br>
+            (format: <code>Bearer &lt;DISCORD_HTML_TRANSCRIPT_API_KEY&gt;</code>)
         </td>
     </tr>
 </table>
@@ -196,25 +196,28 @@ The server validates the [`Server-Version`](#headers) header using the following
 
 - Pre-release versions must match exactly.
 - Major versions must match exactly.
-- Server minor version must be greater than or equal to the `Server-Version` minor version.
+- Server minor version must be greater than or equal to `Server-Version` minor version.
 
 > [!TIP]
-> HTTP request examples can be found at [requests](examples/requests.http).
+> Request examples can be found [here](examples/requests.http).
 
-##### Payload
+##### Request Payload Example
 
-You can specify the `options` object in your payload to specify transcript options:
+You can specify the `options` object inside your payload to configure the generator:
 
 ```json5
 {
+  "guild": {},
+  "channel": {},
+  "messages": [],
   "options": {
     "attachment": {
-      // If set to "true", attachments referenced in the payload will be downloaded and encoded into a Base64 Data URI
+      // If set to "true", the generator will download referenced attachments and encode them into the file.
       // default: false
       "save_images": true
     },
     "style": {
-      // If set, the custom style.css will be used instead of the inline styles.
+      // If set, the generator will use the styles of the specified path.
       // default: null
       "path": "path/to/style.css"
     }

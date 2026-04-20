@@ -18,14 +18,13 @@ public final class ServerUtil {
   private ServerUtil() {}
 
   /**
-   * Parses the {@code Server-Version} header from the provided Javalin {@link Context} and compares it with
-   * {@link ServerConfig#getVersion()}.
+   * Parses the {@code Server-Version} header and compares it with {@link ServerConfig#getVersion()}.
    * <p>
    * Compatibility:
    * <ul>
    * <li>Pre-release versions must match exactly.</li>
    * <li>Major versions must match exactly.</li>
-   * <li>Server minor version must be greater than or equal to the Client minor version.</li>
+   * <li>Server minor version must be greater than or equal to Client minor version.</li>
    * </ul>
    *
    * @param ctx
@@ -38,12 +37,12 @@ public final class ServerUtil {
     SemVer clientVersion = new SemVer(ctx.header("Server-Version"));
     SemVer serverVersion = ServerConfig.getVersion();
 
-    if (serverVersion.isPreRelease() || clientVersion.isPreRelease()) {
-      if (!serverVersion.equals(clientVersion)) {
-        throw new MismatchedVersionException("Pre-release versions must match exactly.", clientVersion.toString());
-      }
-
+    if (serverVersion.equals(clientVersion)) {
       return;
+    }
+
+    if (serverVersion.isPreRelease() || clientVersion.isPreRelease()) {
+      throw new MismatchedVersionException("Pre-release versions must match exactly.", clientVersion.toString());
     }
 
     if (serverVersion.getMajor() != clientVersion.getMajor()) {
@@ -52,20 +51,20 @@ public final class ServerUtil {
 
     if (serverVersion.getMinor() < clientVersion.getMinor()) {
       throw new MismatchedVersionException(
-        "Server minor version must be greater than or equal to the Client minor version.",
-        clientVersion.toString());
+        "Server minor version must be greater than or equal to Client minor version.",
+        clientVersion.toString()
+      );
     }
   }
 
   /**
-   * Parses the {@code Authorization} header from the provided Javalin {@link Context} and compares it with
-   * {@link ServerConfig#getApiKey()}.
+   * Parses the {@code Authorization} header and compares it with {@link ServerConfig#getApiKey()}.
    *
    * @param ctx
    *   the Javalin {@link Context}.
    *
    * @throws UnauthorizedResponse
-   *   if the provided key in the {@code Authorization} header does not match {@link ServerConfig#getApiKey()}.
+   *   if the key provided by the {@code Authorization} header does not match {@link ServerConfig#getApiKey()}.
    */
   public static void validateApiKey(Context ctx) {
     String authHeader = ctx.header("Authorization");
@@ -79,9 +78,7 @@ public final class ServerUtil {
       throw new UnauthorizedResponse("Authorization header must start with \"Bearer \".");
     }
 
-    String key = authHeader.substring(authType.length());
-
-    if (!Objects.equals(key, ServerConfig.getApiKey())) {
+    if (!Objects.equals(authHeader.substring(authType.length()), ServerConfig.getApiKey())) {
       throw new UnauthorizedResponse("API Key is invalid.");
     }
   }

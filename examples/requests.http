@@ -1,6 +1,6 @@
-POST https://<TRANSCRIPT_SERVER_HOST>:<TRANSCRIPT_SERVER_PORT>/transcript
-Server-Version: 0.1.0-beta.5
-Authorization: Bearer <TRANSCRIPT_SERVER_API_KEY>
+POST https://<DISCORD_HTML_TRANSCRIPT_HOST>:<DISCORD_HTML_TRANSCRIPT_PORT>/transcript
+Server-Version: 0.1.0-beta.6
+Authorization: Bearer <DISCORD_HTML_TRANSCRIPT_API_KEY>
 
 # input body
 < payload.json
@@ -11,6 +11,6 @@ Authorization: Bearer <TRANSCRIPT_SERVER_API_KEY>
 ###
 
 # @no-log
-GET https://<TRANSCRIPT_SERVER_HOST>:<TRANSCRIPT_SERVER_PORT>/health
-Server-Version: 0.1.0-beta.5
-Authorization: Bearer <TRANSCRIPT_SERVER_API_KEY>
+GET https://<DISCORD_HTML_TRANSCRIPT_HOST>:<DISCORD_HTML_TRANSCRIPT_PORT>/health
+Server-Version: 0.1.0-beta.6
+Authorization: Bearer <DISCORD_HTML_TRANSCRIPT_API_KEY>
