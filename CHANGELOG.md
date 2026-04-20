@@ -1,12 +1,19 @@
 # Changelog
 
-## [0.1.0-beta.6] (Unreleased)
+## [0.1.0-beta.7] (Unreleased)
+
+## [0.1.0-beta.6]
 
 ### discord-html-transcript-core
 
+#### Added
+
 - Support for threads.
 
-### discord-html-transcript-server
+#### Changed
+
+- Rename environment variables to prevent clashes.
+- Use CSS nesting for an improved structure.
 
 ## [0.1.0-beta.5]
 
