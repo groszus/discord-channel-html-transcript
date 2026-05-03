@@ -10,63 +10,44 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * A class representing a <a href="https://semver.org/">Semantic Version</a>.
+ * A record representing a <a href="https://semver.org/">Semantic Version</a>.
  */
 @NullMarked
-public final class SemVer {
-  private static final Pattern SEMVER = Pattern.compile(
+public record SemVer(int major, int minor, int patch, @Nullable String qualifier) {
+  private static final Pattern PATTERN = Pattern.compile(
     "^v?(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$");
 
-  private final int major;
-  private final int minor;
-  private final int patch;
-  private final @Nullable String qualifier;
-
   /**
-   * Constructs a Semantic Version from parsing the provided {@code version}.
+   * Parses the provided {@code version} into a new {@link SemVer} instance.
    *
    * @param version
    *   the version to parse.
    *
+   * @return a new {@link SemVer} instance.
+   *
    * @throws MismatchedVersionException
-   *   if any of the following are true:
-   *   <ul>
-   *   <li>The provided {@code version} returns {@code null}.</li>
-   *   <li>The provided {@code version} can not be parsed.</li>
-   *   </ul>
+   *   if the provided {@code version} is {@code null}, blank, or invalid.
    */
-  public SemVer(@Nullable String version) {
+  public static SemVer parse(@Nullable String version) {
     if (Check.isBlank(version)) {
-      throw new MismatchedVersionException("Version can not be null.");
+      throw new MismatchedVersionException("Version cannot be null or blank.");
     }
 
-    Matcher matcher = SEMVER.matcher(version);
+    Matcher matcher = PATTERN.matcher(version);
 
     if (!matcher.matches()) {
       throw new MismatchedVersionException(
-        "Invalid version format. Expected format: [v](major).(minor).(patch)[-(qualifier)]",
+        "Invalid version format. Expected: [v](major).(minor).(patch)[-(qualifier)]",
         version
       );
     }
 
-    this.major = Integer.parseInt(matcher.group(1));
-    this.minor = Integer.parseInt(matcher.group(2));
-    this.patch = Integer.parseInt(matcher.group(3));
-    this.qualifier = matcher.group(4);
-  }
-
-  /**
-   * @return the {@code x} in {@code x.y.z}.
-   */
-  public int getMajor() {
-    return major;
-  }
-
-  /**
-   * @return the {@code y} in {@code x.y.z}.
-   */
-  public int getMinor() {
-    return minor;
+    return new SemVer(
+      Integer.parseInt(matcher.group(1)),
+      Integer.parseInt(matcher.group(2)),
+      Integer.parseInt(matcher.group(3)),
+      matcher.group(4)
+    );
   }
 
   /**
@@ -89,13 +70,13 @@ public final class SemVer {
   }
 
   @Override
-  public int hashCode() {
-    return Objects.hash(major, minor, patch, qualifier);
-  }
-
-  @Override
   public String toString() {
-    String version = major + "." + minor + "." + patch;
-    return isPreRelease() ? version + "-" + qualifier : version;
+    StringBuilder sb = new StringBuilder().append(major).append(".").append(minor).append(".").append(patch);
+
+    if (isPreRelease()) {
+      sb.append("-").append(qualifier);
+    }
+
+    return sb.toString();
   }
 }

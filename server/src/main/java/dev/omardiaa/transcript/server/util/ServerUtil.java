@@ -34,7 +34,7 @@ public final class ServerUtil {
    *   if any of the compatibility rules are violated.
    */
   public static void validateVersion(Context ctx) {
-    SemVer clientVersion = new SemVer(ctx.header("Server-Version"));
+    SemVer clientVersion = SemVer.parse(ctx.header("Server-Version"));
     SemVer serverVersion = ServerConfig.getVersion();
 
     if (serverVersion.equals(clientVersion)) {
@@ -45,11 +45,11 @@ public final class ServerUtil {
       throw new MismatchedVersionException("Pre-release versions must match exactly.", clientVersion.toString());
     }
 
-    if (serverVersion.getMajor() != clientVersion.getMajor()) {
+    if (serverVersion.major() != clientVersion.major()) {
       throw new MismatchedVersionException("Major versions must match exactly.", clientVersion.toString());
     }
 
-    if (serverVersion.getMinor() < clientVersion.getMinor()) {
+    if (serverVersion.minor() < clientVersion.minor()) {
       throw new MismatchedVersionException(
         "Server minor version must be greater than or equal to Client minor version.",
         clientVersion.toString()
