@@ -1,6 +1,5 @@
 package dev.omardiaa.transcript.core.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import dev.omardiaa.transcript.core.config.TranscriberConfig;
 import dev.omardiaa.transcript.core.model.Payload;
 import dev.omardiaa.transcript.core.model.payload.Channel;
@@ -8,6 +7,7 @@ import dev.omardiaa.transcript.core.model.payload.Guild;
 import dev.omardiaa.transcript.core.model.payload.Message;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import tools.jackson.core.type.TypeReference;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -88,7 +88,7 @@ class TranscriberFetcher {
         }
 
         try {
-          return TranscriberConfig.getObjectMapper().readValue(response.body(), responseType);
+          return TranscriberConfig.getJsonMapper().readValue(response.body(), responseType);
         } catch (Exception e) {
           throw new RuntimeException("Failed to deserialize JSON response", e);
         }

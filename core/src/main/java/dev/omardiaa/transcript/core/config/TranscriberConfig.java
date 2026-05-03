@@ -1,9 +1,5 @@
 package dev.omardiaa.transcript.core.config;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import dev.omardiaa.transcript.core.service.Transcriber;
 import dev.omardiaa.transcript.core.util.EnvironmentUtil;
 import gg.jte.ContentType;
@@ -12,6 +8,10 @@ import gg.jte.resolve.ResourceCodeResolver;
 import org.jspecify.annotations.NullMarked;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.PropertyNamingStrategies;
+import tools.jackson.databind.cfg.EnumFeature;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,11 +26,13 @@ public final class TranscriberConfig {
   private static final boolean JTE_DEV = EnvironmentUtil.get("JTE_DEV", false);
   private static final ExecutorService EXECUTOR = Executors
     .newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
-  private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
-    .registerModule(new JavaTimeModule())
+  private static final JsonMapper OBJECT_MAPPER = JsonMapper
+    .builder()
+    //.addModule(new JavaTimeModule())
     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-    .configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE, true)
-    .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+    .configure(EnumFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE, true)
+    .propertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
+    .build();
 
   private static final TemplateEngine TEMPLATE_ENGINE;
 
@@ -55,9 +57,9 @@ public final class TranscriberConfig {
   }
 
   /**
-   * @return the default {@link ObjectMapper}.
+   * @return the default {@link JsonMapper}.
    */
-  public static ObjectMapper getObjectMapper() {
+  public static JsonMapper getJsonMapper() {
     return OBJECT_MAPPER;
   }
 

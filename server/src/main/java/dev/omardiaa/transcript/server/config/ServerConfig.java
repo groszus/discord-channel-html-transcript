@@ -14,7 +14,7 @@ public final class ServerConfig {
   private static final @Nullable String API_KEY = EnvironmentUtil.get("DISCORD_HTML_TRANSCRIPT_API_KEY").orElse(null);
   private static final String HOST = EnvironmentUtil.get("DISCORD_HTML_TRANSCRIPT_HOST", "127.0.0.1");
   private static final int PORT = EnvironmentUtil.get("DISCORD_HTML_TRANSCRIPT_PORT", 7000);
-  private static final SemVer VERSION = new SemVer("0.1.0-beta.6");
+  private static final SemVer VERSION = new SemVer("0.1.0-beta.7");
 
   private ServerConfig() {}
 

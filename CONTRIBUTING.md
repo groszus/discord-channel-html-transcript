@@ -19,7 +19,7 @@ You can join the [Discord Server](https://discord.omardiaa.dev) to ask us direct
 
 ### Prerequisites
 
-- **Java 17** or higher.
+- **Java 17** or higher
 
 ### Clone The Repository
 

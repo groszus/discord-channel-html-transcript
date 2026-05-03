@@ -8,37 +8,23 @@
     <a href="https://discord.omardiaa.dev"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=FFF&color=5865F2"></a>
 </p>
 
-<details>
-    <summary>Table of Contents</summary>
-    <ul>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#preview">Preview</a></li>
-        <li><a href="#usage">Usage</a></li>
-        <li><a href="#contributing">Contributing</a></li>
-    </ul>
-</details>
+## About
 
-## Features
-
-- **Beautiful UI:** Modern styling that replicates the look and feel of the Discord desktop client.
-- **Asynchronous:** Built with `CompletableFuture` for high performance.
-- **100% Offline:** Built to contain all information in one file.
-
-**Supported Components**
-
-<ul>
-    <li>
-        <strong>ComponentsV2</strong>
-        <img alt="NEW" src="https://img.shields.io/badge/NEW-FF2E2E" height="12">
-    </li>
-    <li><strong>Markdown:</strong> Standard Markup, Mentions, Custom Emojis, and more.</li>
-    <li><strong>Message Accessories:</strong> Attachments, Embeds, Polls, References, and more.</li>
-</ul>
+**discord-html-transcript** is a microservice used to generate chat logs of Discord messages as a singular offline HTML
+file that resembles the look and feel of the Discord desktop client.
 
 > [!IMPORTANT]
 > This project is not affiliated with Discord Inc.
 
-## Preview
+### Features
+
+<ul>
+    <li><strong>ComponentsV2:</strong> Containers, Media Galleries, Sections, and more.</li>
+    <li><strong>Markdown:</strong> Standard Markup, Mentions, Custom Emojis, and more.</li>
+    <li><strong>Message Accessories:</strong> Attachments, Embeds, Polls, References, and more.</li>
+</ul>
+
+### Preview
 
 <a title="✨" href="https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/transcript.html">
     <img alt="Preview" src="https://res.cloudinary.com/omardiaadev/image/upload/discord-html-transcript_ocjq03.png">
@@ -86,7 +72,7 @@ For custom Java implementations, you can install the core library directly via M
 
 #### Prerequisites
 
-- **Java 17+**
+- **Java 17** or higher
 
 [![Maven](https://img.shields.io/badge/Maven-C71A36?logo=apachemaven)](#2-installation)
 
@@ -95,7 +81,7 @@ For custom Java implementations, you can install the core library directly via M
 <dependency>
   <groupId>dev.omardiaa</groupId>
   <artifactId>discord-html-transcript-core</artifactId>
-  <version>0.1.0-beta.6</version>
+  <version>0.1.0-beta.7</version>
 </dependency>
 ```
 
@@ -103,7 +89,7 @@ For custom Java implementations, you can install the core library directly via M
 
 ```kts
 
-implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.6")
+implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.7")
 ```
 
 ### 3. Standalone API

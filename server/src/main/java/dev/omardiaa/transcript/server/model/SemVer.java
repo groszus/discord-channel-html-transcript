@@ -45,7 +45,8 @@ public final class SemVer {
     if (!matcher.matches()) {
       throw new MismatchedVersionException(
         "Invalid version format. Expected format: [v](major).(minor).(patch)[-(qualifier)]",
-        version);
+        version
+      );
     }
 
     this.major = Integer.parseInt(matcher.group(1));
@@ -77,14 +78,14 @@ public final class SemVer {
 
   @Override
   public boolean equals(Object o) {
-    if (o == null || getClass() != o.getClass()) {
+    if (getClass() != o.getClass()) {
       return false;
     }
     SemVer semVer = (SemVer) o;
-    return major == semVer.major
-           && minor == semVer.minor
-           && patch == semVer.patch
-           && Objects.equals(qualifier, semVer.qualifier);
+    return major == semVer.major && minor == semVer.minor && patch == semVer.patch && Objects.equals(
+      qualifier,
+      semVer.qualifier
+    );
   }
 
   @Override

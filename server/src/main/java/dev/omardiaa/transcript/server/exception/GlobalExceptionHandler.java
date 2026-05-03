@@ -1,6 +1,5 @@
 package dev.omardiaa.transcript.server.exception;
 
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import dev.omardiaa.transcript.core.exception.TranscriberException;
 import dev.omardiaa.transcript.server.config.ServerConfig;
 import io.javalin.http.Context;
@@ -9,6 +8,7 @@ import io.javalin.http.UnauthorizedResponse;
 import org.jspecify.annotations.NullMarked;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tools.jackson.databind.exc.MismatchedInputException;
 
 import java.util.Map;
 
@@ -22,7 +22,8 @@ public final class GlobalExceptionHandler {
     ctx.status(HttpStatus.BAD_REQUEST).json(
       new ErrorResponse(
         HttpStatus.BAD_REQUEST,
-        e.getMessage()));
+        e.getMessage()
+      ));
   }
 
   public static void handleMismatchedInput(MismatchedInputException e, Context ctx) {
@@ -34,7 +35,9 @@ public final class GlobalExceptionHandler {
           "path",
           e.getPathReference(),
           "problem",
-          e.getOriginalMessage())));
+          e.getOriginalMessage()
+        )
+      ));
   }
 
   public static void handleMismatchedVersion(MismatchedVersionException e, Context ctx) {
@@ -46,14 +49,17 @@ public final class GlobalExceptionHandler {
           "server",
           ServerConfig.getVersion().toString(),
           "client",
-          e.getVersion() == null ? "null" : e.getVersion())));
+          e.getVersion() == null ? "null" : e.getVersion()
+        )
+      ));
   }
 
   public static void handleUnauthorized(UnauthorizedResponse e, Context ctx) {
     ctx.status(HttpStatus.UNAUTHORIZED).json(
       new ErrorResponse(
         HttpStatus.UNAUTHORIZED,
-        e.getMessage()));
+        e.getMessage()
+      ));
   }
 
   public static void handleException(Exception e, Context ctx) {
@@ -62,6 +68,7 @@ public final class GlobalExceptionHandler {
     ctx.status(HttpStatus.INTERNAL_SERVER_ERROR).json(
       new ErrorResponse(
         HttpStatus.INTERNAL_SERVER_ERROR,
-        "Encountered unhandled exception."));
+        "Encountered unhandled exception."
+      ));
   }
 }

@@ -1,6 +1,5 @@
 package dev.omardiaa.transcript.server;
 
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import dev.omardiaa.transcript.core.config.TranscriberConfig;
 import dev.omardiaa.transcript.core.exception.TranscriberException;
 import dev.omardiaa.transcript.core.model.Payload;
@@ -14,8 +13,9 @@ import io.javalin.http.ContentType;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 import io.javalin.http.UnauthorizedResponse;
-import io.javalin.json.JavalinJackson;
+import io.javalin.json.JavalinJackson3;
 import org.jspecify.annotations.NullMarked;
+import tools.jackson.databind.exc.MismatchedInputException;
 
 import java.util.Map;
 
@@ -39,7 +39,7 @@ public final class Server {
         config.jetty.host = ServerConfig.getHost();
         config.jetty.port = ServerConfig.getPort();
 
-        config.jsonMapper(new JavalinJackson(TranscriberConfig.getObjectMapper(), false));
+        config.jsonMapper(new JavalinJackson3(TranscriberConfig.getJsonMapper(), false));
 
         config.routes
           .get("/health", this::healthHandler)

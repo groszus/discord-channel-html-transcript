@@ -1,5 +1,5 @@
 POST https://<DISCORD_HTML_TRANSCRIPT_HOST>:<DISCORD_HTML_TRANSCRIPT_PORT>/transcript
-Server-Version: 0.1.0-beta.6
+Server-Version: 0.1.0-beta.7
 Authorization: Bearer <DISCORD_HTML_TRANSCRIPT_API_KEY>
 
 # input body
@@ -12,5 +12,5 @@ Authorization: Bearer <DISCORD_HTML_TRANSCRIPT_API_KEY>
 
 # @no-log
 GET https://<DISCORD_HTML_TRANSCRIPT_HOST>:<DISCORD_HTML_TRANSCRIPT_PORT>/health
-Server-Version: 0.1.0-beta.6
+Server-Version: 0.1.0-beta.7
 Authorization: Bearer <DISCORD_HTML_TRANSCRIPT_API_KEY>

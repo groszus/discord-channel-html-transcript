@@ -86,7 +86,7 @@ class TranscriberTest {
     LOGGER.info("Saved: file://{}", htmlPath.toAbsolutePath());
 
     Path jsonPath = dir.resolve("transcript.json");
-    TranscriberConfig.getObjectMapper().writerWithDefaultPrettyPrinter().writeValue(jsonPath.toFile(), payload);
+    TranscriberConfig.getJsonMapper().writerWithDefaultPrettyPrinter().writeValue(jsonPath.toFile(), payload);
     LOGGER.info("Saved: file://{}", jsonPath.toAbsolutePath());
   }
 }
