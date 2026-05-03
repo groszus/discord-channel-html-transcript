@@ -23,12 +23,12 @@ import java.util.concurrent.TimeUnit;
 @NullMarked
 public final class TranscriberConfig {
   private static final Logger LOGGER = LoggerFactory.getLogger(TranscriberConfig.class);
+
   private static final boolean JTE_DEV = EnvironmentUtil.get("JTE_DEV", false);
   private static final ExecutorService EXECUTOR = Executors
     .newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
   private static final JsonMapper OBJECT_MAPPER = JsonMapper
     .builder()
-    //.addModule(new JavaTimeModule())
     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
     .configure(EnumFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE, true)
     .propertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
@@ -74,15 +74,21 @@ public final class TranscriberConfig {
    * Gracefully shuts down the {@link #EXECUTOR}.
    */
   public static void shutdownExecutor() {
+    if (EXECUTOR.isShutdown()) {
+      return;
+    }
+
     LOGGER.info("Shutting down executor...");
 
     EXECUTOR.shutdown();
 
     try {
       if (!EXECUTOR.awaitTermination(5, TimeUnit.SECONDS)) {
+        LOGGER.warn("Executor didn't shutdown in time, forcing shutdown.");
         EXECUTOR.shutdownNow();
       }
     } catch (InterruptedException e) {
+      LOGGER.error("Shutdown interrupted, forcing shutdown.");
       EXECUTOR.shutdownNow();
       Thread.currentThread().interrupt();
     }
