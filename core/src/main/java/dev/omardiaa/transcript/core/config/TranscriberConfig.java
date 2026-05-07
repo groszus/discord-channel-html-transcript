@@ -27,7 +27,7 @@ public final class TranscriberConfig {
   private static final boolean JTE_DEV = EnvironmentUtil.get("JTE_DEV", false);
   private static final ExecutorService EXECUTOR = Executors
     .newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
-  private static final JsonMapper OBJECT_MAPPER = JsonMapper
+  private static final JsonMapper JSON_MAPPER = JsonMapper
     .builder()
     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
     .configure(EnumFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE, true)
@@ -42,10 +42,9 @@ public final class TranscriberConfig {
     if (JTE_DEV) {
       TEMPLATE_ENGINE = TemplateEngine.create(new ResourceCodeResolver("jte"), ContentType.Html);
       TEMPLATE_ENGINE.setBinaryStaticContent(true);
-      LOGGER.info("Java Template Engine is running in development mode.");
+      LOGGER.warn("Java Template Engine is running in development mode.");
     } else {
       TEMPLATE_ENGINE = TemplateEngine.createPrecompiled(ContentType.Html);
-      LOGGER.info("Java Template Engine is running in production mode.");
     }
   }
 
@@ -60,7 +59,7 @@ public final class TranscriberConfig {
    * @return the default {@link JsonMapper}.
    */
   public static JsonMapper getJsonMapper() {
-    return OBJECT_MAPPER;
+    return JSON_MAPPER;
   }
 
   /**
@@ -78,7 +77,7 @@ public final class TranscriberConfig {
       return;
     }
 
-    LOGGER.info("Shutting down executor...");
+    LOGGER.debug("Shutting down executor...");
 
     EXECUTOR.shutdown();
 
@@ -93,6 +92,6 @@ public final class TranscriberConfig {
       Thread.currentThread().interrupt();
     }
 
-    LOGGER.info("Executor has shutdown.");
+    LOGGER.debug("Executor shutdown.");
   }
 }

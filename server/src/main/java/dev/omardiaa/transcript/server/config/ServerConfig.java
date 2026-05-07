@@ -12,6 +12,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public final class ServerConfig {
   private static final @Nullable String API_KEY = EnvironmentUtil.get("DISCORD_HTML_TRANSCRIPT_API_KEY").orElse(null);
+  private static final String LOG_LEVEL = EnvironmentUtil.get("DISCORD_HTML_TRANSCRIPT_LOG_LEVEL").orElse("INFO");
   private static final String HOST = EnvironmentUtil.get("DISCORD_HTML_TRANSCRIPT_HOST", "127.0.0.1");
   private static final int PORT = EnvironmentUtil.get("DISCORD_HTML_TRANSCRIPT_PORT", 7000);
   private static final SemVer VERSION = SemVer.parse("0.1.0-beta.7");
@@ -23,6 +24,13 @@ public final class ServerConfig {
    */
   public static @Nullable String getApiKey() {
     return API_KEY;
+  }
+
+  /**
+   * @return {@code DISCORD_HTML_TRANSCRIPT_LOG_LEVEL} value, or {@code "WARN"} if variable is not specified.
+   */
+  public static String getLogLevel() {
+    return LOG_LEVEL;
   }
 
   /**

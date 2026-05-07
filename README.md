@@ -110,14 +110,16 @@ standalone web server.
     </tr>
     <tr>
         <td><code>DISCORD_HTML_TRANSCRIPT_HOST</code></td>
-        <td>Specifies a custom host for the server.
+        <td>
+            Specifies a custom host for the server.
             <br>
             (default: <code>127.0.0.1</code>)
-            </td>
+        </td>
     </tr>
     <tr>
         <td><code>DISCORD_HTML_TRANSCRIPT_PORT</code></td>
-        <td>Specifies a custom port for the server.
+        <td>
+            Specifies a custom port for the server.
             <br>
             (default: <code>7000</code>)
         </td>
@@ -125,6 +127,14 @@ standalone web server.
     <tr>
         <td><code>DISCORD_HTML_TRANSCRIPT_API_KEY</code></td>
         <td>Specifies a secret key to authenticate client requests.</td>
+    </tr>
+    <tr>
+        <td><code>DISCORD_HTML_TRANSCRIPT_LOG_LEVEL</code></td>
+        <td>
+            Specifies log level.
+            <br>
+            (default: <code>WARN</code>)
+        </td>
     </tr>
 </table>
 

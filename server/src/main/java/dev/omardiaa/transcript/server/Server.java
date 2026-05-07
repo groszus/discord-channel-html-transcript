@@ -5,6 +5,7 @@ import dev.omardiaa.transcript.core.exception.TranscriberException;
 import dev.omardiaa.transcript.core.model.Payload;
 import dev.omardiaa.transcript.core.service.Transcriber;
 import dev.omardiaa.transcript.server.config.ServerConfig;
+import dev.omardiaa.transcript.server.config.ServerRequestLogger;
 import dev.omardiaa.transcript.server.exception.GlobalExceptionHandler;
 import dev.omardiaa.transcript.server.exception.MismatchedVersionException;
 import dev.omardiaa.transcript.server.util.ServerUtil;
@@ -15,6 +16,8 @@ import io.javalin.http.HttpStatus;
 import io.javalin.http.UnauthorizedResponse;
 import io.javalin.json.JavalinJackson3;
 import org.jspecify.annotations.NullMarked;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import tools.jackson.databind.exc.MismatchedInputException;
 
 import java.util.Map;
@@ -24,6 +27,8 @@ import java.util.Map;
  */
 @NullMarked
 public final class Server {
+  private static final Logger LOGGER = LoggerFactory.getLogger(Server.class);
+
   private static final Server INSTANCE = new Server();
 
   private final Javalin javalin;
@@ -51,6 +56,8 @@ public final class Server {
           .exception(UnauthorizedResponse.class, GlobalExceptionHandler::handleUnauthorized)
           .exception(Exception.class, GlobalExceptionHandler::handleException);
 
+        config.requestLogger.http(new ServerRequestLogger());
+
         config.events.serverStopped(TranscriberConfig::shutdownExecutor);
 
         if (ServerConfig.getApiKey() != null) {
@@ -71,6 +78,7 @@ public final class Server {
    */
   public void start() {
     javalin.start();
+    LOGGER.info("Started discord-html-transcript {}.", ServerConfig.getVersion());
   }
 
   /**
@@ -78,6 +86,7 @@ public final class Server {
    */
   public void stop() {
     javalin.stop();
+    LOGGER.info("Stopped discord-html-transcript.");
   }
 
   /**
@@ -87,7 +96,8 @@ public final class Server {
    *   the Javalin {@link Context}.
    */
   private void healthHandler(Context ctx) {
-    ctx.status(HttpStatus.OK).json(Map.of("version", ServerConfig.getVersion().toString()));
+    ctx.status(HttpStatus.OK)
+       .json(Map.of("version", ServerConfig.getVersion().toString()));
   }
 
   /**
