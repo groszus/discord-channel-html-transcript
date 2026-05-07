@@ -32,11 +32,9 @@ file that resembles the look and feel of the Discord desktop client.
 
 ## Usage
 
-There are 3 ways to use this tool:
-
 ### 1. Library (Recommended)
 
-Use the referenced library if you're building your bot with any of the following APIs:
+Use the referenced library if you're building your bot with any of the following Discord APIs:
 
 <table>
     <tr>
@@ -68,13 +66,13 @@ Use the referenced library if you're building your bot with any of the following
 
 ### 2. Installation
 
-For custom Java implementations, you can install the core library directly via Maven or Gradle:
+You can install & implement the core library directly via Maven or Gradle:
 
 #### Prerequisites
 
 - **Java 17** or higher
 
-[![Maven](https://img.shields.io/badge/Maven-C71A36?logo=apachemaven)](#2-installation)
+##### Maven
 
 ```xml
 
@@ -85,7 +83,7 @@ For custom Java implementations, you can install the core library directly via M
 </dependency>
 ```
 
-[![Gradle](https://img.shields.io/badge/Gradle-02303A?logo=gradle)](#2-installation)
+##### Gradle
 
 ```kts
 
@@ -93,8 +91,6 @@ implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.7")
 ```
 
 ### 3. Standalone API
-
-This section refers to [discord-html-transcript-server](server/src/main/java/dev/omardiaa/transcript/server).
 
 You can [download](https://github.com/omardiaadev/discord-html-transcript/releases) and run the executable as a
 standalone web server.
@@ -113,7 +109,7 @@ standalone web server.
         <td>
             Specifies a custom host for the server.
             <br>
-            (default: <code>127.0.0.1</code>)
+            (default: <code>"127.0.0.1"</code>)
         </td>
     </tr>
     <tr>
@@ -133,7 +129,7 @@ standalone web server.
         <td>
             Specifies log level.
             <br>
-            (default: <code>WARN</code>)
+            (default: <code>"INFO"</code>)
         </td>
     </tr>
 </table>
@@ -228,7 +224,7 @@ You can specify the `options` object inside your payload to configure the genera
 Need help? [Ask the Community](https://discord.omardiaa.dev)!
 
 <div align="center">
-    <p>Made With ❤️ By <a href="https://github.com/omardiaadev"><b>Omar Diaa</b></a></p>
     <a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"></a>
     <a href="https://ko-fi.com/omardiaadev"><img alt="Ko-fi" src="https://img.shields.io/badge/ko--fi-FF6433?style=for-the-badge&logo=kofi&logoColor=FFF"></a>
+    <p>Made With ❤️ By <a href="https://github.com/omardiaadev"><b>Omar Diaa</b></a></p>
 </div>

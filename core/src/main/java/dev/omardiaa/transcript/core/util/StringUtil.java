@@ -2,6 +2,10 @@ package dev.omardiaa.transcript.core.util;
 
 import org.jspecify.annotations.NullMarked;
 
+import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * A utility class for String manipulation.
  */
@@ -9,11 +13,11 @@ import org.jspecify.annotations.NullMarked;
 public final class StringUtil {
   /**
    * @param input
-   *   the String to escape.
+   *   the input to escape.
    *
-   * @return the escaped String.
+   * @return the escaped sequence.
    */
-  public static String escape(String input) {
+  public static CharSequence escape(CharSequence input) {
     int lastIndex = 0;
     int length = input.length();
 
@@ -53,9 +57,41 @@ public final class StringUtil {
    * @return the next index.
    */
   private static int flushAndEscape(
-    String input, int start, int end, String escapeSequence, StringBuilder output) {
+    CharSequence input, int start, int end, String escapeSequence, StringBuilder output) {
     output.append(input, start, end);
     output.append(escapeSequence);
     return end + 1;
+  }
+
+  /**
+   * @param pattern
+   *   the pattern to match.
+   * @param input
+   *   the input to match with the pattern.
+   * @param replacer
+   *   the function to replace the matched pattern.
+   *
+   * @return the updated sequence.
+   */
+  public static CharSequence replace(Pattern pattern, CharSequence input, Function<Matcher, String> replacer) {
+    Matcher matcher = pattern.matcher(input);
+
+    if (!matcher.find()) {
+      return input;
+    }
+
+    int lastIndex = 0;
+    int length = input.length();
+    StringBuilder output = new StringBuilder(length);
+
+    do {
+      output.append(input, lastIndex, matcher.start());
+      output.append(replacer.apply(matcher));
+      lastIndex = matcher.end();
+    } while (matcher.find());
+
+    output.append(input, lastIndex, length);
+
+    return output;
   }
 }

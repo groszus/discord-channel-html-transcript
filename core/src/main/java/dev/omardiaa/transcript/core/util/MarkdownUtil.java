@@ -10,8 +10,7 @@ import org.jspecify.annotations.NullMarked;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
-import java.util.regex.Matcher;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 @NullMarked
@@ -30,170 +29,177 @@ public final class MarkdownUtil {
     </svg>
     """;
 
-  // Standard Markdown
-  private final static Pattern CODE_BLOCK = Pattern.compile("```(.*?)```", Pattern.DOTALL);
-  private final static Pattern CODE_INLINE = Pattern.compile("`(?!`)(.*)`");
+  private static final Pattern CODE_BLOCK = Pattern.compile("```(.*?)```", Pattern.DOTALL);
+  private static final Pattern CODE_INLINE = Pattern.compile("`(?!`)(.*)`");
 
-  private final static Pattern BOLD = Pattern.compile("\\*\\*(?!\\*)(.+?)\\*\\*");
-  private final static Pattern UNDERLINE = Pattern.compile("__(?!_)(.+?)__");
-  private final static Pattern ITALIC = Pattern.compile("[*_](?![*_])(.+?)[_*]");
-  private final static Pattern STRIKE_THROUGH = Pattern.compile("~~(.+?)~~");
-  private final static Pattern LINK = Pattern.compile(
+  private static final Pattern BOLD = Pattern.compile("\\*\\*(?!\\*)(.+?)\\*\\*");
+  private static final Pattern UNDERLINE = Pattern.compile("__(?!_)(.+?)__");
+  private static final Pattern ITALIC = Pattern.compile("[*_](?![*_])(.+?)[_*]");
+  private static final Pattern STRIKE_THROUGH = Pattern.compile("~~(.+?)~~");
+  private static final Pattern LINK = Pattern.compile(
     "\\[(.*?)]\\((https?://[\\w.:/?#\\[\\]@-]*)\\)|(https?://[\\w.:/?#\\[\\]@-]*)");
 
-  private final static Pattern HEADER = Pattern.compile("^\\s*(#{1,3})\\s+(.+)", Pattern.MULTILINE);
-  private final static Pattern SUBTEXT = Pattern.compile("^\\s*-#\\s+(.+)", Pattern.MULTILINE);
-  private final static Pattern QUOTE = Pattern.compile("^(&gt; .+(?:\\n&gt; .+)*)", Pattern.MULTILINE);
+  private static final Pattern HEADER = Pattern.compile("^\\s*(#{1,3})\\s+(.+)", Pattern.MULTILINE);
+  private static final Pattern SUBTEXT = Pattern.compile("^\\s*-#\\s+(.+)", Pattern.MULTILINE);
+  private static final Pattern QUOTE = Pattern.compile("^(&gt; .+(?:\\n&gt; .+)*)", Pattern.MULTILINE);
 
-  // Discord Markdown
-  private final static Pattern MENTION_USER = Pattern.compile("&lt;@(\\d+)&gt;");
-  private final static Pattern MENTION_ROLE = Pattern.compile("&lt;@&amp;(\\d+)&gt;");
-  private final static Pattern MENTION_CHANNEL = Pattern.compile("&lt;#(\\d+)&gt;");
-  private final static Pattern MENTION_EVERYONE = Pattern.compile("@(everyone|here)");
-  private final static Pattern CUSTOM_EMOJI = Pattern.compile("&lt;a?:(\\w+):(\\d+)&gt;");
-  private final static Pattern TIMESTAMP = Pattern.compile("&lt;t:(\\d+)(?::[tTdDfFsSR])?&gt;");
+  private static final Pattern MENTION_USER = Pattern.compile("&lt;@(\\d+)&gt;");
+  private static final Pattern MENTION_ROLE = Pattern.compile("&lt;@&amp;(\\d+)&gt;");
+  private static final Pattern MENTION_CHANNEL = Pattern.compile("&lt;#(\\d+)&gt;");
+  private static final Pattern MENTION_EVERYONE = Pattern.compile("@(everyone|here)");
+  private static final Pattern CUSTOM_EMOJI = Pattern.compile("&lt;a?:(\\w+):(\\d+)&gt;");
+  private static final Pattern TIMESTAMP = Pattern.compile("&lt;t:(\\d+)(?::[tTdDfFsSR])?&gt;");
+
+  private static final Pattern NEWLINE = Pattern.compile("\n");
+  private static final Pattern CODE_MASK = Pattern.compile("%%\\d+%%");
+
+  private static final Predicate<String> CONTAINS_CODE = CODE_BLOCK.asPredicate().or(CODE_INLINE.asPredicate());
 
   private MarkdownUtil() {}
 
   /**
-   * Parses the provided {@code content} into markdown as HTML.
+   * Parses the provided markdown {@code input} as HTML.
    *
-   * @param content
-   *   the content to parse.
+   * @param input
+   *   the markup input to parse.
    *
    * @return the markdown as HTML.
    *
    * @throws TranscriberException
-   *   if the provided {@code content} is blank.
+   *   if the provided {@code input} is blank.
    */
-  public static String parseMarkup(String content) {
-    if (content.isBlank()) {
-      throw new TranscriberException("Received empty content.");
+  public static String parseMarkup(String input) {
+    if (input.isBlank()) {
+      throw new TranscriberException("Received empty markdown input.");
     }
 
-    Map<String, String> codeMasks = CODE_BLOCK.asPredicate().test(content) || CODE_INLINE.asPredicate().test(content)
-      ? new HashMap<>()
-      : null;
+    CharSequence sequence = StringUtil.escape(input);
 
-    if (codeMasks != null) {
-      content = CODE_BLOCK.matcher(content).replaceAll(m -> {
-        String codeMaskId = "%%" + (codeMasks.size() + 1) + "%%";
+    Map<String, String> codeMasksMap = CONTAINS_CODE.test(input) ? new HashMap<>() : null;
 
-        String codeBlock = HtmlBuilder
-          .create("code")
-          .attribute("data-code-style", "BLOCK")
-          .build(m.group(1));
+    if (codeMasksMap != null) {
+      sequence = StringUtil.replace(
+        CODE_BLOCK, sequence, m -> {
+          String id = "%%" + (codeMasksMap.size() + 1) + "%%";
 
-        codeMasks.put(
-          codeMaskId,
-          HtmlBuilder.create("pre").build(codeBlock)
-        );
-
-        return codeMaskId;
-      });
-
-      content = CODE_INLINE.matcher(content).replaceAll(m -> {
-        String code = "%%" + (codeMasks.size() + 1) + "%%";
-
-        codeMasks.put(
-          code,
-          HtmlBuilder
+          String code = HtmlBuilder
             .create("code")
-            .attribute("data-code-style", "INLINE")
-            .build(m.group(1))
-        );
+            .attribute("data-code-style", "BLOCK")
+            .build(m.group(1));
 
-        return code;
-      });
+          codeMasksMap.put(id, HtmlBuilder.create("pre").build(code));
+
+          return id;
+        }
+      );
+
+      sequence = StringUtil.replace(
+        CODE_INLINE, sequence, m -> {
+          String id = "%%" + (codeMasksMap.size() + 1) + "%%";
+
+          codeMasksMap.put(
+            id,
+            HtmlBuilder
+              .create("code")
+              .attribute("data-code-style", "INLINE")
+              .build(m.group(1))
+          );
+
+          return id;
+        }
+      );
     }
 
-    content = StringUtil.escape(content).replace("\n", "<br>\n");
+    sequence = StringUtil.replace(NEWLINE, sequence, m -> "<br>\n");
 
-    content = BOLD.matcher(content).replaceAll(m -> HtmlBuilder.create("b").build(m.group(1)));
-    content = UNDERLINE.matcher(content).replaceAll(m -> HtmlBuilder.create("u").build(m.group(1)));
-    content = ITALIC.matcher(content).replaceAll(m -> HtmlBuilder.create("em").build(m.group(1)));
-    content = STRIKE_THROUGH.matcher(content).replaceAll(m -> HtmlBuilder.create("s").build(m.group(1)));
+    sequence = StringUtil.replace(BOLD, sequence, m -> HtmlBuilder.create("b").build(m.group(1)));
+    sequence = StringUtil.replace(UNDERLINE, sequence, m -> HtmlBuilder.create("u").build(m.group(1)));
+    sequence = StringUtil.replace(ITALIC, sequence, m -> HtmlBuilder.create("em").build(m.group(1)));
+    sequence = StringUtil.replace(STRIKE_THROUGH, sequence, m -> HtmlBuilder.create("s").build(m.group(1)));
 
-    content = LINK.matcher(content).replaceAll(m -> {
-      String markdownText = m.group(1);
+    sequence = StringUtil.replace(
+      LINK, sequence, m -> {
+        String markdownText = m.group(1);
 
-      if (markdownText != null && markdownText.isBlank()) {
-        return m.group(0);
+        if (markdownText != null && markdownText.isBlank()) {
+          return m.group(0);
+        }
+
+        String markdownUrl = m.group(2);
+        String url = m.group(3);
+
+        String href = markdownUrl != null ? markdownUrl : url;
+        String text = markdownText != null ? markdownText : url;
+
+        return HtmlBuilder
+          .create("a")
+          .attribute("href", href)
+          .attribute("target", "_blank")
+          .build(text);
       }
+    );
 
-      String markdownUrl = m.group(2);
-      String url = m.group(3);
-
-      String href = markdownUrl != null ? markdownUrl : url;
-      String text = markdownText != null ? markdownText : url;
-
-      return HtmlBuilder
-        .create("a")
-        .attribute("href", href)
-        .attribute("target", "_blank")
-        .build(text);
-    });
-
-    content = TIMESTAMP.matcher(content).replaceAll(
-      m -> HtmlBuilder
+    sequence = StringUtil.replace(
+      TIMESTAMP, sequence, m -> HtmlBuilder
         .create("time")
-        .build(TimeUtil.formatTimestamp(m.group(1))));
+        .build(TimeUtil.formatTimestamp(m.group(1)))
+    );
 
-    content = HEADER.matcher(content).replaceAll(
-      m -> HtmlBuilder
+    sequence = StringUtil.replace(
+      HEADER, sequence, m -> HtmlBuilder
         .create("h" + m.group(1).length())
-        .build(m.group(2)));
+        .build(m.group(2))
+    );
 
-    content = SUBTEXT.matcher(content).replaceAll(
-      m -> HtmlBuilder
+    sequence = StringUtil.replace(
+      SUBTEXT, sequence, m -> HtmlBuilder
         .create("s")
-        .build(m.group(1)));
+        .build(m.group(1))
+    );
 
-    content = QUOTE.matcher(content).replaceAll(
-      m -> HtmlBuilder
+    sequence = StringUtil.replace(
+      QUOTE, sequence, m -> HtmlBuilder
         .create("blockquote")
-        .build(m.group(1).replace("&gt; ", "")));
+        .build(m.group(1).replace("&gt; ", ""))
+    );
 
-    content = MENTION_EVERYONE.matcher(content).replaceAll(
-      m -> HtmlBuilder
+    sequence = StringUtil.replace(
+      MENTION_EVERYONE, sequence, m -> HtmlBuilder
         .create("span")
         .classes("mention")
-        .build("@" + m.group(1)));
+        .build("@" + m.group(1))
+    );
 
-    content = wrapText(content);
-
-    if (codeMasks != null) {
-      for (Map.Entry<String, String> entry : codeMasks.entrySet()) {
-        content = content.replace(entry.getKey(), entry.getValue());
-      }
+    if (codeMasksMap != null && !codeMasksMap.isEmpty()) {
+      sequence = StringUtil.replace(CODE_MASK, sequence, m -> codeMasksMap.get(m.group(0)));
     }
 
-    return content;
+    return sequence.toString();
   }
 
   /**
-   * Parses the provided {@code content} into Discord's extra markdown as HTML.
+   * Parses the provided Discord extra markdown {@code input} as HTML.
    *
    * @param guild
    *   the guild the {@code message} belongs to.
    * @param message
-   *   the message that contains {@code content}.
-   * @param content
-   *   the content to parse.
+   *   the message that contains {@code input}.
+   * @param input
+   *   the markup input to parse.
    *
-   * @return Discord's extra markdown as HTML.
+   * @return Discord extra markdown as HTML.
    *
    * @throws TranscriberException
-   *   if the provided {@code content} is blank.
+   *   if the provided {@code input} is blank.
    * @see <a href="https://docs.discord.com/developers/reference#message-formatting">Message Formatting</a>
    */
-  public static String parseMarkup(Guild guild, Message message, String content) {
-    content = parseMarkup(content);
+  public static String parseMarkup(Guild guild, Message message, String input) {
+    CharSequence sequence = parseMarkup(input);
 
-    content = MENTION_USER.matcher(content).replaceAll(
-      m -> {
+    sequence = StringUtil.replace(
+      MENTION_USER, sequence, m -> {
         String userId = m.group(1);
-        User user = Optional.ofNullable(message.mentionsMap()).map(mentions -> mentions.get(userId)).orElse(null);
+        User user = message.mentionsMap() != null ? message.mentionsMap().get(userId) : null;
 
         if (user == null) {
           return HtmlBuilder.create("span").classes("mention").build("<@" + userId + ">");
@@ -203,12 +209,13 @@ public final class MarkdownUtil {
           .create("a")
           .attribute("href", "https://discord.com/users/" + userId)
           .classes("mention")
-          .build(Matcher.quoteReplacement("@" + user.globalName()));
-      });
+          .build("@" + user.globalName());
+      }
+    );
 
-    content = MENTION_ROLE.matcher(content).replaceAll(
-      m -> {
-        Role role = Optional.ofNullable(guild.rolesMap()).map(roles -> roles.get(m.group(1))).orElse(null);
+    sequence = StringUtil.replace(
+      MENTION_ROLE, sequence, m -> {
+        Role role = guild.rolesMap() != null ? guild.rolesMap().get(m.group(1)) : null;
 
         if (role == null) {
           return HtmlBuilder.create("span").classes("mention").build("@unknown-role");
@@ -217,7 +224,7 @@ public final class MarkdownUtil {
         int primaryColor = role.colors().primaryColor();
 
         if (primaryColor == 0) {
-          return HtmlBuilder.create("span").classes("mention").build("@" + Matcher.quoteReplacement(role.name()));
+          return HtmlBuilder.create("span").classes("mention").build("@" + role.name());
         }
 
         String hexColor = Integer.toHexString(primaryColor);
@@ -228,18 +235,20 @@ public final class MarkdownUtil {
           .attribute("onmouseover", "this.style.backgroundColor='#" + hexColor + "30';")
           .attribute("onmouseout", "this.style.backgroundColor='#" + hexColor + "10';")
           .classes("mention")
-          .build(Matcher.quoteReplacement(role.name()));
-      });
+          .build("@" + role.name());
+      }
+    );
 
     // parses to "unknown" since there's no reliable way to retrieve a guild's channels' names.
-    content = MENTION_CHANNEL.matcher(content).replaceAll(
-      m -> HtmlBuilder
+    sequence = StringUtil.replace(
+      MENTION_CHANNEL, sequence, m -> HtmlBuilder
         .create("span")
         .classes("mention")
-        .build(SVG_CHANNEL_ICON + "<i>unknown</i>"));
+        .build(SVG_CHANNEL_ICON + "<i>unknown</i>")
+    );
 
-    content = CUSTOM_EMOJI.matcher(content).replaceAll(
-      m -> {
+    sequence = StringUtil.replace(
+      CUSTOM_EMOJI, sequence, m -> {
         String name = m.group(1);
         String src = Emoji.Custom.CUSTOM_EMOJI_URL.formatted(m.group(2));
 
@@ -249,69 +258,9 @@ public final class MarkdownUtil {
           .attribute("alt", name)
           .attribute("src", src)
           .build();
-      });
-
-    return content;
-  }
-
-  private static String wrapText(String html) {
-    int length = html.length();
-
-    StringBuilder output = new StringBuilder(length + 32);
-    StringBuilder buffer = new StringBuilder();
-
-    boolean insideTag = false;
-
-    for (int i = 0; i < length; i++) {
-      char c = html.charAt(i);
-
-      switch (c) {
-        case '<' -> {
-          flushBuffer(output, buffer);
-          insideTag = true;
-          output.append(c);
-        }
-        case '>' -> {
-          insideTag = false;
-          output.append(c);
-        }
-        default -> {
-          if (insideTag) {
-            output.append(c);
-          } else {
-            buffer.append(c);
-          }
-        }
       }
-    }
+    );
 
-    flushBuffer(output, buffer);
-    return output.toString();
-  }
-
-  private static void flushBuffer(StringBuilder output, StringBuilder buffer) {
-    if (buffer.isEmpty()) {
-      return;
-    }
-
-    if (isBufferBlank(buffer)) {
-      output.append(buffer);
-    } else {
-      output.append("<span>").append(buffer).append("</span>");
-    }
-
-    buffer.setLength(0);
-  }
-
-  /**
-   * Checks if a StringBuilder is blank without allocating new Strings.
-   */
-  private static boolean isBufferBlank(StringBuilder sb) {
-    for (int i = 0; i < sb.length(); i++) {
-      if (!Character.isWhitespace(sb.charAt(i))) {
-        return false;
-      }
-    }
-    return true;
+    return sequence.toString();
   }
 }
