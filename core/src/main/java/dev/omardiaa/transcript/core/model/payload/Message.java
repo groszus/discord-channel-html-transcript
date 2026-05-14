@@ -37,12 +37,10 @@ public record Message(
   @Nullable List<Component> components,
   @Nullable List<StickerItem> stickerItems,
   @Nullable Poll poll,
-  @JsonIgnore @Nullable Map<String, User> mentionsMap,
-  @JsonIgnore List<Attachment> images,
-  @JsonIgnore List<File> files
+  @JsonIgnore Map<String, User> mentionsMap
 ) {
   @JsonCreator
-  public static Message create(
+  public Message(
     @JsonProperty(value = "id", required = true) String id,
     @JsonProperty(value = "author", required = true) User author,
     @JsonProperty(value = "content", required = true) String content,
@@ -61,18 +59,7 @@ public record Message(
     @JsonProperty(value = "sticker_items") @Nullable List<StickerItem> stickerItems,
     @JsonProperty(value = "poll") @Nullable Poll poll
   ) {
-    List<Attachment> images = new ArrayList<>();
-    List<File> files = new ArrayList<>();
-
-    for (Attachment attachment : attachments) {
-      if (attachment.isImage()) {
-        images.add(attachment);
-      } else {
-        files.add(attachment.toFile());
-      }
-    }
-
-    return new Message(
+    this(
       id,
       author,
       content,
@@ -90,11 +77,43 @@ public record Message(
       stickerItems,
       poll,
       mentions.isEmpty()
-        ? null
-        : mentions.stream().collect(Collectors.toUnmodifiableMap(User::id, Function.identity())),
-      images,
-      files
+        ? Map.of()
+        : mentions.stream().collect(Collectors.toUnmodifiableMap(User::id, Function.identity()))
     );
+  }
+
+  @JsonIgnore
+  public List<Attachment> getImages() {
+    if (attachments.isEmpty()) {
+      return List.of();
+    }
+
+    List<Attachment> images = new ArrayList<>();
+
+    for (Attachment attachment : attachments) {
+      if (attachment.isImage()) {
+        images.add(attachment);
+      }
+    }
+
+    return images;
+  }
+
+  @JsonIgnore
+  public List<File> getFiles() {
+    if (attachments.isEmpty()) {
+      return List.of();
+    }
+
+    List<File> files = new ArrayList<>();
+
+    for (Attachment attachment : attachments) {
+      if (!attachment.isImage()) {
+        files.add(attachment.toFile());
+      }
+    }
+
+    return files;
   }
 
   /**
@@ -113,7 +132,7 @@ public record Message(
    */
   @JsonIgnore
   public boolean showDivider(@Nullable Message previousMessage) {
-    return previousMessage == null || !previousMessage.timestamp().toLocalDate().isEqual(timestamp.toLocalDate());
+    return (previousMessage == null) || !previousMessage.timestamp().toLocalDate().isEqual(timestamp.toLocalDate());
   }
 
   /**
@@ -142,8 +161,8 @@ public record Message(
   @JsonIgnore
   public boolean hasAccessories() {
     return poll != null
-           || !attachments.isEmpty()
            || !embeds.isEmpty()
+           || !attachments.isEmpty()
            || (components != null && !components.isEmpty())
            || (stickerItems != null && !stickerItems.isEmpty())
            || (reactions != null && !reactions.isEmpty());

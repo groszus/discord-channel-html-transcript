@@ -199,7 +199,7 @@ public final class MarkdownUtil {
     sequence = StringUtil.replace(
       MENTION_USER, sequence, m -> {
         String userId = m.group(1);
-        User user = message.mentionsMap() != null ? message.mentionsMap().get(userId) : null;
+        User user = message.mentionsMap().get(userId);
 
         if (user == null) {
           return HtmlBuilder.create("span").classes("mention").build("<@" + userId + ">");
@@ -215,7 +215,7 @@ public final class MarkdownUtil {
 
     sequence = StringUtil.replace(
       MENTION_ROLE, sequence, m -> {
-        Role role = guild.rolesMap() != null ? guild.rolesMap().get(m.group(1)) : null;
+        Role role = guild.rolesMap().get(m.group(1));
 
         if (role == null) {
           return HtmlBuilder.create("span").classes("mention").build("@unknown-role");

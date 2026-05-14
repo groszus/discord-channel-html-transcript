@@ -14,9 +14,9 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 public record Attachment(
   String filename,
-  @Nullable String contentType,
   int size,
-  String url
+  String url,
+  @JsonIgnore boolean isImage
 ) {
   @JsonCreator
   public Attachment(
@@ -25,18 +25,12 @@ public record Attachment(
     @JsonProperty(value = "size", required = true) int size,
     @JsonProperty(value = "url", required = true) String url
   ) {
-    this.filename = filename;
-    this.contentType = contentType;
-    this.size = size;
-    this.url = url;
-  }
-
-  /**
-   * @return {@code true} if this attachment's {@code contentType} is {@code image/*}.
-   */
-  @JsonIgnore
-  public boolean isImage() {
-    return contentType != null && contentType.startsWith("image");
+    this(
+      filename,
+      size,
+      url,
+      (contentType != null) && contentType.startsWith("image")
+    );
   }
 
   /**

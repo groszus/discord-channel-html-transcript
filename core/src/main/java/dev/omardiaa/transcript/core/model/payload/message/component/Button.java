@@ -23,7 +23,7 @@ public record Button(
 ) implements ActionRowChildComponent, SectionAccessoryComponent {
   public Button {
     Check.check(
-      !((label == null) && (emoji == null)),
+      label != null || emoji != null,
       "Either emoji or label can be null, both must not be null."
     );
   }

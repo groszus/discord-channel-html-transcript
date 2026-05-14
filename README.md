@@ -14,7 +14,7 @@
 file that resembles the look and feel of the Discord desktop client.
 
 > [!IMPORTANT]
-> This project is not affiliated with Discord Inc.
+> discord-html-transcript is **not affiliated** with Discord Inc.
 
 ### Features
 
@@ -86,7 +86,6 @@ You can install & implement the core library directly via Maven or Gradle:
 ##### Gradle
 
 ```kts
-
 implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.7")
 ```
 
@@ -195,7 +194,7 @@ The server validates the [`Server-Version`](#headers) header using the following
 
 ##### Request Payload Example
 
-You can specify the `options` object inside your payload to configure the generator:
+You can specify the `options` object to configure the generator's options:
 
 ```json5
 {
@@ -204,12 +203,12 @@ You can specify the `options` object inside your payload to configure the genera
   "messages": [],
   "options": {
     "attachment": {
-      // If set to "true", the generator will download referenced attachments and encode them into the file.
+      // If set to "true", the generator will download attachments and encode them into the file.
       // default: false
       "save_images": true
     },
     "style": {
-      // If set, the generator will use the styles of the specified path.
+      // If set, the generator will use <link rel="stylesheet" href="path/to/style.css">.
       // default: null
       "path": "path/to/style.css"
     }
@@ -224,7 +223,7 @@ You can specify the `options` object inside your payload to configure the genera
 Need help? [Ask the Community](https://discord.omardiaa.dev)!
 
 <div align="center">
+    <p>Made With ❤️ By <a href="https://github.com/omardiaadev"><b>Omar Diaa</b></a></p>
     <a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"></a>
     <a href="https://ko-fi.com/omardiaadev"><img alt="Ko-fi" src="https://img.shields.io/badge/ko--fi-FF6433?style=for-the-badge&logo=kofi&logoColor=FFF"></a>
-    <p>Made With ❤️ By <a href="https://github.com/omardiaadev"><b>Omar Diaa</b></a></p>
 </div>

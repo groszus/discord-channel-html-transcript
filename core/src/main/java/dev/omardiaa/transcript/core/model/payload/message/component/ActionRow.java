@@ -20,10 +20,12 @@ public record ActionRow(
     @JsonProperty(value = "type", required = true) int type,
     @JsonProperty(value = "components", required = true) List<ActionRowChildComponent> components
   ) {
-    boolean containsSelectMenu = components.stream().anyMatch(c -> c instanceof SelectMenu);
-
-    if ((components.size() > 1) && containsSelectMenu) {
-      throw new IllegalArgumentException("Action Row with a Select Menu cannot contain other components.");
+    if (components.size() > 1) {
+      for (ActionRowChildComponent component : components) {
+        if (component instanceof SelectMenu) {
+          throw new IllegalArgumentException("Action Row with a Select Menu cannot contain other components.");
+        }
+      }
     }
 
     this.type = type;

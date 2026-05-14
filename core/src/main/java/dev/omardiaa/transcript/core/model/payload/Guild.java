@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public record Guild(
   String name,
   @JsonIgnore @Nullable String iconUrl,
-  @JsonIgnore @Nullable Map<String, Role> rolesMap
+  @JsonIgnore Map<String, Role> rolesMap
 ) {
   public static final String GUILD_ICON_URL = "https://cdn.discordapp.com/icons/%s/%s.webp?animated=true";
 
@@ -36,7 +36,7 @@ public record Guild(
         ? null
         : GUILD_ICON_URL.formatted(id, icon),
       roles.isEmpty()
-        ? null
+        ? Map.of()
         : roles.stream().collect(Collectors.toUnmodifiableMap(Role::id, Function.identity()))
     );
   }

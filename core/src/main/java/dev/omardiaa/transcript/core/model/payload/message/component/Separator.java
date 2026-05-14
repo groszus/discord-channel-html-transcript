@@ -24,7 +24,7 @@ public record Separator(
   ) {
     this(
       type,
-      divider == null || divider,
+      divider != null ? divider : true,
       spacing
     );
   }

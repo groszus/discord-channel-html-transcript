@@ -1,7 +1,6 @@
 @import dev.omardiaa.transcript.core.util.TimeUtil
 @import dev.omardiaa.transcript.core.model.Payload
 @import dev.omardiaa.transcript.core.model.payload.Message
-@import dev.omardiaa.transcript.core.model.payload.message.User
 
 @param Payload payload
 @param Message message
@@ -10,7 +9,6 @@
 
 
 @if(message.type() != Message.Type.UNKNOWN)
-  !{User author = message.author();}
   !{boolean showAuthor = message.showAuthor(previousMessage);}
 
   @if(message.showDivider(previousMessage))
@@ -29,7 +27,7 @@
       <div class="author__avatar__container">
         @if(showAuthor)
           <img
-            src="${author.avatarUrl()}"
+            src="${message.author().avatarUrl()}"
             alt="Avatar"
             class="author__avatar"
           />
@@ -41,8 +39,8 @@
       <div>
         @if(showAuthor)
           <h3 class="author">
-            @template.discord.message.user.name(author = author)
-            @template.discord.message.user.tag(user = author)
+            @template.discord.message.user.name(author = message.author())
+            @template.discord.message.user.tag(user = message.author())
 
             <div class="author__timestamp">
               @template.discord.ui.timestamp(timestamp = message.timestamp())
@@ -78,7 +76,7 @@
 
       <div>
         <h3 class="author message__thread">
-          @template.discord.message.user.name(author = author)
+          @template.discord.message.user.name(author = message.author())
 
           <span>started a thread:</span>
           <span class="message__thread__name">${message.content()}.</span>
