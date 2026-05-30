@@ -1,10 +1,12 @@
-# discord-html-transcript
+<h1 align="center">discord-html-transcript</h1>
 
-**Generate natively styled Discord chat logs**
+<p align="center"><strong>Generate natively styled Discord chat logs</strong></p>
 
-<a title="Maven Version" href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?label=Maven&color=0088FF"></a>
-<a title="License" href="https://github.com/omardiaadev/discord-html-transcript/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript?label=License&color=0088FF"></a>
-<a href="https://discord.omardiaa.dev"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=FFF&color=5865F2"></a>
+<div align="center">
+    <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?style=flat-square&label=Maven&color=0088FF"></a>
+    <a href="https://github.com/omardiaadev/discord-html-transcript/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript?style=flat-square&label=License&color=0088FF"></a>
+    <a href="https://discord.omardiaa.dev"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=discord&logoColor=FFF&color=5865F2"></a>
+</div>
 
 ## About
 
@@ -32,7 +34,7 @@ file that resembles the look and feel of the Discord desktop client.
 
 Use the library if you're building with the following Discord APIs:
 
-<table>
+<table style="width: 100%">
     <tr>
         <th>API</th>
         <th>Library</th>
@@ -94,7 +96,7 @@ standalone web server.
 
 ##### Environment Variables
 
-<table>
+<table style="width: 100%">
     <tr>
         <th>Variable</th>
         <th>Description</th>
@@ -133,7 +135,7 @@ standalone web server.
 
 ##### Headers
 
-<table>
+<table style="width: 100%">
     <tr>
         <th>Header</th>
         <th>Description</th>
@@ -160,7 +162,7 @@ standalone web server.
 
 ##### Endpoints
 
-<table>
+<table style="width: 100%">
     <tr>
         <th>Endpoint</th>
         <th>Description</th>
