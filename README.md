@@ -1,12 +1,10 @@
-<h1 align="center">discord-html-transcript</h1>
+# discord-html-transcript
 
-<p align="center"><strong>Generate natively styled Discord chat logs</strong></p>
+**Generate natively styled Discord chat logs**
 
-<p align="center">
-    <a href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?label=Maven&color=0055D2"></a>
-    <a href="https://github.com/omardiaadev/discord-html-transcript/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript?label=License&color=0055D2"></a>
-    <a href="https://discord.omardiaa.dev"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=FFF&color=5865F2"></a>
-</p>
+<a title="Maven Version" href="https://central.sonatype.com/artifact/dev.omardiaa/discord-html-transcript"><img alt="Maven Version" src="https://img.shields.io/maven-central/v/dev.omardiaa/discord-html-transcript?label=Maven&color=0088FF"></a>
+<a title="License" href="https://github.com/omardiaadev/discord-html-transcript/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/omardiaadev/discord-html-transcript?label=License&color=0088FF"></a>
+<a href="https://discord.omardiaa.dev"><img alt="Discord" src="https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=FFF&color=5865F2"></a>
 
 ## About
 
@@ -18,23 +16,21 @@ file that resembles the look and feel of the Discord desktop client.
 
 ### Features
 
-<ul>
-    <li><strong>ComponentsV2:</strong> Containers, Media Galleries, Sections, and more.</li>
-    <li><strong>Markdown:</strong> Standard Markup, Mentions, Custom Emojis, and more.</li>
-    <li><strong>Message Accessories:</strong> Attachments, Embeds, Polls, References, and more.</li>
-</ul>
+- **ComponentsV2:** Containers, Media Galleries, Sections, and more.
+- **Markdown:** Standard Markup, Mentions, Custom Emojis, and more.
+- **Message Accessories:** Attachments, Embeds, Polls, References, and more.
 
-### Preview
+### Example Output
 
-<a title="✨" href="https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/transcript.html">
-    <img alt="Preview" src="https://res.cloudinary.com/omardiaadev/image/upload/discord-html-transcript_ocjq03.png">
+<a title="Example Output" href="https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/transcript.html">
+    <img alt="Example Output" src="https://res.cloudinary.com/omardiaadev/image/upload/discord-html-transcript_ocjq03.png">
 </a>
 
 ## Usage
 
 ### 1. Library (Recommended)
 
-Use the referenced library if you're building your bot with any of the following Discord APIs:
+Use the library if you're building with the following Discord APIs:
 
 <table>
     <tr>
@@ -66,7 +62,7 @@ Use the referenced library if you're building your bot with any of the following
 
 ### 2. Installation
 
-You can install & implement the core library directly via Maven or Gradle:
+You can install the core library directly via Maven or Gradle.
 
 #### Prerequisites
 
@@ -91,7 +87,7 @@ implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.7")
 
 ### 3. Standalone API
 
-You can [download](https://github.com/omardiaadev/discord-html-transcript/releases) and run the executable as a
+You can [download](https://github.com/omardiaadev/discord-html-transcript/releases) the executable and run it as a
 standalone web server.
 
 #### Configuration
