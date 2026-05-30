@@ -34,7 +34,7 @@ file that resembles the look and feel of the Discord desktop client.
 
 Use the library if you're building with the following Discord APIs:
 
-<table style="width: 100%">
+<table width="100%">
     <tr>
         <th>API</th>
         <th>Library</th>
@@ -102,7 +102,7 @@ standalone web server.
 
 ##### Environment Variables
 
-<table style="width: 100%">
+<table width="100%">
     <tr>
         <th width="30%">Variable</th>
         <th width="70%">Description</th>
@@ -141,7 +141,7 @@ standalone web server.
 
 ##### Headers
 
-<table style="width: 100%">
+<table width="100%">
     <tr>
         <th width="30%">Header</th>
         <th width="70%">Description</th>
@@ -168,7 +168,7 @@ standalone web server.
 
 ##### Endpoints
 
-<table style="width: 100%">
+<table width="100%">
     <tr>
         <th width="30%">Endpoint</th>
         <th width="70%">Description</th>
