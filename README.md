@@ -34,31 +34,37 @@ file that resembles the look and feel of the Discord desktop client.
 
 Use the library if you're building with the following Discord APIs:
 
-<table style="width: 100%">
+<table>
     <tr>
         <th>API</th>
         <th>Library</th>
     </tr>
     <tr align="center">
-        <td>
+        <td width="30%">
             <img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="64">
             <p>Java Discord API</p>
         </td>
-        <td><a href="https://github.com/omardiaadev/discord-html-transcript-jda">discord-html-transcript-jda</a></td>
+        <td width="70%">
+            <a href="https://github.com/omardiaadev/discord-html-transcript-jda">discord-html-transcript-jda</a>
+        </td>
     </tr>
     <tr align="center">
-        <td>
+        <td width="30%">
             <img alt="discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="64">
             <p>discord.js</p>
         </td>
-        <td><a href="https://github.com/omardiaadev/discord-html-transcript-discordjs">discord-html-transcript-discordjs</a></td>
+        <td width="70%">
+            <a href="https://github.com/omardiaadev/discord-html-transcript-discordjs">discord-html-transcript-discordjs</a>
+        </td>
     </tr>
     <tr align="center">
-        <td>
+        <td width="30%">
             <img alt="discord.py" src="https://discordpy.readthedocs.io/en/latest/_static/discord_py_logo.ico" height="64">
             <p>discord.py</p>
         </td>
-        <td><code>WIP</code></td>
+        <td width="70%">
+            <code>WIP</code>
+        </td>
     </tr>
 </table>
 
@@ -96,10 +102,10 @@ standalone web server.
 
 ##### Environment Variables
 
-<table style="width: 100%">
+<table>
     <tr>
-        <th>Variable</th>
-        <th>Description</th>
+        <th width="30%">Variable</th>
+        <th width="70%">Description</th>
     </tr>
     <tr>
         <td><code>DISCORD_HTML_TRANSCRIPT_HOST</code></td>
@@ -135,10 +141,10 @@ standalone web server.
 
 ##### Headers
 
-<table style="width: 100%">
+<table>
     <tr>
-        <th>Header</th>
-        <th>Description</th>
+        <th width="30%">Header</th>
+        <th width="70%">Description</th>
     </tr>
     <tr>
         <td><code>Server-Version</code></td>
@@ -162,10 +168,10 @@ standalone web server.
 
 ##### Endpoints
 
-<table style="width: 100%">
+<table>
     <tr>
-        <th>Endpoint</th>
-        <th>Description</th>
+        <th width="30%">Endpoint</th>
+        <th width="70%">Description</th>
     </tr>
     <tr>
         <td><code>GET /health</code></td>
