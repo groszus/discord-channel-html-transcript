@@ -14,58 +14,56 @@
 file that resembles the look and feel of the Discord desktop client.
 
 > [!IMPORTANT]
-> discord-html-transcript is **not affiliated** with Discord Inc.
+> discord-html-transcript is not affiliated with Discord Inc.
 
 ### Features
 
+- **Discord UI:** 1 HTML File,
 - **ComponentsV2:** Containers, Media Galleries, Sections, and more.
 - **Markdown:** Standard Markup, Mentions, Custom Emojis, and more.
-- **Message Accessories:** Attachments, Embeds, Polls, References, and more.
 
-### Example Output
+### Example
 
-<a title="Example Output" href="https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/transcript.html">
-    <img alt="Example Output" src="https://res.cloudinary.com/omardiaadev/image/upload/discord-html-transcript_ocjq03.png">
+<a title="Example" href="https://htmlpreview.github.io/?https://github.com/omardiaadev/discord-html-transcript/blob/main/examples/transcript.html">
+    <img alt="discord-html-transcript" src="https://res.cloudinary.com/omardiaadev/image/upload/discord-transcript_aldbto.png">
 </a>
 
 ## Usage
 
 ### 1. Library (Recommended)
 
-Use the library if you're building with the following Discord APIs:
+You can use the suitable library if you're using any of the following Discord APIs:
 
-<table width="100%">
-    <tr>
-        <th>API</th>
-        <th>Library</th>
-    </tr>
-    <tr align="center">
-        <td width="30%">
-            <img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="64">
-            <p>Java Discord API</p>
-        </td>
-        <td width="70%">
-            <a href="https://github.com/omardiaadev/discord-html-transcript-jda">discord-html-transcript-jda</a>
-        </td>
-    </tr>
-    <tr align="center">
-        <td width="30%">
-            <img alt="discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="64">
-            <p>discord.js</p>
-        </td>
-        <td width="70%">
-            <a href="https://github.com/omardiaadev/discord-html-transcript-discordjs">discord-html-transcript-discordjs</a>
-        </td>
-    </tr>
-    <tr align="center">
-        <td width="30%">
-            <img alt="discord.py" src="https://discordpy.readthedocs.io/en/latest/_static/discord_py_logo.ico" height="64">
-            <p>discord.py</p>
-        </td>
-        <td width="70%">
-            <code>WIP</code>
-        </td>
-    </tr>
+<table>
+    <thead>
+        <tr>
+            <th>Discord API</th>
+            <th>Library</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr align="center">
+            <td>
+                <img alt="JDA" src="https://avatars.githubusercontent.com/u/103134607" height="64">
+                <p>Java Discord API</p>
+            </td>
+            <td><a href="https://github.com/omardiaadev/discord-html-transcript-jda">discord-html-transcript-jda</a></td>
+        </tr>
+        <tr align="center">
+            <td>
+                <img alt="discord.js" src="https://avatars.githubusercontent.com/u/26492485" height="64">
+                <p>discord.js</p>
+            </td>
+            <td><a href="https://github.com/omardiaadev/discord-html-transcript-discordjs">discord-html-transcript-discordjs</a></td>
+        </tr>
+        <tr align="center">
+            <td>
+                <img alt="discord.py" src="https://discordpy.readthedocs.io/en/latest/_static/discord_py_logo.ico" height="64">
+                <p>discord.py</p>
+            </td>
+            <td><code>WIP</code></td>
+        </tr>
+    </tbody>
 </table>
 
 ### 2. Installation
@@ -95,7 +93,7 @@ implementation("dev.omardiaa:discord-html-transcript-core:0.1.0-beta.7")
 
 ### 3. Standalone API
 
-You can [download](https://github.com/omardiaadev/discord-html-transcript/releases) the executable and run it as a
+You can [download](https://github.com/omardiaadev/discord-html-transcript/releases) the executable and self-host it as a
 standalone web server.
 
 #### Configuration
@@ -104,8 +102,8 @@ standalone web server.
 
 <table width="100%">
     <tr>
-        <th width="30%">Variable</th>
-        <th width="70%">Description</th>
+        <th width="20%">Variable</th>
+        <th width="80%">Description</th>
     </tr>
     <tr>
         <td><code>DISCORD_HTML_TRANSCRIPT_HOST</code></td>
@@ -141,10 +139,10 @@ standalone web server.
 
 ##### Headers
 
-<table width="100%">
+<table>
     <tr>
-        <th width="30%">Header</th>
-        <th width="70%">Description</th>
+        <th>Header</th>
+        <th>Description</th>
     </tr>
     <tr>
         <td><code>Server-Version</code></td>
@@ -168,10 +166,10 @@ standalone web server.
 
 ##### Endpoints
 
-<table width="100%">
+<table>
     <tr>
-        <th width="30%">Endpoint</th>
-        <th width="70%">Description</th>
+        <th>Endpoint</th>
+        <th>Description</th>
     </tr>
     <tr>
         <td><code>GET /health</code></td>
@@ -187,7 +185,7 @@ standalone web server.
 
 ##### Versioning
 
-The server validates the [`Server-Version`](#headers) header using the following rules:
+The server validates a [`Server-Version`](#headers) header using the following rules:
 
 - Pre-release versions must match exactly.
 - Major versions must match exactly.
@@ -227,7 +225,7 @@ You can specify the `options` object to configure the generator's options:
 Need help? [Ask the Community](https://discord.omardiaa.dev)!
 
 <div align="center">
-    <p>Made With ❤️ By <a href="https://github.com/omardiaadev"><b>Omar Diaa</b></a></p>
+    <p>Made With 💙 By <a href="https://github.com/omardiaadev"><b>Omar Diaa</b></a></p>
     <a href="https://fiverr.com/skywolfxp"><img alt="Fiverr" src="https://img.shields.io/badge/-1DBF73?style=for-the-badge&logo=fiverr&logoColor=FFF&logoSize=auto"></a>
     <a href="https://ko-fi.com/omardiaadev"><img alt="Ko-fi" src="https://img.shields.io/badge/ko--fi-FF6433?style=for-the-badge&logo=kofi&logoColor=FFF"></a>
 </div>
