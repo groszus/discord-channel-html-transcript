@@ -1,0 +1,87 @@
+
+<video
+  src=""
+  data-embed-type=""
+  class="embed"
+  playsinline 
+  autoplay
+  muted
+  loop
+></video>
+<article
+  style=""
+  data-embed-type=""
+  class="embed"
+>
+  <div class="embed__provider embed__margin">
+    <span></span>
+  </div>
+  <div class="embed__author embed__margin">
+    <img
+      src=""
+      alt="Embed Author"
+      class="embed__author__icon"
+    />
+    <a
+      href=""
+      target="_blank"
+      class="embed__author__name"
+    >
+      
+    </a>
+    <span class="embed__author__name"></span>
+  </div>
+  <div class="embed__title embed__margin markup">
+    <a
+      href=""
+      target="_blank"
+    >
+      
+    </a>
+    <span></span>
+  </div>
+  <div class="embed__description embed__margin">
+    
+  </div>
+  <div class="embed__fields">
+    <div
+      data-embed-field-inline=""
+      class="embed__field"
+    >
+      <div class="embed__field__name">
+        <span></span>
+      </div>
+
+      <div class="embed__field__value">
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <div class="embed__image__wrapper">
+    <img
+      src=""
+      alt="Embed Image"
+      class="embed__image"
+    />
+  </div>
+  <div class="embed__thumbnail__wrapper">
+    <img
+      src=""
+      alt="Embed Thumbnail"
+      class="embed__thumbnail"
+    />
+  </div>
+  <div class="embed__footer embed__margin">
+    <img
+      src=""
+      alt="Embed Footer Icon"
+      class="embed__footer__icon"
+    />
+    <span class="embed__footer__text">
+      <span></span>
+
+      <span>&bull;</span>
+      <span></span>
+    </span>
+  </div>
+</article>

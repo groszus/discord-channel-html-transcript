@@ -1,0 +1,31 @@
+plugins {
+    id 'application'
+}
+
+base {
+    archivesName = 'discord-html-transcript-server'
+}
+
+application {
+    mainClass = 'dev.omardiaa.transcript.server.Main'
+}
+
+dependencies {
+    implementation project(':core')
+    implementation 'io.javalin:javalin:7.2.2'
+    implementation 'org.slf4j:slf4j-simple:2.0.17'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'dev.omardiaa.transcript.server.Main'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    exclude 'META-INF/*LICENSE*'
+    exclude 'META-INF/*NOTICE*'
+    exclude 'META-INF/MANIFEST.MF'
+    exclude '**/module-info.class'
+}

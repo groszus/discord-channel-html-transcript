@@ -1,0 +1,88 @@
+plugins {
+    id 'java-library'
+    id 'gg.jte.gradle' version '3.2.4'
+}
+
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+base {
+    archivesName = 'discord-html-transcript-core'
+}
+
+dependencies {
+    api 'gg.jte:jte:3.2.4'
+    implementation 'gg.jte:jte-native-resources:3.2.4'
+    api 'tools.jackson.core:jackson-databind:3.2.0'
+    api 'org.slf4j:slf4j-api:2.0.17'
+    testImplementation 'org.slf4j:slf4j-simple:2.0.17'
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.1.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.1.0'
+}
+
+jte {
+    sourceDirectory = file('src/main/resources/jte').toPath()
+    trimControlStructures = true
+    binaryStaticContent = true
+    contentType = gg.jte.ContentType.Html
+}
+
+tasks.register('updateCss') {
+    def styleCss = file('src/main/resources/style.css')
+    def styleJte = file('src/main/resources/jte/style.jte')
+    inputs.file(styleCss)
+    outputs.file(styleJte)
+    doLast {
+        styleJte.text = """<style>
+${styleCss.text}</style>"""
+    }
+}
+
+tasks.configureEach {
+    if (name == 'jteGenerate') {
+        dependsOn('updateCss')
+    }
+}
+
+sourceSets.main.resources.srcDir(layout.buildDirectory.dir("generated-sources/jte"))
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            pom {
+                name = 'discord-html-transcript-core'
+                description = 'Generate natively styled Discord chat logs'
+                url = 'https://github.com/omardiaadev/discord-html-transcript'
+                licenses {
+                    license {
+                        name = 'Apache License, Version 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0'
+                    }
+                }
+                developers {
+                    developer {
+                        name = 'Omar Diaa'
+                        email = 'contact@omardiaa.dev'
+                        url = 'https://omardiaa.dev'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/omardiaadev/discord-html-transcript.git'
+                    developerConnection = 'scm:git:https://github.com/omardiaadev/discord-html-transcript.git'
+                    url = 'https://github.com/omardiaadev/discord-html-transcript'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'central'
+            url = 'https://central.sonatype.com'
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
