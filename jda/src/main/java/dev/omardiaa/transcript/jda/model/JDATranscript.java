@@ -22,6 +22,11 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.utils.FileUpload;
 import org.jspecify.annotations.NullMarked;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.util.zip.GZIPOutputStream;
+
 /**
  * A {@link AbstractTranscript} implementation for {@link JDA}.
  */
@@ -62,5 +67,26 @@ public final class JDATranscript extends AbstractTranscript {
     return FileUpload.fromData(
       getOutput().toByteArray(),
       filename.endsWith(".html") ? filename : filename + ".html");
+  }
+
+  public FileUpload toFileUploadGzipped() {
+    return toFileUploadGzipped("transcript.html.gz");
+  }
+
+  public FileUpload toFileUploadGzipped(String filename) {
+    byte[] compressed = gzip(getOutput().toByteArray());
+    return FileUpload.fromData(
+      compressed,
+      filename.endsWith(".html.gz") || filename.endsWith(".gz") ? filename : filename + ".html.gz");
+  }
+
+  private static byte[] gzip(byte[] data) {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream(data.length / 2);
+    try (GZIPOutputStream gzipOut = new GZIPOutputStream(baos)) {
+      gzipOut.write(data);
+    } catch (IOException e) {
+      throw new UncheckedIOException("Failed to gzip transcript", e);
+    }
+    return baos.toByteArray();
   }
 }
