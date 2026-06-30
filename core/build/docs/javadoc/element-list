@@ -1,9 +1,0 @@
-dev.omardiaa.transcript.core.config
-dev.omardiaa.transcript.core.exception
-dev.omardiaa.transcript.core.model
-dev.omardiaa.transcript.core.model.payload
-dev.omardiaa.transcript.core.model.payload.common
-dev.omardiaa.transcript.core.model.payload.message
-dev.omardiaa.transcript.core.model.payload.message.component
-dev.omardiaa.transcript.core.service
-dev.omardiaa.transcript.core.util

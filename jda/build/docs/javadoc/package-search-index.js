@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"dev.omardiaa.transcript.jda.exception"},{"l":"dev.omardiaa.transcript.jda.internal"},{"l":"dev.omardiaa.transcript.jda.model"},{"l":"dev.omardiaa.transcript.jda.service"},{"l":"dev.omardiaa.transcript.jda.util"}];updateSearchResults();

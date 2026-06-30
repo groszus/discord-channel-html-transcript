@@ -1,5 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="/health" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" path="$PROJECT_DIR$/examples/requests.http" executionIdentifier="#2" index="2" runType="Run single request">
-    <method v="2" />
-  </configuration>
-</component>
