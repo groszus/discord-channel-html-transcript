@@ -1,0 +1,96 @@
+/*
+ * Copyright 2026 Omar Diaa
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package dev.omardiaa.transcript.jda.service;
+
+import tools.jackson.core.type.TypeReference;
+import dev.omardiaa.transcript.core.model.Payload;
+import dev.omardiaa.transcript.core.model.payload.Channel;
+import dev.omardiaa.transcript.core.model.payload.Guild;
+import dev.omardiaa.transcript.core.model.payload.Message;
+import dev.omardiaa.transcript.jda.internal.JacksonRestAction;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel;
+import net.dv8tion.jda.api.requests.Route;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
+/**
+ * A class for fetching the required {@link Payload}.
+ */
+@NullMarked
+class TranscriberFetcher {
+  private static final TypeReference<Guild> GUILD_TYPE = new TypeReference<>() {};
+  private static final TypeReference<Channel> CHANNEL_TYPE = new TypeReference<>() {};
+  private static final TypeReference<List<Message>> MESSAGE_LIST_TYPE = new TypeReference<>() {};
+
+  private final JDA jda;
+
+  TranscriberFetcher(JDA jda) {
+    this.jda = jda;
+  }
+
+  CompletableFuture<Guild> getGuild(GuildMessageChannel channel) {
+    return new JacksonRestAction<>(
+      jda,
+      Route.Guilds.GET_GUILD.compile(channel.getGuild().getId()),
+      GUILD_TYPE)
+      .submit();
+  }
+
+  CompletableFuture<Channel> getChannel(GuildMessageChannel channel) {
+    return new JacksonRestAction<>(
+      jda,
+      Route.Channels.GET_CHANNEL.compile(channel.getId()),
+      CHANNEL_TYPE)
+      .submit();
+  }
+
+  CompletableFuture<List<Message>> getMessages(GuildMessageChannel channel) {
+    return getMessages(channel.getId(), new ArrayList<>(), null)
+      .thenApply(messages -> {
+        Collections.reverse(messages);
+        return messages;
+      });
+  }
+
+  private CompletableFuture<List<Message>> getMessages(
+    String channelId, List<Message> messages, @Nullable String lastMessageId
+  ) {
+    Route.CompiledRoute route = Route.Messages.GET_MESSAGE_HISTORY.compile(channelId).withQueryParams("limit", "100");
+
+    if (lastMessageId != null) {
+      route = route.withQueryParams("before", lastMessageId);
+    }
+
+    return new JacksonRestAction<>(jda, route, MESSAGE_LIST_TYPE)
+      .submit()
+      .thenCompose(batch -> {
+        messages.addAll(batch);
+
+        if (batch.size() < 100) {
+          return CompletableFuture.completedStage(messages);
+        }
+
+        return getMessages(channelId, messages, batch.get(batch.size() - 1).id());
+      });
+  }
+}

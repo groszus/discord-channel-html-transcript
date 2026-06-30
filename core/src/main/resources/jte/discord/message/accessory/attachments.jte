@@ -12,7 +12,7 @@
 @if(!images.isEmpty())
   <div class="images" data-count="${images.size()}">
     @for(Attachment image : images)
-      @template.util.image(src = image.url(), options = options.attachment())
+      @template.util.image(src = image.url())
     @endfor
   </div>
 @endif

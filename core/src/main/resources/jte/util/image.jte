@@ -1,12 +1,10 @@
 @import dev.omardiaa.transcript.core.util.Helper
-@import dev.omardiaa.transcript.core.model.payload.PayloadOptions.AttachmentOptions
 
 @param String src
-@param AttachmentOptions options
 
 <div class="image__wrapper">
   <img
-    src="${options.saveImages() ? Helper.downloadAndEncode(src) : src}"
+    src="${Helper.downloadAndEncode(src)}"
     alt="Image"
     class="image"
   />

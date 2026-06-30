@@ -25,7 +25,7 @@
     @if(section.accessory() instanceof Button button)
       @template.discord.components.button(button = button)
     @elseif(section.accessory() instanceof Thumbnail thumbnail)
-      @template.util.image(src = thumbnail.media().url(), options = options.attachment())
+      @template.util.image(src = thumbnail.media().url())
     @endif
   </div>
 </div>

@@ -6,6 +6,6 @@
 
 <div class="images" data-count="${mediaGallery.items().size()}">
   @for(MediaGallery.Item item : mediaGallery.items())
-    @template.util.image(src = item.media().url(), options = options.attachment())
+    @template.util.image(src = item.media().url())
   @endfor
 </div>

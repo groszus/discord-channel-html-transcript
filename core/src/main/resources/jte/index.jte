@@ -35,6 +35,5 @@
   @endfor
 </ol>
 
-@template.discord.ui.footer()
 </body>
 </html>
