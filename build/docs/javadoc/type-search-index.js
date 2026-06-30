@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"dev.omardiaa.transcript","l":"Transcriber"},{"p":"dev.omardiaa.transcript","l":"TranscriberConstants"},{"p":"dev.omardiaa.transcript","l":"TranscriberUtils"},{"p":"dev.omardiaa.transcript","l":"Transcript"}];updateSearchResults();

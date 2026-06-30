@@ -1,0 +1,85 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'signing'
+    id 'gg.jte.gradle' version '3.2.1'
+}
+
+group = 'dev.omardiaa'
+version = '4.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+    withSourcesJar()
+    withJavadocJar()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.dv8tion:JDA:6.2.0', {
+        exclude group: 'club.minnced', module: 'opus-java'
+        exclude group: 'com.google.crypto.tink', module: 'tink'
+    }
+    implementation 'gg.jte:jte:3.2.1'
+    implementation 'ch.qos.logback:logback-classic:1.5.22'
+    implementation 'org.jspecify:jspecify:1.0.0'
+}
+
+jte {
+    sourceDirectory = file('src/main/resources/templates').toPath()
+    targetDirectory = layout.buildDirectory.dir('classes').get().asFile.toPath()
+    trimControlStructures = true
+    binaryStaticContent = true
+    contentType = gg.jte.ContentType.Html
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            pom {
+                name = 'discord-channel-html-transcript'
+                description = 'Discord Java library for generating shareable HTML archives of channels, preserving the native Discord styles.'
+                url = 'https://github.com/omardiaadev/discord-channel-html-transcript'
+                licenses {
+                    license {
+                        name = 'CC BY-SA 4.0'
+                        url = 'https://github.com/omardiaadev/discord-channel-html-transcript/blob/main/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        name = 'Omar Diaa'
+                        email = 'contact@omardiaa.dev'
+                        url = 'https://omardiaa.dev'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/omardiaadev/discord-channel-html-transcript'
+                    connection = 'scm:git:git://github.com/omardiaadev/discord-channel-html-transcript.git'
+                    developerConnection = 'scm:git:ssh://git@github.com:omardiaadev/discord-channel-html-transcript.git'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'central'
+            url = 'https://central.sonatype.com'
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
