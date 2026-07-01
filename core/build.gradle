@@ -39,7 +39,7 @@ ${styleCss.text}</style>"""
 }
 
 tasks.configureEach {
-    if (name == 'jteGenerate') {
+    if (name == 'generateJte') {
         dependsOn('updateCss')
     }
 }
