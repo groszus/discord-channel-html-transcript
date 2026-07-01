@@ -45,6 +45,7 @@ public final class TranscriberConfig {
       LOGGER.warn("Java Template Engine is running in development mode.");
     } else {
       TEMPLATE_ENGINE = TemplateEngine.createPrecompiled(ContentType.Html);
+      TEMPLATE_ENGINE.setBinaryStaticContent(true);
     }
   }
 
