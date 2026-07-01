@@ -145,7 +145,7 @@ public record Message(
   public boolean showAuthor(@Nullable Message previousMessage) {
     if (
       showDivider(previousMessage)
-      || previousMessage.author().equals(author)
+      || !previousMessage.author().equals(author)
       || referencedMessage != null
       || interactionMetadata != null
     ) {

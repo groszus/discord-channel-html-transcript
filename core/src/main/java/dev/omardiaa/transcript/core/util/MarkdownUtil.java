@@ -39,7 +39,7 @@ public final class MarkdownUtil {
   private static final Pattern LINK = Pattern.compile(
     "\\[(.*?)]\\((https?://[\\w.:/?#\\[\\]@-]*)\\)|(https?://[\\w.:/?#\\[\\]@-]*)");
 
-  private static final Pattern HEADER = Pattern.compile("^\\s*(#{1,3})\\s+(.+)", Pattern.MULTILINE);
+  private static final Pattern HEADER = Pattern.compile("^((?:&gt; )?)\\s*(#{1,3})\\s+(.+)", Pattern.MULTILINE);
   private static final Pattern SUBTEXT = Pattern.compile("^((?:&gt; )?)\\s*(-\\s+)?-#\\s+(.+)", Pattern.MULTILINE);
   private static final Pattern BULLET = Pattern.compile("^((?:&gt; )?)- (?!-#)", Pattern.MULTILINE);
   private static final Pattern QUOTE = Pattern.compile("^(&gt; .+(?:\\n&gt; .+)*)", Pattern.MULTILINE);
@@ -148,9 +148,9 @@ public final class MarkdownUtil {
     );
 
     sequence = StringUtil.replace(
-      HEADER, sequence, m -> HtmlBuilder
-        .create("h" + m.group(1).length())
-        .build(m.group(2))
+      HEADER, sequence, m -> m.group(1) + HtmlBuilder
+        .create("h" + m.group(2).length())
+        .build(m.group(3))
     );
 
     sequence = StringUtil.replace(
