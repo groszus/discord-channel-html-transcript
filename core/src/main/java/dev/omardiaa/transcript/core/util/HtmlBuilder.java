@@ -2,7 +2,7 @@ package dev.omardiaa.transcript.core.util;
 
 import org.jspecify.annotations.NullMarked;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,7 +18,7 @@ public final class HtmlBuilder {
 
   private HtmlBuilder(String tag) {
     this.tag = tag;
-    this.attributes = new HashMap<>();
+    this.attributes = new LinkedHashMap<>();
   }
 
   /**
@@ -67,10 +67,10 @@ public final class HtmlBuilder {
    * @return the string representation of the HTML element.
    */
   public String build(String content) {
-    StringBuilder output = new StringBuilder().append("<").append(tag).append(" ");
+    StringBuilder output = new StringBuilder().append("<").append(tag);
 
     for (Map.Entry<String, String> entry : this.attributes.entrySet()) {
-      output.append(entry.getKey()).append("=\"").append(entry.getValue()).append("\"");
+      output.append(" ").append(entry.getKey()).append("=\"").append(entry.getValue()).append("\"");
     }
 
     output.append(">");

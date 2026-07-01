@@ -51,7 +51,6 @@ public final class Helper {
       HttpResponse<byte[]> response = HttpUtil.getClient().send(request, HttpResponse.BodyHandlers.ofByteArray());
 
       if (response.statusCode() >= 400) {
-        LOGGER.warn("Failed to download {}, falling back to image URL.", url);
         return url;
       }
 
@@ -59,10 +58,8 @@ public final class Helper {
 
       return "data:" + contentType + ";base64," + Base64.getEncoder().encodeToString(response.body());
     } catch (IOException e) {
-      LOGGER.warn("Failed to download {}, falling back to image URL.", url);
       return url;
     } catch (InterruptedException e) {
-      LOGGER.warn("Failed to download {}, falling back to image URL.", url);
       Thread.currentThread().interrupt();
       return url;
     }

@@ -40,8 +40,10 @@ public final class MarkdownUtil {
     "\\[(.*?)]\\((https?://[\\w.:/?#\\[\\]@-]*)\\)|(https?://[\\w.:/?#\\[\\]@-]*)");
 
   private static final Pattern HEADER = Pattern.compile("^\\s*(#{1,3})\\s+(.+)", Pattern.MULTILINE);
-  private static final Pattern SUBTEXT = Pattern.compile("^\\s*-#\\s+(.+)", Pattern.MULTILINE);
+  private static final Pattern SUBTEXT = Pattern.compile("^((?:&gt; )?)\\s*(-\\s+)?-#\\s+(.+)", Pattern.MULTILINE);
+  private static final Pattern BULLET = Pattern.compile("^((?:&gt; )?)- (?!-#)", Pattern.MULTILINE);
   private static final Pattern QUOTE = Pattern.compile("^(&gt; .+(?:\\n&gt; .+)*)", Pattern.MULTILINE);
+  private static final Pattern QUOTE_PREFIX = Pattern.compile("^&gt; ", Pattern.MULTILINE);
 
   private static final Pattern MENTION_USER = Pattern.compile("&lt;@(\\d+)&gt;");
   private static final Pattern MENTION_ROLE = Pattern.compile("&lt;@&amp;(\\d+)&gt;");
@@ -152,15 +154,24 @@ public final class MarkdownUtil {
     );
 
     sequence = StringUtil.replace(
-      SUBTEXT, sequence, m -> HtmlBuilder
-        .create("s")
-        .build(m.group(1))
+      SUBTEXT, sequence, m -> {
+        String bullet = m.group(2) != null ? "\u2022 " : "";
+        return m.group(1) + HtmlBuilder
+          .create("small")
+          .build(bullet + m.group(3));
+      }
+    );
+
+    sequence = StringUtil.replace(
+      BULLET, sequence, m -> m.group(1) + HtmlBuilder
+        .create("span")
+        .build("\u2022 ")
     );
 
     sequence = StringUtil.replace(
       QUOTE, sequence, m -> HtmlBuilder
         .create("blockquote")
-        .build(m.group(1).replace("&gt; ", ""))
+        .build(QUOTE_PREFIX.matcher(m.group(1)).replaceAll(""))
     );
 
     sequence = StringUtil.replace(

@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public final class TranscriberConfig {
   private static final Logger LOGGER = LoggerFactory.getLogger(TranscriberConfig.class);
 
-  private static final boolean JTE_DEV = EnvironmentUtil.get("JTE_DEV", false);
+  private static final boolean JTE_DEV = true;
   private static final ExecutorService EXECUTOR = Executors
     .newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
   private static final JsonMapper JSON_MAPPER = JsonMapper
